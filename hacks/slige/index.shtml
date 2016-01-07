@@ -1,0 +1,79 @@
+<html>
+
+<head>
+<title>Automatic SLIGE megawad!</title>
+<meta name=viewport content="width=device-width, initial-scale=1">
+
+<style>
+	#youtube {
+		float: right;
+		margin: 10px;
+	}
+
+	#youtube iframe {
+		width: 420px;
+		height: 315px;
+	}
+</style>
+</head>
+<body>
+
+<div id="youtube">
+<iframe width="400" height="280" type="text/html" frameborder="0"
+    src="//www.youtube.com/embed/WpOM9eqKGC0?html5=1" allowfullscreen>
+</iframe>
+</div>
+
+<h1>Automatic SLIGE megawad!</h1>
+
+<p>
+Every day, this automatically generates a totally new 32-level Doom
+megawad using the random
+level generator <a href="http://doomworld.com/slige/">SLIGE</a>.
+A video of one of the WADs can be seen to the right.
+</p>
+<a href="megawad.zip">Download today's megawad!</a>
+</body>
+
+<h2> Statistics </h2>
+
+The generator has been running since September 19th, 2002. This amounts to
+more than <span id="wads">3,600</span> WAD files generated so far, including
+more than <span id="levels">110,000</span> levels.
+I think this makes <a href="/">me</a> the most prolific level author ever!
+
+<script language="JavaScript">
+	// Update the counters above.
+	var startDate = new Date(2002, 9, 19, 0, 0, 0, 0);
+	var now = new Date();
+
+	// How many days has it run? There has been some down time, so
+	// apply a fudge factor. I don't think it's been down for more than
+	// 60 days in total.
+	var days = Math.floor(now - startDate) / (24*60*60*1000) - 60;
+	var levels = days * 32;
+
+	// Round down.
+	days -= (days % 100);
+	levels -= (levels % 1000);
+
+	function commaize(val) {
+		var valstr = val.toString();
+		for (;;) {
+			var newvalstr = valstr.replace(/(\d)(\d\d\d)\b/, "$1,$2");
+			if (newvalstr == valstr) {
+				break;
+			}
+
+			valstr = newvalstr;
+		}
+
+		return valstr;
+	}
+
+	document.getElementById("wads").innerHTML = commaize(days);
+	document.getElementById("levels").innerHTML = commaize(levels);
+</script>
+
+
+</html>

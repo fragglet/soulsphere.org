@@ -1,0 +1,2 @@
+#!/bin/sh
+du -h deutex/megawad.zip | cut -f 1
