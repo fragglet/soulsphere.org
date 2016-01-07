@@ -1,0 +1,44 @@
+<html>
+<head>
+<title> HTML Blur-O-Vision </title>
+<style>
+	#disk {
+		border: 0px;
+
+	}
+</style>
+</head>
+<body bgcolor="black">
+<img src="bigdoom2titlepic.gif" id="titlepic">
+<audio src="doom2title.mp3" autoplay="true">
+
+<script language="javascript">
+	var imgscale
+
+	function setTitlepic() {
+		var titlepic = document.getElementById("titlepic")
+		var windowratio = (window.innerWidth * 1.0) / window.innerHeight
+		var imgratio = 1600.0 / 1200
+
+		if (windowratio > imgratio) {
+			imgscale = window.innerHeight / 1200.0
+		} else {
+			imgscale = window.innerWidth / 1600.0
+		}
+
+		titlepic.width = Math.floor((imgscale * 1600))
+		titlepic.height = Math.floor((imgscale * 1200))
+
+		titlepic.style.position = "absolute"
+		titlepic.style.left = (window.innerWidth - titlepic.width) / 2
+		titlepic.style.top = (window.innerHeight - titlepic.height) / 2
+	}
+
+	setTitlepic()
+
+	window.onresize = setTitlepic
+</script>
+
+</body>
+</html>
+

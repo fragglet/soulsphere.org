@@ -1,0 +1,123 @@
+body {
+	margin-top: 0px;
+	margin-bottom: 0px;
+	margin-left: 0px;
+	margin-right: 0px;
+	background-color: black;
+	color: #DDDDDD;
+	font-family: verdana;
+	font-size: 13px;
+}
+
+/* this should be the same as the font size in the body */
+td { font-size: 13px; }
+
+/* You probably shouldnt do much with this unless you want to have a visible table around all the content.  It's called in a table so you can try setting the border and background color and crap. */
+.textwrap {}
+
+
+/*css hackery by cyb*/
+.fredrik A:active, .fredrik A:hover, .fredrik A:link, .fredrik A:visited
+{
+        color: #189BD8;
+        text-decoration: none;
+}
+
+.fredrik
+{
+}
+
+a:link { color: #189BD8; }
+a.inactive:link { color: #DDDDDD; }
+a:visited { color: #189BD8; }
+a.unvisited:visited { color: #DDDDDD; }
+a:active { color: silver; }
+
+/* for the actual cell where all the text in the sidebar goes */
+.sidebar-color 	{
+		background-color: #082939;
+		background-image:url("http://www.doomworld.com/images/water2.gif");
+		font-family: Verdana, Sans Serif;
+		font-size: 10px;
+		}
+
+/* mostly self-explanatory, CSS for the 8 border cells surrounding the sidebar */
+.sidebar-border-topleft { background-color: #106B94; background-image:url("http://www.doomworld.com/images/sidebar_top_left.gif"); width:5px; height:15px; }
+.sidebar-border-topmiddle { background-color: #106B94; background-image:url("http://www.doomworld.com/images/sidebar_top_middle.gif"); width:140px; height:15px; }
+.sidebar-border-topright { background-color: #106B94; background-image:url("http://www.doomworld.com/images/sidebar_top_right.gif"); width:5px; height:15px; }
+.sidebar-border-middleleft { background-color: #106B94; background-image:url("http://www.doomworld.com/images/sidebar_middle_left.gif"); width:5px; }
+.sidebar-border-middleright { background-color: #106B94; background-image:url("http://www.doomworld.com/images/sidebar_middle_right.gif"); width:5px; }
+.sidebar-border-bottomleft { background-color: #106B94; background-image:url("http://www.doomworld.com/images/sidebar_bottom_left.gif"); width:5px; height:5px; }
+.sidebar-border-bottommiddle { background-color: #106B94; background-image:url("http://www.doomworld.com/images/sidebar_bottom_middle.gif"); width:140px; height:5px;}
+.sidebar-border-bottomright { background-color: #106B94; background-image:url("http://www.doomworld.com/images/sidebar_bottom_right.gif");width:5px; height:5px; }
+
+/* Here you can change how wide the sidebar is overall.  "sidebar" should be as wide as the width of the cells within it, and totalsidebarwidth should be 10 more */
+.totalsidebarwidth { width:160px; }
+.sidebar { width:150px; }
+
+/* 
+	This stuff is for the masthead.  uppermast is for the table cell with the little in-game monster image
+	lowermast is the table that has the water bg normally
+	mastline is the little one-px-high line below the lowermast
+*/
+.uppermast{ background-color: #000000; height:60px; background-image:url(<?=$mastheadbg1;?>); }
+.lowermast{ background-color: #202020; background-image:url("http://www.doomworld.com/images/water.gif"); height:50px;}
+.mastline { background-color: #848484; }
+
+/* thinbar is the bar that appears at the top of some of the content pages showing the relative directory structure */
+.thinbar, .tabletop { background-color: #303030; }
+
+/* these 4 tables have 4 different colors for the table cells in the resource sections, go look at source ports or something to see how it works */
+.table1 { background-color: #082939; }
+.table2 { background-color: #202020; }
+.table3 { background-color: #101010; }
+.table4 { background-color: #000030; }
+
+/* just like the sidebar stuff, only for the top story bar... don't put widths in the middle cells, you'll see why if you do */
+.topstory { background-color: #082939; background-image:url("http://www.doomworld.com/images/topstorybg.gif"); }
+.topstory-border-topleft { background-color: #106B94; background-image:url("http://www.doomworld.com/images/topstory_top_left.gif"); width:5px; height:15px; }
+.topstory-border-topmiddle { background-color: #106B94; background-image:url("http://www.doomworld.com/images/topstory_top_middle.gif"); height:15px; }
+.topstory-border-topright { background-color: #106B94; background-image:url("http://www.doomworld.com/images/topstory_top_right.gif"); width:5px; height:15px; }
+.topstory-border-middleleft { background-color: #106B94; background-image:url("http://www.doomworld.com/images/topstory_middle_left.gif"); width:5px; }
+.topstory-border-middleright { background-color: #106B94; background-image:url("http://www.doomworld.com/images/topstory_middle_right.gif"); width:5px; }
+.topstory-border-bottomleft { background-color: #106B94; background-image:url("http://www.doomworld.com/images/topstory_bottom_left.gif"); width:5px; height:5px; }
+.topstory-border-bottommiddle { background-color: #106B94; background-image:url("http://www.doomworld.com/images/topstory_bottom_middle.gif"); height:5px; }
+.topstory-border-bottomright { background-color: #106B94; background-image:url("http://www.doomworld.com/images/topstory_bottom_right.gif"); width:5px; height:5px; }
+
+/* crap for the date bar between days of news, pretty easy to understand */
+.dateline-left { background-color: #002131; background-image:url("http://www.doomworld.com/images/datebar_left.gif"); width:5px; height:25px; }
+.dateline-middle { background-color: #002131; background-image:url("http://www.doomworld.com/images/datebar_middle.gif"); width:100%; height:25px; }
+.dateline-right { background-color: #002131; background-image:url("http://www.doomworld.com/images/datebar_right.gif"); width:5px; height:25px; }
+.dateline-text { color: #189BD8; font-family: verdana; font-size: 16px; }
+
+/* stuff for the news itself */
+.headline { color: #106B94; font-family: verdana; font-size: 16px; }
+.byline { font-family: verdana; font-size: 10px; }
+.newsitem { font-family: verdana; font-size: 13px; }
+.quote { font-family: verdana; font-size: 13px; color: #106B94; margin-left: 20px; margin-right: 20px; }
+.invisible { color: black; }
+
+.bottomtable { position: absolute; bottom: 0px; }
+
+/* Who cares about the UGO logo anyway? */
+
+#ugologo {
+	display: block;
+	position: fixed;
+	width: 32px;
+	height: 30px;
+	right: 0px;
+	bottom: 0px;
+	background-image: url("http://www.soulsphere.org/titlepic/stdisk.gif?0");
+}
+
+#ugologo img {
+	display: none;
+}
+
+/* These ads can get in the way... */
+
+#google_ads_div_Atomicgamer_Other_Frontpage_BTF_Right_160x600_ad_wrapper {
+	display: none;
+}
+
