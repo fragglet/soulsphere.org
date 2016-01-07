@@ -1,0 +1,71 @@
+==================================================================
+https://keybase.io/fraggle
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of https://soulsphere.org
+  * I am fraggle (https://keybase.io/fraggle) on keybase.
+  * I have a public key with fingerprint 6D2C 117E 0310 6644 97AA  9546 F6C2 EE9C 2335 4344
+
+To claim this, I am signing this object:
+
+{
+    "body": {
+        "key": {
+            "fingerprint": "6d2c117e0310664497aa9546f6c2ee9c23354344",
+            "host": "keybase.io",
+            "key_id": "F6C2EE9C23354344",
+            "uid": "2734da761e4b8bd5a8739433eaeed300",
+            "username": "fraggle"
+        },
+        "service": {
+            "hostname": "soulsphere.org",
+            "protocol": "https:"
+        },
+        "type": "web_service_binding",
+        "version": 1
+    },
+    "ctime": 1396498623,
+    "expire_in": 157680000,
+    "prev": "d3e30daba0a40531526952d33c9270c93795b13ab04ccae8246e994ec527590d",
+    "seqno": 4,
+    "tag": "signature"
+}
+
+with the aforementioned key, yielding the PGP signature:
+
+-----BEGIN PGP MESSAGE-----
+Version: GnuPG/MacGPG2 v2.0.22 (Darwin)
+Comment: GPGTools - http://gpgtools.org
+
+owGbwMvMwMH47dC7Ocqmzi6Mpw98TmIItnmwv1opKT+lUsmqWik7FUylZealpxYV
+FGXmlShZKZmlGCUbGpqnGhgbGpiZmZhYmicmWpqamKWZJRulplomGxkbm5oYm5go
+6Shl5BeDdACNSUosTtXLzAeKATnxmSlAUTczZyNXV0tnJPWlYAkjc2OTlERzM8NU
+kySLpBTTRAtzY0sTY+PUxNTUFGMDA5DC4tSivMTcVKDqtKLE9PScVKVaHSWgYFlm
+cirIySCboQqK80tzigsyUotS9fKL0oGaC4ryS/KT83OAchklJQXFViC9JZUFIMXl
+qUnxUGPikzLzUoA+B+ooSy0qzszPU7IyBKpMLskEmWtobGlmYmlhZmSso5RaUZBZ
+lBqfCVJham5mYQAEIHtSy4BGphinGhukJCYlGiSaGJgaG5oamVmaGqUYGydbGpkb
+JFsam1uaJhkaJyYZmCQnJ6ZaGJmYpVpamqQmmxqZm1oapCiBPFaYl69kZQJ0ZmI6
+yEuZ6XmJJaVFQF93MsmwMDByMLCxMoHijoGLUwAWozJ7+P/X6JXP3NOaPj1in5i2
+lOwKl9T56z5Ut5q1R3sFhr86Y5O0rtWoKGaJsFVuTEv45WPmh4ufTdN82GDzp8lg
+9o0C7oXcS/1zfMW1ih6U6kj3yzfa31pfscRYcZteQltnWtvU64G3tzAolf4+PrVa
+weOQxhyDI68zV+iJXtxt80fn5u+p1/S35k11+mGl7xzCvNgt/sYBjmCdQ9PtRK7d
+mvr8qaf1VLObiy7Kl7MJL3QN2JK8xzRFxvy6LX/htKYljLEXjJlS7r4Vip/A4PDO
+NY5BVrTfc68oZ07Mqdz4Zd/+1/Z463778nfvpWoDHT/+kzkOc7u1hViW7V0+Yfm1
+5bP/ZLUJ6joG3Zh4Uo61xueF0u9w9+YZ+9e8OP75SZ7X3B97DXNMXr7/NOW1faf9
+mfJmYbdTpddYpRZPeOlicnr1ve/Rp6pjXkwTaVkScSxG19vlvNIrlb8nJnGeu5GS
+sMc9o1Dw9/93f1bLX86/rnKM7+FKzyrDv+fSA59lrVvo2tjw7/JiW7dJPYFzT3ll
+b+oVM3PJSHjS773hRX9FtaKQ6cvFxekn2N9rhkktjJg3bfl//rMO+wRka2zEel6w
+TfpnvYgnjXtKU0JCz67t3c/3VhXknat737RDrnvXx8TK9w9ijr6tnFac3O4p/bCN
+/3ZtTWO3/OtMq8KcPVOXMzW96ZUvOMNqVv+mQetBp/Zs1dDzcl0vOKtEt929CgA=
+=Acz5
+-----END PGP MESSAGE-----
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/fraggle
+
+==================================================================
+
