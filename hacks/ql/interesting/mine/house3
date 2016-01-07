@@ -1,0 +1,107 @@
+100 floor$="dangerous":LET LOCK$= "LOCKED":gol =0:key=0 :FLOO=0:WTV 4
+105 FLO=0
+110 CLS:start
+120 DEFine PROCedure start
+130 IF gol = 1 THEN PRINT "WELL DONE"\"YOU GOT THE GOLD"\"YOU WIN THE GAME":STOP
+140 IF gol =0:PRINT "to your north is a house"\"on the house is a door and door step"\"there are flower beds to your east":IF key=0 THEN PRINT "key visible"
+150 INPUT a$
+155 IF "lay" INSTR a$ AND "floorboards" INSTR a$ AND FLOO=1 THEN PRINT "you lay the floorboards over the doorstep.":FLO=1:start
+157 IF "lay" INSTR a$ AND "floorboards" INSTR a$ AND FLOO=0 THEN PRINT "you haven't got them!!"
+160 IF a$=="north" AND FLO=0 THEN PRINT "the doorstep is a trap! you fall down to your death!":XEXE
+165 IF a$=="quit" THEN STOP
+170 IF a$ == "north" AND FLO=1  THEN PRINT "YOU LAY THE FLOORBOARDS,OPEN THE DOOR AND WALK INSIDE!":CLS:aa
+180 IF a$ == "east" THEN CLS:PRINT "you slide down a trapdoor":bbb=0:dd
+185 IF a$ == "get key" THEN key =1:PRINT "ok":start
+190 IF a$ == "GO ONTO DOORSTEP" THEN PRINT "THIS IS A TRAP! YOU FALL INTO BLAZING FIRE AS YOU FALL TO YOUR DEATH":XEXE
+200 PRINT "YOU CANT!":start
+210 END DEFine 
+220 DEFine PROCedure aa
+240 PRINT  "you are inside the house to the south of you is the front door"\"to the west a window"\"you can see a staircase"
+250 bbb=1
+260 INPUT b$
+270 IF b$=="west" THEN CLS:bb
+275 IF b$== "south" THEN CLS:start
+280 IF b$== "quit" THEN STOP
+285 IF b$== "up" THEN CLS:FF
+290 PRINT "YOU CANT!":aa
+300 END DEFine 
+310 DEFine PROCedure bb
+320 PRINT "this appears to be a lift! you slide down on the floor"\"into some sort of cellar"
+330 cc
+340 END DEFine 
+350 DEFine PROCedure cc
+360 PRINT "you are in a cellar beneath the house"\"there is an elevator to your east"\"to your front is an alley":IF FLOO=0 THEN PRINT "you can see floorboards"
+370 INPUT c$
+380 IF c$ == "get floorboards" THEN PRINT "ok":FLOO=1:GO TO 360
+390 IF "go" INSTR c$ AND "alley" INSTR c$THEN dd
+400 IF c$ == "quit" THEN STOP
+405 IF c$== "east" THEN CLS:PRINT "THE ELEVATOR TAKES YOU TO GROUND LEVEL":aa
+410 PRINT "YOU CANT!":GO TO 360
+420 END DEFine 
+430 DEFine PROCedure dd
+440 IF bbb=0 THEN 
+445 PRINT "you are standing by a turn table pillar"\"that was holding up a disguised trapdoor flower bed!"\"to your north is an alley"
+450 INPUT eee$
+460 IF eee$=="north" THEN CLS:cc:IF eee$=="CLIMB UP TRAPDOOR"THEN CLS:ee
+470 IF eee$=="UP" THEN CLS:ee
+475 END IF 
+480 IF bbb=1 THEN 
+485 PRINT "you are standing by a pillar"
+490 INPUT eee$
+500 IF eee$=="turn pillar" THEN CLS:PRINT "a trapdoor opens":bbb=0:dd
+510 IF eee$== "quit" THEN STOP
+512 PRINT "you cant!":dd
+515 END IF 
+520 PRINT "YOU CANT!":dd
+530 END DEFine 
+540 DEFine PROCedure ee
+550 PRINT "you climb up the trapdoor"
+560 start
+570 END DEFine 
+580 DEFine PROCedure XEXE
+590 PRINT 'PLAY AGAIN?(Y OR N)'
+600 INPUT XEXE$
+610 IF XEXE$ == "Y" THEN CLS:RUN
+620 IF XEXE$ == "N" THEN STOP
+630 XEXE
+640 END DEFine 
+650 DEFine PROCedure FF
+660 PRINT "THIS IS A RATHER TATTY AREA OF THE HOUSE"\"YOU CAN SEE A STAIRCASE LEADING DOWN"\"AND A STAIR CASE LEADING UP"
+670 INPUT R$
+680 IF R$ == "UP" THEN CLS:GG
+685 IF R$ == "UP" THEN CLS:HH
+690 IF R$ == "DOWN" THEN CLS:aa
+692 IF R$ == "quit" THEN STOP
+695 PRINT "you cant!":FF
+700 END DEFine 
+710 DEFine PROCedure GG
+720 PRINT "IT IS RATHER DUSTY HERE ON THE THIRD FLOOR"\"TO THE FAR END NORTH IS"\"A CABINET "
+723 IF floor$<>"safe" THEN PRINT "YOU DARENT GO ANY FURTHER"
+725 PRINT "TO YOUR SOUTH ARE STAIRS":INPUT S$
+730 IF S$=="NORTH" AND floor$="safe" THEN CLS:HH
+740 IF S$ == "NORTH" THEN PRINT "THE FLOOR BOARDS COLLAPSE AND YOU CRACK YOUR SKULL":XEXE
+750 IF S$ == "SOUTH" THEN CLS:FF
+760 IF S$ == "LAY FLOORBOARDS" AND FLOO =1 THEN floor$ = "safe" :CLS:PRINT "OK"\"the floor is safe to walk on now":GG
+761 IF S$ == "LAY FLOORBOARDS" AND FLOO =0 THEN PRINT "YOU DONT HAVE THEM!":GG
+762 IF S$ == "quit" THEN STOP
+765 PRINT "you cant!":GG
+770 END DEFine 
+780 DEFine PROCedure HH
+790 PRINT "YOU CAN SEE THE CABINET"\"IT IS ";LOCK$;""\"TO YOUR SOUTH IS A STAIRCASE"
+800 INPUT ZZ$
+810 IF ZZ$ == "OPEN CABINET" AND LOCK$=="LOCKED" THEN PRINT "ITS LOCKED":HH
+820 IF ZZ$ == "OPEN CABINET" AND LOCK$=="UNLOCKED" THEN PRINT "THERE IS GOLD INSIDE IT":II
+825 IF ZZ$ == "UNLOCK CABINET" AND key==1 THEN PRINT "ok":LOCK$= "UNLOCKED":HH
+827 IF ZZ$=="lock cabinet" AND key=1 THEN PRINT "ok":LOCK$="LOCKED":HH
+830 IF ZZ$ == "SOUTH" THEN CLS:PRINT "OK":FF
+832 IF S$ == "quit" THEN STOP
+835 PRINT "you cant!":HH
+840 END DEFine 
+850 DEFine PROCedure II
+855 PRINT "BEHIND YOU ARE STAIRS"
+860 INPUT NT$
+870 IF NT$=="SOUTH" THEN CLS:FF
+880 IF NT$=="GET GOLD" THEN gol=1:PRINT "OK":HH
+882 IF NT$ == "quit" THEN STOP
+885 PRINT "you cant!":II
+890 END DEFine 

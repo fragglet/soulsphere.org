@@ -1,0 +1,368 @@
+100 REMark QL DOS
+110 REMark BY SIMON HOWARD
+120 DELETE "RAM1_ "
+130 test=0
+140 CLS:d$="":FOR I=1 TO 6:A$=INKEY$(-1):PRINT "^";:d$=d$&CODE(A$)
+150 IF d$="11210111099105108" THEN test=1:GO TO 170
+160 GO TO 140
+170 COPY "FLP1_command_com","RAM1_ "
+180 dire$=""
+190 CLOSE
+200 CLS
+210 h=0
+220 a=0
+230 REMark 
+240 SH$=":\>"
+250 dri$="FLP1"
+260 dri2$="FLP1"
+270 DRI3$="FLP1"
+280 ECHO=1
+290 REPeat loop
+300 CLS #0
+310 IF ECHO=0 THEN PRINT "";:GO TO 330
+315 IF SH$=">" THEN PRINT DRI3$&">"; :GO TO 330
+320 PRINT dri$;SH$;
+330 com$=""
+340 Ii= EDIT_LN$(74,com$)
+350 IF com$=="DIR/W" THEN ldir1:NEXT loop
+370 IF "SCR " INSTR com$ OR "scr " INSTR com$ THEN scrl:NEXT loop
+380 IF com$=="CD\.." OR com$=="cd .." THEN dire$="":dri$=DRI3$:dri2$=DRI3$:NEXT loop
+390 IF com$=="VER" THEN PRINT "QL-DOS VERSION 3.2":NEXT loop
+400 IF "CD\" INSTR com$ OR "CD " INSTR com$ OR "cd\" INSTR com$ OR "cd " INSTR com$ THEN chng_dir com$:NEXT loop
+410 IF "type" INSTR com$ OR "TYPE" INSTR com$ THEN type com$:NEXT loop
+420 IF com$=="prompt $g" THEN SH$=">":PRINT \:NEXT loop
+430 IF com$=="dir/p"     THEN ldir2:PRINT:NEXT loop
+440 IF "mkdir" INSTR com$ OR "MKDIR" INSTR com$ THEN mkdir:NEXT loop
+450 IF com$=="dir"       THEN ldir:PRINT:NEXT loop
+460 IF com$=="new"       THEN CLS #0:PRINT #0,"THANK-YOU FOR USING QL-DOS"\"     HAVE A NICE DAY!":AT #0,0,0:test=0:STOP
+470 IF test<>1 THEN PRINT "Error,hacked":FOR I=1 TO 3:BEEP 0,10:PAUSE 20:BEEP 0,0:PAUSE 20:NEXT I:BEEP:STOP
+480 IF com$=="ECHO OFF"  THEN ECHO=0:NEXT loop
+490 IF com$=="ECHO ON"   THEN ECHO=1    :NEXT loop
+500 IF "echo" INSTR com$ OR "ECHO" INSTR com$ THEN ECh:NEXT loop
+510 IF com$=="CLS"       THEN CLS:h=0   :NEXT loop
+520 IF com$=="PROMPT $P$G" THEN PRINT \:SH$=":\>":NEXT loop
+530 IF ":" INSTR com$    THEN chng_dri com$:NEXT loop
+540 IF "DEL" INSTR com$ OR "del" INSTR com$ THEN del com$:NEXT loop
+560 IF com$=="" THEN NEXT loop
+570 OBJP
+580 END REPeat loop
+590 DEFine PROCedure ldir1
+600 files=0
+610 DELETE ram1_dir
+620 OPEN_NEW #3,ram1_dir
+630 DIR #3,dri2$&"_"
+640 CLOSE
+650 dis=1
+660 setup_dir
+670 DATA 0,25,50
+680 RESTORE 
+700 h=1
+710 RESTORE 
+720 OPEN #3,"ram1_DIR"
+730 INPUT #3,g$
+740 INPUT #3,sec$
+750 IF g$<>"          " THEN g$=" IS "&g$
+760 IF g$ ="          " THEN g$=" HAS NO LABEL"
+770 PRINT "VOLUME IN DRIVE ";DRI3$;g$;"<";sec$;">"
+775 h=2
+777 N=1
+783 REPeat looper
+800 IF EOF(#3) THEN EXIT looper
+810 files=files+1
+820 INPUT #3,fil$
+835 fil$=fil$&"                         ":fil$=fil$(1 TO 18)
+840 PRINT fil$;
+845 N=N+1
+850 IF N=5 THEN h=h+1:N=1:PRINT ""
+860 IF h=20 THEN PRINT "";:PRINT "Strike Any Key When Ready . . .": PAUSE:h=1:NEXT looper
+870 END REPeat looper
+880 CLOSE
+900 IF h>18 THEN PAUSE:CLS:h=0
+910 IF dri2$="DIR1" THEN PRINT "[..]"
+915 PRINT ""
+920 PRINT files;" file(s)"
+930 END DEFine 
+940 DEFine PROCedure ldir
+950 DELETE ram1_dir
+960 OPEN_NEW #3,ram1_dir
+970 DIR #3,dri2$&"_"
+980 CLOSE
+990 dis=1
+1000 setup_dir
+1010 OPEN #3,"ram1_dir"
+1020 INPUT #3,g$
+1030 IF g$<>"          " THEN g$=" IS "&g$
+1040 IF g$= "          " THEN g$=" HAS NO LABEL"
+1050 PRINT \"VOLUME IN DRIVE ";DRI3$;g$
+1060 INPUT #3,g$
+1070 PRINT "DIRECTORY OF ";dri$;";"
+1080 REPeat looper
+1090 IF EOF(#3) THEN EXIT looper
+1100 INPUT #3,fil$
+1110 PRINT fil$
+1120 h=h+1
+1130 IF h=20 THEN h=19
+1140 END REPeat looper
+1150 CLOSE
+1160 IF dri2$=="DIR1" THEN PRINT "[..]"
+1170 END DEFine 
+1180 DEFine PROCedure ldir2
+1200 DELETE ram1_dir
+1210 OPEN_NEW #3,ram1_dir
+1220 DIR #3,dri2$&"_"
+1230 CLOSE
+1240 dis=1
+1250 setup_dir
+1260 OPEN #3,"RAM1_DIR"
+1270 INPUT #3,g$
+1280 IF g$<>"          " THEN g$=" IS "&g$
+1290 IF g$="          " THEN g$=" HAS NO LABEL"
+1300 PRINT "VOLUME IN DRIVE ";dri2$;g$
+1310 PRINT "DIRECTORY OF ";dri$;";" :INPUT #3,g$
+1320 h=2
+1330 REPeat looper
+1340 IF EOF (#3) THEN EXIT looper
+1350 INPUT #3,fil$
+1360 PRINT fil$
+1370 h=h+1
+1380 IF h=20 THEN h=0:PAUSE
+1390 END REPeat looper
+1400 CLOSE
+1410 IF dire$<>"" THEN PRINT "[..]"
+1420 END DEFine 
+1430 DEFine PROCedure chng_dri(driN$)
+1440 DELETE "RAM1_DIR"
+1450 OPEN_NEW #3,"RAM1_DIR"
+1460 DIR #3,RAM1_
+1470 CLOSE #3
+1480 OPEN #3,"RAM1_DIR"
+1490 PAUSE
+1500 REMark 
+1510 IF EOF (#3) THEN notready 1320:CLOSE:RETurn 
+1520 INPUT #3,fil$
+1530 IF fil$=" " THEN GO TO 1550
+1540  GO TO 1500
+1550 CLOSE #3
+1560 DELETE "RAM1_DIR"
+1570 OPEN #3,"RAM1_ "
+1580 REMark 
+1590 IF EOF(#3) THEN N=4:CLOSE #3:h=h+1:PRINT "Invalid Drive Specification":RETurn 
+1600 INPUT #3,DG$
+1610 IF DG$&":"==driN$ THEN N=3:GO TO 1630
+1620 GO TO 1580
+1630 IF SH$<>"" THEN dri$=DG$:dri2$=DG$:DRI3$=DG$
+1640 CLOSE #3
+1650 DELETE ram1_dir
+1660 OPEN_NEW #3,"RAM1_DIR"
+1670 DIR #3,DG$&"_"
+1680 CLOSE #3
+1690 dire$="":dri$=DG$:dri2$=DG$:DRI3$=DG$
+1700 END DEFine 
+1710 DEFine PROCedure OBJP
+1720 CLS #0
+1730 PRINT #0,""
+1740 OPEN_OVER #3 ,ram1_dir
+1750 DIR #3,dri$&"_"
+1760 CLOSE
+1770 dis=0:setup_dir
+1780 OPEN #3,"RAM1_DIR"
+1790 REPeat LOOPING
+1800 IF EOF(#3) THEN PRINT \"Bad Command or File Name":h=h+1:CLOSE:RETurn 
+1810 INPUT #3,fil2$
+1820 IF fil2$==com$&"_OBJ" THEN com$=com$&"_obj":g=65 :GO TO 1840
+1830 END REPeat LOOPING
+1840 CLOSE
+1850 EW dri2$&"_"&fil2$
+1860 CLS #0
+1870 PRINT #0,"Strike any key when ready . . ."
+1880 PAUSE
+1890 MODE 1
+1900 END DEFine 
+1910 DEFine PROCedure chng_dir(fil$)
+1920 OPEN_OVER #3,ram1_dir
+1930 DIR #3,dri2$&"_"
+1940 CLOSE #3
+1950 OPEN #3,ram1_dir
+1960 REPeat LOOPE
+1970 IF EOF(#3) THEN PRINT "Invalid Directory":CLOSE:RETurn 
+1980 INPUT #3,TEX$
+1990 IF TEX$=="DIRS" THEN EXIT LOOPE
+2000 END REPeat LOOPE
+2010 CLOSE #3:OPEN #3,dri2$&"_DIRS"
+2020 REPeat LOOPEE
+2030 IF EOF(#3) THEN CLOSE #3:PRINT "Invalid Directory":RETurn 
+2040 INPUT #3,TEST$
+2050 IF "CD\"&TEST$==fil$ THEN EXIT LOOPEE
+2060 IF "CD "&TEST$==fil$ THEN EXIT LOOPEE
+2070 END REPeat LOOPEE
+2080 CLOSE:dri$=DRI3$&dire$&"\"&TEST$
+2090 OPEN #3,scr_:WINDOW #3,5,5,1,1
+2100 FORMAT #3,"DIR1_"&DRI3$&"_"&dire$&TEST$
+2110 CLOSE #3
+2120 dire$=dire$&"\"&TEST$
+2130 dri2$="DIR1"
+2140 END DEFine 
+2150 DEFine PROCedure prompt    (pr$)
+2160 pr$=""
+2170 AT h-1,a+6+7:PRINT ;" ";
+2180 Ii=EDIT_LN$(7,pr$)
+2190 SH$=pr$
+2200 END DEFine 
+2210 DEFine PROCedure del(fil$)
+2220 OPEN_OVER #4,ram1_dir
+2230 DIR #4,dri2$&"_"
+2240 CLOSE #4
+2250 dis=0:setup_dir
+2260 OPEN #3,ram1_dir
+2270 INPUT #3,g$
+2280 INPUT #3,g$
+2290 REPeat LOOPING
+2300 IF EOF(#3) THEN EXIT LOOPING
+2310 INPUT #3,filN$
+2320 IF "del "&filN$  ==fil$ THEN GO TO  2350
+2330 END REPeat LOOPING
+2340 PRINT "File not found":CLOSE:RETurn 
+2350 PRINT dri$;":";fil2$
+2360 DELETE dri2$&"_"&filN$
+2370 CLOSE
+2380 END DEFine 
+2390 DEFine PROCedure type(fil$)
+2400 OPEN_OVER #4,ram1_dir
+2410 DIR #4,dri$&"_"
+2420 CLOSE #4
+2430 dis=0:setup_dir
+2440 OPEN #3,ram1_dir
+2450 INPUT #3,g$
+2460 INPUT #3,g$
+2470 REPeat  LOOPING
+2480 IF EOF(#3) THEN EXIT LOOPING
+2490 INPUT #3,fil2$
+2500 IF "TYPE "&fil2$ == fil$ THEN GO TO 2530
+2510 END REPeat LOOPING
+2520 PRINT "File not found":CLOSE:RETurn 
+2530 CLOSE:VIEW dri2$&"_"&fil2$
+2540 END DEFine 
+2550 BEEP 9000,2,3,1000,69,47,90
+2560 DEFine PROCedure setup_dir
+2570 DELETE ram1_dirs
+2580 OPEN_OVER #3,ram1_dir
+2590 DIR #3,dri2$&"_"
+2600 CLOSE #3
+2610 OPEN #3,ram1_dir
+2620 REPeat LOOPP
+2630 IF EOF(#3) THEN CLOSE:RETurn 
+2640 INPUT #3,TEST$
+2650 IF TEST$=="DIRS" THEN COPY dri2$&"_DIRS" TO ram1_dirs:EXIT LOOPP
+2660 END REPeat LOOPP
+2670 CLOSE
+2680 OPEN #3,ram1_dirs
+2690 DIM dirs$(20,20)
+2700 counting=0
+2710 REPeat loop12
+2720 IF EOF(#3) THEN EXIT loop12
+2730 INPUT #3,dirs$(counting)
+2740 IF EOF(#3) THEN EXIT loop12
+2750 counting=counting+1
+2760 END REPeat loop12
+2770 OPEN_OVER #4,RAM1_DIR2
+2780 OPEN #3,ram1_dir
+2790 INPUT #3,A$:PRINT #4,A$:INPUT #3,A$:PRINT #4,A$
+2800 REPeat LOOP23
+2810 IF EOF(#3) THEN EXIT LOOP23
+2820 INPUT #3,DIR$
+2830 FOR I=0 TO counting
+2840 IF DIR$(1 TO LEN(dirs$(I)))==dirs$(I) THEN NEXT LOOP23
+2850 IF DIR$=="dirs" THEN NEXT LOOP23
+2860 IF DIR$=="COMMAND_COM" THEN PRINT #4,"COMMAND_COM":NEXT LOOP23
+2870 IF DIR$(2 TO LEN(dirs$(I)))==dirs$(I) THEN NEXT LOOP23
+2880 NEXT I
+2890 PRINT #4,DIR$
+2900 END REPeat LOOP23
+2910 FOR I=0 TO counting:IF dis=1 THEN PRINT #4,"["&dirs$(I)&"]"
+2920 CLOSE
+2930 DELETE ram1_dir
+2940 RENAME RAM1_DIR2,ram1_dir
+2950 END DEFine 
+2960 DEFine PROCedure scrl
+2970 filnam$=com$(5 TO LEN(com$))
+2980 OPEN_OVER #3,   ram1_dir
+2990 DIR #3,dri2$&"_"
+3000 CLOSE #3
+3010 dis=0:setup_dir
+3020 OPEN #3,ram1_dir
+3030 REPeat loopte
+3040 IF EOF(#3) THEN PRINT "File Not Found":CLOSE:RETurn 
+3050 INPUT #3,d$
+3060 IF d$==filnam$ THEN EXIT loopte
+3070 END REPeat loopte
+3080 CLOSE
+3090 LBYTES dri2$&"_"&d$,131072
+3100 PAUSE
+3110 CLS #0:PRINT #0,"Strike any key when ready . . ."
+3120 PAUSE:CLS:CLS #0
+3130 END DEFine 
+3140 DEFine PROCedure notready(LINE)
+3150 PRINT "Not Ready,Error Reading RAM1"
+3160 PRINT "(A)bort,(R)etry,(F)ail?";
+3170 x$=""
+3180 A$=INKEY$(-1)
+3190 IF A$=="f" THEN PRINT "F":RETurn 
+3200 IF A$=="A" THEN PRINT "A":PRINT "Insert disc with COMMAND_COM and "
+3210 IF A$=="A" THEN PRINT "Strike any key when ready . . .":
+3220 IF A$=="A" THEN x$=INKEY$(-1)
+3230 IF x$==CHR$(27) THEN A$="R"
+3240 IF A$=="R" THEN PRINT "R":GO TO LINE
+3250 IF A$=="A" THEN GO TO 3270
+3260 GO TO 3180
+3270 OPEN_OVER #4,RAM1_DIR2:DIR #4,flp1_:CLOSE #4:OPEN #4,RAM1_DIR2
+3280 REPeat loop_eri
+3290 IF EOF(#4) THEN GO TO 3200
+3300 INPUT #4,eded$
+3310 IF eded$=="command_com" THEN EXIT loop_eri
+3320 END REPeat loop_eri
+3330 CLOSE #4:COPY  flp1_command_com TO "ram1_ "
+3340 CLOSE:chng_dri driN$:RETurn 
+3350 END DEFine 
+3360 DEFine PROCedure mkdir
+3370 fil$=com$(7 TO LEN(com$))
+3380 OPEN_OVER #3,ram1_dir
+3390 DIR #3,dri2$&"_"
+3400 CLOSE #3
+3410 OPEN #3,ram1_dir
+3420 REPeat looptes
+3430 IF EOF(#3) THEN CLOSE:OPEN_NEW #3,dri2$&"_dirs":GO TO 3580
+3440 INPUT #3,filname$
+3450 IF filname$=="DIRS" THEN EXIT looptes
+3460 END REPeat looptes
+3470 CLOSE
+3480 OPEN #3,dri2$&"_dirs"
+3490 REPeat loop_er
+3500 IF EOF(#3) THEN EXIT loop_er
+3510 INPUT #3,null$
+3520 END REPeat loop_er
+3530 upper$ fil$
+3540 PRINT d$
+3550 fil$=d$
+3560 PRINT d$
+3570 PRINT fil$
+3580 PRINT #3,fil$
+3590 CLOSE #3
+3600 BEEP 50,0
+3610 END DEFine 
+3620 DEFine PROCedure ECh
+3630 IF com$=="ECHO" AND ECHO=1 THEN PRINT "ECHO IS ON":RETurn 
+3640 IF com$=="ECHO" AND ECHO=0 THEN PRINT "ECHO IS OFF":RETurn 
+3650 PRINT com$(6 TO LEN(com$))
+3660 END DEFine 
+3670 DEFine PROCedure upper$
+3675 d$=""
+3680 d$=fil$
+3690 FOR I=1 TO LEN(d$)
+3700 IF CODE(d$(I TO I))>96 AND CODE(d$(I TO I))<123 THEN d$(I TO I)=CHR$(CODE(d$(I TO I))-32)
+3710 PRINT d$(I TO I)
+3720 NEXT I
+3730 PRINT fil$
+3740 END DEFine 
+6000 REMark FOR I=21 TO 50 STEP 1:BEEP 500,I:NEXT I
+6100 REMark FOR I=21 TO 50 STEP 1:BEEP 500,I:NEXT I
+6200 REMark  FOR I=21 TO 50 STEP 1:BEEP 500,I:NEXT I

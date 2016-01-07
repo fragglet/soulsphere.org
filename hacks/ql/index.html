@@ -1,0 +1,89 @@
+<html>
+<head>
+<title>Sinclair QL disks</title>
+<meta name=viewport content="width=device-width, initial-scale=1">
+</head>
+<body>
+<h1> Sinclair QL disks </h1>
+
+<img src="worm-thumbnail.png" align="right">
+
+I first learnt programming at around age 9 in the early 1990s, on a 
+<a href="https://en.wikipedia.org/wiki/Sinclair_QL">Sinclair QL</a>. The
+native storage format for the QL was
+<a href="https://en.wikipedia.org/wiki/ZX_Microdrive">microdrive cassettes</a>,
+which were notoriously unreliable, slow and had a tiny capacity. Fortunately,
+my QL was equipped with a
+<a href="https://en.wikipedia.org/wiki/Miracle_Systems">trump card</a> 
+expansion card, providing additional memory and floppy disk storage.
+
+<p>
+
+Recently, I dumped the contents of some of my old floppy disks to files
+and wrote some scripts to decode the contents.
+
+<h2> Filesystem format </h2>
+
+The QL disk file system format is a modified version of the format used
+on the original microdrive cassettes.  I have written
+<a href="fs.html">about the filesystem format.</a>
+
+<h2> Scripts </h2>
+
+Various scripts for extracting the contents of the disks.  These are all
+written in Python.
+
+<ul>
+<li> <a href="scripts/qldumper">Filesystem dumper</a>.  This reads QL 
+     disks that have been dumped using the Unix <tt>dd</tt> command,
+     and extracts all of the files that it finds on the file system.
+
+<li> <a href="scripts/convert-image">Image converter</a> for image files 
+     in the QL screen format.  This can be used to convert files stored
+     using eg. <tt>SBYTES flp1_image, 131072, 32768</tt> (which is used
+     as an example in the QL manual) into PNG format files.
+</ul>
+
+<h2> QL software </h2>
+
+This is some software that I managed to extract from the disks:
+
+<ul>
+<li> <a href="interesting/arcade">arcade</a>
+     - Some kind of arcade game?
+<li> <a href="interesting/BOMBER">BOMBER</a>
+<li> <a href="interesting/HARRY2">HARRY2</a>
+     - "Hungry Harry", I seem to remember this was like pacman.
+<li> <a href="interesting/hunt">hunt</a>
+     - "Treasure Hunt, by Halvor Heuch"
+<li> <a href="interesting/startrek">startrek</a> 
+     - A QL version of <a href="https://en.wikipedia.org/wiki/Star_Trek_(text_game)">Star Trek</a>
+<li> <a href="interesting/vampire">vampire</a> - The Vampire's Castle Adventure
+<li> <a href="ql-games.tar.gz">A disk of QL games</a> including Psion Chess.
+</ul>
+
+<h2> My own stuff </h2>
+
+Various notable programs of my own creation
+
+<ul>
+<li> <a href="interesting/mine/1ST">1ST</a> - The first program I wrote
+<li> <a href="interesting/mine/ai">ai</a> - Some kind of misguided attempt at artificial intelligence
+<!--<li> <a href="interesting/mine/figlet-like">figlet-like</a> 
+     - ASCII art letters, similar to <a href="https://en.wikipedia.org/wiki/FIGlet">figlet</a>-->
+<li> <a href="interesting/mine/house3">house3</a> 
+     - Somewhat odd text adventure
+<li> <a href="interesting/mine/qldos">qldos</a>
+     - An attempt at emulating MS/DOS!
+</ul>
+
+<h2> Other stuff </h2>
+
+<ul>
+<li> <a href="worm.png">A worm</a> (I remember this program displayed a
+     message saying "dedicated to new age music")
+</ul>
+
+</body>
+</html>
+

@@ -1,0 +1,15 @@
+10 PRINT "enter password"
+15 INPUT ans$
+20 IF ans$ = "treasure" THEN GO TO 30:ELSE GO TO 10
+30 PRINT "how old are you ?"
+35 INPUT age
+40 IF age >18 THEN PRINT "you can drink in a pub":GO TO 60
+50 IF age <18 THEN PRINT "you cant drink in a pub"
+60 PRINT "DO YOU WANT TO GO ON?"
+65 INPUT ans$
+70 IF ans$ = "YES"THEN GO TO 90 :ELSE PRINT "GOODBYE!" :GO TO 120
+80 GO TO 90
+90 PRINT "WHO IS PRIME MINISTER?"
+95 INPUT ans$
+100 IF ans$ = "MAJOR" THEN PRINT "YOU GOT IT RIGHT!" :GO TO 10 :ELSE GO TO 110
+110 PRINT "YOU GOT IT WRONG"

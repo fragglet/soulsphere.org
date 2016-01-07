@@ -1,0 +1,51 @@
+<html>
+<head><title>Self-modifying Brainfuck</title></head>
+<meta name=viewport content="width=device-width, initial-scale=1">
+<body>
+<h1> Self-modifying Brainfuck </h1>
+
+<b><a href="https://en.wikipedia.org/wiki/Brainfuck">Brainfuck</a></b> is
+a useful general purpose procedural programming language, elegant in
+its simplicity.  However, the language uses a "Harvard" architecture,
+which separates instructions from data.  As a result, some programming
+paradigms which are possible in other languages are impossible in Brainfuck.
+<p>
+Self-modifying Brainfuck extends the Brainfuck language to a
+<a href="https://en.wikipedia.org/wiki/Von_Neumann_architecture">von
+Neumann Architecture</a>, placing the
+program code on the same "tape" which the program uses to store data.  As
+a result, it is possible to write programs which modify themselves while
+running.  This feature also brings introspection abilities (sometimes
+called "Reflection" or "Reflectance"), allowing Brainfuck programs
+to read their own source code.
+<p>
+<h3> Source code </h3>
+<ul>
+<li><a href="smbf.rb">smbf.rb</a> - Ruby version (first implementation)
+<li><a href="smbf.c">smbf.c</a> - C version
+</ul>
+<h3> Examples </h3>
+Examples can be found <a href="examples/">here</a>.
+<h3> Technical </h3>
+The program source code is placed immediately to the "left" of the 
+data pointer's "origin" point (the location of the data pointer at 
+the start of program execution).  The source code is inserted
+left-to-right, so that the last character of the source file
+is immediately left of the origin.
+For example, the following 
+program prints the last character of the source file:
+<blockquote><tt>&lt;.</tt></blockquote>
+In normal Brainfuck, attempting to access data left of the 
+origin will produce undefined results.  As a result, Self-Modifying
+Brainfuck can technically be described as a backwards-compatible derivative of 
+normal Brainfuck.
+However, some Brainfuck interpreters allow data left of the origin to be
+accessed.  Programs which rely on this behavior may not run correctly
+as a result of this alternate behavior.
+
+<hr>
+<a href="mailto:fraggle@removethisbitfirst.gmail.com">Simon Howard</a>
+</body>
+</html>
+
+

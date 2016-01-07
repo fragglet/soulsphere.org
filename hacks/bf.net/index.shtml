@@ -1,0 +1,120 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html>
+  <head>
+    <title>BrainFuck.Net</title>
+    <meta name=viewport content="width=device-width, initial-scale=1">
+  </head>
+
+  <body>
+    <h1>BrainFuck.Net</h1>
+
+
+    <p>
+      As part of their <i>.Net</i> initiative, Microsoft have created a VM 
+      which is not only platform independent (theoretically anyway) but 
+      also language independent. You can develop for .Net in VB.Net, 
+      C++ or C#, Microsoft's Java clone. Microsoft have commissioned several
+      other people to port languages to the .Net platform.
+    </p>
+
+    <p>
+      However, in typical Microsoft style, they have totally overlooked one 
+      of the most important and useful languages! I speak, of course, of
+      <a href="https://en.wikipedia.org/wiki/Brainfuck">Brainfuck</a>.
+    </p>
+    
+    <p>
+      Brainfuck is designed to be one the most compact languages possible
+      while still being turing complete. While brainfuck has only 8
+      commands, it is still theoretically possible to do anything in it
+      that can be done in other languages. The 8 brainfuck commands are:
+    </p>
+
+    <table>
+      <tr> <td> + </td> <td> Increment value under pointer </td> </tr>
+      <tr> <td> - </td> <td> Decrement value under pointer </td> </tr>
+      <tr> <td> > </td> <td> Increment pointer </td> </tr>
+      <tr> <td> < </td> <td> Decrement pointer </td> </tr>
+      <tr> <td> [ </td> <td> Loop while value under pointer is nonzero </td> </tr>
+      <tr> <td> ] </td> <td> End of loop </td> </tr>
+      <tr> <td> , </td> <td> Read character from input into pointer </td> </tr>
+      <tr> <td> . </td> <td> Output value under pointer to screen </td> </tr>
+    </table>
+
+    <p>
+      To remedy this tragic oversight on the part of Microsoft, I have 
+      written a compiler to compile brainfuck code to the MSIL VM.
+    </p>
+
+    <p> <b>Newsflash!</b> The Portable.Net compiler now includes
+      <a href="http://savannah.gnu.org/cgi-bin/viewcvs/dotgnu-pnet/pnet/cscc/bf/">a brainfuck frontend</a>.
+      Credit for this goes to <a href="mailto:gopalv82@NOSPAM.symonds.net">
+      Gopal.V</a>. It generates the same code as my compiler does, although
+      the source is from scratch.
+    </p>
+
+    <h3> Download </h3>
+
+    <ul>
+      <li> <b> <a href="bfc-1.1.0.tar.gz">bfc-1.1.0.tar.gz</a></b> (Current Version)
+      <li> <a href="bfc-1.0.0.tar.gz">bfc-1.0.0.tar.gz</a>
+    </ul>
+
+    <h3> FAQ </h3>
+    
+    <ul>
+      <li> 
+	Does this work with the Microsoft IL Assembler? <br>
+	I have no idea. I use the <a href="http://www.dotgnu.org/">DotGNU</a>
+	Portable.Net implementation of the IL Assembler. There should 
+	be no reason why the Microsoft Assembler will not assemble the
+	IL code outputted by the compiler, but the compiler may pass
+	options to ilasm that the Microsoft Assembler will not understand.
+
+      <li> 
+	Does this run under Windows? <br>
+	Its rumoured to run in <a href="http://sources.redhat.com/cygwin">
+	CygWin</a> and also <a href="http://www.delorie.com/">DJGPP</a>.
+	All my development for this was done under Linux.
+	
+      <li>
+	Is the BrainFuck.Net language different to ordinary BrainFuck? <br>
+	Unlike other impure languages which have had to change their syntax
+	in order to run in the CVM, BrainFuck is flexible enough that
+	there is no need to alter the syntax.
+
+      <li>
+	Could this be modified to work with the JVM? <br>
+	Yes, very easily infact. You're welcome to do it if you want.
+
+      <li>
+	Shouldn't you write this in C#? <br>
+	No, now go away.
+
+      <li>
+	Can I use BrainFuck.Net to write webservices? <br>
+	<strike>No. Well, probably not.</strike> Yes! Using the Portable.Net
+        frontend, now you CAN write webservices in bf.net. Yet another 
+        example of the crazy world we live in :)
+
+      <li>
+	Does BrainFuck.Net use the controversial Microsoft Passport system
+	for authentication? <br>
+	No. The Brainfuck language has only 8 commands, and none of them
+	are related to authenticating remote network users.
+    </ul>
+
+    <h3> Links </h3>
+
+    <ul>
+      <li> <a href="http://www.dotgnu.org/">DotGNU</a>
+      <li> <a href="http://www.go-mono.com/">Mono</a>
+      <li> <a href="http://www.catseye.mb.ca/esoteric/bf/">Cat's Eye Technologies: The Brainfuck Programming Language</a>
+      <li> <a href="http://esoteric.sange.fi/brainfuck/">An archive of Brainfuck programs</a>
+      <li> <a href="http://p-nand-q.com/brainfuck.net.htm">Another Brainfuck.Net compiler</a> written in Python
+    </ul>
+
+    <hr>
+    <address><a href="mailto:fraggle@nospam!!.alkali.org">Simon Howard</a></address>
+  </body>
+</html>

@@ -1,0 +1,648 @@
+100 REMark *** treasure hunt   ***
+110 REMark *** by Halvor Heuch ***
+120 WINDOW #1,512,256,0,0
+140 INK 7:PAPER 4:AT 0,0:PRINT \\\\\\\\\\\\\\\\\\\\\"             Press any key."
+150 PAUSE
+160 RESTORE 
+170 CLEAR
+180 PAPER 1
+190 BORDER #1,10,2
+200 CLS
+210 instructions
+220 WINDOW #1,512,236,0,20
+230 WINDOW #2,472,20,20,10
+240 PAPER #2,0
+250 PAPER #1,0
+260 CLS#1
+270 WINDOW #0,512,256,0,0
+280 BORDER #0,10,2
+290 BORDER #1,10,2
+300 CLS #2
+310 INK #1,7
+320 CSIZE #2,2,1
+330 PRINT #2;"            Treasure Hunt "
+340 PRINT:PRINT"             PLEASE WAIT"
+350 INK #2,7
+360 initialize
+370 reed
+380 CLS #1
+390 PRINT"Do you wish to L(oad),S(ave) game ?"
+400 a$=INKEY$(-1)
+410 IF a$=="l" THEN gameload
+420 IF a$=="s" THEN gamesave
+430 CLS #1
+440 north=0:south=0:west=0:east=0:up=0:down=0:col=0
+450 IF (location>231OR location=-8OR location=-9OR location=-10OR location=-7OR location=-6)AND (object(10)<>0 AND object(10)<>location OR litla=0)THEN PRINT response$(5):fin
+460 SELect ON location
+470 =174:p"You are on a high plateau with severe cliffs to the east and an apparantly bottomless chasm at your feet, bridged  by a rotting tree."
+480 south=1
+490 =159:p"You are on a rocky plateau with craggy outcrops overhanging the cliff to the east.There is a deep chasm to the north":south=1:north=1
+500 IF treebr THEN p"You can see a rotting tree made into a bridge which crosses the chasm."
+510 IF treebr=0 THEN p"You can see a small rotting tree stand-ing upright by the chasm."
+520 =144:p"You are at the top of a hundred foot cliff on a rocky plateau.Below the north-east you can see a large,well fortified castle.A path leads north.":north=1
+530 p"Caught at the top of the cliff is a rope which dangles right down to the rocky floor below."
+540 =43:p"You are in a dark and dingy cave with the only light coming from outside,to the east.":east=1
+550 =44:p"You are at the base of a tall cliff.A path leads east to a sheer sided gulley in which lies the carcase of a dead dragon.":east=1
+560 IF rocop THEN p" You can see a large cave entrance to the west.":west=1
+570 IF rocop=0 THEN p" You can see footprints going straight into the cliff!"
+580 IF ropeti=1 THEN p"There is a rope hanging down from the cliff top,its tip just touches the rock floor."
+590 =45:p"You are standing in a narrow west-east gulley.";:east=1:west=1
+600 IF dragde=0 THEN p"To your astonishment you can see a large green dragon which appears to  be asleep! It is lying so that you cannot creep past!"
+610 IF dragde THEN p"You can see a large dead dragon surrounded by a pool of blood."
+620 IF tim45>4 THEN p"You here a faint rubling at first, the ground begins to tremble, and the valley sides fall in on top of you!":fin
+630 =46:p"You are on a wide open valley, a narrow winding path goes to the east and west.":west=1:east=1
+640 =47:p"You are at the crossroads to four paths in the centre of a wide flat plain. Next to you is an old sign which says 'Leave treasure here'!":north=1:south=1:west=1:east=1
+650 =32:p"You are at the very brink of a large marsh which stretches away to the southand west. It looks very nasty, I wouldn'tlike to cross there!":north=1:south=1:west=1
+660 =31:p"You are at the heart of the marsh now, which spreads to the south and east.":south=1:east=1
+670 IF showor=1 AND carrying<3 THEN p"Your snow shoes support you - just."
+680 IF showor=0 THEN p"Your weight is just too much and you sink to your death!":fin
+690 =17:p"You are at the south-eastern side of the marsh.":west=1:north=1
+700 IF showor=1 AND carrying<3 THEN p"Your snow shoes support you - just."
+710 IF showor=0 THEN p"Your weight is too much and you drown in the deadly marshes!":fin
+720 =16:p"You are on the far side of the marshes now. The ground appears to be more solid. There is a path leading south. The extensive marshes stretch to your northand east.":north=1:east=1:south=1
+730 =1:p"Much to your relief the path is now as solid as it ever was, the hitch is the only path leads north!":north=1
+740 =62:p"The land is more fertile here. There is plenty of scrub dotted round about, with scattered clumps of bracken. A path leads north and south.":north=1:south=1
+750 =77:p"You are at the outskirts of a forest. The path leads south and north into the forest.":south=1:north=1
+760 IF guard THEN p"You can see the dead figure of a soldier with blood still creeping from his ribs. He is in full battle dress."
+770 IF guard=0 THEN p"Unfortunately there is the tall figure of a mean looking soldier standing before you. He won't let you pass."
+780 IF tim77=3 AND guard=0THEN p"The man attacks savagely without provocation and warning. He cleaves your skull in one blow!":fin
+790 tim77=tim77+1
+800 =92:p"You are standing at the heart of the   forest now. The path from the south curves away eastwards.":south=1:east=1
+810 IF chop1 THEN p"At your feet is the stump of a tree. The rest of the tree is lying nearby.":down=1
+820 =-8:p"It's very dark and dingy down here even though you can still see sunlight. There are roots hanging down from the  roof of the passage which leads west.":west=1:up=1
+830 =-9:p"It's very dark down here. The only thing one can see is a west-east passage.":west=1:east=1
+840 =-10:p"You are now at the western end of the passage, the only exit leads east.":east=1
+850 =192:p"You are at the very top of a tall tree. You have a great view all around.":down=1
+860 =93:p"You are still in the forest but now possibly on the out-skirts as there is a clearing to the north.";:west=1:north=1
+870 IF chop2 THEN p"You are by a hollow tree stump.":down=1
+880 =-7:p"You are on a steep up-down passage. You can still see a small patch of sunlight shining far above you.":up=1:down=1
+890 =-107:p"You are at the deepest depths of the  passage which has now come to an end. The only exit leads up.":up=1
+900 =193:p"You are on a rather flimsy branch at the top of a tree. There is a great viewall around.":down=1
+910 =108:p"You are at a clearing in the dense forest.The path leads north and south. Occasionally you believe you here the sound of running water.":north=1:south=1
+920 =123
+930 p"You are on the southern bank of an exceptionally fast flowing river, which flows east. There is a tree opposite another on either side of the river.":south=1:north=1
+940 IF (ropeti<>2 OR ropeti<>4)THEN p"There are also some odd scratches on   the nearby tree."
+950 IF ropeti=4 THEN p"There is a rope stretching from one tree to the other."
+960 IF ropeti=3 AND ropeti<>2 THEN p"There is a rope with one end caught on to the far tree, the other end is floating downstream."
+970 IF ropeti=2 AND ropeti<>3 THEN p"There is a rope with one end tied to   the near tree, the other end dangling in the stream."
+980 =138:p"You are on the northern bank of the river. There are no visible paths. You can see a rope tied to two trees making a precarious bridge across the river.":south=1
+990 =48:p"You are on a flat dry plain, next to a wooden shed. The path leads east and west.The door appears to be ";:west=1:east=1:south=1
+1000 IF door=2 THEN p"open.":north=1
+1010 IF door<>2 THEN p"shut."
+1020 =33:p"You are right in the centre of an ORC camp. These creatures are humanoid in shape but have a warty skin. They are all EVIL! Suddenly you are surrounded by them, they punch and kick you, you fall unconcious...":PAUSE:location=-3:GO TO 430
+1030 =63:p"You are in a small wooden hut, which looks surprisingly cosy. There is a chair in the corner by a fireplace. Apart from that it appears to have countless piles of junk strewn all over the place.":south=1
+1040 =49:p"You are in a wide,flat valley on a west-east path. Running parallel to you is a river to the north which occasionally glistens in the sun. Now and then you notice a rabbit which weaves in and out of the bushes.":west=1:east=1
+1050 =50:p"You are at a fork in the path. One forkheads north, the other continues east. To the east are some massive mountains, most capped with snow.":east=1:west=1:north=1
+1060 =51:p"The mountain pass winds its way up the hillside, dangerously on the edge of a deep valley. The path is very slippery here. The wind , too, is getting up.":west=1:south=1
+1070 IF carrying>3THEN p"Unluckily for you, you slip on a loose rock and go tumbling into nothingness..":fin
+1080 =36:p"You are very high up but you can still see the river glistening far off to the north-west. You are near the snowline, which lies slightly to the north.The wind is now so powerful it is getting dangerous, especially as you are still near a cliff.":north=1:south=1
+1090 IF object(8)<>0 THEN p"You were totally unprepared as a huge gust swept you of your feet, and threw your body over the precipice! You were just too light.":fin
+1100 =21:p"You are in deep snow now! It is not snowing and there is now very little wind. The path has disappeared from view":north=1
+1110 =231:p"The footprints halt at the entrance to a cave. The cave is fairly small but you can see a path leading west into the cave. It looks very dark in there! There is no path east.":west=1
+1120 =230:p"You are right inside the cave system now. Its very dark, you can't see the sun to the east.":west=1:east=1:south=1
+1130 =215:p"You are in a passage like cave which leads south and north.":north=1:south=1
+1140 IF bearbl THEN p"You can see a fat and satisfied bear sitting next to an empty pot of honey - most of which appears to be down the bear's front!":bearbl=1
+1150 IF bearbl=0THEN p"You can see a thin and hungry looking  bear staring at you, whilst licking its lips. You can't get past to continue south."
+1160 =200:p"Well, it looks as though you have come to the end of this cave system.":north=1
+1170 =229:p"The cavern splits into two here. One exit leads north, and the way back is east.":east=1:north=1
+1180 IF rubble THEN p"The other exit leads west. It looks as though it has been cleared recently as there is a great deal of debris on the cave floor.":west=1
+1190 IF rubble=0THEN p"To the west is a cave in-its blocked totally."
+1200 =228:p"You have reached the west end of the cave system.":east=1
+1210 =244:p"You are at the northern most part of the cave system.":south=1
+1220 =65:IF guard2=0 THEN p"The path goes south and east but preventing you from continuing east is a sentry post and two armed ORC guards!":south=1:east=1
+1230 IF tim65>2 AND guard2=0 THEN p"The ORC guards both attack you, you fall unconcious...":PAUSE:location=-3:GO TO 430
+1240 IF guard2 THEN p"A path leads south and east. There are the two bodies of ORC guards covered inblood, lying next to a centry post.":south=1:east=1
+1250 =66:guard2=1:p"The path is very much wider here, more a track. To the north you can see a castle.":west=1:north=1
+1260 =81:p"You are standing near the moat on the draw bridge of the castle (which is down!). To the north you can see the portcullis is up and a great many people in the castle square.":south=1:north=1
+1270 =96:p"You are now standing before the port cullis, beneath a great archway. East is the guard house and west is the bottom of a tall tower. You can see spiral stairs winding upwards. Infront are two mean looking ORC guards.":south=1
+1280 IF brigu THEN p"The guards let you pass.":north=1:west=1:east=1
+1290 IF brigu=0 THEN p"They look at you suspiciously.";
+1300 IF tim96>2 AND brigu=0 THEN p"The guard-s charge! They beat you up, fists flying! You fall unconcious...":PAUSE:location=-3:brigu=2:GO TO 430
+1310 =95:p"You are on a spiral staircase at the  bottom of a tower. The stairs wind up. To the east is the main archway.":east=1:up=1
+1320 =195:p"You are at the very top of the tower. There is a great view of the whole castle spread out before you. Suddenly an arrow flies overhead. You hear shouts from below'Intruder in the tower!'":soldi=1:down=1
+1330 =97:p"You are in the guard house, a small stone building with an open door to the west.":west=1
+1340 =111:p"You are in a square courtyard, within the castle walls. It is bustling with activity as it is market day. To the east you can see another tower, this too, has spiral staircases.":south=1:north=1:east=1
+1350 =126:p"You are by a well. The well has a bucket which is sitting on the small wall around the well, unattatched to any rope. There is a horse standing nearby.":south=1
+1360 IF ropeti=5 OR ropeti=7 THEN p"You can see a rope tied onto the horse.";
+1370 IF ropeti=6 THEN p"One end of the rope is tied to you."
+1380 IF soldi THEN p"Waiting for you are 10 ORC guards! The chieften speaks 'Come peacefully or die!' You have no choice. He leads you inside,down a staircase and into a dim dark dungeon!":location=-3:check=2:PAUSE:GO TO 430
+1390 =26:p"You are now halfway down the well. All you can see is slime and moss. There is water some way below."
+1400 =-74:p"You are now at the waters surface and you are getting wet feet! You can see a small circle of light far above you.":soldi=1
+1410 =112:p"You are at the ground level of the tower. A spiral staircase leads both upwards and downwards. To the west you can see the courtyard.":down=1:up=1:west=1
+1420 =212:p"You are at the top of the tower. You are lower than the west tower but still high.":down=1
+1430 =12:p"You are in a dark and dingy passage. You can see the spiral staircase directly. To the west and east are passages. To the south you can see a shut, barred door. It looks like the dungeon!":west=1:east=1:up=1
+1440 =11:p"You are in a small square room. Propt against every bit of wall space are weapons of some sort. You must be in the armoury.":east=1
+1450 =13:p"You are in a guard room which at  present is unoccupied. There are tables and chairs scattered about.":west=1
+1460 =-3:p"You are in a very dark room, the ground is slimy and you are on your own. There are no windows except for the barred door. It looks like a dungeon!"
+1470 FOR i=1 TO 17,19 TO 37
+1480 IF object(i)=0THEN object(i)=13
+1490 END FOR i
+1500 IF object(18)=0 THEN carrying=1
+1510 IF dunglo THEN p"The door is open and you may go north.":north=1
+1520 IF object(18)<>0 THEN carrying=0
+1530 IF dunglo=0THEN p"The door is locked!"
+1540 END SELect 
+1550 PRINT\\\"Visible items are :"
+1560 test=0
+1570 FOR i=1TO 37
+1580 IF object(i)=location THEN PRINT !object$(i)&"."!:test=1
+1590 END FOR i
+1600 PRINT \
+1610 IF test=0 THEN PRINT;"Nothing!"
+1620 mv$=""
+1630 IF north THEN mv$="North"
+1640 IF south AND north THEN mv$=mv$ & ",south"
+1650 IF south AND north=0 THEN mv$="South"
+1660 IF east AND LEN(mv$)>0 THEN mv$=mv$ & ",east"
+1670 IF east AND LEN(mv$)=0 THEN mv$="East"
+1680 IF west AND LEN(mv$)=0 THEN mv$="West":GO TO 1700
+1690 IF west THEN mv$=mv$ & ",west"
+1700 IF up AND LEN(mv$)=0 THEN mv$="Up":GO TO 1720
+1710 IF up THEN mv$=mv$ & ",up"
+1720 IF down AND LEN(mv$)=0 THEN mv$="Down":GO TO 1740
+1730 IF down THEN mv$=mv$ & ",down"
+1740 mv$=mv$ & "."
+1750 PRINT:PRINT"Obvious exits are:"
+1760 IF LEN(mv$)=1 THEN PRINT"None!":GO TO 1780
+1770 PRINT mv$:col=0
+1780 IF location=77 THEN tim77=tim77+1
+1790 IF location=96 THEN tim96=tim96+1
+1800 IF location=45 THEN tim45=tim45+1
+1810 IF location=65 THEN tim65=tim65+1
+1820 REMark IF tim65>2THEN GO TO 430
+1830 IF litla=1 THEN oil=oil-1
+1840 IF litla=1 AND oil<0 THEN litla=0
+1850 IF guard_3>0 THEN guard_3=guard_3+1
+1860 IF guard_3=3 THEN guard_3=0:p"The guard becomes suspicious and leaves after locking the door!"
+1870 IF guard_3>0 THEN p"The guard looks at you suspiciously."
+1880 IF litla=1 AND oil<6 AND (object(10)=0 OR object(10)=location)THEN p" The lamp gets dimmer."
+1890 IF INT(tot)=100 THEN fin
+1900 IF hunger=-1 THEN p"You collapse and die from exhaustion!":fin
+1910 IF location=49 AND object(5)=-1 AND object(12)=49 THEN object(5)=49
+1920 IF (location>94 AND location<98) AND soldi=1 AND RND(5)=1 THEN p"Infront of you is a platoon of orcs! They beat you in!":PAUSE:location=-3:GO TO 430
+1930 hunger=hunger-1
+1940 IF hunger=20 THEN p"You feel slightly hungry."
+1950 IF hunger=10 THEN p"You feel absolutely starving!"
+1960 PRINT \\response$(1)
+1970 check=1
+1980 INPUT b$
+1990 PRINT:col=0
+2000 IF "look"==b$ OR "examine"==b$ OR "search"==b$ OR b$="l" THEN GO TO 430
+2010 IF "lamp" INSTR b$ AND ("extinguish" INSTR b$ OR "off" INSTR b$) THEN lamp
+2020 IF "guard" INSTR b$ AND ("shout" INSTR b$ OR "call" INSTR b$) THEN shout
+2030 IF b$="quit" THEN fin
+2040 IF "go" INSTR b$ OR "exit" INSTR b$ OR b$="n" OR b$="s" OR b$="e" OR b$="w" OR b$="u" OR b$="d" THEN away
+2050 IF "bribe" INSTR b$ AND "guard" INSTR b$ THEN bribe
+2060 IF "unlock" INSTR b$ THEN unlock
+2070 IF "get " INSTR b$ OR "take" INSTR b$ OR "pick" INSTR b$ THEN nab
+2080 IF "wall" INSTR b$ AND location=26 AND object(17)=-1 THEN object(17)=26:object(28)=26:p"A brick comes loose and you find a hidden compartment!":check=3
+2090 IF "inv" INSTR b$ THEN inv
+2100 IF "drop" INSTR b$ OR "leave" INSTR b$ THEN drop
+2110 IF "light" INSTR b$ THEN light
+2120 IF "burn" INSTR b$ THEN burn
+2130 IF "climb" INSTR b$ THEN climb
+2140 IF "untie" INSTR b$ THEN untie
+2150 IF "tie" INSTR b$ AND NOT "untie" INSTR b$ THEN tie
+2160 IF "throw" INSTR b$ THEN throw
+2170 IF "kill" INSTR b$ OR "attack" INSTR b$ OR "fight" INSTR b$ THEN kill
+2180 IF "read" INSTR b$ THEN read_
+2190 IF "prise" INSTR b$ OR "lever" INSTR b$ THEN prise
+2200 IF "eat" INSTR b$ THEN eat
+2210 IF "wear" INSTR b$ THEN wear
+2220 IF "dig" INSTR b$ THEN dig
+2230 IF "fill" INSTR b$ THEN fill_
+2240 IF "chop" INSTR b$ THEN chop
+2250 IF "set" INSTR b$ THEN set
+2260 IF "push" INSTR b$ THEN push
+2270 IF "push" INSTR b$ AND "rock" INSTR b$ AND location=47 THEN PRINT"It won't budge!":check=3
+2280 IF "drink" INSTR b$ THEN drink
+2290 IF "follow" INSTR b$ AND "footprints" INSTR b$ AND location=21 THEN location=231:check=2:GO TO 2310
+2300 IF "follow" INSTR b$ AND "footprints" INSTR b$ AND location=231 THEN location=21:check=2
+2310 IF "help" INSTR b$ THEN help
+2320 IF "pull" INSTR b$ THEN pull
+2330 IF "score" INSTR b$ THEN score
+2340 IF "open" INSTR b$ THEN OPEN_:GO TO 2360
+2350 IF "say" INSTR b$ OR "open" INSTR b$ THEN say
+2360 IF check=1 THEN PRINT response$(2)
+2370 IF check=0 THEN PRINT response$(3)
+2380 IF check=2 THEN GO TO 430
+2390 GO TO 1780
+2400 DEFine PROCedure away
+2402 IF " n" INSTR b$ THEN b$="n"
+2404 IF " s" INSTR b$ THEN b$="s"
+2406 IF " e" INSTR b$ THEN b$="e"
+2408 IF " w" INSTR b$ THEN b$="w"
+2410 IF location=159 AND b$=="n" AND treebr=0 THEN p"You walk straight over the edge and plunge into nothingness....":fin
+2420 IF location=45 AND dragde=0 AND b$="w" THEN p"You step over the dragon, its powerful sense of smell wakes it and your last living memory is of being trapped in a wall of flames...":fin
+2430 IF (location=123 AND b$=="n")OR(location=138 AND b$=="s")THEN p"You walk straight into the river and are whisked away donwstream to be      bashed against rocks and drown!":fin
+2440 IF location=215 AND b$=="s" AND bearbl=0 THEN p"The bear rips you to pieces and is no longer hungry!":fin
+2450 IF location=77 AND b$=="n" AND guard=0 THEN p"As you move to pass the ORC he plunges his axe deep into your skull!":fin
+2460 IF location=65 AND b$=="e" AND guard2=0 THEN p"Just when you think they haven't seen you a shout rings out and a moment later a spear enters your back and you crumple to the ground!":fin
+2470 IF b$=="n" AND north=1 THEN location=location+15:check=2
+2480 IF b$=="s" AND south=1 THEN location=location-15:check=2
+2490 IF b$=="w" AND west=1 THEN location=location-1:check=2
+2500 IF b$=="e" AND east=1 THEN location=location+1:check=2
+2510 IF (" u" INSTR b$ OR b$=="u") AND up=1 THEN location=location+100:check=2
+2520 IF (" d" INSTR b$ OR b$=="d") AND down=1 THEN location=location-100:check=2
+2530 IF check=1 THEN check=3:p"You can't go that way!"
+2540 END DEFine away
+2550 DEFine PROCedure nab
+2560 test=0
+2570 FOR i=1 TO 37
+2580 IF object$(i) INSTR b$ AND i=4 AND fire>0 AND object(i)=fire THEN PRINT"Its much too hot to pick up!":check=3:EXIT i:RETurn 
+2590 IF object$(i) INSTR b$ AND object(i)=location AND carrying<6 AND i<>15 THEN check=0:carrying=carrying+1:object(i)=0:test=1
+2600 IF test=1 AND location=47 AND i>19 THEN tot=tot-5.89
+2610 IF test=1 THEN EXIT i
+2620 IF object$(i) INSTR b$ AND object(i)=location AND carrying<6 THEN PRINT"It is too heavy to lift!":check=3:EXIT i
+2630 IF object$(i) INSTR b$ AND object(i)=location THEN PRINT"You are carrying too much!":check=3:EXIT i
+2640 IF object$(i) INSTR b$ THEN PRINT"Its not here to pick up!":check=3:EXIT i
+2650 NEXT i
+2660 END FOR i
+2670 END DEFine nab
+2680 DEFine PROCedure drop
+2690 test=0
+2700 FOR i=1 TO 37
+2710 IF object$(i) INSTR b$ AND object(i)=0 THEN check=0:object(i)=location:carrying=carrying-1:test=1
+2720 IF i=2 AND test=1 THEN showor=0
+2730 IF i=19 AND test=1 AND location=215 AND bearbl=0THEN bearbl=1:check=2
+2740 IF test=1 AND location=47 AND i>19 THEN tot=tot+5.89
+2750 IF test=1 THEN EXIT i
+2760 IF object$(i) INSTR b$ THEN PRINT"You aren't carrying it!":check=3:EXIT i
+2770 NEXT i
+2780 END FOR i
+2790 END DEFine drop
+2800 DEFine PROCedure inv
+2810 test=0
+2820 PRINT"You are carrying:"
+2830 FOR i=1TO 37
+2840 IF object(i)<>0 THEN GO TO 2890
+2850 test=1
+2860 x$=object$(i)
+2870 x$=x$ &"."
+2880 PRINT!x$!
+2890 NEXT i
+2900 PRINT \
+2910 check=3
+2920 IF test=0 THEN PRINT"Nothing!"
+2930 END DEFine inv
+2940 DEFine PROCedure light
+2950 IF "fire" INSTR b$ THEN GO TO 3000
+2960 IF "matches" INSTR b$ THEN GO TO 3090
+2970 IF "tree" INSTR b$ THEN p"Arsonist!":check=3:RETurn 
+2980 IF "lamp" INSTR b$=0 THEN RETurn 
+2982 IF object(10)<>0 THEN PRINT"You have no lamp!":check=3:RETurn 
+2984 IF object(3)<>0 THEN p"It might help if you used matches!":check=3:RETurn 
+2986 IF litla<>0 THEN p"The lamp is already alight!":check=3:RETurn 
+2988 IF oil=0 THEN p"The lamp is empty!":check=3:RETurn 
+2990 litla=1:check=3:p"The lamp flickers into life.":RETurn 
+3000 IF object(4)=0 THEN p"It might be easier if you put the wood down first!":check=3:RETurn 
+3002 IF object(4)<>location THEN p"I'd find some firewood,it might be use-ful!":check=3:RETurn 
+3004 IF fire<>0 THEN p"You already have a fire-how many do you want?!":check=3:RETurn 
+3006 IF object(3)<>0 THEN p"It might be easier if you used matches!":check=3:RETurn 
+3010 p"The wood bursts into flames.":check=3:fire=location:RETurn 
+3090 IF object(3)=0 THEN p"The match bursts into light.":check=3:RETurn 
+3100 p"You haven't got any!":check=3:END DEFine 
+3110 DEFine PROCedure burn
+3120 IF "fire" INSTR b$ OR "wood" INSTR b$ THEN GO TO 3000
+3130 IF "sandw" INSTR b$ THEN p"I didn't know you like toast!":check=3:RETurn 
+3132 IF "rabbit" INSTR b$=0 THEN RETurn 
+3134 IF object(5)<>0 THEN p"You have no rabbit":check=3:RETurn 
+3136 IF fire<>location THEN p"There is no fire!":check=3:RETurn 
+3140 p"You soon smell the delicious smell of  roast rabbit!":foodco=1:check=3
+3170 END DEFine 
+3180 DEFine PROCedure climb
+3190 IF "cliff" INSTR b$ THEN GO TO 3360
+3200 IF "tree" INSTR b$ THEN GO TO 3380
+3210 IF "up" INSTR b$ THEN GO TO 3450
+3220 IF "down" INSTR b$ THEN GO TO 3480
+3230 IF "rope" INSTR b$=0 THEN RETurn 
+3240 IF location=44 AND ropeti=1 AND object(8)<>0 THEN check=2:location=144:RETurn 
+3250 IF location=144 AND ropeti=1 AND object(8)<>0 THEN check=2:location=44:RETurn 
+3260 IF (location=144 OR location=44)AND ropeti=1 THEN p"The rope snaps and you fall to your death!":fin
+3270 IF (location=144 OR location=44)THEN p"There is no rope to climb!":check=3:RETurn 
+3280 IF location=123 AND ropeti=4 AND object(8)<>0 THEN location=138:check=2:RETurn 
+3290 IF location=138 AND ropeti=4 AND object(8)<>0 THEN location=123:check=2:RETurn 
+3300 IF (location=138 OR location=123) AND ropeti=4 THEN p"The rope snaps and you sink to the river bed like a ton of bricks!":fin
+3310 IF (location=138 OR location=123) THEN p"You fall in and drown!":fin
+3320 IF location=-74 AND (ropeti=5 OR ropeti=7) THEN location=26:check=2:RETurn 
+3330 IF location=26 AND (ropeti=5 OR ropeti=7) THEN location=126:check=2:RETurn 
+3340 IF location=26 THEN p"There is no rope to climb up!":check=3:RETurn 
+3350 RETurn 
+3360 IF location=44 THEN p"You get halfway up but then slip and fall to your death as you try to leap for a ledge!":fin
+3370 RETurn 
+3380 IF location=92 AND chop1=0 AND object(8)<>0THEN check=2:location=192:RETurn 
+3390 IF location=93 AND chop2=0 AND object(8)<>0THEN check=2:location=193:RETurn 
+3400 IF (location=92 OR location=93) AND object(8)<>0 THEN p"The tree has previously been chopped down!":check=3:RETurn 
+3410 IF location=92 AND chop1=0 THEN p"You are about ten feet up when you slip in your armour and come crashing to the ground, You break your back!":fin
+3420 IF location=93 AND chop2=0 THEN PRINT"You slip and break your neck!":fin
+3430 IF location=174 AND object(21)=174 THEN p"That tree is not for climbing!":check=3
+3440 RETurn 
+3450 IF location=44 AND ropeti<>1 THEN GO TO 3360
+3460 IF location=44 OR location=-74 OR location=26 THEN GO TO 3240
+3470 GO TO 3380
+3480 IF location=144 THEN location=44:check=2:RETurn 
+3490 IF (location=192 OR location=193) THEN location=location-100:check=2:RETurn 
+3500 IF (location=126 OR location=26)AND object(8)<>0 AND (ropeti=5 OR ropeti=7)THEN location=location-100:check=2:RETurn 
+3510 IF location=-74 THEN p"You get very wet!":check=3:RETurn 
+3520 IF location=126 AND (object(8)=0 OR ropeti<>5 OR ropeti<>7)THEN p"You slip and fall down the well. There is no way to get up, you drown!":fin
+3530 END DEFine 
+3540 DEFine PROCedure tie
+3550 IF "rope" INSTR b$=0 THEN RETurn 
+3560 IF location=123 AND object(1)=0 THEN check=0:ropeti=2:object(1)=-1:carrying=carrying-1:RETurn 
+3570 IF location=123 AND ropeti=2 THEN ropeti=4:check=0:RETurn 
+3580 IF location=123 AND ropeti<2 AND ropeti>4 AND object(1)<>0 THEN p"There is no rope!":check=3:RETurn 
+3590 IF location=123 AND ropeti=4 THEN p"It is already tied on!":check=3:RETurn 
+3600 IF location=126 AND ropeti<5 AND object(1)=0 THEN p"You tie the rope round your waist.":check=3:ropeti=6:object(1)=-1:carrying=carrying-1:RETurn 
+3610 IF location=126 AND ropeti<>5 THEN p"You tie the rope to the horse.":check=3:ropeti=7:RETurn 
+3620 IF location=126 AND ropeti=7 THEN p"The rope is already tied!":check=3
+3630 END DEFine 
+3640 DEFine PROCedure untie
+3650 IF "rope" INSTR b$=0 THEN RETurn 
+3660 IF location=44 AND ropeti=1 THEN p"The rope comes loose.":check=3:object(1)=44:ropeti=0:RETurn 
+3670 IF location=44 THEN p"There is no rope here!":check=3:RETurn 
+3680 IF location=126 AND ropeti=5 THEN ropeti=0:check=0:object(1)=126:RETurn 
+3690 IF location=126 AND ropeti=6 THEN ropeti=0:check=0:object(1)=126:RETurn 
+3700 IF location=126 AND ropeti=7 THEN ropeti=6:check=0:RETurn 
+3710 IF location=123 AND ropeti=4 THEN ropeti=3:check=0:RETurn 
+3720 IF location=123 AND ropeti=2 THEN ropeti=0:check=0:RETurn 
+3730 IF location=123 AND ropeti=3 THEN PRINT"Unfortunately the rope won't come loose-hard luck!":check=3:RETurn 
+3740 END DEFine 
+3750 DEFine PROCedure throw
+3760 IF "rope" INSTR b$=0 THEN RETurn 
+3770 IF location=44 AND ropeti<>1 AND object(1)=0 THEN check=0:ropeti=1:object(1)=-1:carrying=carrying-1:RETurn 
+3780 IF location=44 AND ropeti<>1 THEN p"You haven't got a rope.":check=3:RETurn 
+3790 IF location=44 THEN p"You have already thrown it!":check=3:RETurn 
+3800 IF location=123 AND ropeti<2 AND ropeti>4 AND object(1)=0 THEN ropeti=3:check=3:p"The rope gets caught on the far side.":object(1)=-1:carrying=carrying-1:RETurn 
+3810 IF location=123 AND ropeti=2 THEN ropeti=4:check=3:p"The rope makes a precarious bridge.":RETurn 
+3820 END DEFine 
+3830 DEFine PROCedure kill
+3840 IF "guard" INSTR b$ THEN GO TO 3920
+3850 IF "dragon" INSTR b$ THEN GO TO 3870
+3860 RETurn 
+3870 IF location<>45 THEN p"There are no dragons here!, are there?":check=3:RETurn 
+3872 IF dragde<>0 THEN p"The dragon has already been slain!":check=3:RETurn 
+3874 IF object(6)<>0 THEN p"You have no sword, I'd find one first!":check=3:RETurn 
+3876 IF object(8)=0 THEN p"Just as you reach the creatures neck your armour creaks, the dragons eyes flick open and you get roasted alive!":check=3:dragde=1:RETurn 
+3878 dragde=1:check=3:p"You slay the dragon in its sleep!":west=1
+3880 RETurn 
+3920 IF location=77 AND guard=0 AND object(6)=0 AND object(8)=0 THEN p"You have a long and bloody battle. Your sword is of high quality and you pierce the ORCs armour after a short time.":check=3:north=1:guard=1:RETurn 
+3930 IF location=77 AND guard=0 AND object(6)=0 THEN p"You have a hard task, the ORC after many close calls finally slays you!":fin
+3940 IF location=77 AND guard=0 THEN p"You have no sword! The guard overcomes you in an arm lock. He shouts and more guards come! You are surrounded, they beat you in! You fall unconcious...":PAUSE:location=-3:check=2:RETurn 
+3950 IF location=77 THEN p"The guard is dead already!":check=3:RETurn 
+3960 IF location=65 AND guard2=0 AND object(6)=0 AND object(8)=0 THEN p"The ORC guards look scared as you charge at them, sword flying, the biggest attacks first. He attacks without armour. You are wounded but not seriously, before you slay the creature. The second attacks-smaller but more mobile, your armour saves you from a vicious blow and at last you kill him.":check=3:east=1:guard2=1:RETurn 
+3970 IF location=65 AND guard2=0 AND object(6)=0 THEN p"You pay the penalty for no armour, you  are slain whilst fighting for your life":fin
+3980 IF location=65 AND guard2=0 THEN PRINT"You attack two armed ORC guards without weapons-crazy. You are slaughtered on the spot!":fin
+3990 IF location=65 THEN p"The guards are already dead!":check=3:RETurn 
+4000 IF location=96 THEN p"These two guards happen to be the most proficient ORC fighters for miles around! Although shocked by your attack their response is swift and deadly!":fin
+4010 IF location=-3 AND guard_3=0 THEN p"There is no guard here!":check=3:RETurn 
+4020 IF location=-3 AND guard_3>0 AND object(18)=0 THEN p"You take the guard by surprise, smash his skull, walk north and close the door behind you!":check=2:PAUSE:location=12:guard_3=0:RETurn 
+4030 IF location=-3 AND guard_3>0 THEN p"What with!":check=3
+4040 END DEFine 
+4050 DEFine PROCedure read_
+4060 IF "note" INSTR b$=0 THEN RETurn 
+4070 PRINT"The old torn paper reads:"
+4080 p" Find a door large and hard! Simply say:_________ well that would be too easy! This may help 'ITGHASPET'All shall be  revealed!"
+4090 p" The remainder was lost."
+4100 check=3:END DEFine 
+4110 DEFine PROCedure prise
+4120 IF "boulder" INSTR b$=0 THEN RETurn 
+4130 IF location<>47 THEN RETurn 
+4135 IF object(4)<>0 THEN p"You need something to PRISE it with!":check=3:RETurn 
+4140 IF object(11)=-1 THEN object(11)=47:p"You need all your strength to move the rock. Underneath you find a rusty key!":check=3:RETurn 
+4160 p"You've already got the key-what more do you want!":check=3
+4170 END DEFine 
+4180 DEFine PROCedure eat
+4190 IF "rabbit" INSTR b$ THEN GO TO 4225
+4200 IF "sandwich" INSTR b$ THEN GO TO 4240
+4210 IF "honey" INSTR b$ THEN GO TO 4250
+4220 GO TO 4270
+4225 IF object(5)<>0 THEN GO TO 4270
+4230 IF foodco=1 THEN check=0:object(5)=-1:carrying=carrying-1:hunger=hunger+100:rabeat=1:RETurn 
+4235 p"Raw rabbit tastes disgusting! You can't swallow it.":check=3:RETurn 
+4240 IF object(16)<>0 THEN GO TO 4270
+4245 object(16)=-1:p"Yum,yum!":hunger=hunger+50:check=3:carrying=carrying-1:RETurn 
+4250 IF object(19)<>0 THEN GO TO 4270
+4255 p"Yum yum!":object(19)=-1:hunger=hunger+60:carrying=carrying-1:check=3:RETurn 
+4270 p"You haven't got one to eat!":check=3
+4280 DEFine PROCedure wear
+4290 IF "armour"INSTR b$ AND object(8)=0 THEN p"Its O.K.,you're already wearing it!":check=3:RETurn 
+4300 IF "armour"INSTR b$ AND object(36)=0 THEN p"Its much too small!":check=3:RETurn 
+4310 IF "snow" INSTR b$=0 OR "shoes" INSTR b$=0 THEN RETurn 
+4315 IF object(2)<>0 THEN p"You haven't got any!":check=3:RETurn 
+4320 IF showor=0 THEN showor=1:check=0:RETurn 
+4330 p"You are already wearing them!":check=3
+4345 END DEFine 
+4350 DEFine PROCedure dig
+4360 IF "grave" INSTR b$ THEN GO TO 4420
+4370 IF "rubble" INSTR b$=0 OR location<>229 THEN RETurn 
+4375 IF rubble<>0 THEN p"It has already been cleared!":check=3:RETurn 
+4380 IF object(20)=0 THEN west=1:rubble=1:check=2:RETurn 
+4390 p"You get nowhere using only hands.":check=3
+4410 RETurn 
+4420 p"Its not that bad is it! I don't really see the point in digging a grave but if you really want to...":check=3
+4425 END DEFine 
+4430 DEFine PROCedure fill_
+4440 IF "water" INSTR b$ AND "flask" INSTR b$ THEN GO TO 4470
+4450 IF "lamp" INSTR b$=0 THEN RETurn 
+4452 IF object(10)<>0 THEN p"You are not carrying the lamp!":check=3:RETurn 
+4454 IF object(9)<>0 THEN p"You haven't got any oil to fill it with":check=3:RETurn 
+4456 IF fulamp<>0 THEN p"Sorry the oil flask is empty!":check=3:RETurn 
+4458 IF litla<>0 THEN p"The lamp is still on!":check=3:RETurn 
+4460 check=0:fulamp=1:oil=oil+35:RETurn 
+4470 IF object(13)<>0 THEN p"You have no container!":check=3:RETurn 
+4474 IF NOT(location=123 OR location=138) THEN p"There is no water available here!":check=3:RETurn 
+4476 IF flask<>0 THEN p"It already contains water!":check=3:RETurn 
+4480 check=0:flask=1
+4500 END DEFine 
+4510 DEFine PROCedure chop
+4520 IF "guard" INSTR b$  THEN GO TO 4580
+4530 IF "tree" INSTR b$=0 THEN RETurn 
+4535 IF NOT(location=92 OR location=93) THEN RETurn 
+4537 IF object(7)<>0 THEN p"You have no axe!":check=3:RETurn 
+4540 IF location=92 AND chop1=0 THEN chop1=1:check=2:RETurn 
+4550 IF location=93 AND chop2=0 THEN chop2=1:check=2:RETurn 
+4560 p"Sorry but you've chopped it down already!":check=3
+4570 RETurn 
+4580 IF location<>77 THEN RETurn 
+4585 IF object(7)<>0 THEN p"You have no axe!":check=3:RETurn 
+4590 IF guard<>0 THEN p"The guard is already dead!":check=3:RETurn 
+4595 p"With one terrific blow the axe cleaves the ORCs skull!":check=3:guard=1:north=1
+4620 END DEFine 
+4630 DEFine PROCedure set
+4640 IF "trap"INSTR b$=0 THEN RETurn 
+4650 IF object(12)<>0 THEN p"How can you set one if you're not carrying one!":check=3:RETurn 
+4660 IF location<>49 THEN p"I wouldn't set it here, I can't see any rabbits!":check=3:RETurn 
+4670 object(12)=49:carrying=carrying-1:check=0
+4680 END DEFine 
+4690 DEFine PROCedure drink
+4700 IF "water" INSTR b$=0 THEN RETurn 
+4720 IF (location=123 OR location=138)THEN p"Ahh thats nice and refreshing!":check=3:RETurn 
+4725 IF object(13)<>0 THEN p"There is nothing to drink":check=3:RETurn 
+4730 IF flask=1 THEN p"Ahh that's refreshing!":check=3:flask=0:RETurn 
+4740 p"Sorry-your flask is empty!":check=3
+4750 END DEFine 
+4760 DEFine PROCedure pull
+4770 IF "rope" INSTR b$=0 THEN RETurn 
+4780 IF location=-74 THEN p"You've already got wet feet, what more  do you want!":check=3:RETurn 
+4790 IF location=26 THEN check=0:location=-74:RETurn 
+4800 IF location=44 AND ropeti=1 THEN p"The rope comes tumbling down after a   good heave!":check=3:object(1)=44:ropeti=0:RETurn 
+4810 IF location=126 THEN check=0:location=26
+4820 END DEFine 
+4830 DEFine PROCedure score
+4840 IF tot<100 THEN PRINT"So far you have scored ";INT(tot);"%":check=3
+4850 END DEFine 
+4860 DEFine PROCedure say
+4870 IF "spaghetti" INSTR b$=0 OR location<>44 THEN RETurn 
+4890 IF rocop=0 THEN rocop=1:check=2:RETurn 
+4900 p"The rock door is already open!":check=3
+4910 END DEFine 
+4920 DEFine PROCedure unlock
+4930 IF "door" INSTR b$=0 OR location<>48 THEN RETurn 
+4935 IF object(11)<>0 THEN p"You have no key!":check=3:RETurn 
+4937 IF door<>0 THEN p"The door is already unlocked!":check=3:RETurn 
+4940 check=0:door=1
+4970 END DEFine 
+4980 DEFine PROCedure OPEN_
+4990 IF "door" INSTR b$=0 OR location<>48 THEN RETurn 
+5000 IF door=1 THEN check=2:door=2:RETurn 
+5010 IF door=2 THEN p"The door is already open!":RETurn 
+5020 p response$(4):check=3
+5030 END DEFine 
+5040 DEFine PROCedure help
+5045 SELect ON location
+5050 =159:IF treebr=0 THEN p"Try using the tree!":check=3
+5060 =26:p"Try examining your surroundings!":check=3
+5070 =44:p"Try 'OPEN SP_G_E__I'!":check=3
+5080 =45:p"You need a sword!":check=3
+5090 =32:p"You need a pair of snowshoes!":check=3
+5100 =47:p"You need to prise the rock!":check=3
+5110 =77:p"You need the SWORD!":check=3
+5120 =92,93:p"Try chopping or climbing!!!":check=3
+5130 =123:p"You need rope!!":check=3
+5140 =48:p"You need a key!":check=3
+5150 =49:p"Ever tasted rabbit?!":check=3
+5160 =126:p"You need a rope!":check=3
+5170 =229:p"Try a spade!":check=3
+5180 =51:p"Don't carry so much!":check=3
+5190 =36:p"Armour might make you more wind resistant!?":check=3
+5200 =21:p"You might find some FOOTPRINTS!":check=3
+5210 =REMAINDER :p"Sorry - no help given here!":check=3
+5215 END SELect 
+5220 END DEFine 
+5230 DEFine PROCedure bribe
+5235 IF object(35)<>0 THEN p"You have no money!":check=3:RETurn 
+5240 IF location=77 THEN p"The guard makes no response.":check=3:RETurn 
+5260 IF location=65 THEN p"The guards show no sign of accepting your offer.":check=3:RETurn 
+5265 IF location<>96 THEN RETurn 
+5270 IF brigu=0 THEN p" You toss them a coin each, keeping the rest hidden away...":check=2:brigu=1:PAUSE:RETurn 
+5280 p"You've bribed the guards already!":check=3
+5300 END DEFine 
+5310 DEFine PROCedure shout
+5320 IF location<>-3 THEN RETurn 
+5330 IF guard_3>0 THEN p"The guard shouts 'I'm here already-what do you want?":check=3:RETurn 
+5340 p"After a few moments the guard peers through the door, sees you on the other side of the room and comes in, leaving the door open!"
+5350 check=3:guard_3=3
+5380 END DEFine 
+5390 DEFine PROCedure push
+5395 IF location<>159 THEN RETurn 
+5400 IF treebr=0 THEN treebr=1:p"The tree is very easy to move as it has been designed as a retractable bridge!":north=1:check=3:RETurn 
+5410 p"There's nothing more you can do to it!":check=3
+5420 END DEFine 
+5450 DEFine PROCedure gamesave
+5460 CLS
+5470 PRINT"Are you sure?(Y or N)"
+5480 k$=INKEY$(-1)
+5490 IF k$=="y"THEN GO TO 5510
+5500 fin
+5510 CLS:PRINT"Insert formatted cartridge into drive1":PAUSE
+5520 CLS:PRINT"             PLEASE WAIT"
+5540 OPEN_OVER #6,mdv1_Variables
+5550 FOR i=1 TO 37
+5560 PRINT #6,object(i)
+5570 NEXT i
+5580 PRINT #6,location:PRINT #6,tot:PRINT #6,hunger:PRINT #6,treebr :PRINT #6,ropeti:PRINT #6,landsl:PRINT #6,dragde:PRINT #6,showor:PRINT #6,foodco:PRINT #6,rabeat:PRINT #6,guard:PRINT #6,chop1:PRINT #6,chop2:PRINT #6,door:PRINT #6,trap:PRINT #6,rubble:PRINT #6,bearbl:PRINT #6,brigu:PRINT #6,guard2:PRINT #6,dunglo:PRINT #6,fulamp:PRINT #6,litla:PRINT #6,trewat:PRINT #6,tim77:PRINT #6,tim96:PRINT #6,tim65:PRINT #6,tim45:PRINT #6,rocop:PRINT #6,soldi:PRINT #6,oil:PRINT #6,fire:PRINT #6,guard_3:PRINT #6,flask
+5590 RESTORE 
+5600 CLOSE #6
+5610 END DEFine 
+5620 DEFine PROCedure gameload
+5630 CLS
+5640 PRINT"Are you sure?(Y or N)"
+5650 k$=INKEY$(-1)
+5660 IF k$=="y"THEN GO TO 5680
+5670 fin
+5680 CLS:PRINT"Insert formatted cartridge into drive1":PAUSE
+5690 CLS:PRINT"             PLEASE WAIT"
+5700 OPEN_IN #6,Variables
+5710 FOR i=1TO 37
+5720 INPUT #6,object(i)
+5730 NEXT i
+5740 INPUT #6,location:INPUT #6,tot:INPUT #6,hunger:INPUT #6,treebr:INPUT #6,ropeti:INPUT #6,landsl:INPUT #6,dragde:INPUT #6,showor:INPUT #6,foodco:INPUT #6,rabeat:INPUT #6,guard:INPUT #6,chop1:INPUT #6,chop2:INPUT #6,door:INPUT #6,trap:INPUT #6,rubble:INPUT #6,bearbl:INPUT #6,brigu:INPUT #6,guard2:INPUT #6,dunglo:INPUT #6,fulamp:INPUT #6,litla:INPUT #6,trewat:INPUT #6,tim77:INPUT #6,tim96:INPUT #6,tim65:INPUT #6,tim45:INPUT #6,rocop:INPUT #6,soldi:INPUT #6,oil:INPUT #6,fire:INPUT #6,guard_3:INPUT #6,flask
+5750 CLOSE #6
+5760 RESTORE 
+5770 END DEFine 
+5780 DEFine PROCedure fin
+5790 PAUSE
+5800 CLS
+5810 IF INT(tot)=100 THEN PRINT"Well done!You have completed this      adventure!You have scored 100%":GO TO 5830
+5820 PRINT"You scored ";INT(tot)
+5830 PRINT:PRINT"Do you wish to L(eave) program or      C(ontinue)?"
+5840 s$=INKEY$
+5850 IF s$=="l"THEN NEW
+5860 IF s$=="c"THEN GO TO 5880
+5870 GO TO 5840
+5880 CLS:PRINT"Do you wish to start a fresh game?(Y orN)"
+5890 g$=INKEY$(-1)
+5900 IF g$=="y"THEN CLS#1:PRINT:PRINT"             PLEASE WAIT":initialize:reed:GO TO 430
+5910 IF g$=="n"THEN GO TO 390
+5920 GO TO 5890
+5925 END DEFine 
+5930 DEFine PROCedure lamp
+5940 IF object(10)=0AND litla=1THEN litla=0:p"The lamp goes out.":check=3:RETurn 
+5950 IF object(10)=0THEN p"The lamp is already off!":check=3:RETurn 
+5960 p"You aren't carrying it!":check=3:END DEFine 
+5970 DEFine PROCedure initialize
+5980 DIM object$(37,25),object(37),response$(5,39)
+5990 location=47:hunger=150:tot=0:guard_3=0:flask=0
+6000 treebr=0:ropeti=0:landsl=0
+6010 oil=30:check=0:soldi=0
+6020 dragde=0:showor=0:foodco=0
+6030 rabeat=0:guard=0:chop1=0
+6040 chop2=0:door=0:trap=0
+6050 rubble=0:bearbl=0:brigu=0
+6060 north=0:south=0:west=0
+6070 east=0:up=0:down=0
+6080 guard2=0:dunglo=0:fulamp=0
+6090 litla=0:trewat=0:tim77=0
+6100 tim96=0:tim65=0:tim45=0
+6110 rocop=0:carrying=1:fire=0
+6120 END DEFine initialize
+6130 DEFine PROCedure reed
+6140 RESTORE 
+6150 FOR i=1TO 37
+6160 READ object$(i):READ object(i)
+6170 NEXT i
+6180 FOR i=1TO 5
+6190 READ response$(i)
+6200 NEXT i
+6210 END DEFine reed
+6220 DATA "rope",13,"snow shoes",36,"matches",44,"wood",62,"rabbit",-1,"sword",63,"axe",212
+6230 DATA "suit of armour",32,"oil flask",111,"lamp",138,"rusty key",-1,"animal trap",92,"water flask",47,"note",192,"large boulder",47,"ham sandwich",0,"loose brick",-1
+6240 DATA "loose rock",-3,"honey",159,"spade",-107
+6250 DATA "magical golden sapling",174,"large red ruby",-10,"silver bear statuette",200,"gold ring",1,"gold nugget",228,"rare fossil",244,"silver broach",192,"diamond",-1,"pot of rubies",138,"jewel encrusted pick",193
+6260 DATA "platinum pyramid",144,"persian rug",63,"golden earring",43,"silver shield",11,"gold pieces",66,"mithril armour",11,"bronze javelin",21
+6270 DATA "What is your next command?","I don't understand.","O.K.","I can't do that - YET!","It's too dark to see,i'm going to trip!"
+6280 DEFine PROCedure instructions
+6290 PRINT:PRINT"  'Treasure hunt' is a text adventure":PRINT:PRINT"where you must collect and deposit the":PRINT:PRINT"seventeen objects of value."
+6300 PRINT:PRINT"  The computer will display in words a":PRINT:PRINT"description of your present location,":PRINT:PRINT"any objects you might want to 'pick":PRINT:PRINT"up' and all the obvious directions":PRINT:PRINT"available to you."
+6310 PRINT:PRINT"  You can tell the computer to do thing":PRINT:PRINT"-s in short two or three word sentances":PRINT:PRINT"such as 'Go north' 'look' 'help'":c$=INKEY$(-1):CLS:PRINT:PRINT"  In this way you can expierience":PRINT:PRINT"problems and hopefully overcome them,":PRINT:PRINT"discovering new locations and more":PRINT:PRINT"objects as you go along,which in turn":PRINT:PRINT"can help solve more puzzles."
+6320 PRINT:PRINT"  If you are stuck you can always try":PRINT:PRINT"typing 'Help',you never know,you might":PRINT:PRINT"even learn something!If you want to":PRINT:PRINT"finish type 'Quit'"
+6330 PRINT:PRINT"  Good luck!":PAUSE:END DEFine 
+7000 DEFine PROCedure p(a$)
+7010 LOCal i,j
+7015 a$=" "&a$
+7020 REPeat i
+7030 i=LEN(a$):IF col+i<70 THEN col=col+i:PRINT a$;:RETurn 
+7040 FOR j=70-col TO 1 STEP -1:IF a$(j)=" " THEN EXIT j
+7050 PRINT a$(1 TO j-1):a$=a$(j TO):col=0
+7060 END REPeat i
+7070 END DEFine 

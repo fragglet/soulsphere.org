@@ -1,0 +1,166 @@
+<html>
+<body>
+
+<%
+
+require "cgi"
+
+cgi = CGI.new
+
+adclause = cgi["adclause"] != ""
+org = cgi["organisation"]
+owner = cgi["owner"]
+$columns = cgi["columns"].to_i
+
+if $columns < 20
+    $columns = 20
+end
+
+licenses = {
+    "bsd2" => "bsd-2-clause.txt",
+    "bsd3" => "bsd-3-clause.txt",
+    "bsd4" => "bsd-4-clause.txt",
+    "mit3" => "mit-3-clause.txt",
+    "mit4" => "mit-4-clause.txt",
+    "isc" => "isc-license.txt",
+}
+
+license_file = licenses[cgi["license"]]
+  
+license_text = ''
+
+File.open(license_file) do |file|
+    license_text = file.readlines.join
+end
+
+license_text = license_text.gsub(/\%ORGANIZATION\%/, org)
+license_text = license_text.gsub(/\%OWNER\%/, owner)
+license_text = license_text.gsub(/\%YEAR\%/, Time.now.year.to_s)
+
+
+def plaintext_convert(text)
+
+    result = ""
+
+    text.each_line do |s|
+        s = s.chomp
+        words = s.split(/ /)
+        linelen = 0
+        startindent = -1
+        words.each do |w|
+            if linelen + w.length > ($columns - 5)
+                result += "\n" 
+                result += " " * startindent
+                linelen = startindent
+            end
+            if w =~ /\w/ and startindent < 0
+                startindent = linelen
+            end
+            result += w + " "
+            linelen += w.length + 1
+        end
+        result += "\n"
+    end
+
+    result
+end
+
+def plaintext_output(text)
+    puts "<pre>"
+    puts plaintext_convert(text)
+    puts "</pre>"
+end
+
+def html_output(text)
+    previousline_data = false
+    in_list = false
+    text.each_line do |s|
+        s = s.chomp
+
+        currentline_data = true
+        if s =~ /^\s*$/
+            currentline_data = false
+        end
+        listitem = false
+        if s =~ /^\s*\*(.*)$/
+            listitem = true
+            s = $1
+        end
+
+        if !in_list && !listitem
+            if currentline_data && previousline_data
+                puts "<br>"
+            elsif !currentline_data
+                puts "<p>"
+            end
+        end
+
+        if listitem && !in_list
+            # start of a list
+            in_list = true
+            puts "<ul>"
+        elsif !listitem && in_list && currentline_data
+            # end of list
+            in_list = false
+            puts "</ul>"
+        end
+
+        if currentline_data
+            if listitem
+                print "<li>"
+            end
+            puts s 
+        end 
+
+        previousline_data = currentline_data
+    end
+end
+
+def c_output(text)
+    puts "<pre>"
+    puts "/*"
+    puts
+    puts plaintext_convert(text)
+    puts
+    puts " */"
+    puts "</pre>"
+end
+
+def cpp_output(text)
+    puts "<pre>"
+    converted = plaintext_convert(text)
+
+    for line in converted
+        puts "// " + line
+    end
+    
+    puts "</pre>"
+end
+
+def perl_output(text)
+    puts "<pre>"
+    converted = plaintext_convert(text)
+
+    for line in converted
+        puts "# " + line
+    end
+    
+    puts "</pre>"
+end
+
+if cgi["output"] == "html"
+    html_output(license_text)
+elsif cgi["output"] == "c"
+    c_output(license_text)
+elsif cgi["output"] == "cpp"
+    cpp_output(license_text)
+elsif cgi["output"] == "perl"
+    perl_output(license_text)
+else
+    plaintext_output(license_text)
+end
+
+%>
+
+</body>
+</html>

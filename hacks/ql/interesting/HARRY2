@@ -1,0 +1,266 @@
+1 CLEAR:las=0
+10 CHAR_USE 0,0:title_page
+20 DEFine PROCedure scrup(y,x,c$)
+30 AT y-1,x-1:PRINT c$;:scr$(y,x)=c$
+40 END DEFine 
+50 DEFine PROCedure title_page
+60 PAPER #0,0:CLS #0
+70 high=2000:defchar:sheet=1:sheets:sheet=2
+80 INK 4:AT 14,2:PRINT "Use Cursor Keys to Control HARRY"
+90 AT 15,7:PRINT "Press (SPACE) to Bomb"
+100 AT 16,7:PRINT "Press (ENTER) to Play"
+105 AT 17,7:PRINT "Press (TAB) for Codes"
+110 a$=INKEY$(-1):IF a$=CHR$(10) THEN GO TO 120
+115 IF a$=CHR$(9) THEN CODES
+117 GO TO 110
+120 init
+130 END DEFine 
+137 DATA "*                                   *"
+140 DEFine PROCedure init
+150 PAPER #0,0:CLS #0
+160 score=0:lives=5:count=0:bombs=5
+170 screen_init
+180 END DEFine 
+190 DEFine PROCedure update(a)
+200 score=score+a
+210 AT 9,18:INK 2:PRINT FILL$("@",lives)&" "
+220 AT 8,18:PRINT score
+230 AT 10,18:PRINT bombs
+240 END DEFine 
+250 x=19:y=7
+260 mona=18:monb=15
+270 REPeat main
+280 FOR loop=1 TO 2
+290 xx=x:yy=y
+300 key=KEYROW(1)
+310 IF key THEN moveyou
+320 c$=scr$(y,x)
+330 IF c$="." THEN BEEP 200,0:scrup y,x," ":update 5:count=count-1:IF key THEN moveyou
+340 IF c$="[" THEN BEEP 500,100:scrup y,x," ":update 50:IF key THEN moveyou
+350 IF c$="+" THEN BEEP 500,0:scrup y,x," ":update 50:IF key THEN moveyou
+360 IF c$="^" THEN INK 2:scrup y,x,"^":OVER 1:INK 6:AT y-1,x-1:PRINT "&":OVER 0
+365 IF las+1000<score THEN AT 9,12:FLASH 1:PRINT "LIVES":FLASH 0: lives=lives+1:las=las+1000:BEEP 10000,2,4,2000,1000
+370 x=xx:y=yy
+380 INK 4:AT y-1,x-1:PRINT "@"
+390 INK 4:AT monb-1,mona-1:PRINT " "
+400 monstermovement
+410 IF scr$(monb,mona)="^" THEN monsterdie
+420 IF count=0 THEN clearsheet:screen_init:GO TO 250
+430 IF scr$(monb,mona)="." THEN count=count-1
+440 INK 5:scrup monb,mona,"%"
+450 IF x=mona AND y=monb THEN EXIT main
+460 update 0
+470 END FOR loop
+480 END REPeat main
+490 FOR n=1 TO 50
+500 BEEP n,n
+510 INK n:scrup y,x,"!"
+520 END FOR n
+530 lives=lives-1
+540 scrup y,x," "
+550 scrup monb,mona," "
+560 IF lives=0 THEN update 0:game_over
+570 GO TO 250
+580 DEFine PROCedure monstermovement
+590 IF mona<x AND scr$(monb,mona+1)<>"*" THEN mona=mona+1:RETurn 
+600 IF mona>x AND scr$(monb,mona-1)<>"*" THEN mona=mona-1:RETurn 
+610 IF monb<y AND scr$(monb+1,mona)<>"*" THEN monb=monb+1:RETurn 
+620 IF monb>y AND scr$(monb-1,mona)<>"*" THEN monb=monb-1:RETurn 
+630 END DEFine 
+640 DEFine PROCedure moveyou
+650 AT y-1,x-1 :PRINT " "
+660 IF key&&16 AND x<>36 THEN IF scr$(y,x+1)<>"*" THEN xx=x+1
+670 IF key&&2 THEN IF scr$(y,x-1)<>"*" THEN xx=x-1
+680 IF key&&4 THEN IF scr$(y-1,x)<>"*" THEN yy=y-1
+690 IF key&&128 THEN IF scr$(y+1,x)<>"*" THEN yy=y+1
+700 IF key&&64 THEN IF bombs>0 THEN dropbomb
+710 END DEFine 
+720 DEFine PROCedure dropbomb
+730 IF scr$(y,x)="." THEN count=count-1
+740 INK 2:scrup y,x,"^":OVER 1:INK 6:AT y-1,x-1:PRINT "&":OVER 0:bombs=bombs-1
+750 END DEFine 
+760 DEFine PROCedure screen_init
+770 sheets
+780 AT 8,12:PRINT "SCORE"
+790 AT 9,12:PRINT "LIVES"
+800 AT 10,12:PRINT "BOMBS"
+810 END DEFine 
+820 DEFine PROCedure sheets
+830 LOCal x,y
+840 DIM scr$(20,37)
+850 IF sheet=1 THEN RESTORE 1030
+860 IF sheet=2 THEN RESTORE 1230
+870 IF sheet=3 THEN RESTORE 1380
+875 IF sheet=4 THEN RESTORE 1580
+880 CSIZE 2,0:PAPER 0:CLS:OVER 1:count=0:CHAR_USE news,0
+890 FOR y=1 TO 20
+900 READ scr$(y)
+910 AT y-1,0
+920 FOR x=1 TO 37
+930 c$=scr$(y,x)
+940 IF c$="*" THEN INK 6
+950 IF c$="." THEN INK 3:count=count+1
+960 IF c$="[" THEN INK 4:PRINT c$;:INK 2:AT y-1,x-1:c$="]"
+970 IF c$="+" THEN INK 2:PRINT c$;:INK 4:AT y-1,x-1:c$="-"
+975 IF sheet=1 AND y<14 THEN FLASH 1
+980 PRINT c$;
+985 FLASH 0
+990 END FOR x
+1000 END FOR y
+1010 OVER 0
+1020 END DEFine 
+1030 DATA "*************************************"
+1040 DATA "*                                   *"
+1050 DATA "*   +  + +  + +  + ++++ ++++ +  +   *"
+1060 DATA "*   ++++ +  + ++ + +    +  + ++++   *"
+1070 DATA "*   ++++ ++++ + ++ + ++ +++   ++    *"
+1080 DATA "*   +  + ++++ +  + ++++ +  +  ++    *"
+1090 DATA "*                                   *"
+1100 DATA "*     [  [  [[  [[[[ [[[[ [  [      *"
+1110 DATA "*     [[[[ [  [ [  [ [  [ [[[[      *"
+1120 DATA "*     [[[[ [[[[ [[[  [[[   [[       *"
+1130 DATA "*     [  [ [  [ [  [ [  [  [[       *"
+1140 DATA "*                                   *"
+1150 DATA "*************************************"
+1160 DATA "*+    @   !   @   !   @   !   @    [*"
+1170 DATA "*                                   *"
+1180 DATA "*                                   *"
+1190 DATA "*                                   *"
+1200 DATA "*                                   *"
+1210 DATA "*[    !   @   !   @   !   @   !    +*"
+1220 DATA "*************************************"
+1230 DATA "************LEVEL 1******************"
+1240 DATA "*          *********                *"
+1250 DATA "*                                   *"
+1260 DATA "*  CODE FOR LEVEL <01> IS BLOBYWOB  *"
+1270 DATA "*                                   *"
+1280 DATA "*                                   *"
+1290 DATA "*                                   *"
+1300 DATA "*                                   *"
+1310 DATA "*                                   *"
+1320 DATA "*** ** **                   ** ** ***"
+1330 DATA "* * **  *                   ***  ****"
+1340 DATA "*                                   *"
+1350 DATA "*                                   *"
+1360 DATA "*                                   *"
+1370 DATA "*                                   *"
+1371 DATA "*                                   *"
+1372 DATA "*                                   *"
+1373 DATA "*                                   *"
+1374 DATA "*...................................*"
+1375 DATA "*************************************"
+1380 DATA "************LEVEL 2******************"
+1390 DATA "*+.........*********...............+*"
+1400 DATA "*.***************..****************.*"
+1410 DATA "*...................................*"
+1420 DATA "*.********..************..*********.*"
+1430 DATA "*..CODE FOR LEVEL (02) IS BLEEPING..*"
+1440 DATA "*.*******..................********.*"
+1450 DATA "*.........****************..........*"
+1460 DATA "* *******.*              *.********.*"
+1470 DATA "*.........*              *..........*"
+1480 DATA "* *******.*              *.********.*"
+1490 DATA "*.........****************..........*"
+1500 DATA "*.*******..................********.*"
+1510 DATA "*...................................*"
+1520 DATA "*.********..************..*********.*"
+1530 DATA "*...................................*"
+1540 DATA "*.***************..****************.*"
+1550 DATA "*...................................*"
+1560 DATA "**[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[**"
+1570 DATA "*************************************"
+1580 DATA "***************LEVEL 3***************"
+1590 DATA "*[............*       *............[*"
+1600 DATA "*.**.**.*.*.*.*       *.*.*.*.**.**.*"
+1610 DATA "*....**...*.*.*********.*.*...**....*"
+1620 DATA "*.**....*...................*....**.*"
+1630 DATA "* **.**.*.****.***.***.****.*.**.**.*"
+1640 DATA "*..CODE FOR LEVEL (03) IS GOODBYEE..*"
+1650 DATA "********..***************..**********"
+1660 DATA "       *..*             *..*         "
+1670 DATA "       *..*             *..*         "
+1680 DATA "       *..*             *..*         "
+1690 DATA "       *..***************..*         "
+1700 DATA "********..*             *..**********"
+1710 DATA "*........*...............*..........*"
+1720 DATA "*.**.............................**.*"
+1730 DATA "*....**....**...........**....**....*"
+1740 DATA "*.............*********.............*"
+1750 DATA "*.**.**.**.**.*       *.** **.**.**.*"
+1760 DATA "*[............*       *............[*"
+1770 DATA "***************       ***************"
+1780 DEFine PROCedure clearsheet
+1790 BEEP 0,288,2222,111,1,1
+1800 PAUSE 50
+1810 RECOL 7,1,5,3,4,0,6,2
+1820 FOR n=1 TO 20:SCROLL -10
+1830 BEEP
+1840 sheet=sheet+1:IF sheet=4 THEN sheet=2
+1850 bombs=5
+1860 END DEFine 
+1870 DEFine PROCedure defchar
+1880 old=PEEK_L(PEEK_L(PEEK_L(HEX("28078")))+HEX("2a"))
+1890 news=ALCHP(875)
+1900 FOR n=0 TO 875 STEP 4:POKE_L news+n,PEEK_L(old+n)
+1910 RESTORE 1970
+1920 FOR char=1 TO 12
+1930 READ c$:charpoke=news+10+(CODE(c$)-32)*9
+1940 FOR dat=1 TO 9:READ d:POKE charpoke+dat,d
+1950 END FOR char
+1960 END DEFine 
+1970 DATA "*",124,124,124,124,124,124,124,124,124
+1980 DATA "@",68,56,84,124,84,108,124,40,108
+1990 DATA "%",56,84,108,124,108,84,56,40,108
+2000 DATA "[",4,8,16,16,40,36,32,0,0
+2010 DATA "]",0,0,0,0,0,0,12,108,96
+2020 DATA "+",0,0,0,124,124,124,56,56,16
+2030 DATA "-",12,104,16,0,32,8,16,0,0
+2040 DATA "!",68,56,84,124,108,84,124,40,108
+2050 DATA "^",0,0,56,56,56,56,56,56,56
+2060 DATA "&",24,16,0,56,0,0,0,56,0
+2070 DATA ".",0,0,0,0,48,48,0,0,0
+2080 DATA "\",0,40,68,104,16,44,100,68,0
+2090 DEFine PROCedure game_over
+2095 AT 9,12:FLASH 1:PRINT "LIVES":FLASH 0:PAUSE 50
+2100 BEEP 0,343,900,64,9,1
+2110 RECOL 4,1,2,3,6,5,7,0
+2120 FOR n=1 TO 20:SCROLL 10
+2130 BEEP
+2140 BEEP 0,364,1000,20,2,2
+2150 FOR n=99 TO 1 STEP -1.5:BORDER n,n
+2160 BORDER 0,0:CHAR_USE 0,0
+2170 IF score>high THEN high=score
+2180 INK #0,6:AT #0,0,1:PRINT #0," Game Over"
+2190 AT #0,1,2:PRINT #0," Your Score was"!score
+2200 AT #0,2,3:PRINT #0," High Score is"!high
+2210 AT #0,3,4:PRINT #0," Press (ENTER) to Play Again"
+2220 BEEP
+2230 key=KEYROW(1):IF key<>1 THEN GO TO 2230
+2240 RECOL 0,0,0,0,0,0,0,0:RECOL #0,0,0,0,0,0,0,0,0
+2250 init
+2260 END DEFine 
+2270 DEFine PROCedure monsterdie
+2280 FOR n=1 TO 7:INK n:scrup monb,mona,"\":BEEP 0,n,n,n,n
+2290 scrup monb,mona," "
+2300 monb=14:mona=17
+2310 update 100
+2320 BEEP
+2330 END DEFine 
+2340 DEFine PROCedure sheet_1
+2350 FOR i=1 TO 13
+2355 FLASH 1
+2360 READ a$
+2365 PRINT a$
+2370 FLASH 0
+2380 NEXT i
+2390 FOR i=14 TO 21
+2400 READ a$
+2410 PRINT a$
+2420 NEXT i
+2430 END DEFine 
+2440 DEFine PROCedure CODES
+2450 II=INPUT$(8,CODED$)
+2460 IF CODED$="BLOBYWOB" THEN sheet=2
+2470 IF CODED$="BLEEPING" THEN sheet=3
+2480 IF CODED$="GOODBYEE" THEN sheet=4
+2490 END DEFine 

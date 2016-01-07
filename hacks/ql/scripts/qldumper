@@ -1,0 +1,319 @@
+#!/usr/bin/env python
+
+import sys
+import os
+import time
+
+DEBUG = False
+
+def debug_write(text):
+	if DEBUG:
+		sys.stderr.write(text + "\n")
+
+# Simple class to read from a file in blocks
+
+class BlockFile:
+	def __init__(self, filename, block_size):
+		self.file = file(filename)
+		self.block_size = block_size
+
+	def read_block(self, block_num):
+		file_offset = block_num * self.block_size
+		debug_write("read sector %i (0x%05x)" % (block_num, file_offset))
+		self.file.seek(file_offset)
+		return self.file.read(self.block_size)
+
+	def close(self):
+		self.file.close()
+
+# Class to read blocks from QL disk images
+
+class QLBlockFile:
+	SECTOR_SIZE = 512
+	SECTORS_PER_BLOCK = 3
+	BLOCKS_PER_TRACK = 3
+	NUM_SIDES = 2
+
+	BLOCKS_PER_FULL_TRACK = BLOCKS_PER_TRACK * NUM_SIDES
+	SECTORS_PER_TRACK = SECTORS_PER_BLOCK * BLOCKS_PER_TRACK
+	SECTORS_PER_FULL_TRACK = SECTORS_PER_TRACK * NUM_SIDES
+
+	def __init__(self, filename):
+		self.file = BlockFile(filename, QLBlockFile.SECTOR_SIZE)
+
+	def offset_for_track(self, track_num):
+		return QLBlockFile.SECTORS_PER_TRACK   \
+		     - ((track_num * 4) % QLBlockFile.SECTORS_PER_TRACK)
+
+	def read_block(self, block_num):
+
+		# Which track is the block in?
+		track_num = block_num / QLBlockFile.BLOCKS_PER_FULL_TRACK
+
+		# Block number within the track?
+		block_in_track = block_num % QLBlockFile.BLOCKS_PER_FULL_TRACK
+
+		# Which side is the block on, and which slice within
+		# that track-side?
+		slice_num = block_in_track / QLBlockFile.NUM_SIDES
+		side = block_in_track % QLBlockFile.NUM_SIDES
+
+		# Sector offset for this track?
+		offset = self.offset_for_track(track_num)
+
+		# Calculate the location of the start of the track-side
+		trackside_start = track_num * QLBlockFile.SECTORS_PER_FULL_TRACK\
+		                + side * QLBlockFile.SECTORS_PER_TRACK
+
+		debug_write("offset for track %i is %i" % (track_num, offset))
+
+		return self.read_block_from_track_side(trackside_start,
+		                                       slice_num,
+		                                       offset)
+
+	def read_block_from_track_side(self, trackside_start, slice_num, offset):
+
+		result = []
+
+		for i in range(QLBlockFile.BLOCKS_PER_TRACK):
+			data = self.read_sector(trackside_start, slice_num,
+			                        i, offset)
+
+			result.append(data)
+
+		return "".join(result)
+
+	# Read one of the sectors that makes up a block
+
+	def read_sector(self, trackside_start, slice_num, sector, offset):
+
+		translated = sector * QLBlockFile.BLOCKS_PER_TRACK +  \
+		             slice_num
+
+		# Adjust by offset
+
+		translated = (translated + offset) % QLBlockFile.SECTORS_PER_TRACK
+
+		return self.file.read_block(trackside_start + translated)
+
+def decode_int32(data):
+	return (ord(data[0]) << 24) |          \
+	       (ord(data[1]) << 16) |          \
+	       (ord(data[2]) << 8)  |          \
+	       ord(data[3])
+
+# Decode a string, as a 16-bit length field followed by data
+
+def decode_string(data):
+	length = (ord(data[0]) << 8) | ord(data[1])
+
+	return data[2:length+2]
+
+class QLFile:
+	# Timestamps start from midnight, jan 1 1961
+	TIMESTAMP_OFFSET = 284000400
+
+	def __init__(self, disk, index, data):
+		self.disk = disk
+		self.index = index
+		self.length = decode_int32(data)
+		self.name = decode_string(data[0xe:0x34])
+		self.time = decode_int32(data[0x34:0x38])
+		self.time -= QLFile.TIMESTAMP_OFFSET
+		self.deleted = self.name == "" or self.length == 0
+
+		if self.deleted:
+			self.name = "recovered_%03x" % index
+
+	def read(self):
+		data = self.disk.read_file_blocks(self.index)
+
+		if data is None:
+			return None
+
+		# Cut to the right length
+		# If the file is recovered, we don't know the proper length
+
+		if self.deleted:
+			return data[QLDisk.FILE_RECORD_LEN:]
+		else:
+			return data[QLDisk.FILE_RECORD_LEN:self.length]
+
+class QLDisk:
+	FILE_MAP_OFFSET = 0x60
+	NUM_BLOCKS = 480     # 720k disk
+	DISK_MAGIC = "QL5A"
+	LABEL_LENGTH = 10
+	FILE_RECORD_LEN = 0x40
+
+	def __init__(self, filename):
+		self.file = QLBlockFile(filename)
+
+		special_block = self.file.read_block(0)
+		self.read_header(special_block)
+		self.read_file_map(special_block)
+		self.read_directory()
+
+	# Read the header from the special block
+
+	def read_header(self, special_block):
+
+		# Check the magic number
+
+		if not special_block.startswith(QLDisk.DISK_MAGIC):
+			raise Exception("QL magic number not found!")
+
+		# Read the disk label
+
+		label_offset = len(QLDisk.DISK_MAGIC)
+		self.label = special_block[label_offset:label_offset+QLDisk.LABEL_LENGTH]
+		# Remove extra spaces
+
+		self.label = self.label.strip()
+
+
+	# Read the file map from the special block
+
+	def read_file_map(self, special_block):
+		self.file_map = []
+
+		debug_write("Reading file map:")
+
+		data = special_block[QLDisk.FILE_MAP_OFFSET:]
+
+		for i in range(QLDisk.NUM_BLOCKS):
+			triple = data[i*3:i*3 + 3]
+			file_num = (ord(triple[0]) << 4) | (ord(triple[1]) >> 4)
+			seq_num = ((ord(triple[1]) & 0xf) << 4) | ord(triple[2])
+
+			self.file_map.append((file_num, seq_num))
+
+			debug_write("\t%i: %02x%02x%02x" % (i,
+			                                    ord(triple[0]),
+			                                    ord(triple[1]),
+			                                    ord(triple[2])))
+			debug_write("\t%i: (%i, %i)" % (i, file_num, seq_num))
+
+	# Read the specified file number
+
+	def read_file_blocks(self, file_num):
+		result = []
+
+		next_seq = 0
+
+		debug_write("Read file #%i" % file_num)
+
+		for i in range(len(self.file_map)):
+			if self.file_map[i] == (file_num, next_seq):
+				debug_write("Sequence %i at %i" % (next_seq, i))
+				block = self.file.read_block(i)
+				result.append(block)
+				next_seq += 1
+
+		if len(result) == 0:
+			return None
+		else:
+			return "".join(result)
+
+	# Get the maximum file number, from examining the file map
+
+	def num_files(self):
+		max_file = 0
+
+		for (file_num, seq) in self.file_map:
+			if file_num >= 0xf00:
+				continue
+
+			if file_num > max_file:
+				max_file = file_num
+
+		return max_file + 1
+
+	# Read the file directory
+
+	def read_directory(self):
+
+		# Directory is in file #0
+
+		debug_write("Reading directory")
+
+		debug_write("%i files found in file map" % (self.num_files()))
+
+		data = self.read_file_blocks(0)
+
+		num_entries = self.num_files()
+
+		self.files = {}
+
+		for i in range(1, num_entries):
+			if i % 24 == 0:
+				debug_write("")
+
+			offset = QLDisk.FILE_RECORD_LEN * i
+
+			record = data[offset:offset+QLDisk.FILE_RECORD_LEN]
+
+			new_file = QLFile(self, i, record)
+
+			self.files[new_file.name] = new_file
+
+			# Deleted file?
+			if new_file.deleted:
+				debug_write("File #%x deleted: %s" % (i, new_file.name))
+			else:
+				debug_write("File #%i: %s" % (i, new_file.name))
+
+# Make a filename "safe" (remove /)
+
+def safe_filename(filename):
+	return filename.replace("/", "_")
+
+def dump_all_files(disk):
+	# Dump all files
+
+	for qlfile in disk.files.values():
+		debug_write("Dump file %x" % qlfile.index)
+		filename = safe_filename(qlfile.name)
+
+		file_data = qlfile.read()
+
+		# Data not found?
+
+		if file_data is None:
+			sys.stderr.write("Unable to get data for file %x\n" %
+			                 qlfile.index)
+			continue
+
+		f = file(filename, "w")
+		f.write(file_data)
+
+		f.close()
+
+		# Set the timestamp
+
+		os.utime(filename, (qlfile.time, qlfile.time))
+
+def list_all_files(disk):
+
+	files = disk.files.values()
+
+	files.sort(lambda x, y:	cmp(x.index, y.index))
+
+	for qlfile in files:
+		if qlfile.deleted:
+			continue
+
+		print "%02x: " % qlfile.index,
+		print qlfile.name,
+		print " " + "." * (45 - len(qlfile.name)),
+		print time.ctime(qlfile.time)
+
+if len(sys.argv) < 2:
+	print "Usage: '%s' <filename>" % sys.argv[0]
+	sys.exit(0)
+
+disk = QLDisk(sys.argv[1])
+
+#list_all_files(disk)
+dump_all_files(disk)
+

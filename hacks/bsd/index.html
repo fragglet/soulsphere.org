@@ -1,0 +1,96 @@
+<html>
+<head>
+<title>BSD license generator </title>
+<meta name=viewport content="width=device-width, initial-scale=1">
+</head>
+<style>
+   #advwarning {
+      background-color: #fdd;
+      border: 1px solid red;
+      padding: 10px;
+      display: none;
+   }
+</style>
+<body>
+<h1> BSD license generator </h1>
+
+<form action="license.rhtml">
+<table>
+
+<tr>
+<td>Owner (copyright holder):
+<td><input type="text" name="owner">
+
+<tr>
+<td>Organization:
+<td><input type="text" name="organisation">
+
+<tr>
+<td>License:
+<td>
+<select id="license_selector" name="license">
+<option value="bsd2" selected>BSD 2 Clause
+<option value="bsd3">BSD 3 Clause (New BSD)
+<option value="bsd4">BSD 4 Clause (Original, with advertising clause)
+<option value="mit3">MIT License
+<option value="mit4">MIT License with "no advertising" clause
+<option value="isc">ISC License (Simplified BSD)
+</select>
+
+<tr>
+<td>
+<td>
+For help in choosing a license, please see the
+<a href="https://en.wikipedia.org/wiki/BSD_licenses">Wikipedia article
+on the BSD licenses</a>.
+
+<tr>
+<td>Output type:
+<td><select name="output">
+<option value="plaintext">Plain text
+<option value="html">HTML
+<option value="c">C comment (/* .... */)
+<option value="cpp">C++ comment (//)
+<option value="perl">Perl/scripting language comment (#)
+</select>
+
+<tr>
+<td>Screen columns:
+<td><input type="text" name="columns" value="80">
+
+<tr>
+<td>
+<td>
+
+<div id="advwarning">
+   Using this license can <a href="https://www.gnu.org/philosophy/bsd.html">
+   cause problems</a>. Please consider using a license without an
+   advertising clause.
+</div>
+
+<input type="submit">
+
+</table>
+
+</form>
+
+<hr>
+<a href="bsd-license-generator.tar.gz">Source code</a>
+
+<script language="JavaScript">
+    var selector = document.getElementById("license_selector");
+    var advwarning = document.getElementById("advwarning");
+
+    selector.onchange = function() {
+        var license = selector.value;
+        if (license == "bsd4") {
+            advwarning.style.display = "block";
+        } else {
+            advwarning.style.display = "none";
+        }
+    }
+</script>
+
+</body>
+</html>
+

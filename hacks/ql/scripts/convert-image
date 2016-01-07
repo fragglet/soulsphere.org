@@ -1,0 +1,104 @@
+#!/usr/bin/env python
+
+import Image
+import sys
+
+MODE_4_IMAGE_W = 512
+MODE_4_IMAGE_H = 256
+MODE_8_IMAGE_W = 256
+MODE_8_IMAGE_H = 256
+
+def convert_mode_4(data):
+	image = Image.new("RGB", (MODE_4_IMAGE_W, MODE_4_IMAGE_H))
+
+	for y in range(MODE_4_IMAGE_H):
+		for x in range(MODE_4_IMAGE_W):
+			pixel = (y * MODE_4_IMAGE_W / 8) + (x / 8)
+			index = pixel * 2
+			bit = 7 - (x % 8)
+
+			byte0 = ord(data[index])
+			byte1 = ord(data[index + 1])
+
+			if ((byte0 >> bit) & 1) != 0:
+				g = 0xff
+			else:
+				g = 0
+
+			if ((byte1 >> bit) & 1) != 0:
+				r = 0xff
+			else:
+				r = 0
+
+			b = 0
+
+			rgb = (b << 16) | (g << 8) | r
+
+			image.putpixel((x, y), rgb)
+
+	return image
+
+def convert_mode_8(data):
+	image = Image.new("RGB", (MODE_8_IMAGE_W, MODE_8_IMAGE_H))
+
+	for y in range(MODE_8_IMAGE_H):
+		for x in range(MODE_8_IMAGE_W):
+			pixel = y * (MODE_8_IMAGE_W / 4) + (x / 4)
+			index = pixel * 2
+			byte_pixel = (3 - (x % 4)) * 2
+
+#			print "%i,%i -> index %i, %i" % (x, y, index, byte_pixel)
+
+			r_bit = byte_pixel + 1
+			g_bit = byte_pixel + 1
+			b_bit = byte_pixel
+
+			byte0 = ord(data[index])
+			byte1 = ord(data[index + 1])
+
+			if ((byte0 >> g_bit) & 1) != 0:
+				g = 0xff
+			else:
+				g = 0
+
+			if ((byte1 >> r_bit) & 1) != 0:
+				r = 0xff
+			else:
+				r = 0
+
+			if ((byte1 >> b_bit) & 1) != 0:
+				b = 0xff
+			else:
+				b = 0
+
+			rgb = (b << 16) | (g << 8) | r
+
+			image.putpixel((x, y), rgb)
+
+	return image
+
+# Check command line
+
+if len(sys.argv) < 3:
+	print "Usage: %s <source> <dest>" % sys.argv[0]
+
+# Read source data
+
+f = file(sys.argv[1])
+
+source_data = f.read(MODE_4_IMAGE_W * MODE_4_IMAGE_H / 2)
+
+f.close()
+
+# Convert image
+
+image = convert_mode_4(source_data)
+
+# Write output file
+
+f = file(sys.argv[2], "w")
+
+image.save(f, "png")
+
+f.close()
+

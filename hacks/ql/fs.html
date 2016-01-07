@@ -1,0 +1,201 @@
+<html>
+<head>
+<title>Sinclair QL floppy disk file system format</title>
+<meta name=viewport content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+
+<h1> Sinclair QL floppy disk file system format </h1>
+
+The drive for my QL was only capable of reading 720KiB disks (double density);
+fortunately, the 
+<a href="https://en.wikipedia.org/wiki/Floppy_disk_format">physical encoding</a>
+used was identical to PC disks.  As a result it was possible to dump the 
+contents of the disks to files using the Unix <tt>dd</tt> command.  However,
+the layout of the sectors on the disks was rather unusual.
+
+<h2> Sector layout </h2>
+
+Data on floppy disks is stored in <i>tracks</i>.  These are concentric 
+circles on the disk surface.  Each track is then divided up into <i>sectors</i>.
+For the QL (and the PC), a 720KiB disk has 80 tracks, with 9 sectors per
+track.  Each sector stores 512 bytes. The disks are double sided, so data is
+stored on each side.
+
+<p>
+
+<strike>
+On PC disks, sectors are arranged "linearly" as follows: the first sector
+of the disk is located on the first sector of the first track.  Reading then
+proceeds through each sector of the first track, then the sectors from the
+first track on the opposite side of the disk are read. Reading then proceeds
+to the second track back on the first side, and the sequence repeats.
+</strike>
+
+<p>
+
+<strike>
+For the QL disks, things are different.  I am not sure what the reason
+for the different layout is - it may be for efficiency or perhaps it was
+easier to program.  The file system is based on logical
+blocks that are 1536 bytes in length (three sectors).  These blocks are
+"interleaved" within a track - sectors alternate between the three blocks
+stored on the track. So, a track actually looks like this:
+</strike>
+
+<p>
+
+The above two paragraphs might not be completely accurate.
+Since writing this document, I discovered the concept of
+<a href="https://en.wikipedia.org/wiki/Interleaving_(disk_storage)">
+sector interleaving</a> that was used to give the CPU time to to process
+data as it was read from disk. So that explains the unusual sector
+ordering. But as the disks were read from a PC, I'm unsure whether the
+ordering is the result of PC floppies being interleaved or because QL
+floppies are interleaved.
+
+<blockquote>
+<table border="1">
+<tr> <th> Sector     <th> Details
+<tr> <td> 0          <td> Block 0, Sector 0
+<tr> <td> 1          <td> Block 1, Sector 0
+<tr> <td> 2          <td> Block 2, Sector 0
+<tr> <td> 3          <td> Block 0, Sector 1
+<tr> <td> 4          <td> Block 1, Sector 1
+<tr> <td> 5          <td> Block 2, Sector 1
+<tr> <td> 6          <td> Block 0, Sector 2
+<tr> <td> 7          <td> Block 1, Sector 2
+<tr> <td> 8          <td> Block 2, Sector 2
+</table>
+</blockquote>
+
+To read a complete block, you must therefore read the first sector, jump
+forward three sectors, read the second sector, then jump forward three
+more sectors and read the third sector.
+<p>
+In fact, things are more complicated than that.  The blocks are grouped by
+track and read from alternate sides, so the first block is read from the
+first side, while the second block is read from the second side, etc. The
+sector layout actually looks like this:
+
+<blockquote>
+<table border="1">
+<tr> <th colspan="2">Side 0             <th colspan="2">Side 1
+<tr> <th> Sector <th> Details           <th> Sector <th> Details
+<tr> <td> 0      <td> Block 0, Sector 0 <td> 0      <td> Block 1, Sector 0
+<tr> <td> 1      <td> Block 2, Sector 0 <td> 1      <td> Block 3, Sector 0
+<tr> <td> 2      <td> Block 4, Sector 0 <td> 2      <td> Block 5, Sector 0
+<tr> <td> 3      <td> Block 0, Sector 1 <td> 3      <td> Block 1, Sector 1
+<tr> <td> 4      <td> Block 2, Sector 1 <td> 4      <td> Block 3, Sector 1
+<tr> <td> 5      <td> Block 4, Sector 1 <td> 5      <td> Block 5, Sector 1
+<tr> <td> 6      <td> Block 0, Sector 2 <td> 6      <td> Block 1, Sector 2
+<tr> <td> 7      <td> Block 2, Sector 2 <td> 7      <td> Block 3, Sector 2
+<tr> <td> 8      <td> Block 4, Sector 2 <td> 8      <td> Block 5, Sector 2
+</table>
+</blockquote>
+
+In fact, it's even more complicated than that!  The above diagram is
+accurate for the
+first track on the drive; however, on each track, the sectors are <i>offset</i>
+by an amount equal to the track number multiplied by four, so the second
+track has an offset of 4, the third has an offset of 8, etc.  This is what 
+the second track (offset of 4) looks like:
+
+<blockquote>
+<table border="1">
+<tr> <th colspan="2">Side 0              <th colspan="2">Side 1
+<tr> <th> Sector <th> Details            <th> Sector <th> Details
+<tr> <td> 0      <td> Block 8, Sector 1  <td> 0      <td> Block 9, Sector 1
+<tr> <td> 1      <td> Block 10, Sector 1 <td> 1      <td> Block 11, Sector 1
+<tr> <td> 2      <td> Block 6, Sector 2  <td> 2      <td> Block 7, Sector 2
+<tr> <td> 3      <td> Block 8, Sector 2  <td> 3      <td> Block 9, Sector 2
+<tr> <td> 4      <td> Block 10, Sector 2 <td> 4      <td> Block 11, Sector 2
+<tr> <td> 5      <td> Block 6, Sector 0  <td> 5      <td> Block 7, Sector 0
+<tr> <td> 6      <td> Block 8, Sector 0  <td> 6      <td> Block 9, Sector 0
+<tr> <td> 7      <td> Block 10, Sector 0 <td> 7      <td> Block 11, Sector 0
+<tr> <td> 8      <td> Block 6, Sector 1  <td> 8      <td> Block 7, Sector 1
+</table>
+</blockquote>
+
+<h2> File system </h2>
+
+The file system is similar to the microdrive file system (details of which
+can be found in [1]).  The first block
+on the disk is a special block containing a <i>sector map</i>; I will refer
+to it as the <i>block map</i> instead, to keep terminology consistent and
+avoid confusion.  The block map is an array of records, one for each 
+block on the disk (480 on a 720KiB disk).  It begins 96 bytes from the
+start of the first block. Each record is three bytes long;
+the first byte and the top four bits of the second byte form a file number,
+while the lower four bits of the second byte and the third byte form a
+sequence number.
+
+<p>
+
+To read a file, the blocks with that file number are read in sequence,
+for each sequence number in succession.  For example, to read file 5, a
+three block file, the blocks with entries (5, 0), (5, 1) and (5, 2) are
+read.
+
+<p>
+
+The contents of each file are prefixed with a 64 byte header, with the
+exception of the directory file (which is file 0).  This appears to be 
+left over from the old microdrive format.  The header contains a copy of
+the file's name, but this does not seem to be updated when the file is
+renamed. The "definitive" name for the file is stored in the file's entry
+in the directory. Other than this, there seems to be no other useful 
+information stored in the header.
+
+<h2> Directory </h2>
+
+The directory contains a list of all of the files stored in the file
+system.  It is itself stored as a file inside file 0.  Each record is
+64 bytes in length.  The first record is empty (as this corresponds to
+file 0, which is the directory itself).  All integer values are
+big-endian. The record format looks like this:
+
+<blockquote>
+<table border="1">
+<tr> <th> Offset (hex)  <th> Length (hex) <th> Purpose
+
+<tr> <td> 0             <td> 4            <td> File length
+<tr> <td> E             <td> 2            <td> 16-bit filename length
+<tr> <td> 10            <td> 24           <td> Filename
+<tr> <td> 34            <td> 4            <td> Modification date
+
+</table>
+</blockquote>
+
+When extracting files, it is worth noting that QL filenames can
+contain '/' characters, which cannot be used in filenames on Unix
+systems.  They can also contain various other characters that cannot
+be used in filenames under various other operating systems (eg.
+Windows).
+
+<p>
+
+The modification date uses a similar scheme to 
+<a href="https://en.wikipedia.org/wiki/Unix_time">Unix time</a> in
+counting seconds since an epoch; however, the epoch is different.
+Unix time measures seconds since 1970, but the epoch here is 1961 (for
+reasons unknown to me).  To convert to Unix time, simply subtract
+284000400. I was able to calibrate this by using various text files on
+the disks that I examined that contained textual representations of
+the date and time that they were created.
+
+<p>
+
+Deleted files have their length and filename length fields set to
+zero, so it is possible to recover files after they have been deleted. 
+
+<h3> Bibliography </h3>
+
+<ol>
+<li> <i>QL advanced user guide</i>, Adrian Dickens, ISBN 0947929002
+</ol>
+
+</body>
+</html>
+

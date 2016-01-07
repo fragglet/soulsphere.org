@@ -1,0 +1,153 @@
+100 REMark Artificial Intelligence
+105 CLS
+106 PRINT "you are probably about to get an error message.Try typing 'd=1'"
+107 IF d=1 THEN PRINT "YOU WILL NEED DISC SIMON 2 FOR THIS PROGRAM.PLEASE INSERT IT.":PAUSE
+110 star=0
+120 INPUT a$
+132 IF "I am" INSTR a$ THEN person:STOP
+133 IF "show" INSTR a$ AND "menu" INSTR a$ THEN men
+135 IF "keep a look out for " INSTR a$ THEN lookout
+140 IF "I have a friend called" INSTR a$ THEN nonintro:star=0
+145 IF "ed" INSTR a$ THEN d=0:ED:STOP
+150 IF a$=="wipe memory." THEN mem_wip:GO TO 120
+155 IF star=4 THEN PRINT "RIGHT.THATS IT.IM NOT PUTTING UP WITH NONSENSE.TRY SAYING WHO YOU ARE NEXT                           TIME.":STOP
+160 PRINT "Would you please say something sensible that I can understand.":star=star+1
+170 GO TO 120
+180 DEFine PROCedure person
+190 INPUT "who?";b$
+200 PRINT "oh,hello ";b$
+210 PRINT "Could you please wait a moment";
+220 OPEN #3,"met"
+230 REPeat lop
+240 IF EOF(#3) THEN EXIT lop
+250 INPUT #3,c$
+260 IF b$==c$ THEN PRINT \"Oh,I Know you!We have met before.":metfore b$:CLOSE:RETurn 
+270 END REPeat lop
+280 CLOSE #3
+290 PRINT ;".";
+300 OPEN #3,"told"
+310 REPeat loop
+320 IF EOF(#3) THEN EXIT loop
+330 INPUT #3,c$
+340 IF b$==c$ THEN PRINT \"I have been told about you but never met you.":newmet b$:RETurn 
+350 END REPeat loop
+360 CLOSE #3
+370 PRINT ;".";
+380 chkenemies b$
+390 PRINT ;".";
+400 PRINT \"I have not met or been told about you before."
+410 newmet b$
+420 END DEFine 
+430 DEFine PROCedure newmet(b$)
+440 PRINT "well,";b$;" would you like to DATA INPUT?";
+450 INPUT dat$
+460 IF dat$=="y" OR dat$=="yes" THEN GO TO 480
+470 IF dat$=="n" OR dat$=="no"  THEN enemylist b$:ALAR
+480 friendlist b$
+490 DELETE "flp1_"&b$
+500 OPEN_NEW #3,"flp1_"&b$
+510 PRINT 'Please type "Finished" when you have finished'
+520 REPeat looop
+530 INPUT inp$
+540 PRINT "Right.I'll remember that."
+550 PRINT #3,inp$
+560 IF inp$=="finished" THEN EXIT looop
+570 END REPeat looop
+580 CLOSE #3
+590 PRINT "Thankyou."
+600 END DEFine 
+610 DEFine PROCedure metfore(b$)
+620 INPUT "would you like to see what you said last time we met?";choice$
+630 IF choice$=="n" OR choice$=="no"  THEN PRINT "Okay.Bye":RETurn 
+640 IF choice$=="y" OR choice$=="yes" THEN GO TO 650
+650 OPEN #3,"FLP1_"&b$
+660 REPeat LP
+665 IF EOF(#3) THEN EXIT LP
+670 INPUT #3,g$
+680 PRINT g$
+690 END REPeat LP
+700 CLOSE #3
+710 END DEFine 
+720 DEFine PROCedure enemylist (b$)
+730 OPEN #3,enemys
+740 REPeat lop
+750 IF EOF THEN EXIT lop
+760 INPUT #3,useless$
+770 END REPeat lop
+780 PRINT #3,b$
+790 END DEFine 
+800 DEFine PROCedure chkenemies (b$)
+810 OPEN #3,enemys
+820 REPeat lop
+830 IF EOF(#3) THEN EXIT lop
+840 INPUT #3,c$
+850 IF b$==c$ THEN ALAR
+860 END REPeat lop
+870 CLOSE #3
+880 END DEFine 
+890 DEFine PROCedure ALAR
+900 REPeat alarming
+910 BEEP 3000,0
+920 CLS:PRINT \\\\\\\\\\,,,"YOU ARE AN ENEMY"
+930 PAUSE 16
+940 CLS:PRINT \\\\\\\\\\,,,"                "
+950 PAUSE 16
+960 END REPeat alarming
+970 END DEFine 
+980 DEFine PROCedure nonintro
+990 INPUT "WHO?";b$
+1000 OPEN #3,told
+1010 REPeat loop
+1020 IF EOF(#3) THEN EXIT loop
+1030 INPUT #3,g$
+1040 END REPeat loop
+1050 PRINT #3,b$
+1060 END DEFine 
+1070 DEFine PROCedure friendlist (b$)
+1080 OPEN #3,MET
+1090 REPeat loop
+1100 IF EOF(#3) THEN EXIT loop
+1110 INPUT #3,g$
+1120 END REPeat loop
+1130 PRINT #3,b$
+1140 END DEFine 
+1150 DEFine PROCedure WIP_MEM
+1160 OPEN_OVER #3,FLP1_ENEMYS
+1170 OPEN_OVER #4,FLP1_MET
+1180 OPEN_OVER #5,FLP1_TOLD
+1190 CLOSE
+1200 END DEFine 
+1210 DEFine PROCedure lookout
+1220 INPUT "Who?";crook$
+1225 IF crook$=="Simon" THEN PRINT "Sorry,I am programmed not to.":RETurn 
+1227 PRINT "Okay."
+1230 enemylist crook$
+1240 END DEFine 
+1250 DEFine PROCedure men
+1252 CLS
+1255 DIM filename$(50,50)
+1260 OPEN #3,flp1_hisifil
+1265 numb=0
+1270 REPeat lop
+1275 IF EOF(#3) THEN EXIT lop
+1277 numb=numb+1
+1280 INPUT #3,filename$(numb)
+1290 END REPeat lop
+1291 scou=0
+1292 numb2=0
+1295 ac=0
+1300 FOR i=0 TO 17
+1310 AT i,ac:PRINT scou!filename$(numb2)
+1312 scou = scou + 1
+1315 IF i=numb THEN GO TO 1340
+1317 numb2=numb2+1
+1320 NEXT i
+1330 ac=ac+15:GO TO 1300
+1340 AT 19,0:INPUT "command?";comm$
+1350 IF comm$=="exit" THEN AT 18,0:PRINT "PLEASE!":BEEP 50,0:PAUSE 100:AT 18,0:CLS 3:GO TO 1340
+1360 IF comm$=="please" THEN AT 18,0:PRINT "please what?":BEEP 50,0:PAUSE 100:AT 18,0:CLS 3:GO TO 1340
+1370 IF comm$=="exit please" THEN RETurn 
+1380 EW filename$(comm$)&"_obj"
+1390 GO TO 1340
+1400 END DEFine 
+1410 REMark 155
