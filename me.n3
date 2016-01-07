@@ -43,9 +43,9 @@
          foaf:accountName "fragglet";
          foaf:accountProfilePage <https://delicious.com/fragglet> ],
        [ a foaf:OnlineAccount;
-         foaf:accountServiceHomepage <http://www.doomworld.com/vb/>;
+         foaf:accountServiceHomepage <https://www.doomworld.com/vb/>;
          foaf:accountName "fraggle";
-         foaf:accountProfilePage <http://www.doomworld.com/vb/members/fraggle/> ],
+         foaf:accountProfilePage <https://www.doomworld.com/vb/members/fraggle/> ],
        [ a foaf:OnlineAccount;
          foaf:accountServiceHomepage <http://doomwiki.org/>;
          foaf:accountName "Fraggle";
@@ -63,6 +63,10 @@
          foaf:accountName "fragglet";
          foaf:accountProfilePage <https://github.com/fragglet> ],
        [ a foaf:OnlineAccount;
+         foaf:accountServiceHomepage <https://keybase.io/>;
+         foaf:accountName "fraggle";
+         foaf:accountProfilePage <https://keybase.io/fraggle> ],
+       [ a foaf:OnlineAccount;
          foaf:accountServiceHomepage <https://www.livejournal.com>;
          foaf:accountName "fragglet";
          foaf:accountProfilePage <http://fragglet.livejournal.com/> ],
@@ -70,9 +74,9 @@
          foaf:accountServiceHomepage <https://plus.google.com/>;
          foaf:accountProfilePage <https://plus.google.com/111550145781278122079> ],
        [ a foaf:OnlineAccount;
-         foaf:accountServiceHomepage <http://www.reddit.com/>;
+         foaf:accountServiceHomepage <https://www.reddit.com/>;
          foaf:accountName "fragglet";
-         foaf:accountProfilePage <http://www.reddit.com/user/fragglet> ],
+         foaf:accountProfilePage <https://www.reddit.com/user/fragglet> ],
        [ a foaf:OnlineAccount;
          foaf:accountServiceHomepage <http://slashdot.org/>;
          foaf:accountName "sfraggle";
@@ -82,8 +86,8 @@
          foaf:accountName "fraggle";
          foaf:accountProfilePage <https://sourceforge.net/users/fraggle/> ],
        [ a foaf:OnlineAccount;
-         foaf:accountServiceHomepage <http://stackoverflow.com/>;
-         foaf:accountProfilePage <http://stackoverflow.com/users/24806/fraggletlivejournalcom> ],
+         foaf:accountServiceHomepage <https://stackoverflow.com/>;
+         foaf:accountProfilePage <https://stackoverflow.com/users/24806/simon-howard> ],
        [ a foaf:OnlineAccount;
          foaf:accountServiceHomepage <https://twitter.com/>;
          foaf:accountName "fraggletastic";
@@ -91,7 +95,7 @@
        [ a foaf:OnlineAccount;
          foaf:accountServiceHomepage <https://www.youtube.com/>;
          foaf:accountName "fragglet";
-         foaf:accountProfilePage <https://www.youtube.com/fragglet> ] .
+         foaf:accountProfilePage <https://www.youtube.com/user/fragglet> ] .
 
 <> a foaf:PersonalProfileDocument;
    foaf:primaryTopic :me;
