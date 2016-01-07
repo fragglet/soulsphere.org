@@ -1,0 +1,77 @@
+<html>
+<body bgcolor="#000000" text="#FFFFFF" link="green" vlink="darkgreen" alink="lightgreen">
+<center><img src="title.gif"></center>
+
+<center><font size="+3">FraggleScript Syntax Rules</font></center>
+
+<center><i>Note: This deals with the syntax rules of Fragglescript exclusively.  For information on how to junction scripts with levels, see <a href="tutbasic.html">Basic Script Implementation</a>.</i></center><br>
+<br>
+
+
+<p>As it is with any programming language, FraggleScript has its own syntactic rules that coders need to follow, otherwise they'll hear the dreaded player death sound as their script starts to run.</p>
+
+<p>Not unlike C, C++, or Pascal, functions in FraggleScript (from this point on, called FS) need to end with a semicolon.</p>
+
+
+<br>
+<br>
+<tt>
+<blockquote>
+rnd();<br>
+tip("Word up!");<br>
+playername();<br>
+</blockquote></tt>
+<br>
+<br>
+
+
+<p>Unlike other programming languages, however, FS seperates lists and series by commas instead of semicolons.</p>
+
+
+<br>
+<br>
+<tt><blockquote>
+for(i=0, i<10, i++);<br>
+int i, j, k;<br>
+</blockquote></tt>
+<br>
+<br>
+
+
+<p>Got it?  Hopefully you do.  To set off where scripts start and end, use brackets.</p>
+
+
+<br>
+<br>
+<tt><blockquote>
+script 0<br>
+  {<br>
+     tip("Hi everybody!");<br>
+     wait(100);<br>
+     tip("Hi Doctor Nick!");<br>
+  }<br>
+</tt></blockquote>
+<br>
+<br>
+
+
+<p>Want everyone to see your sharp wit when they look at your code?  Well, that's the joy of comments.  Comments can be set off by lines beginning with ;, or anything preceding in a line after //.</p>
+
+
+<br>
+<br>
+<tt><blockquote>
+script 0<br>
+;This is script 0<br>
+  {<br>
+    tip("Hi, everybody!");<br>
+    wait(100);   // Wait 100 tics<br>
+    tip("Hi, Doctor Nick!");  // This is a quote from the Simpsons<br>
+  }<br>
+;That was Script 0<br>
+</blockquote></tt>
+<br>
+<br>
+
+</body>
+</html>

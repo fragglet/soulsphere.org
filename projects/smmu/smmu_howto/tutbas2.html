@@ -1,0 +1,101 @@
+<html>
+<body bgcolor="#000000" text="#FFFFFF" link="green" vlink="darkgreen" alink="lightgreen">
+
+<center><img src="title.gif" width="500" height="150"></center>
+
+<center><font size="+3">Basic Script Implementation: Part Deux</font></center>
+
+<br>Now it's time for the actual scripting!  Remember, we wanted to make a switch that would move the floor, display a message, then after 200 tics exit the level.<br>
+<br>Whip out a copy of notepad!  First, you'll want to set off a [scripts] section.<br>
+<br>
+
+<tt>
+[scripts]<br>
+</tt>
+
+<br>
+Yeah, just as simple as that.  Now you need to create a new script sequence.  What number to give it?  Well, remember how we gave the linedef's bit #9 a tag of 70?  That's when this comes in use.<br>
+<br>
+
+<tt>
+[scripts]<br>
+<br>
+script 70<br>
+{<br>
+}<br>
+</tt>
+
+<br>Now, we need to tell script 70 what to do after it is activated.  Since we want it to move the floor first, we'll start
+it with that function.  Remember we gave the sector a tag of 13?  Again, that comes into play here.  Looking up on the handy-dandy <a href="complete.html">Complete Function</a> page, you'll see that there is a function called movefloor(), which is what we'll be using.  The syntax for movefloor is movefloor([tag], [height], [speed]).  We know the tag for our sector is 13, we know the height we want is 32, and we'll set the speed as 1 for this example.<br>
+<br>
+
+<tt>
+[scripts]<br>
+<br>
+script 70<br>
+{<br>
+<br>
+movefloor(13, 32, 1);<br>
+<br>
+}<br>
+</tt>
+<br>
+
+<br>We'll make it play our message simultaneously with the floor movement.  Looking on the function page again, you'll see "tip" as a centered message on the screen, so we'll use that.<br>
+<br>
+
+<tt>
+[scripts]<br>
+<br>
+script 70<br>
+{<br>
+<br>
+movefloor(13, 32, 1);<br>
+tip("This is prower speaking!");<br>
+<br>
+}<br>
+</tt>
+<br>
+
+<br>Finally, we'll make the computer wait 200 tics by using the wait function, then end the level by using the exitlevel function.<br>
+<br>
+
+<tt>
+[scripts]<br>
+<br>
+script 70<br>
+{<br>
+<br>
+movefloor(13, 32, 1);<br>
+tip("This is prower speaking!");<br>
+wait(200);<br>
+exitlevel();<br>
+<br>
+}<br>
+</tt>
+
+<br>
+Congratulations!  Your scripting is done!  If you were too lazy to make that, you can download it <a href="tutbasic.fs">here</a>.<br>
+<br>
+
+<br>
+If you've ever messed with importing graphics and the such before, you've probably messed around with NWT.  NWT is actually a very powerful program, but poorly documented on how to use it.  (Not to mention more bugs than a flea circus.)<br>
+<br>
+After running nwt.exe and configuring it (it's pretty self-explanatory), press ALT+L and NWT will prompt you for a file.  Type the name of your .wad file.<br>
+<br>
+<center><img src="nwt-load.gif" width="481" height="253"></center><br>
+<br>
+You should see a MAP01 entry, followed by some data.  Press F6, choose your script file, and an outfile (can _not_ be the current wad you are using).<br>
+<br>
+<center><img src="rawexp.gif" width="485" height="253"></center><br>
+<br>
+Now, highlight everything _except_ the MAP01 entry.  Press F4 to export it, and choose the name of the .wad you exported the script to.<br>
+<br>
+<center><img src="dataexp.gif" width="485" height="253"></center><br>
+<br>
+Press ALT+L, and input the name of the .wad you exported the script to.  If you do _not_ see MAP01 as the first entry, go to that entry and press ALT+R to rename it to MAP01.<br>
+<br>
+Now, the fated hour is upon us.  Use the command SMMU -file yourwad.wad.  If all goes well, viola!  You have a switch that raises the floor 32 units, displays your message, and exits the level after 200 tics.  Congratulations!  The completed wad is available <a href="tutbas2.zip">here</a> to download.<br>
+<br>
+</body>
+</html>

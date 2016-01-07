@@ -1,0 +1,395 @@
+<html>
+<body
+	bgcolor=#000000
+	text=#ff9933
+	link=#ff9933
+	vlink=#ff9933
+	background="img/sfs.gif"
+	BGPROPERTIES=FIXED
+	FIXED
+>
+ 
+<font face="Times New Roman" size=3>
+
+<p align="right"><img src="img/newsbox.gif" border="0"> <b>18 Sep 99</b> <img src="img/newsbox2.gif" border="0"></p>
+<br><br>
+<b>Third time lucky?</b><br><br>
+I got it wrong <i> again</i>. Randy emailed me yesterday to correct me
+and that Zdoom does not include any dosdoom code, and the legacy code
+has been recently removed. Sorry again.
+<br><br>
+Also in the email he sent me was the following:
+</font>
+<pre>
+There is nothing from SMMU either, as I see no
+reason to use anything from it. Nor will there ever be anything from
+SMMU in it, so you can relax now.</pre>
+<font face="Times New Roman" size=3><br>
+I just want to say right now that I have absolutely <b>NO</b> problem
+with people using my code. I don't want Randy or anyone else to be put
+off from using my code because they think I'm suddenly going to start
+slagging them off for it. In fact, the original posting I put up 
+which caused all of the trouble was meant to express how pleased I was
+that my code was considered worthy enough to be used in other ports.
+The only problem I had was that I thought my code had been used without
+proper credit, which I'm sure anyone can understand. <br>
+<br>
+Someone once coined the phrase "imitation is the highest form of
+flattery", well I find other people using my code the highest form
+of flattery.
+<br><br>
+
+<b> Downloading extravaganza</b><br><br>
+On a lighter note, here are some new downloads:<br>
+<ul>
+<li><a href="download/fscript.zip">New FraggleScript</a> (finished I think, now need to add to SMMU)
+<li><a href="download/fscript-src.zip">FraggleScript <i>source</i></a>
+<li><a href="download/wadptr.zip">New Wadptr</a> (v2.3 with Andreas' improvements)
+<li><a href="download/wadptr-src.zip">Wadptr source</a> (hp, riscos, dos, linux, sun)
+</ul>
+<br><br>
+
+<p align="right"><img src="img/newsbox.gif" border="0"> <b>16 Sep 99</b> <img src="img/newsbox2.gif" border="0"></p>
+<br><br>
+<b>Zdoom</b> <br><br>
+Ok, I read Randy's update today, and I'm sorry about what I said. The
+Zdoom code for the swirly flats is all of his own doing. I meant to
+mention it in the previous update but I forgot. However, I don't think
+that it's unreasonable to assume that some of my code might have been
+used in Zdoom as a lot of the zdoom code is taken from other ports and
+games (hexen, dosdoom, legacy, even some quake) and I wouldn't have
+been suprised if it was my code. All I'm interested in is getting
+proper credit for the work I've done, I'm not doing this as an attack
+on Zdoom or on Randy.
+<br><br>
+
+<p align="right"><img src="img/newsbox.gif" border="0"> <b>8 Sep 99</b> <img src="img/newsbox2.gif" border="0"></p>
+<b> I'm Back </b><br><br>
+I got back from Portugal at the weekend, quite nice they had a bowling
+alley and a very deep pool. Anyway, it's back to school now, though
+at least I'm in the Upper Sixth which is the most senior year of the
+school. FraggleScript is coming along rather nicely, I've now added
+the foundations for local and global variables. In fact I think its
+probably time to start integrating it into SMMU. I was messing around
+with linux a few days ago even and managed to quickly port
+(FraggleScript) to linux.
+I'm not gonna release this publicly but if you want a copy then email
+me for one.
+<br><br>
+I get the feeling I'm going to find FraggleScript quite useful in the
+future for other things as well as doom. I even rewrote first.bas, the
+first program I ever wrote, in it!
+<br><br>
+<b>Zdoom?</b><br><br>
+They say you know when you're there when 
+<a href="http://zdoom.notgod.com/" target="_top">
+Zdoom </a>starts stealing your
+code. heh. Anyway it seems that the latest version of Zdoom supports
+"liquid texture warping" which is no doubt from SMMU. I've also heard
+that I haven't been credited for this so I'm going to download the
+Zdoom source code and confirm it is my code first, then I'll have
+a bitch at Randy to mention me in the credits.
+<br><bR>
+
+<b>Holiday?</b><br><br>
+I'm going on holiday next week for 2 weeks, so you won't see me
+around. I thought I'd release <a href="download/fscript.zip">this</a>
+FraggleScript beta tho, for you to play with while I'm gone =)
+<br><br>
+<p align="right"><img src="img/newsbox.gif" border="0"> <b>11 Aug 99</b> <img src="img/newsbox2.gif" border="0"></p>
+<b> Zooming </b> <br><br>
+Just a quick note to give a SMMU update. I ought to be doing loads of
+work because it's the holiday, but you know how it is, the one time
+you want to do the most work is during the exam period when you should
+be revising ;). Anyway, I have added a few things, the first three are
+really just 'knick-knacks':
+<ul>
+<li> Zooming  - kinda like the Quake zoom-in thing, you know you press
+		one of the F-keys and it zooms in (except its not bound
+		to a key, just a console command). Anyway you can zoom
+		in on things in the distance.
+<li> Cooldemo - For playing back demos, suprisingly. You are shown views
+		from different players in turn, with views from the
+		players, from the chasecam and (if you're playing a
+		suitably-equipped level) from intermission cameras.
+<li> Credits screen - lists everyone working for the port, with a
+		swirling background
+<li> Work on the console - I've been doing some quite major work on the
+		console - breaking up the main command list. Suffice
+		to say it's very dull and boring.
+<li> FraggleScript - Yep, I'm still hard at work on FraggleScript:
+		I have functions working now, and I'm currently working
+		on a preprocessor which I finally realised was probably
+		neccesary =). Anyway, I am currently redesigning some of
+		the nesting code to allow developers to have a delay()
+		function, so it's going to be kinda essential.
+</ul>
+<br><br>
+<b>Bugs</b> <br><br>
+What? No, not the TV series, I mean bugs in SMMU. I have received quite
+a few bug reports on SMMU, including from the infamous BOOM/MBF beta
+tester Rez. These are the bugs I know about (and have fixed):
+<uL>
+<li> some console variables are not saved (eg. sv_bfgtype)
+<li> autorun key in console won't type (toggles autorun instead)
+<li> sound too quiet (some people mistook it for no sound at all)
+<li> walkcam doesn't work when game paused
+<lI> startup in graphics mode not toggl-able
+<li> no option for secrets/items/kills display on new hud
+<li> messages toggle doesn't work
+<li> extra \ in smmu.wad load line
+<li> vertical sensitivity too high at the 2nd-lowest setting
+
+</ul>
+
+<br><br>
+
+<p align="right"><img src="img/newsbox.gif" border="0"> <b>29 Jul 99</b> <img src="img/newsbox2.gif" border="0"></p>
+<b> &lt;citrus> yummy </b> <br><br>
+Well, my SMMU beta release seems to have been quite a success. I've
+received some encouraging support as well as some minor bug reports and
+interesting ideas for new features. Anyway, lots of people have said
+that it's a really cool port and all, I thought I'd list what the
+major doom news sites said:
+<br><br>
+<ul>
+<li><a href="http://www.doomworld.com/"> Doomworld</a>:
+<i>I've tried it, and this port is pretty damn cool...</i>
+<br>
+<li><a href="http://www.doomnation.com/"> Doomnation</a>:
+<i>
+You can read all the
+details over on Fraggle Rock. Or, if you can't wait that long, you
+can download it here. Enjoy!
+</i> <br>
+<li><a href="http://frad.org/"> frad.org</a>:
+<i>it's one of the few mods that is actually done right, adding
+features instead of gloss, adding power instead of candy to sell
+his idea. and plus he built of MBF which is the best mod currently
+anyway.</i> <br>
+</ul>
+<br>
+A lot of people have been saying that SMMU loads faster, which I find
+strange because it doesn't load any faster on my PC =). The only
+explanation that I have come up with so far is that my changes to the
+wad code to allow dynamic wad loading caused this, but I really am at
+a loss to explain it. weird.
+<br><br>
+I've also heard that SMMU may be used as the port for the 
+Ninja Doom TC. Cool.<br><br>
+
+I'm feeling smug, ok? shut up.
+<br><br>
+<b>Note to developers</b><br><Br>
+As you may (or may not) have noticed, the beta release does not actually
+include FraggleScript, .. I haven't got round to incorporating the
+FraggleScript code into SMMU yet, basically because it isn't finished.
+I can appreciate that there may be quite a few developers out there
+wanting to create their own SMMU levels, but I'd quite like you to hold
+off for a while just until I get FraggleScript finished. This is
+basically because I'm just going to ditch the current scripting code
+when I've finished FraggleScript, and if you go making levels now
+then they won't work later on. The current scripting support is only
+really for showing off what SMMU can do. Until then, you'll have to
+make MBF levels or something, or make levels without scripts.
+
+<br><br>
+
+<p align="right"><img src="img/newsbox.gif" border="0"> <b>25 Jul 99</b> <img src="img/newsbox2.gif" border="0"></p>
+<b>SMMU beta release</b>
+<br><br>
+Ok, I've decided to release it. This is a public <i><u>beta</u></i>
+however. If you find <i>any</i> bug or error or crash, <i>please</i>
+let me know. The last time I released SMMU, i heard that some people
+had problems with video modes, but they never sent me anything. Please,
+I want to know about any problem whatsoever.<br>
+Sooo, get the <a href="download/smmu.zip">binaries</a> or the 
+<a href="download/smmu-src.zip">sources</a><br>
+<br>
+<b>Birthday</b><br><br>
+Yup, it's my 17th today. I had a great party with all my friends
+yesterday, and I'm enjoying my new TI-83. <br><br>
+
+<p align="right"><img src="img/newsbox.gif" border="0"> <b>21 Jul 99</b> <img src="img/newsbox2.gif" border="0"></p>
+<b>(Adore track 16)</b>
+<br><br>
+I'm 17 on Sunday. And after seeing Mystican's amazing TI-83 calculator,
+I want one too, and that's what i'm going to get (hopefully). Those
+things are amazing.. I mean <i> Mario </i> .. on a calculator?
+<br><br>
+<b>SMMU</b>
+<br><br>
+So, back to SMMU. Apparently, Satori has got quite far in the graphics
+department (60% done I think he said.. may be different). I sent
+Afterglow a copy of the latest version of SMMU a few days ago, which
+was useful as he pointed out several bugs and annoying things which I
+quickly fixed (I ought to do more beta testing =).
+<br><br>
+One thing I'm considering is releasing the latest version as a beta
+on Sunday as a kind of 'birthday beta'.
+The only thing I'll need to do is finish the new fullscreen heads up
+(I think) which I am currently busy rewriting. Anyway, we'll see..
+<br><br>
+
+<p align="right"><img src="img/newsbox.gif" border="0"> <b>10 Jul 99</b> <img src="img/newsbox2.gif" border="0"></p>
+<b>Ended yet? =) </b>
+<br><br>
+Well, guess the world didn't end. Apparently its <i>actually</i> going to be in
+August, with something to do with Peter Mandelson. That's what I heard anyway.<br>
+Anyway, I fixed the dumb-ass link below that pointed to 'downloads/' rather than
+'download/' so you can all enjoy the "amazing" FraggleScript.
+<br><br>
+<b>Inevitability</b> <br> 
+That's right, it's the inevitable SMMU update. Anyway, some amazing things in it
+now:
+<ul>
+	<li> 'Walk-cam' : a camera view that lets you walk around levels! Although
+		this sounds a bit stupid at first (you can already walk around) the
+		actual purpose is so that you can walk around inside demos <i> as
+		they are playing</i>. That is, without disturbing demo sync or
+		anything. It's actually rather cool.
+	<li> Doom I support. While you can already load Doom I levels using the Doom
+		I iwad, the new system allows you to load Doom I levels and play them
+		under Doom II by converting the Doom I textures to Doom II. In fact,
+		the other day I downloaded a level and played on it, not noticing until
+		I exited the level that it was actually a Doom I wad!
+</ul>
+<p align="right"><img src="img/newsbox.gif" border="0"> <b>30 Jun 99</b> <img src="img/newsbox2.gif" border="0"></p>
+<b>FraggleScripting?</b><br><br>
+Yeah, I dunno where that word came from =). 'FraggleScript' is the name
+of the language, like 'JavaScript'. It isn't a way of doing scripting,
+called 'FraggleScripting'.<br>
+Anyway, I thought I ought to release this <a href="download/fscript.zip">
+beta</a> of FraggleScript so far. It seems mean not to.
+<br><br>
+<b>The end of the world is nigh</b>
+<br><br>
+If we're to believe Nostradamus, the world ends next week. Anyway,
+bye everyone if the world ends! 
+<br><br>
+
+<p align="right"><img src="img/newsbox.gif" border="0"> <b>24 Jun 99</b> <img src="img/newsbox2.gif" border="0"></p>
+<b>Exams over!</b>
+<br><br>
+Thats right, my exams are over. Anyway, I've also been doing some work
+on SMMU over the past few weeks. I should probably release a beta at
+some point soon.<br><br>
+Also, I ought to mention that two more people have joined me in developing
+SMMU:
+<ul>
+<li> Derek MacDonald 'Afterglow' is designing a new start map for SMMU,
+	I've already seen a version of this and it looks like it's 
+	going to be great.
+<li> Bob Satori 'Mantic' is doing some graphics including a new title
+	screen, logo and console backdrop. From some of the sketches
+	he has sent me already, these look set to be great also.
+</ul>
+<br>
+<b>FraggleScript</b>
+<br><br>
+FraggleScript is up to a quite impressive level already. It already has
+the foundations of a proper interpreter. What it does so far:
+<ul>
+<li> Orders of precedence, ie. 4+2*3 means 4+(2*3) not (4+2)*3
+<li> Comments
+<li> Variables
+<li> All Basic C operators: + - / % * & | ==
+<li> Multi-level nested brackets
+</ul>
+I am developing this as a seperate program. When I have it sufficiently
+'finished' I will incorporate it into SMMU. I don't plan to release
+the current program, but if there is sufficient demand I will.
+<br><br>
+
+<p align="right"><img src="img/newsbox.gif" border="0"> <b>7 Jun 99</b> <img src="img/newsbox2.gif" border="0"></p>
+<b>Dead?</b>
+<br><br>
+Yeah, this place has been 'dead' for the last 2-3 months. I've been working
+on SMMU, mostly, and have exams coming up. I'm not releasing it yet, though.
+I may release a beta version soon to a select few. Right now, here's a list
+of 'amazing' things you will be able to do in the new version:
+<ul>
+<li> New scripting commands (spawning monsters etc)
+<li> <i> Working</i> netgame and serial comms.
+<li> Quake-style 'swirly' floor effect (see <a href="img/news/animfloor.gif">
+Animated Screenshot</a>.
+<li> Full skins support
+<li> Chasecam
+<li> New editing options: Intermission camera, intermission text with
+	the ability to set background as a 320x200 graphics <i>or</i>
+	as a tiled flat.
+<li> Coloured lighting! Yes, this is back. I managed to re-implement it
+	and it is also a lot less dodgy than the previous system.
+<li> VPO Warning indicator for developers of old doom
+
+</ul>
+<br>
+And in the long term:
+<ul>
+<li> A re-write of the menu system (this should be cool, I have ideas
+	for a complete redesign of the doom menus, I think the current
+	menus being used in other ports are pretty much the same as the
+	original doom ones.
+<li> Inbuilt client-server TCP/IP netgames with the ability to start 
+	games once the game has begun. I have already downloaded a
+	TCP/IP library, it seems pretty straightforward.
+<li> A brand new C-style scripting language called 'FraggleScript'
+	which will not require compiling like ACS does (I have already
+	started on this)
+</ul>
+<br><br>
+<b> Help wanted apply within </b>
+<br><br>
+I am also looking for help with this project. If you think you can
+help, <a href="mailto:sfraggle@sfrag.free-online.co.uk">e-mail me!</a>.
+I need:
+<ul>
+	<li> Some kickass level makers to make me a decent start map
+		(I have to admit that the current one is pretty bad)
+		and a demo level showing SMMU's new editing options etc
+	<li> Graphics artists? Anyone good at graphics out there? I
+		need a logo for SMMU and also a console backdrop. I may
+		also need some graphics for the new menu system.
+</ul>
+<b>BUT</b> if you are going to do anything, please email me first! I
+don't want to suddenly receive 20 logos or 30 start maps from people
+without warning.
+<br><br>
+<p align="right"><img src="img/newsbox.gif" border="0"> <b>31 Mar 99</b> <img src="img/newsbox2.gif" border="0"></p>
+<b>SMMU</b>
+<br><br>
+The ridiculous speed of the xoom ftp site means that I've actually been
+unable to upload it here. However, Doomworld have been kind enough
+to host the port until xoom get their act together: the binaries are
+<a href="ftp://ftp.doomworld.com/ports/smmu.zip">here</a>. Sources?, not
+yet, I <u>will</u> release them and would have done now if it wasn't
+for this bloody FTP.
+
+<br><br>
+<b>Skins n stuff</b>
+<br><br>
+I have almost finished implementing skins in smmu (only need to implement
+sounds and status bar pic).  I have also made a really cool chasecam
+which is kind of similar to the <a href="http://www.frag.com/doomlegacy" target="_top">
+Legacy</a> one, except it doesn't get stuck =). So the next release
+should be interesting.
+<br><br>
+
+<p align="right"><img src="img/newsbox.gif" border="0"> <b>20 Mar 99</b> <img src="img/newsbox2.gif" border="0"></p>
+<b>Niceday</b><br><br>
+Ok, I've finished the current version of SMMU, including:
+<ul>
+<li> Built-in Serial Comms
+<li> Console, looking up-down(totally disablable)
+<li> Start map included
+<li> Amazing New editing options
+</ul>
+<br>
+So go get it: <a href="download/smmu.zip">Binaries</a> or
+<a href="download/smmu-src.zip">Sources</a>
+<br>
+</body>
+<!--
+<p align="right"><img src="img/newsbox.gif" border="0"> <b>Date</b> <img src="img/newsbox2.gif" border="0"></p>
+-->
+</html>

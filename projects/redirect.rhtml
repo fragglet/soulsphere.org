@@ -1,0 +1,13 @@
+<%
+require "cgi"
+
+cgi = CGI.new
+
+url = cgi["url"]
+
+if url =~ /^wp:(.*)/
+  url = "https://en.wikipedia.org/wiki/#{$1}"
+end
+%><html>
+<meta http-equiv="refresh" content="0; url=<%=url%>">
+</html>

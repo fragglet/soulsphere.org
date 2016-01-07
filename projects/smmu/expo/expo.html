@@ -1,0 +1,307 @@
+<html>
+
+<body>
+
+<div style="border: 1px solid red; background: #f99; padding: 5px;">
+Note: this is an old page that lists some of SMMU's features.  The port
+is no longer in development.  See <a href="../">the main page</a>.
+</div>
+
+<h1> SMMU </h1>
+
+SMMU is a new Doom port based on Lee Killough's MBF, which is based on BOOM,
+which is based on DOSDOOM, which is based on the original LinuxDoom sources
+released by John Carmack.
+<br>
+<br>
+
+<i>
+ "i suggest you all check out his MBF mod. it's one of the few
+ mods that is actually done right, adding features instead of gloss, adding power instead of
+ candy to sell his idea."
+</i>
+
+<p align="right"> -- Aurikan </p>
+
+I think this quote describes well what I'm trying to do with SMMU. SMMU
+includes a lot of features in common with other ports, but I have always
+tried to go one step further and do something different. Here is a
+list of features I've added/am adding to SMMU. Please note that some of
+these features are still under development, although others can be found
+in the current version of SMMU available from
+<a href="http://fraggle.tsx.org/"> my homepage </a>
+
+<br><br>
+
+<table border = 0>
+
+
+<tr>
+  <td>
+    <a href="img/multi1.gif"><img src="img/thumb/multi1.gif"></a><br>
+    <a href="img/multi2.gif"><img src="img/thumb/multi2.gif"></a>
+  </td>
+  <td>
+    <h3> Inbuilt multiplayer </h3>
+        Many doom ports, such as <a href="http://zdoom.notgod.com/"
+	target="_top">Zdoom</a>, <a href="http://frag.com/doomlegacy/"
+	target="_top">Legacy</a>, prboom and so on have
+	built-in network game support. However, these all use the
+	'traditional' system of command line parameters to set up
+	games. If you want to start a new game then you have to quit
+	and restart. <br>
+	SMMU includes built-in serial/modem support which can be
+	started	<i>inside</i> the game without a need to restart. 
+	The currently released version of SMMU includes this, although
+	the new version under development adds easy support for it
+	using the menu. <br>
+	You can also expect TCP/IP games in the near future using a
+	similar system. I will be aiming for a 'descent-style' approach
+	rather than 'quake-style': that is, the server computer starts
+	ands sees a list of people who have joined. When he/she is
+	satisfied with the number of players joining, he can start the
+	game. I feel that a quake-style system of game-joining would
+	be too difficult to implement and even if I managed to achieve
+	it, as a result unreliable.
+  </td>
+</tr>
+
+<tr>
+  <td>
+    <a href="img/fscript1.gif"><img src="img/thumb/fscript1.gif"></a>
+  </td>
+  <td>
+    <h3>'FraggleScript' Scripting </h3> 
+	One of the many demands high on people in the doom community's
+	wish-list is for scripting in levels. This allows level authors
+	to write small programs and attach them to their levels, which
+	can be activated by the player doing certain things in the
+	level. <br>
+	SMMU adds the much-famed 'FraggleScript' which is a
+	fully-featured programming language. Unlike other languages
+	such as the ACS language used by Zdoom, FraggleScript does not
+	need to be compiled. It can be simply dropped into a level and
+	will work fine. Two sites dedicated to FraggleScript editing
+	have recently appeared <a href="http://smmuediting.cjb.net/"> here</a>
+	and <a href="http://smmu.frad.org/"> here </a> for more
+	information.
+  </td>
+</tr>
+
+<tr>
+  <td>
+    <a href="img/skins.gif"><img src="img/thumb/skins.gif"></a>
+  </td>
+  <td>
+    <h3> Legacy skins support </h3> 
+	The <a href="http://frag.com/doomlegacy/" target="_top">
+	Doom Legacy</a> team added support for skins replacement in
+	their port, which allows custom wad files to be loaded with
+	replacement sprites for the player. SMMU includes support for
+	Legacy skins. Multiplayer is sure to be more interesting as
+	players turn themselves into imps, duke nukems, lost souls and
+	other strange creatures. So if you've ever wanted to become a
+	black floating skull, you came to the right port!
+  </td>
+</tr>
+
+<tr>
+  <td>
+    <a href="img/lighting.gif"><img src="img/thumb/lighting.gif"></a>
+  </td>
+  <td>
+    <h3>Coloured lighting</h3> 
+	Boom added support for colormapped levels - that is, areas of
+	the level shaded a different color. However, in boom you
+	saw the whole level in the color of the area you were
+	standing in. SMMU takes it one step further and allows you to
+	see all the parts of the level in the color they should be.
+	So effects such as coloured lighting are possible.
+  </td>
+</tr>
+
+<tr>
+  <td>
+    <a href="img/zooming.gif"><img src="img/thumb/zooming.gif"></a>
+  </td>
+  <td>
+    <h3>Zooming</h3> 
+	Just an interesting effect really. SMMU allows you to change
+	the field of view so that you can zoom in on far away objects.
+  </td>
+</tr>
+
+<tr>
+  <td>
+    <a href="img/menu.gif"><img src="img/thumb/menu.gif"></a>
+  </td>
+  <td>
+    <h3> Totally Rewritten menu </h3> 
+	One of the things I noticed about the various ports is that
+	although they all changed the doom menu to an extent, they
+	still retained the old code for it. I have started on a
+	complete re-write of the menu. The new, much simplified code
+	structure allows me to add a host of new menus to allow access
+	to the new SMMU features (multiplayer especially). <br>
+	Doom conservatives, don't worry, though. SMMU retains the
+	original main menu of new, options, load, save, quit, although
+	it adds a new menu 'features' which allows access to multiplayer
+	and demo options. And
+	although it includes new 'full-screen' small-text menus, I
+	have tried my best to do them in a 'doom-style'. <br>
+	One thing I have done is to re-organise the options
+	menu and divide it into various categories, meaning you
+	can find the option you need much quicker.
+  </td>
+</tr>
+
+<tr>
+  <td> </td>
+  <td>
+    <h3> Rewritten HUD </h3> 
+        I thought it was time to rewrite the HUD code. The new HUD includes
+        a similar full-screen HUD to the one in Boom, but with longer names
+        so you can see more clearly what each item represents. There is also
+        a choice of three different styles. <br>
+        SMMU allows you to choose from two different crosshairs. There are
+        'smart' crosshairs like the ones in half-life: they light up when
+        pointed at an enemy so you can see when its ready to fire. <br>
+        For netgames there is an optional frag display which displays the
+        names of all the players in the game in descending order of ranking.
+  </td>
+</tr>
+
+<tr>
+  <td>
+    <a href="img/compat.gif"><img src="img/thumb/compat.gif"></a>
+  </td>
+  <td>
+    <h3>Full original doom/boom compatibility</h3> 
+	I have done my best when adding new gameplay features to
+	retain original doom and boom compatibility. SMMU should play
+	back the majority of demos correctly, and all levels should be
+	loaded correctly. As it is an MBF-derived port, it includes
+        support for all the boom and MBF editing features. <br>
+        I would like to think that SMMU is a bit more of a 'conservative'
+        port than some of the other ports currently available. There are
+        a lot of ports which simply try to make Doom into Quake. This isn't
+        my intention. I concede that SMMU includes some new features which
+        are Quake-inspired, but I try to make sure that these can be
+        disabled or are hidden unless the player specifically wants to
+        see them.
+  </td>
+</tr>
+
+<tr>
+  <td>
+    <a href="img/walkcam.gif"><img src="img/thumb/walkcam.gif"></a>
+  </td>
+  <td>
+    <h3>Demo walkcam</h3> 
+	The demo walkcam allows you, during demo playback, to walk
+	around inside the demo as it plays, or even to pause the demo
+	and take screenshots from various positions. The screen shot
+	given on the left shows a scene from a paused demo shown at
+	three different angles. The walkcam allows you to take the kind
+	of pictures that have never been seen before.
+  </td>
+</tr>
+
+<tr>
+  <td>
+    <a href="img/chasecam.gif"><img src="img/thumb/chasecam.gif"></a>
+  </td>
+  <td>
+    <h3>Chasecam</h3>
+	The chasecam is another camera. When activated, the chasecam
+	follows you around the level 'tomb-raider style'. SMMU also
+	includes a 'cooldemo' option which when activated will during
+	demo playback give
+	random viewpoints from different players, the chasecam or
+	cameras placed in the level by the level author.
+  </td>
+</tr>
+
+<tr>
+  <td>
+    <a href="img/console1.gif"><img src="img/thumb/console1.gif"></a>
+  </td>
+  <td>
+    <h3>Console</h3> 
+        SMMU includes its own command-console where you can type commands,
+        change the level, send network messages, change game variables,
+        and so on. It includes all of the features you expect in game
+        consoles, including scrolling, tab-completion, delayed commands,
+        and command aliases. <br>
+        I work under the belief that if you don't want to see the console,
+        you shouldn't have to. That is, unless you push the console button,
+        the console won't appear. The exception in this is for netgames,
+        where the console is important to see network messages. Although
+        SMMU defaults to showing the startup messages in the console window,
+        this can be disabled easily from the menu if you so wish.
+  </td>
+</tr>
+
+<tr>
+  <td>
+    <a href="img/startmap.gif"><img src="img/thumb/startmap.gif"></a>
+  </td>
+  <td>
+    <h3>Start map</h3>
+        Yes, I know. It's a Quake feature. Top level editor
+        <a href="mailto:derekmd@doomnation.com">Afterglow</a>
+        is creating the SMMU start map which will replace the traditional
+        skill level menu. You can expect it to include new SMMU features
+        such as coloured lighting and FraggleScript scripting. And of course,
+        it'll be totally disable-able for traditionalists who wish to use the
+        menu.
+  </td>
+</tr>
+
+<tr>
+  <td>
+    <a href="img/animfloor.gif"><img src="img/thumb/animfloor.gif"></a>
+  </td>
+  <td>
+    <h3>'Swirling' floors</h3>
+        Another Quake-style feature. Rather than the usual animated floors,
+        level authors can choose to use a new 'swirling water' effect on
+        liquid floor textures. This can be hack-tested on all animated flats
+        from the console variable r_swirl.
+  </td>
+</tr>
+
+</table>
+
+<h3> Coming soon ... </h3>
+
+<ul>
+	<li> <b> Hubs </b> <br>
+                Hubs are when you have a group of levels, with links that
+                allow you to travel between them. You may have seen this
+                kind of feature if you have played Hexen, Half life or
+                certain Zdoom maps.
+	<li> <b> Linux SMMU</b> <br>
+                I have already started on this. I have a working version
+                already which lets you play SMMU using SVGALIB. The code has
+                been modified to allow multi-platform support. When finished
+                you can expect an X-window version also. I am using code
+                from lxdoom by Colin Phipps, who might also help me out in
+                Linux (I'm a real Linux newbie, suprised I've got this far
+                to tell the truth :)
+	<li> <b> TCP/IP Internet play </b> <br>
+                TCP/IP gaming (internet gaming) is a likely feature I will be adding in the
+                not-too-distant future.
+                As already discussed, this will be built-in and be startable
+                from within the game. I have already started experimenting
+                with networking (seperately from the game) and have had some
+                reasonable success already. The network library I am using
+                is a DOS version of the standard BSD sockets which is used
+                in Linux and Windows, so porting to different platforms
+                should be reasonably easy.
+</ul>
+
+
+</body>
+
+</html>

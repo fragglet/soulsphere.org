@@ -1,0 +1,54 @@
+<html>
+<body bgcolor="#000000" text="#FFFFFF" link="green" vlink="darkgreen" alink="lightgreen">
+
+<center><img src="title.gif"></center>
+
+<center><font size="+3">Random Thing Spawner, Part Deux: Weighted Randomness</font></center>
+
+<br>
+"Weighted randomness?  What the hell?" is probably what you're thinking right now.  Don't deny it - I called the psychic hotline and they said you were!  Weighted randomness is just my term for it, but basically it's just theoretical probability.  For our health dispenser, let's make a soul sphere spawn 10% of the time, medikit spawn 40% of the time, and stimpack 50% of the time.  We do this again with the lovely modulus operator.  But first, the basics.<br>
+<br>
+<pre><tt>
+script 81
+  {
+    int i;
+
+    i = rnd();
+</tt></pre>
+<br>
+What we've done is assigned i to the random number.  This ensures that while the checking is being done that i remains constant.  First, we'll give the 10% probability to the supercharge.  Remember that <i>rnd</i> chooses a random number from 1 to 100 (inclusive).  Therefore, 10% of the numbers are divisibile by 10.  So 10% of the time, i % 10 will be equal to 0.<br>
+<br>
+<pre><tt>
+i = rnd();
+if(i % 10 == 0)
+  {
+    spawn(SUPERCHARGE, 128, 0);
+    return();
+  }
+</tt></pre>
+<br>
+To break that down: first, it finds whether the random number divided by 10 is 0.  If so, it moves into the braces; otherwise, it skips.  In the braces, it spawns a supercharge at (128, 0), then quits the current script (the return function).  Now that we've got the soul sphere ready, we'll do the medikit.  How do we tell it to have 40% of the time?  Well, <tt>i % 2 == 0</tt> will be true 50% of the time.  However, since any numbers that had <tt>i % 10 == 0</tt> are not accounted for at this point, 40% remain.<br>
+<br>
+<pre><tt>
+...
+if(i % 2 == 0)
+  {
+    spawn(MEDIKIT, 128, 0);
+    return();
+  }
+</tt></pre>
+<br>
+Finally, we need to make a stimpack be spawned the other 50% of the time, which is done by simply telling it to spawn.  (If a soul sphere or medikit was spawned, they have exited the script.)<br>
+<br>
+<pre><tt>
+script 81
+  {
+    ...
+    spawn(STIMPACK, 128, 0);
+  }
+</tt></pre>
+The final products ends up looking something like <a href="tutrand.fs">that</a>.  Note that the health spawner's percentages are based on theoretical probability, not practical probability.  If you press the health spawning switch 10 times, you won't get a soul sphere, 4 medikits, and 5 stimpacks unless you're _really_ lucky.  Hopefully the numbers should be around that, though.  So, load up <a href="tutrand2.zip">the map</a> and spawn some stuff!<br>
+<br>
+<br>
+</body>
+</html>

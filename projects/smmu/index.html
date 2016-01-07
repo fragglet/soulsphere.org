@@ -1,0 +1,246 @@
+<html>
+
+<head>
+<title>SMMU</title>
+<link rel="shortcut icon" href="/favicon.png">
+<link rel="apple-touch-icon" href="/favicon.png">
+<meta name=viewport content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+
+<h1> SMMU </h1>
+
+<b>SMMU</b> stands for <a href="#name">"Smack My Marine Up"</a>.
+It is a Doom source port I wrote between 1998-2001.  More information on it
+is available <a href="http://doomwiki.org/wiki/SMMU">on the
+Doom Wiki</a>. It was based on the <a href="#mbf">MBF</a> source port
+by <a href="http://doomwiki.org/wiki/Lee_Killough">Lee Killough</a>.
+<p>
+Work on SMMU ceased years ago and it is no longer maintained or developed.
+<a href="http://www.doomworld.com/eternity/">The Eternity Engine</a> is
+derived from the SMMU codebase and should be considered its spiritual
+successor. This page is an attempt to gather as much relevant data about
+SMMU, for historical posterity.
+
+<div style="float:right;">
+    <iframe width="400" height="280" display="float" type="text/html"
+            src="//www.youtube.com/embed/VTjMdKluQvU?html5=1"
+    	frameborder="0" allowfullscreen>
+    </iframe>
+</div>
+
+<a name="screenshots"></a>
+<h3> Screenshots and Features </h3>
+
+A summary of some of the <a href="expo/expo.html">features of SMMU</a>
+is available, including some screenshots. The page was created during SMMU's
+development, and all of the "coming soon" features listed were eventually
+included.
+<p>
+As a demonstration, you can also download
+<a href="smmutest.zip">a simple demo level</a> that that shows some of SMMU's
+features (including
+<a href="#fragglescript">FraggleScript</a>).  A video of it is to the right.
+
+<a name="downloads"></a>
+<h3> Downloads </h3>
+
+These are the most recent builds that I have in my possession. Due to
+bit rot, I no longer have a working compile environment that will build
+SMMU.
+<p>
+
+SMMU is licensed under the <a href="http://www.gnu.org/licenses/gpl-2.0.html">GNU GPL v2</a>.
+
+<ul>
+<li> <a href="smmu.zip">DOS binary</a>
+ - 2000/08/17 build of SMMU v3.30, the <a href="#textdoom">"textmode"</a>
+ release.
+
+<li> <a href="smmu-win32.zip">Windows binary</a> (Cygwin-based, has no sound)
+<li> <a href="smmu-src.zip"> Source code </a>
+</ul>
+
+<a name="olddownloads"></a>
+<h3> Older versions </h3>
+
+Releases of SMMU were clumsy and irregular, and I don't have a complete
+version history in my possession. However, thanks to James Haley (Quasar),
+here are some old versions and releases!
+
+<table border="1" style="margin:20px;">
+
+<!--
+<tr>
+<th>Description
+<th>Download
+-->
+
+<tr>
+<td>SMMU v3.21 (Christmas Day 1999 release). This release served as the primary
+base for the Eternity Engine - most features introduced after this version
+did not make it into Eternity, although a few select changes from later
+versions were incorporated.
+
+<td><a href="old/smmu-bin-3_21.zip">Binaries</a>,
+<a href="old/smmu-src-3_21.zip">Source</a>.
+<!--<a href="old/smmu-beta.zip">Source</a>.-->
+
+<tr>
+<td>SMMU v3.20 ("Millenium" private beta distributed
+to testers - December 18th 1999).
+This is "the beta with hubs support". I do not have the definitive
+source code to this version, though the github repository contains a
+backup snapshot with the same date.
+
+<td><a href="old/smmu-bin-3_20.zip">Binaries</a>,
+
+<tr>
+<td>SMMU v3.10 (<a href="#fragglescript">FraggleScript</a> "beta" release
+- October 25th 1999)
+<td><a href="old/smmu310.zip">Binaries</a>,
+<a href="old/smmu-src.zip">Source</a>.
+
+<tr>
+<td>SMMU v3.02 ("Birthday Beta" release - July 25th 1999).
+Introduced lots of the basic
+unique features of the port - chasecam, coloured lighting, etc.
+<td><a href="old/smmu-bin-3_02.zip">Binaries</a>,
+<a href="old/smmu-src-3_02.zip">Source</a>.
+
+<tr>
+<td>SMMU v3.01 (March 20th 1999).
+Very early version with only some very basic features in place.
+I sadly do not have the source code to this version.
+<td><a href="old/smmu-bin-3_01.zip">Binaries</a>.
+
+
+<!-- This is the same as the release above:
+<tr>
+<td>2000/08/17 build of SMMU v3.30 ("textmode" release).
+Includes the <a href="textdoom/">Text mode</a> feature.
+Select changes from this were incorporated into Eternity 3.29 public beta 1.
+<td>
+<a href="old/smmu817.zip">Binaries</a>,
+<a href="old/smmu-src-8-17-00.zip">Source</a>.
+-->
+
+</table>
+
+If you have any old versions of SMMU in your possession that are not listed
+here, please get in contact as I am eager to have as complete a history as
+possible.
+
+<a name="git"></a>
+<h3> Version history </h3>
+
+In the later stages of the development of SMMU, I adopted CVS as a version
+control system to track the source code.
+The <a href="smmu-cvs.tar.gz">CVS repository</a> is available for
+download. It contains fix-ups that I made in 2001, and also a
+<a href="#mbf">fixed version of MBF</a> that I ported to work on later
+versions of DJGPP.
+<p>
+I have converted the CVS repository into a Git repository.
+The revision history can be browsed
+<a href="http://github.com/fragglet/smmu">on GitHub</a>. This
+repository also incorporates the code from the old versions above, and
+some "backup" source code snapshots that I recovered from an old hard
+drive. You can follow the change history back all the way to the MBF
+source code
+- though the changes are quite large and complicated for
+the early history before I adopted CVS.
+<p>
+You can also read <a href="news/">the development blog</a> that I posted
+on my website while I was writing SMMU to get a feel for how the port
+developed.
+
+<a name="smmuserv"></a>
+<h3> SMMUSERV </h3>
+
+As part of the process of rewriting the network engine I developed a master
+server for locating games on the Internet.  The master server is no longer
+running; however, the <a href="smmuserv.tgz">source code</a> can be downloaded.
+
+<a name="textdoom"></a>
+<h3> Text mode </h3>
+
+SMMU includes a feature for rendering the screen in text mode.
+There is a separate <a href="textdoom/">text mode doom</a> page with
+more information, including screenshots.
+
+<a name="name"></a>
+<h3> Name </h3>
+
+SMMU stands for "Smack My Marine Up", a reference to the song by
+The Prodigy, <i><a href="https://en.wikipedia.org/wiki/Smack_my_bitch_up">Smack
+My Bitch Up</a></i>. I originally used the name <i>sfdoom</i> (see below), but
+disliked the name and asked various people for suggestions for alternate
+names.  I credit <a href="name.txt">BrV-Zokum</a> as the source/inspiration
+for the name :-)
+
+<a name="fragglescript"></a>
+<h3> FraggleScript </h3>
+
+SMMU includes the <i>FraggleScript</i> programming language; this was later
+incorporated into other source ports (including Doom Legacy and GZDoom).
+The code for the interpreter was developed separately and later incorporated
+into SMMU;
+<a href="http://www.doomworld.com/idgames/index.php?id=14871">
+the source code to the standalone version</a>
+can be found in the /idgames archive.
+
+<p>
+It's probably not a good idea to use FraggleScript nowadays, because other
+modern source ports have far more powerful and practical alternatives.
+That said, if you really do want to learn about it, here are some resources:
+<ul>
+<li> <a href="smmu_howto/">Prower's SMMU tutorials</a> - partially retrieved
+    from archive.org. These are not complete.
+<li> <a href="http://legacywiki.net/index.php/FraggleScript">FraggleScript
+    page</a> on the Doom Legacy wiki. Pretty comprehensive documentation,
+    though some of the things are Doom Legacy extensions.
+<li> <a href="http://doomwiki.org/wiki/FraggleScript">FraggleScript page</a>
+    on the Doom wiki (and the
+    <a href="http://doomwiki.org/wiki/FraggleScript_functions">functions
+    list</a>). 
+</ul>
+
+There used to be a page about SMMU by Thomas Sturm with some FraggleScript
+information (used to be located
+<a href="http://www2.crosswinds.net/~tsturm/smmu/">here</a> but that link
+is now broken). I don't have any way to contact Thomas nowadays. If you
+have a copy of these pages please contact me.
+
+<a name="sfdoom"> </a>
+<h3> sfdoom </h3>
+
+Before writing SMMU, my first excursion into Doom source hacking was writing
+the <i>sfdoom</i> port.  This was based on Chi Hoang's original DOS port
+of the LinuxDoom source code that appeared in the first couple of days after
+the source release.  <i>sfdoom</i> contained some features that later
+appeared in SMMU (coloured lighting, console, start map, basic scripting).
+SMMU was intended as a rewrite of <i>sfdoom</i>, and originally even used the
+same name.
+<p>
+<i>sfdoom</i> can be downloaded here:
+<ul>
+<li> <a href="sfdoom-bin.zip">DOS binary</a>
+<li> <a href="sfdoom-src.zip">Source code</a>
+</ul>
+
+<a name="mbf"></a>
+<h3> MBF fixes </h3>
+
+SMMU is based on Lee Killough's <a href="http://doomwiki.org/wiki/MBF">MBF</a>.
+I also made a <a href="mbf-fixes/">bugfixed version of MBF</a>.
+
+<hr>
+
+<a href="mailto:fraggle@removethistoemailme.gmail.com">Simon Howard</a>
+
+</body>
+
+</html>
+

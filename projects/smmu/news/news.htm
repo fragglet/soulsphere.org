@@ -1,0 +1,451 @@
+<html>
+<body
+	bgcolor=#000000
+	text=#ff9933
+	link=#ff9933
+	vlink=#ff9933
+	background="img/sfs.gif"
+	BGPROPERTIES=FIXED
+	FIXED
+>
+ 
+<font face="Times New Roman" size=3>
+
+<p align="right"><img src="img/newsbox.gif" border="0"> <b>17 Apr 2000</b><img src="img/newsbox2.gif" border="0"></p>
+<br><br>
+<b>SMMU and all</b>
+<br><br>
+My A-Levels are coming up soon which means that I'll probably be
+reducing the amount of time I spend with SMMU to get in some much-
+needed revision. Anyway I've been doing loads and loads of stuff to
+it recently. The networking engine is more or less finished I think,
+all I need to do is include movement prediction and it should really
+kick ass. 
+<br><br>
+And for all those of you that didnt believe me before, heres what I
+said I'd do in my original list and how far I've got:
+
+<ul>
+
+<li> Client-Server <br>
+	Yes. I can also compile a seperate dedicated server program which
+	acts on its own. It uses the actual code from the port, so any
+	changes I make there will take effect immediately
+<li> Multiple communication channels <br>
+	Done. Players can set up servers that listen for new connections
+	using their serial port, using TCP/IP, <b>and</b> from old-style
+	drivers like IPXSETUP/SERSETUP
+<li> Inbuilt communication protocols <br>
+	Done. Serial/Modem, UDP (TCP/IP) for internet/lan play
+<li> Compatibility with old-style external program network
+     drivers. <br>
+	Yes. Includes ipxsetup and sersetup
+<li> Inbuilt into game through menus<br>
+	Menus are more-or-less done. No need for any messing with
+	command lines.
+<li> Compressed player packets for low bandwidth machines <br>
+	Done.
+<li> SMMUSERV for internet SMMU server lookup <br>
+	Done. Check out 
+     <a href="http://basrad.dhs.org/~fraggle">this</a>
+<li> Server info retrieval <br>
+	Done. You can query SMMUSERV for a list of running games on 
+	the internet
+<li> Original networking speedup features <br>
+	ticdup etc. Done.
+</ul>
+I mentioned before that players will not be able to 'jump in' to
+running netgames like in Quake. I have now 'loosened' this up a bit.
+You can join servers that are running but cannot enter the game until
+a change of level. Players that are waiting are able to chat in a
+'waiting room' while they wait for the level to change. Also, when
+you first start the game you can talk to other waiting players while
+you wait for everyone to join.
+<br><br>
+Not bad, huh? I've also been adding the new Key Bindings system which
+a few people were moaning about and that is basically finished as
+well. The linux version is also now fully functional except for the
+sound, which I hope to add now I have sound working in Linux on my
+computer. In any case, the future looks bright!
+<br><br>
+Any comments? <a href="mailto:fraggle@doomnation.com">email me</a>
+<br><br>
+
+<p align="right"><img src="img/newsbox.gif" border="0"> <b>19 Mar 2000</b><img src="img/newsbox2.gif" border="0"></p>
+<br><br>
+<b>More Progress</b>
+<br><br>
+The SMMU networking is coming along <u> very </u> nicely. It has already
+had its first few tests over the internet against a few people. There
+were some issues with Windows 98 and Winsock2 (as there was/is(?) in DOS 
+Legacy originally) but I have found a solution to this now.
+
+Heres some of the stuff done so far:
+
+<ul>
+
+<li> Built-in. You can start servers for internet play, or lan
+     play, or over a serial link, or mix-n-match, and join them without
+     having to quit the game. Menus are done for ease
+     of use. No longer any need for the old command-line system that all
+     the ports made so far have used.
+<li> Start servers and watch the people join. You do not need to specify
+     how many people you want there to be in a game. When you have enough
+     people joined, you can start the game.
+<li> Internet server lookup using
+     <a href="http://basrad.dhs.org/~fraggle" target="_top">SMMUSERV</a>
+     as already mentioned. When on the internet you can simply contact
+     SMMUSERV and a list of all the games currently running appears,
+     gamespy style.
+</ul>
+
+As I already mentioned, dynamic joining, "quake-style" will not be possible
+but what I hoping to implement is a system where players can join and will
+enter the game upon a change of level. Waiting players will hopefully be
+able to talk with each other in a kind of "waiting room" while they wait
+to enter the game. It's not as great as the networking you get with Quake
+but if you consider the other benefits that I will be bringing I think
+its a small price to play. Bear in mind that open-game joining is something
+that Doom was simply never designed to do.
+
+<br><br>
+
+It seems I made a mistake in the previous update about 
+<a href="http://netdoom.sourceforge.net/" target="_top">NetDoom</a>,
+and ResDe will be joining me after all, although he will continue working
+on NetDoom. I have no experience with windows programming, so ResDe should
+be helping me by developing a windows version of SMMU.
+
+<br><br>
+
+Any comments can be directed <a href="mailto:fraggle@doomnation.com"> here</a>
+
+<br><br>
+
+<p align="right"><img src="img/newsbox.gif" border="0"> <b>3 Mar 2000</b><img src="img/newsbox2.gif" border="0"></p>
+<br><br>
+<b>Progress</b>
+<br><br>
+I'm a little frustrated with the lack of response to my posting, i noticed
+that no-one posted any comments in the doomworld comments thread. I'm also
+angry that <a href="http://doomnation.com/afterglow/" target="_top">
+Afterglow</a>, who I considered a friend and who in the past has always
+been very supportive of SMMU (he made the SMMU start map) doubts my
+abilities to code these new features to the extent
+that he compares my port to some lamer's over-optimistic TC. In any case,
+SMMU Networking is coming along extremely promisingly.
+<br><br>
+I noticed ResDe's announcement that he is to start work on
+<a href="http://netdoom.sourceforge.net/" target="_top">NetDoom</a>,
+and suggested to him that maybe we could combine our efforts.
+ResDe is aiming for a true quake-like networking system which I think is
+rather too much work (I wouldnt expect it to be at this level for quite
+a while). In any case we both seem to be too unwilling to leave our own
+ports so the proposed merger unfortunately seems unlikely.
+<br><br>
+BTW, check out this picture which is taken from a netgame running the
+new SMMU networking code: <br>
+
+<center> <img src="img/news/smmunet1.gif"> </center><br>
+
+Pretty interesting huh? ;)
+
+<br><br>
+
+<p align="right"><img src="img/newsbox.gif" border="0"> <b>21 Feb 2000</b><img src="img/newsbox2.gif" border="0"></p>
+<br><br>
+<b>SMMU Networking</b>
+<br><br>
+Networking is what I'm currently working on in SMMU, as you may have
+gathered. Anyway, I've started on a complete re-write of the
+networking engine. Here are some of the features of the system
+I'm playing with:
+
+<ul>
+
+<li> Client-Server <br>
+   with possibility of dedicated server and seperate
+   dedicated server program.
+<li> Multiple communication channels <br>
+   ie. can have different nodes connected to server via
+       tcp/ip, serial/modem, ipx etc.
+<li> Inbuilt communication protocols <br>
+   No need to use old-style external programs. Inbuilt
+   support for TCP/IP and Serial/Modem connections.
+<li> Compatibility with old-style external program network
+     drivers. <br>
+     including ipxsetup and sersetup
+<li> Inbuilt into game through menus<br>
+     No more command line parameters. System allows someone
+     to set up a server, wait for the other clients to
+     join and then start the game, rather than specify how
+     many clients are wanted.
+<li> Compressed player packets for low bandwidth machines
+<li> SMMUSERV for internet SMMU server lookup <br>
+     already available - log into it
+     <a href="telnet://basrad.dhs.org:52638">here</a> or
+     <a href="http://basrad.dhs.org/~fraggle">view the
+     stats</a>
+<li> Server info retrieval <br>
+     Ability to finger running servers to retrieve
+     information eg. server name, status, number of
+     clients etc.
+<li> Original networking speedup features <br>
+     ticdup etc.
+</ul>
+
+I do not plan to implement open joinable-games ala quake as
+I think that there are too many issues to resolve to get doom
+to network in this way. However, the final server structure
+(as I envision it) may allow someone else to set up such a 
+structure. <br> <br>
+
+Clearly these are exciting prospects. However, I want you
+to bear in mind that I have not yet written the code for this.
+It is possible that I may not be able to get this network
+structure to work at all, or that the end system will be
+very different to the one outlined. On the other hand, I have
+already had some encouraging success with what I have so far
+written.
+
+<br><br>
+<p align="right"><img src="img/newsbox.gif" border="0"> <b>14 Feb 2000</b><img src="img/newsbox2.gif" border="0"></p>
+<br><br>
+<b>smmuserv?</b>
+<br><br>
+Yeah, smmuserv, you heard.  smmuserv will be the central server for smmu
+internet players who will be able to register their new servers or search
+for existing servers. Anyway, basically I've written the program (which runs
+under linux, of course :).  I've been trying it out on
+<a href="http://basrad.dhs.org/~tom" target="_top">Mystican</a>'s box over
+the past week or so, in fact it might even still be running, try
+<a href="telnet://basrad.dhs.org:52638">here</a>.  All I have to do now is
+the actual multiplayer in SMMU and this should really rock.
+<br><br>
+
+<p align="right"><img src="img/newsbox.gif" border="0"> <b>10 Feb 2000</b><img src="img/newsbox2.gif" border="0"></p>
+<br><br>
+<b>Suck my fucken cock asshole!</b>
+<br><br>
+I haven't done much work on SMMU recently... mostly been doing other
+stuff like playing Opposing Force, although I have been doing some
+network-related coding (not smmu network coding tho :).  Anyway I've 
+managed to get a simple server-related program working which I've
+been testing on myst's box. Speaking of which, remember to check out
+<a href="http://basrad.dhs.org/~tom" target="_top">basrad</a>. <br>
+
+<br><br>
+
+<p align="right"><img src="img/newsbox.gif" border="0"> <b>23 Jan 2000</b><img src="img/newsbox2.gif" border="0"></p>
+<br><br>
+<b>Wait for it..</b>
+<br><br>
+Well, the time for the next release is getting closer. It should be here
+in less than a week hopefully. Anyway, here are some new things to
+dribble over:
+<ul>
+<li> File selector on the menu -- Basically, you can use the dynamic wad
+     loading in SMMU more easily. The file selector displays a list of
+     wad files and you simply select the one you want to load. Cool huh?
+<li> FraggleScript functions for music -- now you can create jukeboxes
+     in your levels or something, .. bah, i don't know. I think Recidivus
+     was the one that suggested that one, the idea being that you can
+     have sinister music changes to play on the atmosphere during the game.
+<li> Of course, lots of bug fixes, this is the main point of this release.
+     I also fixed the long-text-string-in-dos-format-dehacked-file-in-wad
+     bug that was pissing me off :)
+</ul>
+Of course, once I release this version I'll be going on to other cool
+stuff, namely multiplayer. It will rock, say no more :)
+
+<br><br>
+<p align="right"><img src="img/newsbox.gif" border="0"> <b>5 Jan 2000</b><img src="img/newsbox2.gif" border="0"></p>
+<br><br>
+<b>Features, anyone?</b>
+<br><br>
+I'm planning on doing another small release in a week or so, seeing as
+FraggleScript dumbly seems to be missing some pretty basic stuff
+(opening doors springs to mind :). Anyway as well as that it should
+have some bug fixes from the previous version. Basically what I'm asking
+for is if anyone wants any _little_ features for me to put in (ie.
+FraggleScript functions etc) then <a href="mailto:fraggle@doomnation.com">
+email me</a> so I can try and fit them into the next release.
+<br><br>
+
+<p align="right"><img src="img/newsbox.gif" border="0"> <b>25 Dec 99</b><img src="img/newsbox2.gif" border="0"></p>
+<br><br>
+<b>Santa fraggle</b>
+<br><br>
+Hi, it's santa fraggle here bringing you a little stocking-filler for
+you to enjoy.. a new version of SMMU with a new menu and hubs support!
+Get the DOS binaries <a href="download/smmu-bin-3_21.zip"> here </a>
+or alternatively if you want to play with the sources or compile the
+linux version, get the sources <a href="download/smmu-src-3_21.zip">
+here </a>. Merry Christmas!
+<br><br>
+
+<p align="right"><img src="img/newsbox.gif" border="0"> <b>12 Dec 99</b><img src="img/newsbox2.gif" border="0"></p>
+<br><br>
+<b>SMMj00</b>
+<br><br>
+I thought I'd post <a href="img/news/sshot.gif">
+a screenshot</a> of my computer. An exclusive screenshot of SMMU under
+development.. or something. Heh is that pic schizophrenic. And before
+you ask, no, I'm not <a href="http://www.doomnation.com/" target="_top">
+on crack</a>.
+<br><br>
+
+<p align="right"><img src="img/newsbox.gif" border="0"> <b>9 Dec 99</b><img src="img/newsbox2.gif" border="0"></p>
+<br><br>
+<b>mmm.. hubs</b>
+<br><br>
+Well, hubs are almost done now, as is the menu. And I have to point out
+that the menu is going to be a <i>bit</i> different from the
+'traditional' menu. Featurewise, rather than in appearance, that is. 
+Here are some of the interesting (or not) features of the new menu:
+<ul>
+<li> WAD loading menu making use of the dynamic wad loading
+<li> Multiplayer menu allowing you to start serial/modem games and 
+     (in the future) internet games
+<li> 'Test framerate' option which compares your framerate during
+     a timedemo of demo2 against the framerate of a fast computer
+     (ie. mine)
+<li> Demo playback menu
+</ul>
+<br><br>
+So you can see, it has some interesting new options. This version of
+SMMU is almost finished, I think. I'll 'polish' it and then get round
+to releasing it in the not-too-distant future.
+
+<br><br>
+<p align="right"><img src="img/newsbox.gif" border="0"> <b>27 Nov 99</b><img src="img/newsbox2.gif" border="0"></p>
+<br><br>
+<b>Linux port</b>
+<br><br>
+I don't think I mentioned, but I'm doing a linux port of SMMU. Although
+my linux skills are hardly good, I've already got a working svgalib
+version. I'm currently using 'borrowed' code from cph's
+<a href="http://lxdoom.linuxgames.com/" target="_top">lxdoom</a>.
+The difference will be that instead of having 2 executables (which is
+how all linux ports seem to have gone about the problem of having
+the two display libraries of Xlib and svgalib) the linux port will have
+only one.
+<br><br>
+<b> Other SMMU stuff</b>
+<br><br>
+Among other SMMU news (well, no one comes here for anything else :)
+there is the news that I have started on hubs and have also got a
+significant way into rewriting the menu. I'm still waiting for Satori
+to do me the SMMU graphics but 
+<a href="mailto:umkiddel@cc.UManitoba.CA">Dave Kiddell</a> has sent me
+a new title for the text file.
+<br><br>
+
+<p align="right"><img src="img/newsbox.gif" border="0"> <b>14 Nov 99</b><img src="img/newsbox2.gif" border="0"></p>
+<br><br>
+<b>Stuff</b><br><br>
+Don't those banners just make you feel crushed? Well go there and buy
+whatever they want or something, i dunno. Anyway due to popular demand
+I have for you <a href="download/add_fs.zip">this</a> automatic
+program to load FraggleScript into wads, go check.
+<br><br>
+
+
+<p align="right"><img src="img/newsbox.gif" border="0"> <b>11 Nov 99</b><img src="img/newsbox2.gif" border="0"></p>
+<br><br>
+<b>Doomnation</b><br><br>
+Well, I finally decided to move to a real website hosting rather than that old xoomcrap. So here I am in
+my new home of doomnation. Thanks to ZyFly and Cyb for setting
+this up for me.
+<br><br>
+
+<p align="right">
+
+<img src="img/newsbox.gif" border="0"> <b>26 Oct 99</b> <img src="img/newsbox2.gif" border="0"></p>
+<br><br>
+<b>Hmm?</b><br><br>
+Well, what a great response to my release of SMMU. I haven't had
+<b>ONE</b> email about it since its release. However, it must have
+gained some attention as there are now two sites devoted to it and
+FraggleScript. I've also heard that <a href="mailto:haleyjd@okstate.edu">
+Quasar</a> is adding FraggleScript to his port eternity which will no doubt
+go somewhere toward increasing FraggleScript's popularity. The two
+tutorial sites are:
+<ul>
+<li> <a href = "http://smmuediting.cjb.net"> SMMU tutorials (Thomas Sturn)</a>
+	which also includes a port of FraggleScript to win32 and discusses
+	the possibility of a win32 port of SMMU itself
+<li> <a href = "http://smmu.frad.org/"> SMMU tutorials (prower)</a>
+</ul>
+<br><br>
+<b> Other pointless SMMU stuff</b><br><br>
+I have started working on the SMMU menu. I have abandoned the idea
+I previously mentioned (see previous update). I am instead adopting
+a more boom-style look. However the code is very generalised so it
+should be easy to change the look if neccesary. I am, however, 
+reorganising the menu, especially the options menu which has been
+split into several categories (it may be possible to have a 'classic
+option' to restore this if there is enough demand)
+<br><br>
+<b> Other pointless non-SMMU stuff </b><br><br>
+Check <a href="http://members.xoom.com/shuttle_game" target="_top">
+this</a> page which my brother made for his adventure game 'Shuttle'
+
+<br><br>
+
+<p align="right"><img src="img/newsbox.gif" border="0"> <b>18 Oct 99</b> <img src="img/newsbox2.gif" border="0"></p>
+<br><br>
+<b>SMMU woo!</b><br><br>
+If you've been attentive over the past few weeks you'll probably have
+noticed rumours of SMMU and FraggleScript floating around, not least
+of which was <a href="http://prower.frad.org/" target="_top">prower</a>'s 
+claim that it "owns his llama ass". Hmm. Anyway, I decided this is
+probably just about stable enough to release right now, so you can get
+it <a href="download/smmu.zip">here</a> (or the
+<a href="download/smmu-src.zip"> sources</a> of course).<br>
+This version contains already quite extensive FraggleScript ability
+already, although there are a few things i still need to do (doors
+for example :). Suffice to say it'll all be coming soon.<br>
+I want as much feedback as possible! The only bug that I currently
+know of is that the <b>idbeholda</b> cheat isn't work. Other than
+that, let me know!
+
+<br><br>
+<b>Whats with the menu?</b><br><br>
+If you download the above beta, you should probably notice that the
+menus are quite behind the rest of the game. The only way to set some
+options is by the console. I am planning a major menu re-write: I have
+an idea for a quite radical menu re-think although one that I think
+could be rather cool. There is a text file describing the proposed
+change <a href="new-menu.txt">here</a>. I originally designed the file
+for Satori to describe the new graphics i wanted but when I took
+another look at what I'd thought up, I reckoned it was probably a
+good idea to see what other people thought first. Anyway,
+<a href="mailto:sfraggle@sfrag.free-online.co.uk">let me know</a>
+if my idea is great(in which case I'll use it) or if it sucks(in which
+case I'll choose a more 'traditional' style).
+
+<p align="right"><img src="img/newsbox.gif" border="0"> <b>18 Sep 99</b> <img src="img/newsbox2.gif" border="0"></p>
+<br><br>
+<b>Clean slate</b><br><br>
+I've archived all the old news: Notepad was running out of memory on 
+the news file =). Anyway the most important thing I have to say is
+FRAGGLESCRIPT! Yes, I have started adding FraggleScript into SMMU
+and its almost finished I have to say. I just have a few minor things
+to add to the language itself and then add all the functions to it.
+Anyway I'm not going to release the actual version of SMMU containing
+it for a week or so, but you can download the <a href="img/news/start.fs">
+Level file</a> for the testbed level I'm using to develop and test it.
+I'm sure you'll agree it can already do some quite impressive stuff =).
+<br><br>
+<b>WADPTR stuff</b>
+<br><br>
+btw i forgot to mention <a href=
+"http://www.forwiss.tu-muenchen.de/~dehmel/DIY.html#wadptr">Andreas'
+Dehmel's website</a> where he's got versions of wadptr for sun, RISC-OS,
+etc. He's also done a bit more work on the source to make it faster,
+although I tested it under dos and it didnt work properly. I'll
+release the new sources and binaries once its stable again.
+
+
+</html>

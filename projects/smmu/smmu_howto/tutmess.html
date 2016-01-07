@@ -1,0 +1,64 @@
+<html>
+<body bgcolor="#000000" text="#FFFFFF" link="green" vlink="darkgreen" alink="lightgreen">
+<center><img src="title.gif"></center>
+
+<center><font size="+3">The Infamous Message</font></center>
+<br>
+<br>
+Want to make a message pop up that proudly displays your website's URL when the player enters your level?  Then get ready, cause here comes a message.<br>
+<br>
+We'll need a test environment for this one, again.  Since I'm a lazy bastard, we can re-use <a href="tutbas1.zip">Tutbas1.wad</a> in this example, except we won't do anything with the switch this time.<br>
+<br>
+Good news for those who dislike level editing: no need to even load an editor!  Making a start-up message is as simple as scripting, then importing it into SMMU.<br>
+<br>
+Even though it's not triggered by a linedef, we still need to give our script a unique number and set it off with [scripts].<br>
+<br>
+<tt>
+[scripts]<br>
+<br>
+script 99<br>
+<br>
+{<br>
+}<br>
+</tt>
+<br>
+Be forewarned, now that there is a script 99, any linedefs with tag #99 will trigger this script.  For our script, we can use the 'tip' and 'wait' functions to display a message, wait a given number of clocks, and then display another message.  For the wait function, we'll use 105 clocks, which is equivilent to a bit more than a second.  (Sorry for my earlier mistake that FS uses "tics".)<br>
+<br>
+<tt>
+[scripts]<br>
+<br>
+script 99<br>
+<br>
+{<br>
+<br>
+tip("SMMU Tutorials Page");<br>
+wait(105);<br>
+tip("http://smmu.frad.org/");<br>
+<br>
+}<br>
+<br>
+</tt>
+<br>
+Now that that's all done, how do we start it automagically when the level loads?  With the <i>startscript</i> function.<br>
+<br>
+<tt>
+[scripts]<br>
+<br>
+script 99<br>
+<br>
+{<br>
+<br>
+tip("SMMU Tutorials Page");<br>
+wait(105);<br>
+tip("http://smmu.frad.org/");<br>
+<br>
+}<br>
+<br>
+startscript(99);<br>
+<br>
+</tt>
+<br>
+Whee!  <a href="tutmess.fs">Our script</a> is done.  Now insert the script into your level (see <a href="tutbas2.html">Basic Script Implementation: Part Deux</a> for details) and load it up.  If all goes well, you should see the SMMU Tutorials Page being plugged as soon as you load <a href="tutmess.zip">the level</a>.<br>
+<br>
+</body>
+</html>

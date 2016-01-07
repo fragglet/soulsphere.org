@@ -1,0 +1,78 @@
+<html>
+<head> <title> Text mode doom </title>
+<meta name=viewport content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+
+<h1> Text Mode Doom </h1>
+
+<div style="float: right;">
+    <iframe width="400" height="280"
+            src="//www.youtube.com/embed/s15eJ9WMfVg?html5=1"
+	    frameborder="0" allowfullscreen></iframe>
+</div>
+
+One of the features of <a href="../">SMMU</a> is its text mode rendering
+feature.
+I used to have a different page here with
+some decent pictures but unfortunately it got lost. I took these 
+pictures with my digital camera so the quality isnt too good unfortunately:
+
+<ul>
+
+<li> <a href="0276_-_titlescreen.jpg">Doom II Titlescreen</a>
+<li> <a href="0279_-_imp.jpg">An Imp</a>
+<li> <a href="0281_-_hires.jpg">80x50 mode</a> is a bit clearer than
+     <a href="0282_-_lores.jpg">80x25 mode</a>
+<li> Some of the monsters come out better than others. 
+     This <a href="0283_-_demon.jpg">demon</a> is quite nice for example.
+<li> <a href="0284_-_romero.jpg">To win the game you must kill me..</a>
+</ul>
+
+<b> New! </b> A <a href="http://www.youtube.com/watch?v=s15eJ9WMfVg">video
+of SMMU in text mode</a> is available on Youtube. It can be viewed to the
+right.
+
+<h2> FAQ </h2>
+
+<ol>
+<li> 
+<b> What? </b> <br>
+This is Doom running in DOS text mode.
+<li> 
+<b> You mean like aalib? </b> <br>
+Well, not really. Aalib uses normal ascii characters. This uses the 
+extended ascii mode "gradient" characters. Also, aalib is mono only.
+This is in colour.
+<li>
+<b> How does it work? </b> <br>
+The engine renders into a 320x200 internal buffer like it would 
+normally. This then gets converted into either an 80x25 or 
+80x50 text mode display. The text colour is selected based on the
+hue of the colour (text mode has 16 different colours) and the
+gradient character to use is selected from the lightness value.
+<li>
+<b> How can I play this? </b> <br>
+First download <a href="../">SMMU</a>. 
+You need to use the DOS version, though. Then run like this: 
+<blockquote>
+<tt>smmu -textmode</tt>
+</blockquote>
+</ol>
+
+<b> WARNING </b> : The characters on the text mode screen have a tendency to
+blink and flash a lot. I have managed to give myself a headache after
+playing for a while. If you are epileptic or have some other condition where
+you may be affected by this then do _not_ play it. At the same time, you use
+this at your own risk. If you have a fit and die after playing my port, it's
+not my fault.
+</p>
+ 
+
+
+<hr>
+<a href="mailto:sdh300@removethistoemailme.zepler.net">Simon Howard</a>
+</body>
+</html>
+

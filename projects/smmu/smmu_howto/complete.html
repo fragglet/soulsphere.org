@@ -1,0 +1,131 @@
+<html>
+<body bgcolor="#000000" text="#FFFFFF" link="green" vlink="darkgreen" alink="lightgreen">
+<center><img src="title.gif"></center>
+
+<center><font size="+2">Complete Function List</font></center>
+<br>
+<i>For the syntax of each function, refer to the page of the function's type.</i><br>
+<br>
+<center><font size="+1">Standard functions</font></center>
+<br>
+<tt>
+break()                 -- jump out of current loop<br>
+continue()              -- jump to start of next loop<br>
+return()                -- exit script<br>
+goto(label)             -- jump to a label in the script<br>
+include(lump)           -- read the contents of a lump<br>
+<br>
+print(mess, mess, ...)  -- print a message to the console<br>
+rnd()                   -- return a random number from 0 to 255<br>
+beep()                  -- make a beeping sound<br>
+clock()                 -- get the current time (100 clocks = 1 second)<br>
+wait(n)                 -- delay for n clocks<br>
+startscript(scriptnum)  -- start off a new instance of a script<br>
+</tt>
+<br>
+<br>
+<center><font size="+1">Player-Related Functions</font></center><br>
+<br>
+<br>
+<tt>
+consoleplayer    [variable]    -- player controlled from this computer<br>
+displayplayer    [variable]    -- player being viewed<br>
+playerobj([player])            -- the mobj controlled by a player<br>
+playername([player])           -- players name<br>
+playermsg(player, mess, ...)   -- message to a particular player<br>
+playertip(player, mess, ...)   -- centremsg to certain player<br>
+playeringame(player)           -- player in game?<br>
+</tt>
+<br>
+<br>
+<center><font size="+1">Sector-Related Functions</font></center><br>
+<br>
+<br>
+<tt>
+floorheight(sectag)            -- get floor height of sector<br>
+floorheight(sectag, newval)    -- set floor height<br>
+movefloor(sectag, newheight, [speed])<br>
+                               -- gradual move floor height<br>
+floortext(sectag)              -- floor texture in sector<br>
+floortext(sectag, newtexture)  -- set floor texture<br>
+<br>
+ceilheight(sectag)             -- get ceiling height of sector<br>
+ceilheight(sectag, newval)     -- set ceiling height<br>
+moveceil(sectag, newheight, [speed])<br>
+                               -- gradual move ceiling<br>
+ceiltext(sectag)               -- get texture of ceiling<br>
+ceiltext(sectag, newval)       -- set texture of ceiling<br>
+<br>
+lightlevel(sectag) -- get lightlevel<br>
+lightlevel(sectag, newval)     -- set lightlevel<br>
+fadelight(sectag, newval, [speed]) -- fade lightlevel to new value<br>
+</tt>
+<br>
+The following are promised to be implemented in later versions of SMMU:<br>
+<br>
+<tt>
+special                       -- get/set special sector type<br>
+friction                      -- get/set sector friction<br>
+colormap                      -- get/set sector colormap<br>
+</tt>
+<br>
+<br>
+<center><font size="+1">Thing-Related Functions</font></center><br>
+<br>
+<br>
+<tt>
+trigger   [variable]       -- object which triggered script<br>
+spawn(type,x,y,[angle])    -- spawn object<br>
+removeobj(obj)             -- remove object<br>
+kill([obj])                -- kill object<br>
+teleport([obj], tag)       -- teleport object<br>
+silentteleport([obj], tag) -- silent teleport object<br>
+player([obj])              -- playernum of mobj's controlling player<br>
+damageobj([obj])           -- damage an object<br>
+objsector([obj])           -- sector tag of sector object is in<br>
+objflags(flagnum)          -- get flagnum of trigger object<br>
+objflags(obj, flagnum)     -- get flagnum of object<br>
+objflags(obj, flagnum, newval) -- set flag of obj<br>
+objhealth([obj])           -- object health<br>
+objangle([obj])            -- angle a thing is facing<br>
+objx([obj])                -- x co-ordinate of thing<br>
+objy([obj])                -- y co-ordinate of thing<br>
+objz([obj])                -- z co-ordinate of thing<br>
+pushobj(obj, angle, force) -- apply momentum to a thing<br>
+</tt>
+<br>
+<br>
+<center><font size="+1">Miscellaneous Functions</font></center><br>
+<br>
+<br>
+<tt>
+Messages:<br>
+<br>
+tip(mess, mess, ...)       -- centre-of-screen message<br>
+message(mess,mess,..)      -- normal message<br>
+<br>
+Cameras:<br>
+<br>
+setcamera(obj,[angle])     -- switch to an alternative camera view<br>
+clearcamera()              -- switch off camera<br>
+<br>
+Levels:<br>
+<br>
+exitlevel()                -- same as console command<br>
+<br>
+Sounds:<br>
+<br>
+startsound(thing, lump)    -- start sound at a thing<br>
+startsectorsound(sectag, lump) -- start sound in sector<br>
+<br>
+Mathematical Functions:<br>
+<br>
+pointtoangle(x1,y1,x2,y2)  -- angle of one position from another<br>
+pointtodist(x1,y1,x2,y2)   -- distance between two points<br>
+<br>
+Other:<br>
+<br>
+zoom     [variable]        -- zoom in<br>
+<br>
+</body>
+</html>

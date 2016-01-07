@@ -1,0 +1,112 @@
+<html>
+<body bgcolor="#000000" text="#FFFFFF" link="green" vlink="darkgreen" alink="lightgreen">
+<center><img src="title.gif"></center>
+
+<center><font size="+3">Basic SMMU Functions</font></center>
+<br>
+<br>
+
+<i>Break</i> - breaks out of the current loop.<br>
+<br>
+<pre><tt>
+script 0
+  {
+    for(x=0, x<10, x++)
+      {
+        if(x==5) break();
+      }
+  }
+</pre></tt>
+
+<i>Continue</i> - continues to next loop.<br>
+<br>
+Not sure of how this one is used.<br>
+<br>
+<i>Return - exits a script.</i><br>
+<br>
+<pre><tt>
+script 0
+  {
+    if(switch_is_activated)
+      {
+        if(floor_is_raised) return();
+      }
+  }
+</pre></tt>
+<br>
+<i>Goto</i> - the infamous goto statement.  Goes to a label in the file.<br>
+<br>
+<pre><tt>
+:john
+
+script 0
+  {
+    if(jake) goto(john);
+  }
+</tt></pre>
+<br>
+<i>Include</i> - uses a header file.<br>
+<br>
+<pre><tt>
+include("things.h");
+
+script 0
+  ...
+</tt></pre>
+<br>
+<i>Print</i> - prints a message to the console.<br>
+<br>
+<pre><tt>
+script 0
+  {
+    print("I know what you did last summer");
+  }
+</tt></pre>
+<br>
+<i>Rnd</i> - produces a random number, 1-100.<br>
+<br>
+<pre><tt>
+script 0
+  {
+    x = rnd();
+  }
+</tt></pre>
+<br>
+<i>Beep</i> - makes a beeping sound.<br>
+<br>
+<pre><tt>
+script 0
+  {
+    tip("Beep beep!");
+    beep();
+  }
+</tt></pre>
+<br>
+<i>Clock</i> - get the current time in a script.<br>
+<br>
+Not sure how to use this one.<br>
+<br>
+<i>Wait</i> - waits a given number of clocks.  100 clocks in one second.<br>
+<br>
+<pre><tt>
+script 0
+  {
+    tip("Hi!");
+    wait(300);
+    tip("Yo!");
+  }
+</tt></pre>
+<br>
+<i>Startscript</i> - Starts a new instance of a script.<br>
+<br>
+<pre><tt>
+script 3
+  {
+    tip("Heya!");
+  }
+
+startscript(3);
+</tt></pre>
+<br>
+</body>
+</html>
