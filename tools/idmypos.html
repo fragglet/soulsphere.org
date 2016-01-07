@@ -1,0 +1,139 @@
+<html>
+<!--
+
+  Copyright(C) 2014 Simon Howard
+
+  Permission to use, copy, modify, and/or distribute this software for any
+  purpose with or without fee is hereby granted, provided that the above
+  copyright notice and this permission notice appear in all copies.
+
+  THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+  WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+  MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY
+  SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+  WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+  ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR
+  IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+
+-->
+
+<head>
+  <title>IDMYPOS decoder</title>
+</head>
+<body>
+  <h1> IDMYPOS decoder </h1>
+  Decode the mysterious gibberish output from the Doom
+  <a href="http://doomwiki.org/wiki/Doom_cheat_codes">IDMYPOS
+  cheat code</a>.
+  <p>
+  IDMYPOS output looks like this:
+  <blockquote>
+    <tt>ANG=0x2E800000;X,Y=(0xFF767AF8,0xFD2A88C8)</tt>
+  </blockquote>
+  <form action="javascript:calculate();">
+  <table>
+    <tr>
+    <td><b>ANG=</b>
+    <td><input type="text" name="ang">
+    <tr>
+    <td><b>X=</b>
+    <td><input type="text" name="x">
+    <tr>
+    <td><b>Y=</b>
+    <td><input type="text" name="y">
+    <tr>
+    <td>
+    <td><input type="button" onclick="javascript:calculate();"
+               value="Decode!">
+  </table>
+  </form>
+  <div id="result_pos"></div>
+  <div id="result_ang"></div>
+
+  <script language="JavaScript">
+    var INT_MAX = 65536 * 65536;
+    var DIRECTIONS = [
+      "East", "North-East", "North", "North-West",
+      "West", "South-West", "South", "South-East",
+    ];
+
+    // Read a form field, decode a hex value and return the integer
+    // that was entered, or null if none could be understood.
+    function decode_field_hex(name) {
+      var value = document.forms[0][name].value;
+      var match = value.match(/^(0x)?([0-9a-f]+)/i)
+      if (!match) {
+        return null;
+      }
+      return parseInt(match[2], 16);
+    }
+
+    // Read a form field, decode a hex value and and return a signed
+    // integer, based on the top bit (or null).
+    function decode_signed_hex(name) {
+      var result = decode_field_hex(name);
+
+      if (result == null) {
+        return result;
+      }
+
+      if ((result & 0x80000000) != 0) {
+        result = ~result + 1;
+      }
+
+      return result;
+    }
+
+    // Calculate the player position from the X and Y fields, and
+    // fill in 'result_pos' div accordingly.
+    function calculate_pos() {
+      var result_div = document.getElementById("result_pos");
+      result_div.innerHTML = "";
+
+      var x = decode_signed_hex("x"), y = decode_signed_hex("y");
+      var xStr = "?", yStr = "?";
+
+      if (x != null) {
+        xStr = (x / 65536).toFixed(2);
+      }
+
+      if (y != null) {
+        yStr = (y / 65536).toFixed(2);
+      }
+
+      result_div.appendChild(
+          document.createTextNode("Player position: " +
+                                  xStr + ", " + yStr));
+    }
+
+    // Given an angle in degrees, describe the direction in a human-
+    // understandable form.
+    function describe_direction(angle) {
+      angle = (angle + 22.5) % 360;
+      var direction = Math.floor(angle / 45);
+      return DIRECTIONS[direction];
+    }
+
+    // Calculate the player position from the ANG field and fill
+    // in 'result_ang' accordingly.
+    function calculate_ang() {
+      var result_div = document.getElementById("result_ang");
+      result_div.innerHTML = "";
+
+      var ang = decode_field_hex("ang");
+      if (ang != null) {
+        var degrees = (ang / INT_MAX) * 360;
+        var label = "Player direction: " + degrees.toFixed(2) + " degrees " +
+	            "(" + describe_direction(degrees) + ")";
+        result_div.appendChild(document.createTextNode(label));
+      }
+    }
+
+    // Decode fields. Invoked by button press.
+    function calculate() {
+      calculate_pos();
+      calculate_ang();
+    }
+  </script>
+</body>
+</html>

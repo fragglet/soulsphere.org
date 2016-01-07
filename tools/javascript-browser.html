@@ -1,0 +1,113 @@
+
+<script language="javascript">
+
+/*
+
+  Copyright(C) 2005 Simon Howard
+
+  Permission to use, copy, modify, and/or distribute this software for any
+  purpose with or without fee is hereby granted, provided that the above
+  copyright notice and this permission notice appear in all copies.
+
+  THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+  WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+  MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY
+  SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+  WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+  ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR
+  IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+
+*/
+
+
+function js_browser() {
+
+function find_search_term(href)
+{
+    var index = href.indexOf("q=")
+
+    if (index < 0) {
+        return "window"
+    } else {
+        return href.substr(index+2)
+    }
+}
+
+function find_list_object(path)
+{
+    var obj = window
+    for (var i = 0; i<path.length; i++) {
+        obj = obj[path[i]]
+    }
+    return obj
+}
+
+function print_path(path)
+{
+    var i
+
+    for (i=0; i<path.length; ++i) {
+        var pathname = path.slice(0, i+1).join(".")
+        document.write("<a href=\"?q=" + pathname + "\">")
+        document.write(path[i])
+        document.write("</a>")
+        if (i < path.length-1) {
+            document.write(".")
+        }
+    }
+}
+
+document.writeln("<h1>Javascript browser</h1>")
+
+var search = find_search_term(document.location.href)
+
+var path = search.split('.')
+
+if (document.location.href.indexOf("q=") < 0) {
+    document.writeln("<h4>");
+    document.writeln("This page allows you to browse the variables within");
+    document.writeln("your global Javascript context. Click an object to ");
+    document.writeln("list the variables in that object.");
+    document.writeln("</h4>");
+}
+
+document.write("Listing for ")
+print_path(path)
+document.write(":<p>")
+
+var obj = find_list_object(path)
+
+document.writeln("<table border=2>")
+document.writeln("<tr><th>Name</th><th>Type</th><th>Value</th>")
+
+for (var name in obj) {
+
+    if (name == "js_browser")
+        continue
+
+    document.writeln("<tr>")
+
+    var value = obj[name]
+
+    document.write("<td>")
+    if (typeof(value) == "object") {
+        document.write("<a href=\"?q=" + path.join('.') + "." + name + "\">")
+        document.write(name)
+        document.write("</a>")
+    } else {
+        document.write(name)
+    }
+    document.write("</td>")
+
+    document.writeln("<td>" + typeof(obj[name]) + "</td>")
+    document.writeln("<td>" + obj[name] + "</td>")
+    document.writeln("</tr>")
+}
+document.writeln("</table")
+
+}
+
+js_browser()
+
+</script>
+
