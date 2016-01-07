@@ -1,0 +1,48 @@
+<html>
+<head>
+<title> Logging with ircd-hybrid </title>
+</head>
+
+<body>
+
+<h1> Logging with ircd-hybrid </h1>
+
+This is a patch for <a href="http://www.ircd-hybrid.org/">ircd-hybrid</a>
+to add full logging of almost all activity. It dumps all conversations 
+(both private and public) and connections/disconnections to the server
+ to a file, <i>activity.log</i>. 
+
+<ul>
+<li> <a href="logging_patch">logging_patch</a>. This is against ircd-hybrid
+	7.0.
+<li> <a href="splitlog">splitlog script</a>. This is a ruby script which takes
+	the generated logs and splits them into hyperlinked HTML files, 
+	allowing the information and conversations from the log to be browsed
+	via a web browser.
+
+</ul> 
+
+<h3> Notes </h3>
+
+<ul>
+<li> <tt>src/s_log.c</tt> contains the line: 
+
+	<blockquote><tt>
+	fflush(activity_log_file);
+	</tt></blockquote>
+
+     This flushes the log file after every line written to the log file.
+     This allows you to view the log in real time with <tt>tail -f</tt>. 
+     For higher performance you might want to comment this out.
+
+<li> This has not been tested under high load. 
+</ul>
+
+<hr>
+
+<a href="mailto:fraggle@removethistoemailme.gmail.com">Simon Howard</a>
+
+</body>
+
+</html>
+

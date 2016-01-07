@@ -1,0 +1,153 @@
+/* Decompiled by Mocha from Board.class */
+/* Originally compiled from LifeApplet.java */
+
+import java.awt.*;
+import java.io.*;
+import java.net.URL;
+
+synchronized class Board extends Canvas
+{
+    public static final int cellsize = 8;
+    protected int xcells;
+    protected int ycells;
+    protected Color board[][];
+
+    public Board(int i, int j)
+    {
+        board = new Color[i][j];
+        xcells = i;
+        ycells = j;
+        setSize(xcells * 8 + 1, ycells * 8 + 1);
+        addMouseListener(new Board$1(this));
+    }
+
+    public Board()
+    {
+        this(8, 8);
+    }
+
+    public boolean cellAlive(int i, int j)
+    {
+        if (i < 0 || j < 0 || i >= xcells || j >= ycells)
+            return false;
+        else
+            return board[i][j] != null;
+    }
+
+    public void setCell(int i, int j, Color color)
+    {
+        if (i < 0 || j < 0 || i >= xcells || j >= ycells)
+            return;
+        board[i][j] = color;
+    }
+
+    public void toggleCell(int i, int j)
+    {
+        if (i < 0 || j < 0 || i >= xcells || j >= ycells)
+            return;
+        board[i][j] = (board[i][j] == null) ? Color.red : ((board[i][j] == Color.red) ? Color.blue : null);
+    }
+
+    public int cellNeighbours(int i1, int j1)
+    {
+        if (i1 < 0 || j1 < 0 || i1 >= xcells || j1 >= ycells)
+            return 0;
+        int k = 0;
+        for (int i2 = -1; i2 <= 1; i2++)
+            for (int j2 = -1; j2 <= 1; j2++)
+                if ((i2 != 0 || j2 != 0) && cellAlive(i1 + i2, j1 + j2))
+                    k++;
+        return k;
+    }
+
+    public void paint(Graphics g)
+    {
+        for (int i = 0; i < xcells; i++)
+        {
+            for (int j = 0; j < ycells; j++)
+            {
+                if (board[i][j] == null)
+                {
+                    g.setColor(Color.black);
+                    g.clearRect(i * 8, j * 8, 8, 8);
+                    g.drawRect(i * 8, j * 8, 8, 8);
+                }
+                else
+                {
+                    g.setColor(board[i][j]);
+                    g.fillRect(i * 8, j * 8, 8, 8);
+                }
+            }
+        }
+    }
+
+    public void refresh()
+    {
+        Graphics g = getGraphics();
+        paint(g);
+    }
+
+    public void randomize()
+    {
+        for (int i = 0; i < xcells; i++)
+        {
+            for (int j = 0; j < ycells; j++)
+            {
+                if (Math.random() < 0.2)
+                    board[i][j] = new Color((int)(Math.random() * 255.0), (int)(Math.random() * 255.0), (int)(Math.random() * 255.0));
+                else
+                    board[i][j] = null;
+            }
+        }
+        repaint();
+    }
+
+    public void clear()
+    {
+        for (int i = 0; i < xcells; i++)
+            for (int j = 0; j < ycells; j++)
+                board[i][j] = null;
+        repaint();
+    }
+
+    public void loadBoard(URL uRL)
+    {
+        BufferedReader bufferedReader;
+        String string;
+        int i;
+        int j;
+        clear();
+        try
+        {
+            IOException e;
+            bufferedReader = new BufferedReader(new InputStreamReader(uRL.openStream()));
+            i = 0;
+        }
+        catch ()
+        {
+            return;
+        }
+        string = bufferedReader.readLine();
+        pop j
+        if (string != null) goto 54 else 222;
+        if (string.charAt(0) != 35) goto 67 else 34;
+        for (j = 0; j < string.length(); j++)
+        {
+            char ch = string.charAt(j);
+            if (ch == 49)
+                setCell(j, i, Color.red);
+            else if (ch == 50)
+                setCell(j, i, Color.blue);
+            else if (ch == 51)
+                setCell(j, i, Color.green);
+            else if (ch == 52)
+                setCell(j, i, Color.magenta);
+            else if (ch == 53)
+                setCell(j, i, Color.cyan);
+            else if (ch == 54)
+                setCell(j, i, Color.yellow);
+        }
+        i++;
+        repaint();
+    }
+}

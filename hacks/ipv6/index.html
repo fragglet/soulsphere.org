@@ -1,0 +1,75 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+ "http://www.w3.org/TR/REC-html40/loose.dtd"> 
+
+<html>
+
+<head> <title> IPv6 patches </title>
+
+<body>
+
+<h1>IPv6 Patches</h1>
+
+<p> 
+
+I worked as a Research Assistant at <a href="http://www.ecs.soton.ac.uk/">
+ECS, University of Southampton</a> over Summer 2003, with a focus on porting
+games to IPv6. This was part of the 
+<a href="http://www.6net.org/">6net project</a>. These are some patches to 
+provide IPv6 support for various projects.
+
+<h2>SDL_net</h2>
+
+<p>
+I have been working on porting 
+<a href="http://www.libsdl.org/projects/SDL_net/">SDL_net</a> to support
+IPv6. SDL_net is a library aiming to provide networking support in an
+abstracted cross-platform manner.  SDL_net was been designed, however,
+to be oriented only toward IPv4. 
+<p>
+
+I have modified the API to SDL_net in a way that supports both IPv4 and
+IPv6. Unfortunately this means that the new version of SDL_net is 
+not API-compatible with the previous version. I have written a
+<a href="newapi.html">porting guide</a> which summarises the changes.
+
+<p>
+
+Here is a <a href="sdlnet_diff">patch</a> to SDL_net-1.2.5 containing 
+my changes.
+
+<h2> Sopwith </h2>
+
+Code to support the new version of SDL_net including IPv6 support is 
+now in <a href="http://sdl-sopwith.sf.net/">Sopwith</a> CVS (see
+sopwith/src/sdl/tcpcomm.c)
+
+<h2> PrBoom </h2>
+
+I have <a href="http://prboom.sf.net/">PrBoom</a> running over the 
+new version of SDL_net. It needs some more work, however. Patches 
+soon.
+
+<h2> Scorched3D </h2>
+
+<a href="http://www.scorched3d.co.uk/">Scorched-3D</a> is a clone of
+"Scorched Earth". This also uses SDL_net. <a href="scorched_diff">patch</a>.
+
+<h2> Irmo </h2>
+
+<a href="http://irmo.sf.net/">Irmo</a> now includes proper IPv6 support.
+
+<p>
+
+<h2> Awstats </h2>
+
+<a href="awstats_v6_diff">this patch</a> adds an extra graph to awstats which
+displays bandwidth used by IPv4 against IPv6 hosts.
+
+<hr>
+
+<a href="mailto:sdh300@removethistoemailme.zepler.net">Simon Howard</a>
+
+</body>
+
+</html>
+

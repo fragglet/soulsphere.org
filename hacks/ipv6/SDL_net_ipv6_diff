@@ -1,0 +1,852 @@
+diff -u -r SDL_net-1.2.5-orig/SDL_net-1.2.5/SDL_net.h SDL_net-1.2.5/SDL_net.h
+--- SDL_net-1.2.5-orig/SDL_net-1.2.5/SDL_net.h	Mon Feb 10 00:33:26 2003
++++ SDL_net-1.2.5/SDL_net.h	Wed Jul 23 15:56:52 2003
+@@ -47,11 +47,36 @@
+ /* IPv4 hostname resolution API                                        */
+ /***********************************************************************/
+ 
++typedef enum {
++	SDLNET_IPV4,
++	SDLNET_IPV6,
++} SDLNet_AddrType;		
++	
+ typedef struct {
+-	Uint32 host;			/* 32-bit IPv4 host address */
++	SDLNet_AddrType type;
+ 	Uint16 port;			/* 16-bit protocol port */
++	Uint8 padding[16];
+ } IPaddress;
+ 
++typedef struct {
++	SDLNet_AddrType type;           /* should always be SDLNET_IPV4 */
++	Uint16 port;
++	Uint32 host;
++} IPaddress4;
++
++typedef struct {
++	SDLNet_AddrType type;           /* should always be SDLNET_IPV6 */
++	Uint16 port;
++	union {
++		Uint8 i8[16];
++		Uint16 i16[8];
++		Uint32 i32[4];
++	} host;
++} IPaddress6;
++
++#define IP_ADDRESS4(x) ((IPaddress4 *) (x))
++#define IP_ADDRESS6(x) ((IPaddress6 *) (x))
++	
+ /* Resolve a host name and port to an IP address in network form.
+    If the function succeeds, it will return 0.
+    If the host couldn't be resolved, the host portion of the returned
+@@ -76,22 +101,37 @@
+ */
+ extern DECLSPEC const char * SDLCALL SDLNet_ResolveIP(IPaddress *ip);
+ 
++/* Convert an IP to a string for presentation, address family independent */
++
++extern DECLSPEC const char * SDLCALL SDLNet_PresentIP(IPaddress *ip);
++	
++/* Compare two address structures. Returns 0 if the two addresses
++   are the same.
++ */
+ 
++extern DECLSPEC int SDLCALL SDLNet_IPaddress_cmp(IPaddress *a, IPaddress *b);
++
++	
+ /***********************************************************************/
+ /* TCP network API                                                     */
+ /***********************************************************************/
+ 
+ typedef struct _TCPsocket *TCPsocket;
+ 
+-/* Open a TCP network socket
+-   If ip.host is INADDR_NONE or INADDR_ANY, this creates a local server
+-   socket on the given port, otherwise a TCP connection to the remote
+-   host and port is attempted. The address passed in should already be
+-   swapped to network byte order (addresses returned from 
+-   SDLNet_ResolveHost() are already in the correct form).
++/* Open a TCP network socket connection to a remote host
++   The address passed in should already be swapped to network byte order
++   (addresses returned from SDLNet_ResolveHost() are already in the
++   correct form).
+    The newly created socket is returned, or NULL if there was an error.
+ */
+-extern DECLSPEC TCPsocket SDLCALL SDLNet_TCP_Open(IPaddress *ip);
++extern DECLSPEC TCPsocket SDLCALL SDLNet_TCP_Connect(IPaddress *ip);
++
++/* Open a TCP server socket listening on a specified port. The port
++   is given in native byte order.
++ */
++
++extern DECLSPEC TCPsocket SDLCALL SDLNet_TCP_Open(SDLNet_AddrType type,
++						  int port);
+ 
+ /* Accept an incoming connection on the given server socket.
+    The newly created socket is returned, or NULL if there was an error.
+@@ -163,7 +203,8 @@
+    internally in network (big endian) byte order, in addresses, etc.
+    This allows other systems to send to this socket via a known port.
+ */
+-extern DECLSPEC UDPsocket SDLCALL SDLNet_UDP_Open(Uint16 port);
++extern DECLSPEC UDPsocket SDLCALL SDLNet_UDP_Open(SDLNet_AddrType type,
++						  Uint16 port);
+ 
+ /* Bind the address 'address' to the requested channel on the UDP socket.
+    If the channel is -1, then the first unbound channel will be bound with
+diff -u -r SDL_net-1.2.5-orig/SDL_net-1.2.5/SDLnet.c SDL_net-1.2.5/SDLnet.c
+--- SDL_net-1.2.5-orig/SDL_net-1.2.5/SDLnet.c	Fri Mar  7 08:01:23 2003
++++ SDL_net-1.2.5/SDLnet.c	Wed Jul 23 16:04:34 2003
+@@ -308,31 +308,160 @@
+ 	}
+ }
+ 
++int SDLNet_AddrType_to_family(SDLNet_AddrType type)
++{
++	switch (type) {
++	case SDLNET_IPV4:
++		return AF_INET;
++#ifdef USE_IPV6
++	case SDLNET_IPV6:
++		return AF_INET6;
++#endif
++	default:
++		return -1;
++	}
++}
++
++int SDLNet_IPaddress_cmp(IPaddress *a, IPaddress *b)
++{
++	if (a->type != b->type || a->port != b->port)
++		return 1;
++
++	switch (a->type) {
++#ifdef USE_IPV6
++	case SDLNET_IPV6:
++		return memcmp(&IP_ADDRESS6(a)->host,
++			      &IP_ADDRESS6(b)->host,
++			      sizeof(IP_ADDRESS6(a)->host));
++#endif
++	case SDLNET_IPV4:
++		return IP_ADDRESS4(a)->host != IP_ADDRESS4(b)->host;
++
++	default:
++		return 0;
++	}
++		
++}
++
++void SDLNet_sockaddr_to_IPaddress(struct sockaddr *in, IPaddress *out)
++{
++	switch (in->sa_family) {
++	case AF_INET: {
++		struct sockaddr_in *addr = (struct sockaddr_in *) in;
++		
++		out->type = SDLNET_IPV4;
++		out->port = addr->sin_port;
++		IP_ADDRESS4(out)->host = addr->sin_addr.s_addr;
++		
++		break;
++	}
++		
++#ifdef USE_IPV6
++	case AF_INET6: {
++		struct sockaddr_in6 *addr = (struct sockaddr_in6 *) in;
++		
++		out->type = SDLNET_IPV6;
++		out->port = addr->sin6_port;
++		memcpy(&IP_ADDRESS6(out)->host, &addr->sin6_addr.in6_u,
++		       sizeof(IP_ADDRESS6(out)->host));
++		break;
++	}
++#endif
++	default:
++		fprintf(stderr,
++			"SDLNet_sockaddr_to_IPaddress: Warning: unknown "
++			"address family\n");
++		break;
++	}
++}
++
++void SDLNet_IPaddress_to_sockaddr(IPaddress *in, struct sockaddr *out)
++{
++	switch (in->type) {
++	case SDLNET_IPV4: {
++		struct sockaddr_in *addr = (struct sockaddr_in *) out;
++		memset(addr, 0, sizeof(*addr));
++		addr->sin_family = AF_INET;
++		addr->sin_port = in->port;
++		addr->sin_addr.s_addr = IP_ADDRESS4(in)->host;
++		break;
++	}
++#ifdef USE_IPV6
++	case SDLNET_IPV6: {
++		struct sockaddr_in6 *addr = (struct sockaddr_in6 *) out;
++		memset(addr, 0, sizeof(*addr));
++		addr->sin6_family = AF_INET6;
++		addr->sin6_port = in->port;
++		memcpy(&addr->sin6_addr.in6_u, &IP_ADDRESS6(in)->host,
++		       sizeof(IP_ADDRESS6(in)->host));
++		break;
++	}
++#endif
++	default:
++		fprintf(stderr,
++			"SDLNet_IPaddress_to_sockaddr: Warning: unknown "
++			"address type\n");
++		break;
++	}
++}
++
+ /* Resolve a host name and port to an IP address in network form */
+ int SDLNet_ResolveHost(IPaddress *address, const char *host, Uint16 port)
+ {
+-	int retval = 0;
++	int retval;
++	
++	if (host == NULL) {
++		address->type = SDLNET_IPV4;
++		address->port = SDL_SwapBE16(port);
++		IP_ADDRESS4(address)->host = INADDR_ANY;
++
++		return 0;
++	}
++	
++#ifdef USE_IPV6
++	{
++		struct addrinfo *addrinfo;
++		struct addrinfo hints;
++
++		hints.ai_family = PF_INET6;
++		hints.ai_flags = 0;
++		hints.ai_socktype = SOCK_STREAM;
++		hints.ai_protocol = 0;
++	
++		retval = getaddrinfo(host, "0", &hints, &addrinfo);
++		
++		if (retval == 0 && addrinfo) {
++			SDLNet_sockaddr_to_IPaddress(addrinfo->ai_addr,
++						     address);
++			address->port = SDL_SwapBE16(port);
++			freeaddrinfo(addrinfo);
++			return 0;
++		}
++	}
++
++#endif /* USE_IPV6 */
+ 
+ 	/* Perform the actual host resolution */
+-	if ( host == NULL ) {
+-		address->host = INADDR_ANY;
+-	} else {
+-		address->host = inet_addr(host);
+-		if ( address->host == INADDR_NONE ) {
+-			struct hostent *hp;
+-
+-			hp = gethostbyname(host);
+-			if ( hp ) {
+-				memcpy(&address->host,hp->h_addr,hp->h_length);
+-			} else {
+-				retval = -1;
+-			}
++
++	IP_ADDRESS4(address)->host = inet_addr(host);
++
++	if ( IP_ADDRESS4(address)->host == INADDR_NONE ) {
++		struct hostent *hp;
++		
++		hp = gethostbyname(host);
++		if ( hp ) {
++			memcpy(&IP_ADDRESS4(address)->host,
++			       hp->h_addr, hp->h_length);
++			
++		} else {
++			return -1;
+ 		}
+ 	}
+-	address->port = SDL_SwapBE16(port);
+ 
+-	/* Return the status */
+-	return(retval);
++	address->type = SDLNET_IPV4;
++	address->port = SDL_SwapBE16(port);	
++	
++	return 0;
+ }
+ 
+ /* Resolve an ip address to a host name in canonical form.
+@@ -344,17 +473,54 @@
+  * Main Programmer of Arianne RPG.
+  * http://come.to/arianne_rpg
+  */
++
+ const char *SDLNet_ResolveIP(IPaddress *ip)
+ {
+ 	struct hostent *hp;
+ 
+-	hp = gethostbyaddr((char *)&ip->host, 4, AF_INET);
++	if (ip->type == SDLNET_IPV4) {
++		hp = gethostbyaddr((char *)&IP_ADDRESS4(ip)->host,
++				   sizeof(IP_ADDRESS4(ip)->host), AF_INET);
++#ifdef USE_IPV6
++	} else if (ip->type == SDLNET_IPV6) {
++		hp = gethostbyaddr((char *) &IP_ADDRESS6(ip)->host,
++				   sizeof(IP_ADDRESS6(ip)->host), AF_INET6);
++#endif
++	} else {
++		return NULL;
++	}
++	
+ 	if ( hp != NULL ) {
+ 		return hp->h_name;
+ 	}
+   	return NULL;
+ }
+ 
++const char *SDLNet_PresentIP(IPaddress *ip)
++{
++	switch (ip->type) {
++	case SDLNET_IPV4: {
++		struct in_addr in;
++
++		in.s_addr = IP_ADDRESS4(ip)->host;
++		
++		return inet_ntoa(in);
++	}
++#ifdef USE_IPV6
++	case SDLNET_IPV6: {
++		// static buffer is ok since it is bigger than any
++		// possible IPv6 address
++		
++		static char hostname[64];
++
++		return inet_ntop(AF_INET6, &IP_ADDRESS6(ip)->host,
++				 hostname, sizeof(hostname)-1);
++	}
++#endif
++	}
++}
++       
++
+ #endif /* MACOS_OPENTRANSPORT */
+ 
+ #if !SDL_DATA_ALIGNED /* function versions for binary compatibility */
+diff -u -r SDL_net-1.2.5-orig/SDL_net-1.2.5/SDLnetTCP.c SDL_net-1.2.5/SDLnetTCP.c
+--- SDL_net-1.2.5-orig/SDL_net-1.2.5/SDLnetTCP.c	Sat Apr 13 15:50:37 2002
++++ SDL_net-1.2.5/SDLnetTCP.c	Fri Jul 18 16:04:16 2003
+@@ -690,15 +690,13 @@
+ 	int sflag;
+ };
+ 
+-/* Open a TCP network socket
+-   If 'remote' is NULL, this creates a local server socket on the given port,
+-   otherwise a TCP connection to the remote host and port is attempted.
+-   The newly created socket is returned, or NULL if there was an error.
+-*/
+-TCPsocket SDLNet_TCP_Open(IPaddress *ip)
++/* Open a TCP connection to a remote machine */
++
++TCPsocket SDLNet_TCP_Connect(IPaddress *ip)
+ {
++	sockaddr_max sock_addr;
++	int family;
+ 	TCPsocket sock;
+-	struct sockaddr_in sock_addr;
+ 
+ 	/* Allocate a TCP socket structure */
+ 	sock = (TCPsocket)malloc(sizeof(*sock));
+@@ -707,83 +705,142 @@
+ 		goto error_return;
+ 	}
+ 
++	family = SDLNet_AddrType_to_family(ip->type);
++
+ 	/* Open the socket */
+-	sock->channel = socket(AF_INET, SOCK_STREAM, 0);
++	sock->channel = socket(family, SOCK_STREAM, 0);
+ 	if ( sock->channel == INVALID_SOCKET ) {
+ 		SDLNet_SetError("Couldn't create socket");
+ 		goto error_return;
+ 	}
+ 
+-	/* Connect to remote, or bind locally, as appropriate */
+-	if ( (ip->host != INADDR_NONE) && (ip->host != INADDR_ANY) ) {
++	SDLNet_IPaddress_to_sockaddr(ip,
++				     (struct sockaddr *) &sock_addr);
++	
++	/* Connect to the remote host */
++	if ( connect(sock->channel, (struct sockaddr *)&sock_addr,
++		     sizeof(sock_addr)) == SOCKET_ERROR ) {
++		SDLNet_SetError("Couldn't connect to remote host");
++		goto error_return;
++	}
++	
++	sock->sflag = 0;
++	sock->ready = 0;
++
++#ifdef TCP_NODELAY
++	/* Set the nodelay TCP option for real-time games */
++	{ int yes = 1;
++	setsockopt(sock->channel, IPPROTO_TCP, TCP_NODELAY, (char*)&yes, sizeof(yes));
++	}
++#endif /* TCP_NODELAY */
+ 
+-	// #########  Connecting to remote
++	/* Fill in the channel host address */
++	memcpy(&sock->remoteAddress, ip, sizeof(*ip));
++
++	/* The socket is ready */
++	return(sock);
+ 	
+-		memset(&sock_addr, 0, sizeof(sock_addr));
+-		sock_addr.sin_family = AF_INET;
+-		sock_addr.sin_addr.s_addr = ip->host;
+-		sock_addr.sin_port = ip->port;
+-
+-		/* Connect to the remote host */
+-		if ( connect(sock->channel, (struct sockaddr *)&sock_addr,
+-				sizeof(sock_addr)) == SOCKET_ERROR ) {
+-			SDLNet_SetError("Couldn't connect to remote host");
+-			goto error_return;
+-		}
+-		sock->sflag = 0;
+-	} else {
++error_return:
++	SDLNet_TCP_Close(sock);
++	return(NULL);
++}
++
++/* Open a TCP network socket */
+ 
++TCPsocket SDLNet_TCP_Open(SDLNet_AddrType type, int port)
++{
++	sockaddr_max sock_addr;
++	TCPsocket sock;
++	int family;
++	
++	/* Allocate a TCP socket structure */
++	sock = (TCPsocket)malloc(sizeof(*sock));
++	if ( sock == NULL ) {
++		SDLNet_SetError("Out of memory");
++		goto error_return;
++	}
++
++	family = SDLNet_AddrType_to_family(type);
++
++	/* Open the socket */
++	sock->channel = socket(family, SOCK_STREAM, 0);
++	if ( sock->channel == INVALID_SOCKET ) {
++		SDLNet_SetError("Couldn't create socket");
++		goto error_return;
++	}
++	
+ 	// ##########  Binding locally
+ 
++	if (family == AF_INET) {
++		struct sockaddr_in *addr = (struct sockaddr_in *) &sock_addr;
++		
+ 		memset(&sock_addr, 0, sizeof(sock_addr));
+-		sock_addr.sin_family = AF_INET;
+-		sock_addr.sin_addr.s_addr = INADDR_ANY;
+-		sock_addr.sin_port = ip->port;
+-
+-		/* allow local address reuse */
+-		{ int yes = 1;
+-			setsockopt(sock->channel, SOL_SOCKET, SO_REUSEADDR, (char*)&yes, sizeof(yes));
+-		}
+-
+-		/* Bind the socket for listening */
+-		if ( bind(sock->channel, (struct sockaddr *)&sock_addr,
+-				sizeof(sock_addr)) == SOCKET_ERROR ) {
+-			SDLNet_SetError("Couldn't bind to local port");
+-			goto error_return;
+-		}
+-		if ( listen(sock->channel, 5) == SOCKET_ERROR ) {
+-			SDLNet_SetError("Couldn't listen to local port");
+-			goto error_return;
+-		}
++ 		addr->sin_family = AF_INET;
++ 		addr->sin_addr.s_addr = INADDR_ANY;
++		addr->sin_port = SDL_SwapBE16(port);
++	}
++#ifdef USE_IPV6
++	else if (family == AF_INET6) {
++		struct sockaddr_in6 *addr = (struct sockaddr_in6 *) &sock_addr;
++		
++		memset(&sock_addr, 0, sizeof(sock_addr));
++ 		addr->sin6_family = AF_INET6;
++ 		addr->sin6_addr = in6addr_any;
++		addr->sin6_port = SDL_SwapBE16(port);
++	}
++#endif
++	
++	/* allow local address reuse */
++	{
++		int yes = 1;
++		setsockopt(sock->channel, SOL_SOCKET, SO_REUSEADDR,
++			   (char*)&yes, sizeof(yes));
++	}
++	
++	/* Bind the socket for listening */
++	if ( bind(sock->channel, (struct sockaddr *) &sock_addr,
++		  sizeof(sock_addr)) == SOCKET_ERROR ) {
++		SDLNet_SetError("Couldn't bind to local port");
++		goto error_return;
++	}
++	
++	if ( listen(sock->channel, 5) == SOCKET_ERROR ) {
++		SDLNet_SetError("Couldn't listen to local port");
++		goto error_return;
++	}
++	
+ #ifdef O_NONBLOCK
+-		/* Set the socket to non-blocking mode for accept() */
+-		fcntl(sock->channel, F_SETFL, O_NONBLOCK);
++	/* Set the socket to non-blocking mode for accept() */
++	fcntl(sock->channel, F_SETFL, O_NONBLOCK);
+ #else
++	
+ #ifdef WIN32
+-		{
+-		  /* passing a non-zero value, socket mode set non-blocking */
+-		  unsigned long mode = 1;
+-		  ioctlsocket (sock->channel, FIONBIO, &mode);
+-		}
++	/* passing a non-zero value, socket mode set non-blocking */
++	{
++		unsigned long mode = 1;
++		ioctlsocket (sock->channel, FIONBIO, &mode);
++	}
+ #else
+ #warning How do we set non-blocking mode on other operating systems?
+ #endif /* WIN32 */
+ #endif /* O_NONBLOCK */
+ 
+-		sock->sflag = 1;
+-	}
++	sock->sflag = 1;
+ 	sock->ready = 0;
+ 
+ #ifdef TCP_NODELAY
+ 	/* Set the nodelay TCP option for real-time games */
+-	{ int yes = 1;
+-	setsockopt(sock->channel, IPPROTO_TCP, TCP_NODELAY, (char*)&yes, sizeof(yes));
++	{
++		int yes = 1;
++				
++		setsockopt(sock->channel, IPPROTO_TCP, TCP_NODELAY,
++			   (char*)&yes, sizeof(yes));
+ 	}
+ #endif /* TCP_NODELAY */
+ 
+ 	/* Fill in the channel host address */
+-	sock->remoteAddress.host = sock_addr.sin_addr.s_addr;
+-	sock->remoteAddress.port = sock_addr.sin_port;
++	SDLNet_sockaddr_to_IPaddress((struct sockaddr *) &sock_addr,
++				     &sock->remoteAddress);
+ 
+ 	/* The socket is ready */
+ 	return(sock);
+@@ -799,7 +856,7 @@
+ TCPsocket SDLNet_TCP_Accept(TCPsocket server)
+ {
+ 	TCPsocket sock;
+-	struct sockaddr_in sock_addr;
++	sockaddr_max sock_addr;
+ 	int sock_alen;
+ 
+ 	/* Only server sockets can accept */
+@@ -808,35 +865,39 @@
+ 		return(NULL);
+ 	}
+ 	server->ready = 0;
+-
++	
+ 	/* Allocate a TCP socket structure */
+ 	sock = (TCPsocket)malloc(sizeof(*sock));
+ 	if ( sock == NULL ) {
+ 		SDLNet_SetError("Out of memory");
+ 		goto error_return;
+ 	}
+-
++	
+ 	/* Accept a new TCP connection on a server socket */
+ 	sock_alen = sizeof(sock_addr);
+ 	sock->channel = accept(server->channel, (struct sockaddr *)&sock_addr,
+ #ifdef USE_GUSI_SOCKETS
+-						(unsigned int *)&sock_alen);
++			       (unsigned int *)&sock_alen
+ #else
+-								&sock_alen);
++			       &sock_alen
+ #endif
++		);
++	
+ 	if ( sock->channel == SOCKET_ERROR ) {
+ 		SDLNet_SetError("accept() failed");
+ 		goto error_return;
+ 	}
++	
+ #ifdef WIN32
+-      {
+-              /* passing a zero value, socket mode set to block on */
+-              unsigned long mode = 0;
+-              ioctlsocket (sock->channel, FIONBIO, &mode);
+-      }
++	{
++		/* passing a zero value, socket mode set to block on */
++		unsigned long mode = 0;
++		ioctlsocket (sock->channel, FIONBIO, &mode);
++	}
+ #endif /* WIN32 */
+-	sock->remoteAddress.host = sock_addr.sin_addr.s_addr;
+-	sock->remoteAddress.port = sock_addr.sin_port;
++
++	SDLNet_sockaddr_to_IPaddress((struct sockaddr *) &sock_addr,
++				     &sock->remoteAddress);
+ 
+ 	sock->sflag = 0;
+ 	sock->ready = 0;
+diff -u -r SDL_net-1.2.5-orig/SDL_net-1.2.5/SDLnetUDP.c SDL_net-1.2.5/SDLnetUDP.c
+--- SDL_net-1.2.5-orig/SDL_net-1.2.5/SDLnetUDP.c	Mon Feb 10 00:33:26 2003
++++ SDL_net-1.2.5/SDLnetUDP.c	Tue Jul 22 16:44:28 2003
+@@ -24,6 +24,7 @@
+ 
+ #include "SDLnetsys.h"
+ #include "SDL_net.h"
++
+ #ifdef MACOS_OPENTRANSPORT
+ #include <Events.h>
+ #endif
+@@ -272,11 +273,13 @@
+ /* Open a UDP network socket
+    If 'port' is non-zero, the UDP socket is bound to a fixed local port.
+ */
+-extern UDPsocket SDLNet_UDP_Open(Uint16 port)
++extern UDPsocket SDLNet_UDP_Open(SDLNet_AddrType type, Uint16 port)
+ {
+ 	UDPsocket sock;
+ #ifdef MACOS_OPENTRANSPORT
+ 	EndpointRef dummy = NULL;
++#else
++	int family;	
+ #endif
+ 
+ 	/* Allocate a UDP socket structure */
+@@ -308,7 +311,16 @@
+ 		OTSetBlocking( sock->channel );
+ 	}
+ #else
+-	sock->channel = socket(AF_INET, SOCK_DGRAM, 0);
++	family = SDLNet_AddrType_to_family(type);
++	
++	// unsupported ?
++
++	if (family < 0) {
++		SDLNet_SetError("Unsupported address family");
++		goto error_return;
++	}
++	
++	sock->channel = socket(family, SOCK_DGRAM, 0);
+ #endif /* MACOS_OPENTRANSPORT */
+ 
+ 	if ( sock->channel == INVALID_SOCKET ) 
+@@ -365,26 +377,46 @@
+ 	/* Bind locally, if appropriate */
+ 	if ( port )
+ 	{
+-		struct sockaddr_in sock_addr;
+-		memset(&sock_addr, 0, sizeof(sock_addr));
+-		sock_addr.sin_family = AF_INET;
+-		sock_addr.sin_addr.s_addr = INADDR_ANY;
+-		sock_addr.sin_port = SDL_SwapBE16(port);
++		sockaddr_max sock_addr;
+ 
++		if (type == SDLNET_IPV4) {
++			struct sockaddr_in *addr
++				= (struct sockaddr_in *) &sock_addr;
++			memset(addr, 0, sizeof(*addr));
++			addr->sin_family = AF_INET;
++			addr->sin_addr.s_addr = INADDR_ANY;
++			addr->sin_port = SDL_SwapBE16(port);
++		}
++#ifdef USE_IPV6
++		else if (type == SDLNET_IPV6) {
++			struct sockaddr_in6 *addr
++				= (struct sockaddr_in6 *) &sock_addr;
++
++			addr->sin6_family = AF_INET6;
++			addr->sin6_addr = in6addr_any;
++			addr->sin6_port = SDL_SwapBE16(port);
++		}
++#endif
++			
+ 		/* Bind the socket for listening */
+-		if ( bind(sock->channel, (struct sockaddr *)&sock_addr,
+-				sizeof(sock_addr)) == SOCKET_ERROR ) {
++		if ( bind(sock->channel,
++			  (struct sockaddr *)&sock_addr,
++			  sizeof(sock_addr)) == SOCKET_ERROR ) {
++			perror("bind");
+ 			SDLNet_SetError("Couldn't bind to local port");
+ 			goto error_return;
+ 		}
+ 		/* Fill in the channel host address */
+-		sock->address.host = sock_addr.sin_addr.s_addr;
+-		sock->address.port = sock_addr.sin_port;
++
++		SDLNet_sockaddr_to_IPaddress((struct sockaddr *) &sock_addr,
++					     &sock->address);
+ 	}
+ 
+ 	/* Allow LAN broadcasts with the socket */
+-	{ int yes = 1;
+-		setsockopt(sock->channel, SOL_SOCKET, SO_BROADCAST, (char*)&yes, sizeof(yes));
++	{
++		int yes = 1;
++		setsockopt(sock->channel, SOL_SOCKET,
++			   SO_BROADCAST, (char*)&yes, sizeof(yes));
+ 	}
+ #endif /* MACOS_OPENTRANSPORT */
+ 
+@@ -493,7 +525,7 @@
+ 	int status;
+ #ifndef MACOS_OPENTRANSPORT
+ 	int sock_len;
+-	struct sockaddr_in sock_addr;
++	sockaddr_max sock_addr;
+ 
+ 	/* Set up the variables to send packets */
+ 	sock_len = sizeof(sock_addr);
+@@ -533,9 +565,8 @@
+ 				++numsent;
+ 			}
+ #else
+-			sock_addr.sin_addr.s_addr = packets[i]->address.host;
+-			sock_addr.sin_port = packets[i]->address.port;
+-			sock_addr.sin_family = AF_INET;
++			SDLNet_IPaddress_to_sockaddr(&packets[i]->address,
++						     (struct sockaddr *) &sock_addr);
+ 			status = sendto(sock->channel, 
+ 					packets[i]->data, packets[i]->len, 0,
+ 					(struct sockaddr *)&sock_addr,sock_len);
+@@ -584,9 +615,8 @@
+ 				}
+ 
+ #else
+-				sock_addr.sin_addr.s_addr = binding->address[j].host;
+-				sock_addr.sin_port = binding->address[j].port;
+-				sock_addr.sin_family = AF_INET;
++				SDLNet_IPaddress_to_sockaddr(&binding->address[j],
++							     (struct sockaddr *) &sock_addr);
+ 				status = sendto(sock->channel, 
+ 						packets[i]->data, packets[i]->len, 0,
+ 						(struct sockaddr *)&sock_addr,sock_len);
+@@ -677,13 +707,13 @@
+ 	InetAddress address;
+ #else
+ 	int sock_len;
+-	struct sockaddr_in sock_addr;
++	sockaddr_max sock_addr;
+ #endif
+ 
+ 	numrecv = 0;
+-	while ( packets[numrecv] && SocketReady(sock->channel) ) 
+-	{
+-	UDPpacket *packet;
++
++	while ( packets[numrecv] && SocketReady(sock->channel) ) {
++		UDPpacket *packet;
+ 
+ 		packet = packets[numrecv];
+ 		
+@@ -710,18 +740,21 @@
+ 		}
+ #else
+ 		sock_len = sizeof(sock_addr);
++		
+ 		packet->status = recvfrom(sock->channel,
+-				packet->data, packet->maxlen, 0,
+-				(struct sockaddr *)&sock_addr,
++					  packet->data, packet->maxlen, 0,
++					  (struct sockaddr *)&sock_addr,
+ #ifdef USE_GUSI_SOCKETS
+-				(unsigned int *)&sock_len);
++					  (unsigned int *)&sock_len
+ #else
+-						&sock_len);
++					  &sock_len
+ #endif
++			);
++		
+ 		if ( packet->status >= 0 ) {
+ 			packet->len = packet->status;
+-			packet->address.host = sock_addr.sin_addr.s_addr;
+-			packet->address.port = sock_addr.sin_port;
++			SDLNet_sockaddr_to_IPaddress((struct sockaddr *) &sock_addr,
++						     &packet->address);
+ 		}
+ #endif
+ 		if (packet->status >= 0)
+@@ -734,9 +767,8 @@
+ 				
+ 				for ( j=binding->numbound-1; j>=0; --j ) 
+ 				{
+-					if ( (packet->address.host == binding->address[j].host) &&
+-					     (packet->address.port == binding->address[j].port) ) 
+-					{
++					if (!SDLNet_IPaddress_cmp(&packet->address,
++								  &binding->address[j])) {
+ 						packet->channel = i;
+ 						goto foundit; /* break twice */
+ 					}
+diff -u -r SDL_net-1.2.5-orig/SDL_net-1.2.5/SDLnetsys.h SDL_net-1.2.5/SDLnetsys.h
+--- SDL_net-1.2.5-orig/SDL_net-1.2.5/SDLnetsys.h	Tue Jan 21 02:56:35 2003
++++ SDL_net-1.2.5/SDLnetsys.h	Fri Jul 18 16:00:54 2003
+@@ -27,6 +27,7 @@
+ #include <stdlib.h>
+ #include <string.h>
+ #include <errno.h>
++#include <assert.h>
+ 
+ #ifdef macintosh
+ #ifndef USE_GUSI_SOCKETS
+@@ -71,6 +72,26 @@
+ #define SOCKET	int
+ #define INVALID_SOCKET	-1
+ #define SOCKET_ERROR	-1
++
++#include "SDL_net.h"
++
++/* sockaddr_max is a sockaddr structure big enough to hold the largest
++   address we are going to use. If we do not have IPv6 support enabled
++   this is a sockaddr_in. The new IPv6 API defines sockaddr_storage
++   which provides such a structure already.
++ */
++
++#ifdef USE_IPV6
++typedef struct sockaddr_storage sockaddr_max;
++#else
++typedef struct sockaddr_in sockaddr_max;
++#endif
++
++void SDLNet_sockaddr_to_IPaddress(struct sockaddr *in, IPaddress *out);
++void SDLNet_IPaddress_to_sockaddr(IPaddress *in, struct sockaddr *out);
++int SDLNet_IPaddress_cmp(IPaddress *a, IPaddress *b);
++int SDLNet_AddrType_to_family(SDLNet_AddrType type);
++
+ #endif /* __USE_W32_SOCKETS */
+ #endif /* Open Transport */
+ 
+diff -u -r SDL_net-1.2.5-orig/SDL_net-1.2.5/configure.in SDL_net-1.2.5/configure.in
+--- SDL_net-1.2.5-orig/SDL_net-1.2.5/configure.in	Sun Apr 14 22:56:15 2002
++++ SDL_net-1.2.5/configure.in	Tue Jul 22 16:39:07 2003
+@@ -91,7 +91,7 @@
+             :,
+ 	    AC_MSG_ERROR([*** SDL version $SDL_VERSION not found!])
+ )
+-CFLAGS="$CFLAGS $SDL_CFLAGS"
++CFLAGS="$CFLAGS $SDL_CFLAGS -DUSE_IPV6"
+ LIBS="$LIBS $SDL_LIBS"
+ 
+ dnl Check for GUI library for the chat client

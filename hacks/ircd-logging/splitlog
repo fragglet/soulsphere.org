@@ -1,0 +1,599 @@
+#!/usr/bin/env ruby
+
+class HTML
+	def HTML.escape(text)
+		text = text.gsub(/\&/, '&amp;')
+		text.gsub!(/\</, '&lt;')
+		text.gsub!(/\>/, '&gt;')
+
+		return text
+	end
+
+	def HTML.write(filename)
+		File.open(filename, "w") do |file|
+
+			def file.puts_escaped(text)
+				puts "#{HTML.escape(text)}<br>"
+			end
+
+			file.puts "<html>"
+			file.puts "<body>"
+			yield file
+			file.puts "</body>"
+			file.puts "</html>"
+		end
+	end
+end
+
+class Conversation
+	@@convnum = 0;
+
+	def initialize
+		@convnum = @@convnum;
+		@@convnum += 1
+		@shutdown = false
+		@text = ""
+	end
+
+	def filename
+		"conv_#{@convnum}.html"
+	end
+
+	def add_text(time, text)
+		strtime = Time.at(time).strftime('%H:%M').to_s
+		@text += "#{strtime}: #{text} <br>\n"
+	end
+
+	def add_text_action(time, text)
+		add_text(time, "<b>*** #{text}</b>")
+	end
+
+	def link
+		"<a href=\"#{filename}\">#{HTML.escape(display_name)}</a>"
+	end
+end
+
+class PrivateConversation < Conversation
+	def initialize(user1, user2)
+		super()
+		@users = [user1, user2]
+		user1.add_private(user2, self)
+		user2.add_private(user1, self)
+	end
+
+	def shutdown
+		@users[0].del_private(@users[1])
+		@users[1].del_private(@users[0])
+		write
+	end
+
+	def write
+		HTML.write(filename) do |file|
+			file.puts "<h1>Conversation between #{@users[0].link} " +
+				  "and #{@users[1].link}</h1>"
+			file.puts "<blockquote><tt>\n"
+			file.puts @text
+			file.puts "</tt></blockquote>\n"
+		end
+	end
+
+	def display_name
+		"Conversation between #{@users[0].display_name} and #{@users[1].display_name}"
+	end
+end
+
+class Channel < Conversation
+	def initialize(server, time, name, creator)
+		@creation_time = time
+		@name = name
+		@creator = creator
+		@server = server
+
+		@users = []
+
+		super()
+	end
+
+	def add(user)
+		@users.push(user)
+	end
+
+	def name
+		@name
+	end
+
+	def remove(user)
+		@users.delete(user)
+	end
+
+	def write
+		HTML.write(filename) do |file|
+			file.puts "<h1> Channel: #{HTML.escape(@name)}</h1>"
+			file.puts "Created by #{@creator.link} at " + 
+				  "#{Time.at(@creation_time).to_s} <br> <br>"
+			file.puts "<blockquote><tt>\n"
+			file.puts @text
+			file.puts "</tt></blockquote>\n"
+			
+		end
+	end
+
+	def display_name
+		@name
+	end
+end
+
+class User
+	@@usernum = 0
+
+	def initialize(server, time, nickname, hostmask, realname)
+		@time = time
+		@orignick = @nickname = nickname
+		@hostmask = hostmask
+		@realname = realname
+		@server = server
+
+		@channels = []
+		@channel_history = {}
+		@conversations = {}
+		@conversations_history = []
+		@nick_history = [nickname]
+		@whois_history = {}
+
+		@usernum = @@usernum
+		@@usernum += 1
+	end
+
+	def change_nick(time, newnick)
+		each_conversation do |conv|
+			conv.add_text_action(time, "#{link_nick} changes nick to #{newnick}")
+		end
+		@nickname = newnick
+		@nick_history.push(newnick)
+	end
+
+	def quit(time, message)
+		each_conversation do |conv|
+			conv.add_text_action(time, "#{link_nick} has quit (#{message})")
+		end
+		write
+		@conversations.each_value { |conv| conv.shutdown }
+		@channels.each { |chan| chan.remove(self) }
+	end
+
+	def join(time, channel)
+		channel.add(self)
+		@channels.push(channel)
+		@channel_history[channel] = 1
+
+		channel.add_text_action(time, "#{link_nick} has joined #{channel.name}")
+	end
+
+	def name
+		@nickname
+	end
+
+	def part(time, channel, reason)
+		channel.remove(self)
+		@channels.delete(channel)
+
+		channel.add_text_action(time, "#{link_nick} has left #{channel.name}")
+	end
+
+	def kicked(time, channel, kicker, reason)
+		channel.remove(self)
+		@channels.delete(channel)
+
+		channel.add_text_action(time,
+			 "#{link_nick} was kicked by #{kicker.link_nick} (#{reason})")
+	end
+
+	def add_private(user, conv)
+		@conversations[user] = conv
+		@conversations_history.push(conv)
+	end
+
+	def del_private(user)
+		@conversations.delete(user)
+	end
+
+	def find_conversation(user)
+		conv = @conversations[user]
+
+		if conv == nil then
+			conv = PrivateConversation.new(self, user)
+		end
+
+		return conv
+	end
+
+	def each_conversation
+		@channels.each do |chan|
+			yield chan
+		end
+		@conversations.each_value do |conv|
+			yield conv
+		end
+	end
+
+	def whois(user)
+		@whois_history[user] = 1
+	end
+
+	def link
+		"<a href=\"#{filename}\">#{HTML.escape(display_name)}</a>"
+	end
+
+	def link_nick
+		"<a href=\"#{filename}\">#{HTML.escape(@nickname)}</a>"
+	end
+
+	def display_name
+		@orignick
+	end
+
+	def filename
+		"user_#{@usernum}.html"
+	end
+
+	def write
+		@conversations.each_value do |conv|
+			conv.shutdown
+		end
+
+		HTML.write(filename) do |file|
+			file.puts "<h2>#{HTML.escape(@orignick)}</h2>"
+			file.puts "Connected at #{Time.at(@time).to_s}<br>"
+			file.puts "Hostmask: <tt>#{@hostmask}</tt><br>"
+			file.puts "Info: #{@realname}<br><br>"
+			file.puts "Conversations: <ul>"
+			@conversations_history.each do |conv|
+				file.puts "<li> #{conv.link}"
+			end
+			file.puts "</ul>"
+			file.puts "Joined the following channels: <ul>"
+			@channel_history.each_key do |chan|
+				file.puts "<li> #{chan.link}"
+			end
+			file.puts "</ul>"
+			file.puts "Nicknames used: <ul>"
+			@nick_history.each do |name|
+				file.puts "<li> #{name}"
+			end
+			file.puts "</ul>"
+			file.puts "Performed whois queries on: <ul>"
+			@whois_history.each_key do |user|
+				file.puts "<li> #{user.link_nick}"
+			end
+			file.puts "</ul>"
+		end
+	end
+end
+
+class Server
+	@@servnum = 0
+	@@servers = []
+
+	def initialize(time)
+		@start_time = time
+		@users = {}
+		@user_history = []
+		@channels = {}
+		@servnum = @@servnum
+		@@servnum += 1
+		@@servers.push(self)
+	end
+
+	def new_user(time, nickname, hostmask, realname)
+		user = User.new(self, time, nickname, hostmask, realname)
+		@users[nickname] = user
+		@user_history.push(user)
+
+		return user
+	end
+
+	def find_user(name)
+		@users[name] or raise "Unknown user '#{name}'"
+	end
+
+	def user_quit(time, user, reason)
+		user.quit(time, reason)
+		@users.delete(user)
+	end
+
+	def user_change_nick(time, user, newnick)
+		user.change_nick(time, newnick)
+		@users.delete(user)
+		@users[newnick] = user
+	end
+
+	def new_channel(time, name, creator)
+		channel = Channel.new(self, time, name, creator)
+		@channels[name] = channel
+
+		return channel
+	end
+
+	def find_channel(name)
+		@channels[name]
+	end
+
+	def get_conversation(source, dest_name)
+		if /^\#/.match(dest_name) then
+			# this is a channel
+
+			return $server.find_channel(dest_name)
+		end
+
+		target = find_user(dest_name)
+	
+		return source.find_conversation(target)
+	end
+
+	def filename
+		"server_#{@servnum}.html"
+	end
+
+	def display_name
+		"Server started at #{Time.at(@start_time).to_s}"
+	end
+
+	def link 
+		"<a href=\"#{filename}\">#{HTML.escape(display_name)}</a>"
+	end
+
+	def write
+		@channels.each_value do |chan|
+			chan.write
+		end
+		@users.each_value do |user|
+			user.write
+		end
+
+		HTML.write(filename) do |file|
+			file.puts "<h1> #{display_name} </h1>"
+			file.puts "Users: <ul>"
+			@user_history.each do |user|
+				file.puts "<li> #{user.link}"
+			end
+			file.puts "</ul>"
+	
+			file.puts "Channels: <ul>"
+			@channels.each_value do |channel|
+				file.puts "<li> #{channel.link}"
+			end
+			file.puts "</ul>"
+		end
+	end
+
+	def Server.write_all
+		write_index
+
+		@@servers.each { |server| server.write }
+	end
+
+	def Server.write_index
+		HTML.write('index.html') do |file|
+			file.puts "<h1>Servers</h1> <ul>"
+			@@servers.each do |server|
+				file.puts "<li> #{server.link}"
+			end
+			file.puts "</ul>"
+		end
+	end
+end
+
+class Message
+	def set_info(msgtype, time)
+		@msgtype = msgtype
+		@time = time
+	end
+
+	def run
+		
+	end
+end
+
+class StartMsg < Message
+	def initialize(rest)
+		
+	end
+
+	def run
+		$server = Server.new(@time)
+	end
+end
+
+class PrivMsg < Message
+	def initialize(rest)
+		(drop, @user, @channame, @message) = 
+			/^(\S+)\s+(\S+)\s(.*)$/.match(rest).to_a
+	end
+
+	def run
+		user = $server.find_user(@user)
+		conv = $server.get_conversation(user, @channame)
+
+		if /^\001(\S+)(.*)\001$/.match(@message)
+
+			# CTCP
+
+			if $1 == 'ACTION'
+				conv.add_text_action(@time, "#{user.link_nick} #{$2}")
+			elsif @msgtype == 'NOTICE' 
+				conv.add_text_action(@time, "#{user.link_nick} sends CTCP #{$1} reply")
+			else
+				conv.add_text_action(@time, "#{user.link_nick} sends CTCP #{$1} request")
+			end
+
+			return
+		else
+
+			if @msgtype == 'NOTICE'
+				text = "-#{user.link_nick}-"
+			else
+				text = "&lt;#{user.link_nick}&gt;"
+			end
+
+			conv.add_text(@time, "#{text} #{@message}")
+		end
+	end
+end
+
+class NickChangeMsg < Message
+	def initialize(rest)
+		(drop, @user, @newnick) =
+			/^(\S+)\s+(\S+)/.match(rest).to_a;
+	end
+
+	def run
+		user = $server.find_user(@user)
+
+		$server.user_change_nick(@time, user, @newnick)
+	end
+end
+
+class ClientConnectMsg < Message
+	def initialize(rest)
+		(drop, @user, @hostmask, @description) =
+			/^(\S+)\!(\S+)\s*(.*)$/.match(rest).to_a;
+	end
+
+	def run
+		$server.new_user(@time, @user, @hostmask, @description)
+	end
+end
+
+class ClientQuitMsg < Message
+	def initialize(rest)
+		(drop, @user, @reason) =
+			/^(\S+)\s+(.*)/.match(rest).to_a;
+	end
+
+	def run
+		user = $server.find_user(@user)
+
+		$server.user_quit(@time, user, @reason)
+	end
+end
+
+class ClientWhoisMsg < Message
+	def initialize(rest)
+		(drop, @whoiser, @whoisee) = 
+			/^(\S+)\s+(\S+)/.match(rest).to_a
+	end
+
+	def run
+		whoiser = $server.find_user(@whoiser)
+		whoisee = $server.find_user(@whoisee)
+
+		whoiser.whois(whoisee)
+	end
+end
+
+class ChannelJoinMsg < Message
+	def initialize(rest)
+		(drop, @channel, @user) = 
+			/^(\S+)\s+(\S+)/.match(rest).to_a
+	end
+
+	def run
+		user = $server.find_user(@user)
+		chan = $server.find_channel(@channel)
+
+		if chan == nil then
+			chan = $server.new_channel(@time, @channel, user)
+		end
+
+		user.join(@time, chan)
+	end
+end
+
+class ChannelModeMsg < Message
+	def initialize(rest)
+		(drop, @channel, @user, @rest) =
+			/^(\S+)\s+(\S+)\s+(.*)/.match(rest).to_a
+	end
+
+	def run
+		user = $server.find_user(@user)
+
+		channel = $server.find_channel(@channel) or raise "Unknown channel: #{@channel}"
+		channel.add_text_action(@time, "#{user.link_nick} sets mode: #{@rest}")
+	end
+end
+
+class ChannelPartMsg < Message
+	def initialize(rest)
+		(drop, @channel, @user, @reason) = 
+			/^(\S+)\s+(\S+)\s+(.*)/.match(rest).to_a
+	end
+
+	def run
+		user = $server.find_user(@user)
+		channel = $server.find_channel(@channel) or raise "Unknown channel: #{@channel}"
+		user.part(@time, channel, @reason)
+	end
+end
+
+class ChannelKickMsg < Message
+	def initialize(rest)
+		(drop, @channel, @kicker, @kickee, @reason) = 
+			/^(\S+)\s+(\S+)\s+(\S+)\s+(.*)/.match(rest).to_a
+	end
+
+	def run
+		kicker = $server.find_user(@kicker)
+		kickee = $server.find_user(@kickee)
+
+		channel = $server.find_channel(@channel) or raise "Unknown channel: #{@channel}"
+
+		kickee.kicked(@time, channel, kicker, @reason)
+	end
+end
+
+class OperMsg < Message
+	def initialize(rest)
+	end
+end
+
+def new_message(s)
+	(drop, time, msgtype, rest) =
+		/(\d*)\s*(\w*)\s*(.*)/.match(s).to_a
+
+	time = time.to_i
+
+	msgtype_hash = {
+		'PRIVMSG' => PrivMsg,
+		'NOTICE' => PrivMsg,
+		'START' => StartMsg,
+		'NICK' => NickChangeMsg,
+		'CONNECT' => ClientConnectMsg,
+		'QUIT' => ClientQuitMsg,
+		'JOIN' => ChannelJoinMsg,
+		'MODE' => ChannelModeMsg,
+		'PART' => ChannelPartMsg,
+		'WHOIS' => ClientWhoisMsg,
+		'OPER' => OperMsg,
+		'KICK' => ChannelKickMsg,
+	}
+
+	raise "Unknown message type '#{msgtype}'" if !msgtype_hash[msgtype]
+
+	mess = msgtype_hash[msgtype].new(rest)
+	mess.set_info(msgtype, time)
+
+	return mess
+end
+
+
+File.open("activity.log") do |file|
+	file.each_line do |s|
+
+		mess = new_message(s)
+		mess.run
+	end
+end
+
+Server.write_all
+

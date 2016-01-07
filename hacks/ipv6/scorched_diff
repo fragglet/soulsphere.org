@@ -1,0 +1,60 @@
+diff -r -u scorched-orig/scorched/src/coms/NetClient.cpp scorched/src/coms/NetClient.cpp
+--- scorched-orig/scorched/src/coms/NetClient.cpp	Wed Jul 30 22:41:25 2003
++++ scorched/src/coms/NetClient.cpp	Tue Aug  5 17:42:19 2003
+@@ -63,12 +63,12 @@
+ 	}
+ 
+ 	IPaddress ip;
+-	if(SDLNet_ResolveHost(&ip,(char *) hostName,port)==-1)
++	if (SDLNet_ResolveHost(SDLNET_ANY, &ip, (char *) hostName,port)==-1)
+ 	{
+ 		return false;
+ 	}
+ 
+-	client_=SDLNet_TCP_Open(&ip);
++	client_=SDLNet_TCP_Connect(&ip);
+ 	if (!client_)
+ 	{
+ 		return false;
+diff -r -u scorched-orig/scorched/src/coms/NetServer.cpp scorched/src/coms/NetServer.cpp
+--- scorched-orig/scorched/src/coms/NetServer.cpp	Wed Jul 30 22:41:25 2003
++++ scorched/src/coms/NetServer.cpp	Tue Aug  5 18:01:26 2003
+@@ -59,18 +59,18 @@
+ 		return false;
+ 	}
+ 
+-	IPaddress ip;
+-	if(SDLNet_ResolveHost(&ip,NULL,port)==-1)
+-	{
+-		return false;
+-	}
+-
+ 	// TODO we seem to be able to open the same port
+ 	// multiple times!!!
+-	server_=SDLNet_TCP_Open(&ip);
++
++	// try IPv6, then IPv4
++
++	server_=SDLNet_TCP_OpenServer(SDLNET_IPV6, port);
+ 	if (!server_)
+ 	{
+-		return false;
++		server_ = SDLNet_TCP_OpenServer(SDLNET_IPV4, port);
++
++		if (!server_)
++			return false;
+ 	}
+ 	NetBufferUtil::setBlockingIO(server_);
+ 
+@@ -140,8 +140,11 @@
+ 			if (currentSock == server_)
+ 			{
+ 				TCPsocket sock = SDLNet_TCP_Accept(server_);
++
+ 				if (sock)
+ 				{
++					printf("new connection from %s\n", 
++					       SDLNet_PresentIP(SDLNet_TCP_GetPeerAddress(sock)));
+ 					if ((maxClients_ == -1) ||
+ 						((int) connections_.size() != maxClients_ + 1))
+ 					{

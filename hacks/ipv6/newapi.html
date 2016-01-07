@@ -1,0 +1,184 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+ "http://www.w3.org/TR/REC-html40/loose.dtd"> 
+
+<html>
+
+<head> <title> Porting to the new SDL_net API</title> </head>
+
+<body>
+
+<h1> Porting to the new SDL_net API </h1>
+
+<p>
+To support IPv6, the API for SDL_net has been changed.
+This summarises the differences between the SDL_net 1.2.x and 
+SDL_net 1.3.x.
+
+
+
+<h2> IPaddress </h2>
+
+The <tt>IPaddress</tt> structure is now not an IPv4 address, but rather
+an abstracted "superclass" structure. The structure may hold an IPv4
+address, or a IPv6 address, depending on its type. This means that you can
+no longer use "<tt>address.host</tt>" as you could previously.
+
+<p>
+The first member of the new IPaddress structure
+is "<tt>type</tt>". This indicates the type of address. These types are:
+
+<pre>
+typedef enum {
+        SDLNET_ANY,
+        SDLNET_IPV4,
+        SDLNET_IPV6,
+} SDLNet_AddrType;              
+</pre>
+
+ie. IPv4 addresses have <tt>address.type == SDLNET_IPV4</tt>, IPv6 addresses have
+<tt>address.type == SDLNET_IPV6</tt>.  If you want to access the address data, 
+you must cast to the particular address structure (IPaddress4 or 
+IPaddress6). There are convenient macros named IP_ADDRESS4 and 
+IP_ADDRESS6 provided for this purpose.
+
+<pre>
+	IPaddress addr;
+
+	// ....
+
+	printf("%i\n", IP_ADDRESS4(&addr)->host);
+</pre>
+
+In general, it is better to avoid dependency on a particular address
+type where possible. Instead, try to use DNS names.
+
+<h2>SDLNet_PresentIP</h2>
+
+In general, the new API tries to discourage dependencies on particular 
+types of address (IPv4 or IPv6) and encourage use of DNS names instead.
+For this reason, the SDLNet_PresentIP function has been added. When 
+presenting an IP address as a string, do not generate the string by hand,
+but use the SDLNet_PresentIP function instead to convert it. eg.
+
+<pre>
+	IPaddress addr;
+
+	// ....
+
+	printf("New connection from %s!\n", SDLNet_PresentIP(&addr));
+</pre>
+
+<h2>SDLNet_ResolveHost</h2>
+
+SDLNet_ResolveHost has an extra parameter to allow specifying the type of 
+address to resolve. eg.
+
+<pre>
+	IPaddress addr;
+
+	// resolve foo.bar.com:4378 as an IPv4 address
+
+	SDLNet_ResolveHost(SDLNET_IPV4, &addr, "foo.bar.com", 4378);
+
+	// resolve baz.qux.org:8539 as an IPv6 address
+
+	SDLNet_ResolveHost(SDLNET_IPV6, &addr, "baz.qux.org", 8539);
+</pre>
+
+Previously, one way to check if a resolve had failed was to check if
+<tt>addr.host == INADDR_NONE</tt>. Do not do this. Instead check
+the return value of SDLNet_ResolveHost.
+
+<pre>
+	IPaddress addr;
+
+	if (SDLNet_ResolveHost(SDLNET_IPV4, &addr, "shoenix.org", 8201) &lt; 0) {
+		printf("Resolve failed!\n");
+	}
+</pre>	
+
+<h2>SDLNet_TCP_Open</h2>
+
+Previously, the way to create a TCP socket was with SDLNet_TCP_Open. This
+was used both for creating server sockets and connecting to remote hosts.
+This function has now been removed: instead use SDLNet_TCP_OpenServer
+to create a server socket and SDLNet_TCP_Connect to connect to a remote
+machine.
+<p>
+To create a server:
+<pre>
+	TCPsocket sock;
+
+	// create a new IPv4 server on port 8592
+
+	sock = SDLNet_TCP_OpenServer(SDLNET_IPV4, 8592);
+
+</pre>
+
+To connect to a remote host, given a pointer to an IPaddress structure 
+<tt>addr</tt>:
+
+<pre>
+	TCPsocket sock;
+
+	sock = SDLNet_TCP_Connect(addr);
+</pre>
+
+
+<h2>SDLNet_UDP_Open</h2>
+
+When creating a UDP socket, you must now specify the type of socket to
+create. For example:
+
+<pre>
+	UDPsocket sock;
+
+	// create a new IPv4 socket on port 8201
+
+	sock = SDLNet_UDP_Open(SDLNET_IPV4, 8201);
+
+	// create a new IPv6 socket on port 9182
+
+	sock = SDLNet_UDP_Open(SDLNET_IPV6, 9182);
+</pre>
+
+<h2>SDLNET_ANY</h2>
+
+As well as the SDLNET_IPV4 and SDLNET_IPV6 address types, there is also
+a third, SDLNET_ANY. Some hostnames have both IPv4 and IPv6 addresses
+bound to them. Passing SDLNET_ANY to SDLNet_ResolveHost will attempt
+to resolve both types. If the name given resolves to an address of 
+either type, it will be returned. If it resolves to <i>both</i> types,
+the <t>IPaddress</t> structure is filled in to contain both addresses,
+and given <tt>addr.type == SDLNET_ANY</tt>.
+<p>
+This <tt>IPaddress_any</tt> structure can then be passed to 
+SDLNet_TCP_Connect, which will try to connect on both address types.
+For example:
+
+<pre>
+	IPaddress addr;
+	TCPsocket sock;
+
+	if (SDLNet_ResolveHost(SDLNET_ANY, &addr, "shoe.bar.com", 9281) < 0) {
+		printf("Resolve failed!\n");
+		exit(-1);
+	}
+
+	sock = SDLNet_TCP_Connect(&addr);
+</pre>
+
+It is then unneccesary when connecting to a host to try to resolve and
+connect to it as both IPv4 and IPv6 separately, as this is taken care 
+of by the underlying library.
+<p>
+Note that in creating a server with <tt>SDLNet_TCP_OpenServer</tt>, or
+when using UDP, you must still explicitely specify the address type
+(ie. you cannot pass SDLNET_ANY as the socket type).
+
+<hr>
+<a href="mailto:sdh300@removethistoemailme.zepler.net">Simon Howard</a>
+
+</body>
+
+</html>

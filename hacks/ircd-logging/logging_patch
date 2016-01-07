@@ -1,0 +1,294 @@
+diff -ru /home/sdh300/cslib/ircd-hybrid-orig/ircd-hybrid-7.0/include/config.h ircd-hybrid-7.0/include/config.h
+--- /home/sdh300/cslib/ircd-hybrid-orig/ircd-hybrid-7.0/include/config.h	Thu Feb  6 08:46:11 2003
++++ ircd-hybrid-7.0/include/config.h	Thu Aug 14 16:34:10 2003
+@@ -152,6 +152,7 @@
+ #define RPATH   ETCPATH "/ircd.rsa"             /* ircd rsa private keyfile */
+ #define MPATH   ETCPATH "/ircd.motd"            /* MOTD file */
+ #define LPATH   LOGPATH "/ircd.log"             /* ircd logfile */
++#define APATH   LOGPATH "/activity.log"         /* activity log file */
+ #define PPATH   ETCPATH "/ircd.pid"             /* pid file */
+ #define OPATH   ETCPATH "/opers.motd"           /* oper MOTD file */
+ #define LIPATH  ETCPATH "/links.txt"            /* cached links file */
+diff -ru /home/sdh300/cslib/ircd-hybrid-orig/ircd-hybrid-7.0/include/s_log.h ircd-hybrid-7.0/include/s_log.h
+--- /home/sdh300/cslib/ircd-hybrid-orig/ircd-hybrid-7.0/include/s_log.h	Fri Sep  6 20:37:10 2002
++++ ircd-hybrid-7.0/include/s_log.h	Thu Aug 14 16:30:18 2003
+@@ -46,4 +46,7 @@
+ extern void log_oper(struct Client *, char *name);
+ extern void log_failed_oper(struct Client *, char *name);
+ 
++extern void open_activity_log(const char *filename);
++extern void activity_log(char *s, ...);
++
+ #endif /* INCLUDED_s_log_h */
+diff -ru /home/sdh300/cslib/ircd-hybrid-orig/ircd-hybrid-7.0/modules/core/m_kick.c ircd-hybrid-7.0/modules/core/m_kick.c
+--- /home/sdh300/cslib/ircd-hybrid-orig/ircd-hybrid-7.0/modules/core/m_kick.c	Sat Feb  1 20:12:24 2003
++++ ircd-hybrid-7.0/modules/core/m_kick.c	Thu Aug 14 18:01:02 2003
+@@ -184,6 +184,9 @@
+       return;
+     }
+ 
++  activity_log("KICK %s %s %s %s", chptr->chname, source_p->name, 
++		who->name, comment);
++
+   if (IsMember(who, chptr))
+     {
+       /* half ops cannot kick other halfops on private channels */
+@@ -199,6 +202,7 @@
+ 	}
+       }
+ #endif
++  
+       /* jdc
+        * - In the case of a server kicking a user (i.e. CLEARCHAN),
+        *   the kick should show up as coming from the server which did
+diff -ru /home/sdh300/cslib/ircd-hybrid-orig/ircd-hybrid-7.0/modules/core/m_message.c ircd-hybrid-7.0/modules/core/m_message.c
+--- /home/sdh300/cslib/ircd-hybrid-orig/ircd-hybrid-7.0/modules/core/m_message.c	Sun Apr  6 17:47:37 2003
++++ ircd-hybrid-7.0/modules/core/m_message.c	Thu Aug 14 17:38:10 2003
+@@ -459,6 +459,8 @@
+   char *chname = NULL;
+   int result;
+ 
++  activity_log("%s %s %s %s", command, source_p->name, chptr->chname, text);
++
+   chname = RootChan(chptr)->chname;
+ 
+ #ifdef VCHANS
+@@ -593,6 +595,8 @@
+ msg_client(int p_or_n, char *command,
+            struct Client *source_p, struct Client *target_p, char *text)
+ {
++  activity_log("%s %s %s %s", command, source_p->name, target_p->name, text);
++
+   if (MyClient(source_p))
+   {
+     /* reset idle time for message only if its not to self 
+diff -ru /home/sdh300/cslib/ircd-hybrid-orig/ircd-hybrid-7.0/modules/core/m_part.c ircd-hybrid-7.0/modules/core/m_part.c
+--- /home/sdh300/cslib/ircd-hybrid-orig/ircd-hybrid-7.0/modules/core/m_part.c	Thu Feb  6 08:46:06 2003
++++ ircd-hybrid-7.0/modules/core/m_part.c	Thu Aug 14 17:55:35 2003
+@@ -159,6 +159,8 @@
+   if (MyConnect(source_p) && !IsOper(source_p))
+     check_spambot_warning(source_p, NULL);
+   
++  activity_log("PART %s %s %s", chptr->chname, source_p->name, reason);
++
+   /*
+    *  Remove user from the old channel (if any)
+    *  only allow /part reasons in -m chans
+diff -ru /home/sdh300/cslib/ircd-hybrid-orig/ircd-hybrid-7.0/modules/m_join.c ircd-hybrid-7.0/modules/m_join.c
+--- /home/sdh300/cslib/ircd-hybrid-orig/ircd-hybrid-7.0/modules/m_join.c	Thu Apr  3 02:29:00 2003
++++ ircd-hybrid-7.0/modules/m_join.c	Thu Aug 14 17:53:32 2003
+@@ -303,6 +303,8 @@
+       
+       add_user_to_channel(chptr, source_p, flags);
+ 
++      activity_log("JOIN %s %s", chptr->chname, source_p->name);
++
+ #ifdef VCHANS
+       if (joining_vchan)
+ 	add_vchan_to_client_cache(source_p,root_chptr,chptr);
+diff -ru /home/sdh300/cslib/ircd-hybrid-orig/ircd-hybrid-7.0/modules/m_oper.c ircd-hybrid-7.0/modules/m_oper.c
+--- /home/sdh300/cslib/ircd-hybrid-orig/ircd-hybrid-7.0/modules/m_oper.c	Wed Nov  6 21:17:59 2002
++++ ircd-hybrid-7.0/modules/m_oper.c	Mon Aug 18 16:38:58 2003
+@@ -150,6 +150,7 @@
+     ilog(L_TRACE, "OPER %s by %s!%s@%s",
+ 	 name, source_p->name, source_p->username, source_p->host);
+     log_oper(source_p, name);
++    activity_log("OPER %s", source_p->name);
+   }
+   else
+   {
+diff -ru /home/sdh300/cslib/ircd-hybrid-orig/ircd-hybrid-7.0/modules/m_whois.c ircd-hybrid-7.0/modules/m_whois.c
+--- /home/sdh300/cslib/ircd-hybrid-orig/ircd-hybrid-7.0/modules/m_whois.c	Sun Feb  9 00:02:28 2003
++++ ircd-hybrid-7.0/modules/m_whois.c	Mon Aug 18 16:41:50 2003
+@@ -315,6 +315,8 @@
+   int invis;
+   int member;
+   int showperson;
++
++  activity_log("WHOIS %s %s", source_p->name, target_p->name);
+   
+   if (target_p->name[0] == '\0')
+     name = "?";
+diff -ru /home/sdh300/cslib/ircd-hybrid-orig/ircd-hybrid-7.0/src/channel_mode.c ircd-hybrid-7.0/src/channel_mode.c
+--- /home/sdh300/cslib/ircd-hybrid-orig/ircd-hybrid-7.0/src/channel_mode.c	Sun Apr 20 03:33:41 2003
++++ ircd-hybrid-7.0/src/channel_mode.c	Mon Aug 18 16:37:30 2003
+@@ -2076,6 +2076,7 @@
+   char *parptr;
+   int st;
+   int dir = MODE_QUERY;
++  char *modebuf_start;
+ 
+   /* bail out if we have nothing to do... */
+   if (!(mode_count
+@@ -2100,6 +2101,11 @@
+     mbl = ircsprintf(modebuf, ":%s!%s@%s MODE %s ", source_p->name,
+                      source_p->username, source_p->host, chname);
+ 
++  /* save this point in the modebuf, for activity logging we only 
++     want the mode itself */
++
++  modebuf_start = modebuf + strlen(modebuf);
++
+   mc = 0;
+   nc = 0;
+   pbl = 0;
+@@ -2127,9 +2133,13 @@
+       if (mbl && modebuf[mbl - 1] == '-')
+         modebuf[mbl - 1] = '\0';
+ 
+-      if (nc != 0)
++      if (nc != 0) {
+         sendto_channel_local(st, chptr, "%s %s", modebuf, parabuf);
+ 
++	activity_log("MODE %s %s %s %s", chptr->chname, source_p->name, 
++		     modebuf_start, parabuf);
++      }
++
+       nc = 0;
+       mc = 0;
+ 
+@@ -2139,6 +2149,8 @@
+         mbl = ircsprintf(modebuf, ":%s!%s@%s MODE %s ", source_p->name,
+                    source_p->username, source_p->host, chname);
+ 
++      modebuf_start = modebuf + strlen(modebuf);
++
+       pbl = 0;
+       parabuf[0] = '\0';
+       parptr = parabuf;
+@@ -2167,9 +2179,13 @@
+   if (pbl && parabuf[pbl - 1] == ' ')
+     parabuf[pbl - 1] = 0;
+ 
+-  if (nc != 0)
++  if (nc != 0) {
+     sendto_channel_local(st, chptr, "%s %s", modebuf, parabuf);
+ 
++    activity_log("MODE %s %s %s %s", chptr->chname, source_p->name, 
++		 modebuf_start, parabuf);
++  }
++
+   nc = 0;
+   mc = 0;
+ 
+diff -ru /home/sdh300/cslib/ircd-hybrid-orig/ircd-hybrid-7.0/src/client.c ircd-hybrid-7.0/src/client.c
+--- /home/sdh300/cslib/ircd-hybrid-orig/ircd-hybrid-7.0/src/client.c	Sun Mar  2 07:30:54 2003
++++ ircd-hybrid-7.0/src/client.c	Mon Aug 18 16:03:00 2003
+@@ -1391,6 +1391,8 @@
+                            IsIPSpoof(source_p) ? "255.255.255.255" :
+ #endif
+                            source_p->localClient->sockhost);
++
++    activity_log("QUIT %s %s", source_p->name, comment);
+     
+     log_user_exit(source_p);
+   
+@@ -1722,6 +1724,8 @@
+       return 0;
+     }
+ 
++  activity_log("NICK %s %s", source_p->name, nick);
++
+   /* Finally, add to hash */
+   del_from_client_hash_table(source_p->name, source_p);
+   strcpy(source_p->name, nick);
+diff -ru /home/sdh300/cslib/ircd-hybrid-orig/ircd-hybrid-7.0/src/ircd.c ircd-hybrid-7.0/src/ircd.c
+--- /home/sdh300/cslib/ircd-hybrid-orig/ircd-hybrid-7.0/src/ircd.c	Thu May 29 06:13:26 2003
++++ ircd-hybrid-7.0/src/ircd.c	Thu Aug 14 17:13:46 2003
+@@ -110,6 +110,7 @@
+ static unsigned long       initialVMTop = 0;   /* top of virtual memory at init */
+ const char * logFileName = LPATH;
+ const char * pidFileName = PPATH;
++const char * activityLogFileName = APATH;
+ 
+ char**  myargv;
+ int     dorehash   = 0;
+@@ -268,6 +269,8 @@
+    STRING, "File to use for klines.conf"},
+   {"logfile",    &logFileName, 
+    STRING, "File to use for ircd.log"},
++  {"activitylogfile", &activityLogFileName,
++   STRING, "File to use for logging all activity"},
+   {"pidfile",    &pidFileName,
+    STRING, "File to use for process ID"},
+   {"foreground", &server_state.foreground, 
+@@ -625,6 +628,7 @@
+     close_all_connections(); /* this needs to be before init_netio()! */
+   }
+   init_log(logFileName);
++  open_activity_log(activityLogFileName);
+   init_netio();         /* This needs to be setup early ! -- adrian */
+   /* Check if there is pidfile and daemon already running */
+   check_pidfile(pidFileName);
+diff -ru /home/sdh300/cslib/ircd-hybrid-orig/ircd-hybrid-7.0/src/s_log.c ircd-hybrid-7.0/src/s_log.c
+--- /home/sdh300/cslib/ircd-hybrid-orig/ircd-hybrid-7.0/src/s_log.c	Sat Feb 15 16:32:46 2003
++++ ircd-hybrid-7.0/src/s_log.c	Mon Aug 18 16:28:13 2003
+@@ -355,3 +355,54 @@
+     }
+   }
+ }
++
++/*
++ * Activity logging
++ *
++ * This is a separate logfile for logging all server activity (messages,
++ * joins, etc)
++ *
++ */
++
++static FILE *activity_log_file = NULL;
++
++/* 
++ * open_activity_log   - open activity log file
++ *
++ * inputs - activity log filename
++ *
++ */
++
++void open_activity_log(const char *filename)
++{
++  activity_log_file = fopen(filename, "a");
++
++  if (activity_log_file == NULL)
++  {
++#ifdef USE_SYSLOG
++    syslog(LOG_ERR, "Unable to open log file: %s: %s",
++           filename, strerror(errno));
++#endif
++  } else {
++    activity_log("START");
++  }
++}
++
++void activity_log(char *s, ...)
++{
++  va_list args;
++
++  if (!activity_log_file)
++    return;
++
++  va_start(args, s);
++
++  fprintf(activity_log_file, "%i ", time(NULL));
++  vfprintf(activity_log_file, s, args);
++  fprintf(activity_log_file, "\n");
++
++  fflush(activity_log_file);
++
++  va_end(args);
++}
++
+diff -ru /home/sdh300/cslib/ircd-hybrid-orig/ircd-hybrid-7.0/src/s_user.c ircd-hybrid-7.0/src/s_user.c
+--- /home/sdh300/cslib/ircd-hybrid-orig/ircd-hybrid-7.0/src/s_user.c	Thu May 29 05:58:03 2003
++++ ircd-hybrid-7.0/src/s_user.c	Mon Aug 18 16:22:39 2003
+@@ -608,6 +608,10 @@
+       ubuf[1] = '\0';
+     }
+ 
++  activity_log("CONNECT %s!%s@%s %s",
++	       source_p->name, source_p->username, source_p->host,
++               source_p->info);
++
+   /* arghhh one could try not introducing new nicks to ll leafs
+    * but then you have to introduce them "on the fly" in SJOIN
+    * not fun.

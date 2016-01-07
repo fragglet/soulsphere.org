@@ -1,0 +1,159 @@
+--- awstats.pl	Sat Aug 23 10:57:44 2003
++++ /home/sdh300/public_html/cgi-bin/awstats.cgi	Tue Sep  9 16:27:45 2003
+@@ -51,6 +51,7 @@
+ $PluginMode
+ $TotalUnique $TotalVisits $TotalHostsKnown $TotalHostsUnknown
+ $TotalPages $TotalHits $TotalBytes $TotalEntries $TotalExits $TotalBytesPages $TotalDifferentPages
++$TotalV6Pages $TotalV6Hits $TotalV6Bytes
+ $TotalKeyphrases $TotalKeywords $TotalDifferentKeyphrases $TotalDifferentKeywords
+ $TotalSearchEnginesPages $TotalSearchEnginesHits $TotalRefererPages $TotalRefererHits $TotalDifferentSearchEngines $TotalDifferentReferer
+ $FrameName $Center $FileConfig $FileSuffix $Host $DayRequired $MonthRequired $YearRequired
+@@ -149,7 +150,7 @@
+ $FirstDayOfWeek $KeyWordsNotSensitive $SaveDatabaseFilesWithPermissionsForEveryone
+ $WarningMessages $DebugMessages $ShowLinksOnUrl
+ $ShowMenu $ShowMonthStats $ShowDaysOfMonthStats $ShowDaysOfWeekStats
+-$ShowHoursStats $ShowDomainsStats $ShowHostsStats
++$ShowHoursStats $ShowDomainsStats $ShowHostsStats $ShowHostTypeStats
+ $ShowRobotsStats $ShowWormsStats $ShowSessionsStats $ShowPagesStats $ShowFileTypesStats
+ $ShowOSStats $ShowBrowsersStats $ShowOriginStats
+ $ShowKeyphrasesStats $ShowKeywordsStats $ShowMiscStats $ShowHTTPErrorsStats
+@@ -531,7 +532,10 @@
+ 'Size',
+ 'First',
+ 'Last',
+-'Exclude filter'
++'Exclude filter',
++'Address Type',
++'IPv4',
++'IPv6',
+ );
+ 
+ 
+@@ -1479,6 +1483,7 @@
+ 	if ($ShowHoursStats !~ /[01PHBL]/)             	{ $ShowHoursStats='PHBL'; }
+ 	if ($ShowDomainsStats !~ /[01PHB]/)            	{ $ShowDomainsStats='PHB'; }
+ 	if ($ShowHostsStats !~ /[01PHBL]/)             	{ $ShowHostsStats='PHBL'; }
++	if ($ShowHostTypeStats !~ /[01PHB]/)            { $ShowHostTypeStats='PHB'; }
+ 	if ($ShowAuthenticatedUsers !~ /[01PHBL]/)     	{ $ShowAuthenticatedUsers=0; }
+ 	if ($ShowRobotsStats !~ /[01HBL]/)            	{ $ShowRobotsStats='HBL'; }
+ 	if ($ShowWormsStats !~ /[01HL]/)            	{ $ShowWormsStats='HL'; }
+@@ -1551,6 +1556,7 @@
+ 	if ($ShowHoursStats eq '1')         { $ShowHoursStats = 'PHBL'; }
+ 	if ($ShowDomainsStats eq '1')       { $ShowDomainsStats = 'PHB'; }
+ 	if ($ShowHostsStats eq '1')         { $ShowHostsStats = 'PHBL'; }
++	if ($ShowHostTypeStats eq '1')      { $ShowHostTypeStats = 'PHB'; }
+ 	if ($ShowEMailSenders eq '1')       { $ShowEMailSenders = 'HBML'; }
+ 	if ($ShowEMailReceivers eq '1')     { $ShowEMailReceivers = 'HBML'; }
+ 	if ($ShowAuthenticatedUsers eq '1') { $ShowAuthenticatedUsers = 'PHBL'; }
+@@ -2124,6 +2130,7 @@
+ 				if (! $_) { error("History file \"$filetoread\" is corrupted (in section VISITOR). Last line read is number $countlines.\nCorrect the line, restore a recent backup of this file, or remove it (data for this month will be lost).","","",1); }
+ 				my @field=split(/\s+/,$_); $countlines++;
+ 				my $count=0;my $countloaded=0;
++				$TotalV6Hits = $TotalV6Bytes = $TotalV6Pages = 0;
+ 				while ($field[0] ne 'END_VISITOR') {
+ 					if ($field[0]) {
+ 						$count++;
+@@ -2195,6 +2202,16 @@
+ 									elsif ($HTMLOutput{'main'} && ($MonthRequired eq 'all' || $countloaded < $MaxNbOf{'HostsShown'})) { $loadrecord=1; }
+ 								}
+ 							}
++
++							# count up v6 stats (we can find v4 stats by subtracting
++							# from the total)
++
++							if ($ShowHostTypeStats && $field[0] =~ /^[0-9a-z\:]*$/i) {
++								$TotalV6Pages += $field[1];
++								$TotalV6Hits += $field[2];
++								$TotalV6Bytes += $field[3];
++							}
++
+ 							if ($loadrecord) {
+ 								if ($field[1]) { $_host_p{$field[0]}+=$field[1]; }
+ 								if ($field[2]) { $_host_h{$field[0]}+=$field[2]; }
+@@ -6861,6 +6878,7 @@
+ #		&html_end;
+ #		exit(0);
+ #	}
++
+ 	if ($HTMLOutput{'alldomains'}) {
+ 		print "$Center<a name=\"COUNTRIESLIST\">&nbsp;</a><BR>\n";
+ 		# Show domains list
+@@ -6985,6 +7003,7 @@
+ 		&tab_end;
+ 		&html_end;
+ 	}
++
+ 	if ($HTMLOutput{'unknownip'}) {
+ 		print "$Center<a name=\"UNKNOWNIP\">&nbsp;</a><BR>\n";
+ 		&tab_head("$Message[45]",19);
+@@ -8338,6 +8357,70 @@
+ 			}
+ 			&tab_end;
+ 		}
++
++                if ($ShowHostTypeStats) {
++                        print "$Center<a name=\"ADDRESSTYPE\">&nbsp;</a><BR>\n";
++                        &tab_head($Message[154],19);
++                        print "<TR bgcolor=\"#$color_TableBGRowTitle\"><TH>".(scalar keys %_host_h)." $Message[1]</TH>";
++                        &ShowHostInfo('__title__');
++                        if ($ShowHostTypeStats =~ /P/i) { print "<TH bgcolor=\"#$color_p\" width=80>$Message[56]</TH>"; }
++                        if ($ShowHostTypeStats =~ /H/i) { print "<TH bgcolor=\"#$color_h\" width=80>$Message[57]</TH>"; }
++                        if ($ShowHostTypeStats =~ /B/i) { print "<TH bgcolor=\"#$color_k\" width=80>$Message[75]</TH>"; }
++                        print "<TH>&nbsp;</TH>";
++                        print "</TR>\n";
++                        
++			my ($TotalV4Pages, $TotalV4Hits, $TotalV4Bytes) = 
++			  (
++			   $TotalPages - $TotalV6Pages,
++			   $TotalHits - $TotalV6Hits,
++			   $TotalBytes - $TotalV6Bytes
++			  );
++
++			$max_p = $max_h = $max_k = 1;
++			$max_p = $TotalV4Pages if $TotalV4Pages > $max_p;
++			$max_p = $TotalV6Pages if $TotalV6Pages > $max_p;
++			$max_h = $TotalV4Hits if $TotalV4Hits > $max_h;
++			$max_h = $TotalV6Hits if $TotalV6Hits > $max_h;
++			$max_k = $TotalV4Bytes if $TotalV4Bytes > $max_k;
++			$max_k = $TotalV6Bytes if $TotalV6Bytes > $max_k;
++
++                        my ($width_p, $width_h, $width_k);
++
++                        # ipv4
++
++                        $width_p = int(($TotalV4Pages * $BarWidth) / $max_p);
++                        $width_h = int(($TotalV4Hits * $BarWidth) / $max_h);
++                        $width_k = int(($TotalV4Bytes * $BarWidth) / $max_k);
++
++                        print "<TR><TD CLASS=AWS><font color=\"#$color_other\">$Message[155]</font></TD>";
++                        if ($ShowHostTypeStats =~ /P/i) { print "<TD>$TotalV4Pages</TD>"; }
++                        if ($ShowHostTypeStats =~ /H/i) { print "<TD>$TotalV4Hits</TD>"; }
++                        if ($ShowHostTypeStats =~ /B/i) { print "<TD>". Format_Bytes($TotalV4Bytes) . "</TD>"; }
++                        print "<TD CLASS=AWS>";
++                        if ($ShowDomainsStats =~ /P/i) { print "<IMG SRC=\"$DirIcons\/other\/$BarPng{'hp'}\" WIDTH=$width_p HEIGHT=5".AltTitle("")."><br>\n"; }
++                        if ($ShowDomainsStats =~ /H/i) { print "<IMG SRC=\"$DirIcons\/other\/$BarPng{'hh'}\" WIDTH=$width_h HEIGHT=5".AltTitle("")."><br>\n"; }
++                        if ($ShowDomainsStats =~ /B/i) { print "<IMG SRC=\"$DirIcons\/other\/$BarPng{'hk'}\" WIDTH=$width_k HEIGHT=5".AltTitle("").">"; }
++                        print "</TD></TR>\n";
++                        
++                        # ipv6
++                        
++                        $width_p = int(($TotalV6Pages * $BarWidth) / $max_p);
++                        $width_h = int(($TotalV6Hits * $BarWidth) / $max_h);
++                        $width_k = int(($TotalV6Bytes * $BarWidth) / $max_k);
++
++                        print "<TR><TD CLASS=AWS><font color=\"#$color_other\">$Message[156]</font></TD>";
++                        if ($ShowHostTypeStats =~ /P/i) { print "<TD>$TotalV6Pages</TD>"; }
++                        if ($ShowHostTypeStats =~ /H/i) { print "<TD>$TotalV6Hits</TD>"; }
++                        if ($ShowHostTypeStats =~ /B/i) { print "<TD>". Format_Bytes($TotalV6Bytes) . "</TD>"; }
++                        print "<TD CLASS=AWS>";
++                        if ($ShowDomainsStats =~ /P/i) { print "<IMG SRC=\"$DirIcons\/other\/$BarPng{'hp'}\" WIDTH=$width_p HEIGHT=5".AltTitle("")."><br>\n"; }
++                        if ($ShowDomainsStats =~ /H/i) { print "<IMG SRC=\"$DirIcons\/other\/$BarPng{'hh'}\" WIDTH=$width_h HEIGHT=5".AltTitle("")."><br>\n"; }
++                        if ($ShowDomainsStats =~ /B/i) { print "<IMG SRC=\"$DirIcons\/other\/$BarPng{'hk'}\" WIDTH=$width_k HEIGHT=5".AltTitle("").">"; }
++                        print "</TR>\n";
++                        
++                        &tab_end;
++                }
++
+ 	
+ 		# BY SENDER EMAIL
+ 		#----------------------------
