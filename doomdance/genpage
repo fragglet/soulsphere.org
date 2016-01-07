@@ -1,0 +1,55 @@
+#!/bin/sh
+
+function dancers() {
+
+	for d in dancers/*.gif; do
+		echo "<img src='$d'>"
+		echo "<img src='$d'>"
+		echo "<img src='$d'>"
+		echo "<img src='$d'>"
+		echo "<img src='$d'>"
+		echo "<img src='$d'>"
+		echo "<img src='$d'>"
+		echo "<img src='$d'>"
+		echo "<img src='$d'>"
+		echo "<br>"
+		echo
+	done
+
+	echo "<img src='wolf.gif'>"
+	echo "<img src='wolf.gif'>"
+	echo "<img src='wolf.gif'>"
+	echo "<img src='wolf.gif'>"
+	echo "<img src='stfouch0.gif'>"
+	echo "<img src='wolf.gif'>"
+	echo "<img src='wolf.gif'>"
+	echo "<img src='wolf.gif'>"
+	echo "<img src='wolf.gif'>"
+	echo "<br>"
+	echo
+}
+
+echo "<html>"
+echo "<head><title> DOOM DANCE! </title> </head>"
+
+echo "<body background='bldwallblood.png'>"
+echo "<center>"
+
+echo "<font size='32' color='white'>"
+echo "<img src='doomlogo.png'> DANCE! <br><br>"
+
+echo "<img src='DOOMDANCE.gif'> <br><br>"
+
+dancers
+dancers
+dancers
+
+echo "</center>"
+
+echo "<embed src='d_e2m3.mid' autostart=true width=144 height=60 loop=1>"
+
+
+echo "</body>"
+echo "</html>"
+
+
