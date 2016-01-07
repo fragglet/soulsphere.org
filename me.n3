@@ -1,0 +1,100 @@
+# This is a Notation3-format RDF description of myself, using the FOAF
+# ontology. It is signed with my PGP key (see wot:assurance below).
+# For more information, see:
+#   https://en.wikipedia.org/wiki/Resource_Description_Framework
+#   https://en.wikipedia.org/wiki/Notation3
+#   https://en.wikipedia.org/wiki/FOAF_(ontology)
+
+@prefix : <https://soulsphere.org/me.n3#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix wot: <http://xmlns.com/wot/0.1/> .
+
+:me a foaf:Person;
+    owl:sameAs <http://fragglet.livejournal.com/data/foaf>,
+               <http://www.advogato.org/person/fraggle/foaf.rdf#me>;
+    foaf:name "Simon Howard";
+    foaf:givenname "Simon";
+    foaf:family_name "Howard";
+    foaf:nick "fraggle", "fragglet";
+    foaf:gender "male";
+    foaf:myersBriggs "INFJ";
+    foaf:mbox_sha1sum "be71f151a185584e120d1300aba358e4a687f17c";
+    foaf:homepage <https://soulsphere.org/>;
+    foaf:depiction <https://soulsphere.org/me.jpg>;
+    foaf:geekcode """GCS d- s:+ a C+++$ ULX++++$ P--- L++++$ E--- W+++$
+                     o-- w-- O+ M+ PS++ PE Y+ PGP++ t++ 5++ b DI(+) D+++>$
+                     G e+++""";
+    foaf:weblog <https://plus.google.com/111550145781278122079>,
+                <https://fragglet.livejournal.com>;
+    wot:hasKey [ a wot:PubKey;
+                 wot:hex_id "23354344";
+                 wot:length 4096;
+                 wot:pubkeyAddress <https://soulsphere.org/gpg-key.txt>;
+                 wot:fingerprint "6D2C117E0310664497AA9546F6C2EE9C23354344" ];
+    foaf:account
+       [ a foaf:OnlineAccount;
+         foaf:accountServiceHomepage <http://www.advogato.org/>;
+         foaf:accountName "fraggle";
+         foaf:accountProfilePage <http://www.advogato.org/person/fraggle/> ],
+       [ a foaf:OnlineAccount;
+         foaf:accountServiceHomepage <https://delicious.com/>;
+         foaf:accountName "fragglet";
+         foaf:accountProfilePage <https://delicious.com/fragglet> ],
+       [ a foaf:OnlineAccount;
+         foaf:accountServiceHomepage <http://www.doomworld.com/vb/>;
+         foaf:accountName "fraggle";
+         foaf:accountProfilePage <http://www.doomworld.com/vb/members/fraggle/> ],
+       [ a foaf:OnlineAccount;
+         foaf:accountServiceHomepage <http://doomwiki.org/>;
+         foaf:accountName "Fraggle";
+         foaf:accountProfilePage <http://doomwiki.org/wiki/User:Fraggle> ],
+       [ a foaf:OnlineAccount;
+         foaf:accountServiceHomepage <http://www.everything2.com/>;
+         foaf:accountName "phraggle";
+         foaf:accountProfilePage <http://www.everything2.com/index.pl?node_id=899084> ],
+       [ a foaf:OnlineAccount;
+         foaf:accountServiceHomepage <https://www.facebook.com>;
+         foaf:accountName "fragglet";
+         foaf:accountProfilePage <https://www.facebook.com/fragglet> ],
+       [ a foaf:OnlineAccount;
+         foaf:accountServiceHomepage <https://github.com>;
+         foaf:accountName "fragglet";
+         foaf:accountProfilePage <https://github.com/fragglet> ],
+       [ a foaf:OnlineAccount;
+         foaf:accountServiceHomepage <https://www.livejournal.com>;
+         foaf:accountName "fragglet";
+         foaf:accountProfilePage <http://fragglet.livejournal.com/> ],
+       [ a foaf:OnlineAccount;
+         foaf:accountServiceHomepage <https://plus.google.com/>;
+         foaf:accountProfilePage <https://plus.google.com/111550145781278122079> ],
+       [ a foaf:OnlineAccount;
+         foaf:accountServiceHomepage <http://www.reddit.com/>;
+         foaf:accountName "fragglet";
+         foaf:accountProfilePage <http://www.reddit.com/user/fragglet> ],
+       [ a foaf:OnlineAccount;
+         foaf:accountServiceHomepage <http://slashdot.org/>;
+         foaf:accountName "sfraggle";
+         foaf:accountProfilePage <http://slashdot.org/~sfraggle/> ],
+       [ a foaf:OnlineAccount;
+         foaf:accountServiceHomepage <https://sourceforge.net>;
+         foaf:accountName "fraggle";
+         foaf:accountProfilePage <https://sourceforge.net/users/fraggle/> ],
+       [ a foaf:OnlineAccount;
+         foaf:accountServiceHomepage <http://stackoverflow.com/>;
+         foaf:accountProfilePage <http://stackoverflow.com/users/24806/fraggletlivejournalcom> ],
+       [ a foaf:OnlineAccount;
+         foaf:accountServiceHomepage <https://twitter.com/>;
+         foaf:accountName "fraggletastic";
+         foaf:accountProfilePage <https://twitter.com/fraggletastic> ],
+       [ a foaf:OnlineAccount;
+         foaf:accountServiceHomepage <https://www.youtube.com/>;
+         foaf:accountName "fragglet";
+         foaf:accountProfilePage <https://www.youtube.com/fragglet> ] .
+
+<> a foaf:PersonalProfileDocument;
+   foaf:primaryTopic :me;
+   foaf:maker :me;
+   wot:assurance <https://soulsphere.org/me.n3.asc> .
+

@@ -1,0 +1,40 @@
+
+h1 {
+	float: none;
+}
+
+/* Need more space around links in the header so that
+   they're easier to tap. */
+#header > a {
+	padding: 3px;
+	line-height: 1.6;
+}
+
+/* We don't have so much horizontal space on mobile screens,
+   so adjust margins. */
+#header {
+	padding: 1em;
+
+	border-top: 0;
+	margin-top: 0;
+}
+
+h2 {
+	padding-left: 0.5em;
+}
+
+.two-column {
+	width: 18em;
+	padding-left: 1em;
+}
+
+.two-column .left-column {
+	float: none;
+	width: 18em;
+}
+
+.two-column .right-column {
+	float: none;
+	width: 18em;
+}
+

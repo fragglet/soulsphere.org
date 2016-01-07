@@ -1,0 +1,79 @@
+body {
+	margin-top: 0;
+	margin-left: 0px;
+	margin-right: 0px;
+	background-color: #acd;
+	text-rendering: optimizeLegibility;
+	/*background-color: #6ac;*/
+}
+
+* {
+	color: black;
+	font-family: "Ubuntu", "Helvetica Neue",
+	             Helvetica, Arial, "Lucida Grande", sans-serif;
+}
+
+a:visited {
+	color: #456;
+}
+
+h1 {
+	float: right;
+	margin: 0px;
+}
+
+h1 img {
+	width: 0.8em;
+	margin-left: 0.2em;
+}
+
+#header {
+	margin-top: 20px;
+	margin-bottom: 30px;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	padding-left: 30px;
+	padding-right: 30px;
+	background-color: #8ab;
+	/*background-color: #48a;*/
+	border-top: 1px solid black;
+	border-bottom: 1px solid black;
+	overflow: hidden;
+}
+
+h2 {
+	font-size: x-large;
+	padding-left: 45px;
+	margin-top: 1em;
+	margin-bottom: 1em;
+}
+
+.two-column {
+	padding-left: 60px;
+	width: 50em;
+	overflow: hidden;
+}
+
+.two-column .left-column {
+	float: left;
+	width: 25em;
+}
+
+.two-column .right-column {
+	float: right;
+	width: 25em;
+}
+
+.project {
+	margin-bottom: 10px;
+}
+
+.project > a {
+	font-size: large;
+	font-weight: bold;
+}
+
+.project .description {
+	padding-left: 20px;
+}
+
