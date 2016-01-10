@@ -1,0 +1,3 @@
+C networking programs for "bouncing" data. Useful when testing
+networking code to artificially introduce latency, etc.
+
