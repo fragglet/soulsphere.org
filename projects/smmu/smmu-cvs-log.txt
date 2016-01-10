@@ -1,0 +1,1204 @@
+------------------------------------------------------------------------
+r130 | fraggle | 2001-02-25 00:58:56 +0000 (Sun, 25 Feb 2001) | 2 lines
+Changed paths:
+   M /trunk/smmu/v_xwin.c
+
+remove some debug messages
+
+------------------------------------------------------------------------
+r129 | fraggle | 2001-01-18 01:35:53 +0000 (Thu, 18 Jan 2001) | 2 lines
+Changed paths:
+   M /trunk/smmu/cl_demo.c
+   M /trunk/smmu/d_main.c
+   M /trunk/smmu/g_game.c
+   M /trunk/smmu/g_game.h
+
+fix up demo code somewhat
+
+------------------------------------------------------------------------
+r128 | fraggle | 2001-01-15 01:40:06 +0000 (Mon, 15 Jan 2001) | 2 lines
+Changed paths:
+   M /trunk/smmu/mmus2mid.c
+   M /trunk/smmu/mmus2mid.h
+
+remove conflicting mmus2mid typedefs
+
+------------------------------------------------------------------------
+r127 | fraggle | 2001-01-15 01:34:33 +0000 (Mon, 15 Jan 2001) | 3 lines
+Changed paths:
+   M /trunk/smmu/mmus2mid.h
+
+fix ULONG typedef - need to remove this if possible to get rid of the
+conflicts with the windows.h version
+
+------------------------------------------------------------------------
+r126 | fraggle | 2001-01-15 01:33:41 +0000 (Mon, 15 Jan 2001) | 2 lines
+Changed paths:
+   M /trunk/smmu/version.c
+
+mewse
+
+------------------------------------------------------------------------
+r125 | fraggle | 2001-01-15 01:33:03 +0000 (Mon, 15 Jan 2001) | 2 lines
+Changed paths:
+   M /trunk/smmu/mmus2mid.c
+
+MIDIToMidi function made available for windows music code
+
+------------------------------------------------------------------------
+r124 | fraggle | 2001-01-15 01:31:57 +0000 (Mon, 15 Jan 2001) | 2 lines
+Changed paths:
+   M /trunk/smmu/Makefile.in
+
+mmus2mid.c moved to system nonspecific
+
+------------------------------------------------------------------------
+r123 | fraggle | 2001-01-15 01:31:33 +0000 (Mon, 15 Jan 2001) | 2 lines
+Changed paths:
+   M /trunk/smmu/cygwin/v_win32.c
+
+cosmetic - hide window until set up properly
+
+------------------------------------------------------------------------
+r122 | fraggle | 2001-01-15 01:30:41 +0000 (Mon, 15 Jan 2001) | 2 lines
+Changed paths:
+   M /trunk/smmu/config.hin
+   M /trunk/smmu/configure
+   M /trunk/smmu/configure.in
+   M /trunk/smmu/cygwin/i_sound.c
+   M /trunk/smmu/cygwin/i_system.c
+
+Windows music code!
+
+------------------------------------------------------------------------
+r121 | fraggle | 2001-01-14 21:13:45 +0000 (Sun, 14 Jan 2001) | 2 lines
+Changed paths:
+   M /trunk/smmu/midi.h
+
+log tags
+
+------------------------------------------------------------------------
+r120 | fraggle | 2001-01-14 21:13:12 +0000 (Sun, 14 Jan 2001) | 2 lines
+Changed paths:
+   M /trunk/smmu/midi.h
+
+add MIDI_TRACKS
+
+------------------------------------------------------------------------
+r119 | fraggle | 2001-01-14 21:13:00 +0000 (Sun, 14 Jan 2001) | 2 lines
+Changed paths:
+   M /trunk/smmu/mmus2mid.c
+
+fix headers (again)
+
+------------------------------------------------------------------------
+r118 | fraggle | 2001-01-14 21:09:30 +0000 (Sun, 14 Jan 2001) | 2 lines
+Changed paths:
+   M /trunk/smmu/mmus2mid.c
+
+fix headers
+
+------------------------------------------------------------------------
+r117 | fraggle | 2001-01-14 21:08:31 +0000 (Sun, 14 Jan 2001) | 2 lines
+Changed paths:
+   A /trunk/smmu/midi.h
+
+Allegro MIDI structure for other platforms
+
+------------------------------------------------------------------------
+r116 | fraggle | 2001-01-14 21:08:03 +0000 (Sun, 14 Jan 2001) | 2 lines
+Changed paths:
+   D /trunk/smmu/djgpp/mmus2mid.c
+   D /trunk/smmu/djgpp/mmus2mid.h
+   A /trunk/smmu/mmus2mid.c
+   A /trunk/smmu/mmus2mid.h
+
+Move mmus2mid to system-nonspecific so other platforms can use it
+
+------------------------------------------------------------------------
+r115 | fraggle | 2001-01-14 19:22:45 +0000 (Sun, 14 Jan 2001) | 2 lines
+Changed paths:
+   M /trunk/smmu/v_mode.c
+
+fix v_modelist
+
+------------------------------------------------------------------------
+r114 | fraggle | 2001-01-14 02:26:20 +0000 (Sun, 14 Jan 2001) | 2 lines
+Changed paths:
+   M /trunk/smmu/config.hin
+   M /trunk/smmu/v_xwin.c
+
+fix X build
+
+------------------------------------------------------------------------
+r113 | fraggle | 2001-01-14 02:25:26 +0000 (Sun, 14 Jan 2001) | 2 lines
+Changed paths:
+   M /trunk/smmu/Makefile.in
+   M /trunk/smmu/configure
+   M /trunk/smmu/configure.in
+
+fix up weird autoconf bug with X and gdi used at once (???)
+
+------------------------------------------------------------------------
+r112 | fraggle | 2001-01-13 22:39:36 +0000 (Sat, 13 Jan 2001) | 2 lines
+Changed paths:
+   M /trunk/smmu/config.hin
+   M /trunk/smmu/configure
+   M /trunk/smmu/configure.in
+   M /trunk/smmu/net_modl.h
+   M /trunk/smmu/net_udp.c
+
+TCPIP #define moved to config.h, autoconfed
+
+------------------------------------------------------------------------
+r111 | fraggle | 2001-01-13 17:52:31 +0000 (Sat, 13 Jan 2001) | 2 lines
+Changed paths:
+   M /trunk/smmu/compile.txt
+
+Updated info
+
+------------------------------------------------------------------------
+r110 | fraggle | 2001-01-13 17:52:15 +0000 (Sat, 13 Jan 2001) | 2 lines
+Changed paths:
+   M /trunk/smmu/Makefile.in
+
+"make dedicated" fixed
+
+------------------------------------------------------------------------
+r109 | fraggle | 2001-01-13 17:45:08 +0000 (Sat, 13 Jan 2001) | 2 lines
+Changed paths:
+   D /trunk/smmu/linux/old
+
+remove dead tree
+
+------------------------------------------------------------------------
+r108 | fraggle | 2001-01-13 17:43:23 +0000 (Sat, 13 Jan 2001) | 2 lines
+Changed paths:
+   D /trunk/smmu/djgpp/oldasm
+
+Remove dead tree
+
+------------------------------------------------------------------------
+r107 | fraggle | 2001-01-13 17:35:14 +0000 (Sat, 13 Jan 2001) | 2 lines
+Changed paths:
+   M /trunk/smmu/d_main.c
+
+remove some leftover debug code
+
+------------------------------------------------------------------------
+r106 | fraggle | 2001-01-13 17:32:18 +0000 (Sat, 13 Jan 2001) | 2 lines
+Changed paths:
+   M /trunk/smmu/configure
+   M /trunk/smmu/configure.in
+
+config.h.in changed to config.hin for dos mode
+
+------------------------------------------------------------------------
+r105 | fraggle | 2001-01-13 17:31:25 +0000 (Sat, 13 Jan 2001) | 2 lines
+Changed paths:
+   A /trunk/smmu/config.dj
+   A /trunk/smmu/djgpp.bat
+
+DJGPP Configuration files
+
+------------------------------------------------------------------------
+r104 | fraggle | 2001-01-13 17:17:02 +0000 (Sat, 13 Jan 2001) | 2 lines
+Changed paths:
+   D /trunk/smmu/config.h.in
+   A /trunk/smmu/config.hin
+
+rename config.h.in to config.hin for dos
+
+------------------------------------------------------------------------
+r103 | fraggle | 2001-01-13 17:05:35 +0000 (Sat, 13 Jan 2001) | 2 lines
+Changed paths:
+   M /trunk/smmu/cygwin/drawcol.s
+   M /trunk/smmu/cygwin/drawspan.s
+
+fix cygwin asm
+
+------------------------------------------------------------------------
+r102 | fraggle | 2001-01-13 16:58:40 +0000 (Sat, 13 Jan 2001) | 2 lines
+Changed paths:
+   M /trunk/smmu/Makefile.in
+   M /trunk/smmu/configure
+   M /trunk/smmu/configure.in
+
+Fix platform-specific objects
+
+------------------------------------------------------------------------
+r101 | fraggle | 2001-01-13 16:47:02 +0000 (Sat, 13 Jan 2001) | 2 lines
+Changed paths:
+   M /trunk/smmu/config.h.in
+
+fix config.h #ifdef
+
+------------------------------------------------------------------------
+r100 | fraggle | 2001-01-13 16:45:29 +0000 (Sat, 13 Jan 2001) | 2 lines
+Changed paths:
+   A /trunk/smmu/Makefile.in
+   A /trunk/smmu/config.guess
+   A /trunk/smmu/config.h.in
+   A /trunk/smmu/config.sub
+   A /trunk/smmu/configure
+   A /trunk/smmu/configure.in
+   A /trunk/smmu/install-sh
+
+autoconf
+
+------------------------------------------------------------------------
+r99 | fraggle | 2001-01-13 16:43:34 +0000 (Sat, 13 Jan 2001) | 2 lines
+Changed paths:
+   D /trunk/smmu/makefile
+
+Makefile removed - now generated by autoconf
+
+------------------------------------------------------------------------
+r98 | fraggle | 2001-01-13 16:33:47 +0000 (Sat, 13 Jan 2001) | 2 lines
+Changed paths:
+   A /trunk/smmu/cygwin/drawcol.s
+   A /trunk/smmu/cygwin/drawspan.s
+
+Add I386 asm
+
+------------------------------------------------------------------------
+r97 | fraggle | 2001-01-13 16:33:09 +0000 (Sat, 13 Jan 2001) | 3 lines
+Changed paths:
+   M /trunk/smmu/m_fixed.h
+   M /trunk/smmu/r_draw.c
+   M /trunk/smmu/r_things.c
+
+change I386 #define to I386ASM
+to avoid conflicting with compiler-defined I386
+
+------------------------------------------------------------------------
+r96 | fraggle | 2001-01-13 16:32:17 +0000 (Sat, 13 Jan 2001) | 2 lines
+Changed paths:
+   M /trunk/smmu/v_aalib.c
+   M /trunk/smmu/v_xwin.c
+
+fix config.h #include
+
+------------------------------------------------------------------------
+r95 | fraggle | 2001-01-13 14:53:01 +0000 (Sat, 13 Jan 2001) | 2 lines
+Changed paths:
+   D /trunk/smmu/linux/v_xwin.c
+   A /trunk/smmu/v_xwin.c
+
+Move X code to system-nonspecific (cross platform library)
+
+------------------------------------------------------------------------
+r94 | fraggle | 2001-01-13 14:51:22 +0000 (Sat, 13 Jan 2001) | 2 lines
+Changed paths:
+   M /trunk/smmu/doomdef.h
+
+include config.h
+
+------------------------------------------------------------------------
+r93 | fraggle | 2001-01-13 14:50:57 +0000 (Sat, 13 Jan 2001) | 2 lines
+Changed paths:
+   M /trunk/smmu/cygwin/i_sound.c
+   M /trunk/smmu/linux/v_svga.c
+   M /trunk/smmu/linux/v_xwin.c
+   M /trunk/smmu/v_aalib.c
+
+include config.h to check for appropriate libraries
+
+------------------------------------------------------------------------
+r92 | fraggle | 2001-01-13 14:49:57 +0000 (Sat, 13 Jan 2001) | 3 lines
+Changed paths:
+   M /trunk/smmu/cygwin/v_win32.c
+
+fix checking for unsupported modes
+include config.h to check for directdraw library
+
+------------------------------------------------------------------------
+r91 | fraggle | 2001-01-13 14:49:19 +0000 (Sat, 13 Jan 2001) | 2 lines
+Changed paths:
+   M /trunk/smmu/v_mode.c
+
+fix checking for modes not supported
+
+------------------------------------------------------------------------
+r90 | fraggle | 2001-01-13 02:33:26 +0000 (Sat, 13 Jan 2001) | 2 lines
+Changed paths:
+   M /trunk/smmu/cygwin/i_system.c
+   M /trunk/smmu/cygwin/v_win32.c
+
+Fix log tags etc.
+
+------------------------------------------------------------------------
+r89 | fraggle | 2001-01-13 02:31:16 +0000 (Sat, 13 Jan 2001) | 2 lines
+Changed paths:
+   M /trunk/smmu/cygwin/i_sound.c
+
+fix logs
+
+------------------------------------------------------------------------
+r88 | fraggle | 2001-01-13 02:29:46 +0000 (Sat, 13 Jan 2001) | 3 lines
+Changed paths:
+   M /trunk/smmu/cygwin/i_sound.c
+   M /trunk/smmu/cygwin/v_win32.c
+   M /trunk/smmu/linux/v_svga.c
+   M /trunk/smmu/linux/v_xwin.c
+   M /trunk/smmu/v_aalib.c
+   M /trunk/smmu/v_mode.c
+
+changed library #defines to standard HAVE_LIBxyz
+for autoconfing
+
+------------------------------------------------------------------------
+r87 | fraggle | 2001-01-13 02:13:19 +0000 (Sat, 13 Jan 2001) | 2 lines
+Changed paths:
+   M /trunk/smmu/linux/drawcol.s
+   M /trunk/smmu/linux/drawspan.s
+   M /trunk/smmu/r_draw.c
+
+Change USEASM #define to I386
+
+------------------------------------------------------------------------
+r86 | fraggle | 2001-01-13 02:06:16 +0000 (Sat, 13 Jan 2001) | 2 lines
+Changed paths:
+   A /trunk/smmu/v_aalib.c
+
+AALib driver
+
+------------------------------------------------------------------------
+r85 | fraggle | 2001-01-13 00:33:55 +0000 (Sat, 13 Jan 2001) | 2 lines
+Changed paths:
+   M /trunk/smmu/cl_demo.c
+   M /trunk/smmu/mn_menus.c
+
+fix/change fps menu
+
+------------------------------------------------------------------------
+r84 | fraggle | 2001-01-12 20:02:59 +0000 (Fri, 12 Jan 2001) | 2 lines
+Changed paths:
+   M /trunk/smmu/cygwin/v_win32.c
+
+DirectDraw + Fullscreen
+
+------------------------------------------------------------------------
+r82 | fraggle | 2000-08-18 00:34:04 +0100 (Fri, 18 Aug 2000) | 2 lines
+Changed paths:
+   M /trunk/smmu/v_misc.c
+
+null pointer dereference
+
+------------------------------------------------------------------------
+r81 | fraggle | 2000-08-17 15:30:32 +0100 (Thu, 17 Aug 2000) | 2 lines
+Changed paths:
+   M /trunk/smmu/version.c
+
+Up version number
+
+------------------------------------------------------------------------
+r80 | fraggle | 2000-08-17 15:29:47 +0100 (Thu, 17 Aug 2000) | 2 lines
+Changed paths:
+   M /trunk/smmu/linux/v_xwin.c
+
+Fix #include ordering so X window version actually compiles
+
+------------------------------------------------------------------------
+r79 | fraggle | 2000-08-17 15:26:52 +0100 (Thu, 17 Aug 2000) | 2 lines
+Changed paths:
+   M /trunk/smmu/cl_clien.c
+   M /trunk/smmu/cl_find.c
+   M /trunk/smmu/sv_serv.c
+
+seal up possible netgame buffer overruns
+
+------------------------------------------------------------------------
+r78 | fraggle | 2000-08-16 14:29:14 +0100 (Wed, 16 Aug 2000) | 2 lines
+Changed paths:
+   M /trunk/smmu/cl_find.c
+   M /trunk/smmu/sv_serv.c
+   M /trunk/smmu/sv_serv.h
+   M /trunk/smmu/version.c
+   M /trunk/smmu/version.h
+
+more generalised os detection
+
+------------------------------------------------------------------------
+r77 | fraggle | 2000-08-16 14:28:36 +0100 (Wed, 16 Aug 2000) | 2 lines
+Changed paths:
+   M /trunk/smmu/r_things.c
+
+fix asm
+
+------------------------------------------------------------------------
+r76 | fraggle | 2000-08-16 14:28:19 +0100 (Wed, 16 Aug 2000) | 2 lines
+Changed paths:
+   M /trunk/smmu/m_misc.c
+
+shut up compiler
+
+------------------------------------------------------------------------
+r75 | fraggle | 2000-08-16 13:45:36 +0100 (Wed, 16 Aug 2000) | 2 lines
+Changed paths:
+   M /trunk/smmu/makefile
+
+fixed dependencies, added v_text.c
+
+------------------------------------------------------------------------
+r74 | fraggle | 2000-08-16 13:16:01 +0100 (Wed, 16 Aug 2000) | 2 lines
+Changed paths:
+   A /trunk/smmu/djgpp/v_text.c
+   M /trunk/smmu/v_mode.c
+
+text mode driver
+
+------------------------------------------------------------------------
+r65 | fraggle | 2000-07-29 23:40:36 +0100 (Sat, 29 Jul 2000) | 2 lines
+Changed paths:
+   M /trunk/smmu/g_cmd.c
+
+doom_weapon_toggles console cmd
+
+------------------------------------------------------------------------
+r64 | fraggle | 2000-07-29 23:40:18 +0100 (Sat, 29 Jul 2000) | 2 lines
+Changed paths:
+   M /trunk/smmu/v_mode.c
+
+twiddle gamma correction stuff
+
+------------------------------------------------------------------------
+r63 | fraggle | 2000-07-29 23:38:24 +0100 (Sat, 29 Jul 2000) | 2 lines
+Changed paths:
+   A /trunk/smmu/linux/i_esound.h
+   M /trunk/smmu/linux/i_sound.c
+
+linux sound support (thanks finnw)
+
+------------------------------------------------------------------------
+r62 | fraggle | 2000-07-29 23:33:02 +0100 (Sat, 29 Jul 2000) | 2 lines
+Changed paths:
+   M /trunk/smmu/am_map.c
+
+remove automap test code?
+
+------------------------------------------------------------------------
+r61 | fraggle | 2000-07-29 23:32:29 +0100 (Sat, 29 Jul 2000) | 2 lines
+Changed paths:
+   M /trunk/smmu/djgpp/allegro.h
+   M /trunk/smmu/djgpp/i_sound.c
+   M /trunk/smmu/djgpp/internal.h
+   M /trunk/smmu/djgpp/interndj.h
+   M /trunk/smmu/djgpp/v_alleg.c
+
+fix for allegro v3.12
+
+------------------------------------------------------------------------
+r56 | fraggle | 2000-07-28 22:55:46 +0100 (Fri, 28 Jul 2000) | 2 lines
+Changed paths:
+   M /trunk/smmu/c_runcmd.c
+
+hash key case insensitivity
+
+------------------------------------------------------------------------
+r55 | fraggle | 2000-07-28 22:52:00 +0100 (Fri, 28 Jul 2000) | 2 lines
+Changed paths:
+   M /trunk/smmu/t_func.c
+   M /trunk/smmu/t_oper.c
+   M /trunk/smmu/t_parse.c
+   M /trunk/smmu/t_parse.h
+   M /trunk/smmu/t_spec.c
+   M /trunk/smmu/t_vari.c
+   M /trunk/smmu/t_vari.h
+
+floating point math in FraggleScript
+
+------------------------------------------------------------------------
+r54 | fraggle | 2000-06-22 19:30:38 +0100 (Thu, 22 Jun 2000) | 2 lines
+Changed paths:
+   A /trunk/smmu/djgpp/v_vga.c
+   M /trunk/smmu/v_mode.c
+
+VGA Mode driver for Zokum
+
+------------------------------------------------------------------------
+r53 | fraggle | 2000-06-22 19:30:24 +0100 (Thu, 22 Jun 2000) | 2 lines
+Changed paths:
+   M /trunk/smmu/makefile
+
+no message
+
+------------------------------------------------------------------------
+r52 | fraggle | 2000-06-22 19:28:58 +0100 (Thu, 22 Jun 2000) | 4 lines
+Changed paths:
+   M /trunk/smmu/d_main.c
+
+polish various things
+ more useful message when no iwad found
+ fix title screen
+
+------------------------------------------------------------------------
+r51 | fraggle | 2000-06-22 19:28:24 +0100 (Thu, 22 Jun 2000) | 2 lines
+Changed paths:
+   M /trunk/smmu/p_inter.c
+
+fix null pointer dereference
+
+------------------------------------------------------------------------
+r50 | fraggle | 2000-06-22 19:25:44 +0100 (Thu, 22 Jun 2000) | 2 lines
+Changed paths:
+   M /trunk/smmu/sv_serv.c
+
+os_t -> doomos_t to peacefully co-exist with allegro
+
+------------------------------------------------------------------------
+r49 | fraggle | 2000-06-22 19:24:59 +0100 (Thu, 22 Jun 2000) | 2 lines
+Changed paths:
+   M /trunk/smmu/cl_find.c
+   M /trunk/smmu/version.c
+   M /trunk/smmu/version.h
+
+os_t -> doomos_t for peaceful coexistence with allegro
+
+------------------------------------------------------------------------
+r48 | fraggle | 2000-06-20 22:09:50 +0100 (Tue, 20 Jun 2000) | 2 lines
+Changed paths:
+   M /trunk/smmu/djgpp/v_alleg.c
+   M /trunk/smmu/linux/v_svga.c
+   M /trunk/smmu/linux/v_xwin.c
+   M /trunk/smmu/makefile
+   M /trunk/smmu/r_main.c
+   M /trunk/smmu/v_mode.c
+   M /trunk/smmu/v_mode.h
+   M /trunk/smmu/v_video.c
+
+tweak gamma correction stuff
+
+------------------------------------------------------------------------
+r47 | fraggle | 2000-06-20 22:09:27 +0100 (Tue, 20 Jun 2000) | 2 lines
+Changed paths:
+   M /trunk/smmu/cygwin/v_win32.c
+
+fix mouse in win32
+
+------------------------------------------------------------------------
+r46 | fraggle | 2000-06-20 22:08:35 +0100 (Tue, 20 Jun 2000) | 2 lines
+Changed paths:
+   M /trunk/smmu/cl_find.c
+   M /trunk/smmu/sv_serv.c
+   M /trunk/smmu/sv_serv.h
+   M /trunk/smmu/version.c
+   M /trunk/smmu/version.h
+
+platform detection (dos, win32, linux etc)
+
+------------------------------------------------------------------------
+r45 | fraggle | 2000-06-20 22:07:33 +0100 (Tue, 20 Jun 2000) | 2 lines
+Changed paths:
+   M /trunk/smmu/cygwin/i_system.c
+
+fix .cfg file saving
+
+------------------------------------------------------------------------
+r44 | fraggle | 2000-06-20 22:06:43 +0100 (Tue, 20 Jun 2000) | 2 lines
+Changed paths:
+   M /trunk/smmu/c_io.c
+   M /trunk/smmu/cl_clien.c
+   M /trunk/smmu/mn_engin.c
+   M /trunk/smmu/v_misc.c
+   M /trunk/smmu/v_misc.h
+
+V_IsPrint function for portable isprint()
+
+------------------------------------------------------------------------
+r43 | fraggle | 2000-06-20 22:06:10 +0100 (Tue, 20 Jun 2000) | 2 lines
+Changed paths:
+   M /trunk/smmu/p_pspr.c
+   M /trunk/smmu/p_pspr.h
+   M /trunk/smmu/p_user.c
+
+predict psprite bob
+
+------------------------------------------------------------------------
+r42 | fraggle | 2000-06-20 22:05:30 +0100 (Tue, 20 Jun 2000) | 2 lines
+Changed paths:
+   M /trunk/smmu/net_udp.c
+
+fix broadcast in win32
+
+------------------------------------------------------------------------
+r41 | fraggle | 2000-06-19 16:00:23 +0100 (Mon, 19 Jun 2000) | 2 lines
+Changed paths:
+   A /trunk/smmu/cygwin
+   A /trunk/smmu/cygwin/i_main.c
+   A /trunk/smmu/cygwin/i_sound.c
+   A /trunk/smmu/cygwin/i_system.c
+   A /trunk/smmu/cygwin/v_win32.c
+
+cygwin support
+
+------------------------------------------------------------------------
+r40 | fraggle | 2000-06-19 15:58:55 +0100 (Mon, 19 Jun 2000) | 2 lines
+Changed paths:
+   M /trunk/smmu/cl_find.c
+   M /trunk/smmu/doomtype.h
+   M /trunk/smmu/m_bbox.h
+   M /trunk/smmu/m_swap.h
+   M /trunk/smmu/makefile
+   M /trunk/smmu/mn_menus.c
+   M /trunk/smmu/net_udp.c
+   M /trunk/smmu/s_sound.c
+   M /trunk/smmu/sv_serv.c
+   M /trunk/smmu/v_mode.c
+   M /trunk/smmu/wi_stuff.c
+
+cygwin (win32) support
+
+------------------------------------------------------------------------
+r39 | fraggle | 2000-06-19 15:57:37 +0100 (Mon, 19 Jun 2000) | 2 lines
+Changed paths:
+   M /trunk/smmu/djgpp/net_ext.c
+   M /trunk/smmu/djgpp/net_ser.c
+   M /trunk/smmu/djgpp/v_alleg.c
+   M /trunk/smmu/net_loop.c
+
+make functions static
+
+------------------------------------------------------------------------
+r38 | fraggle | 2000-06-09 21:56:23 +0100 (Fri, 09 Jun 2000) | 2 lines
+Changed paths:
+   A /trunk/smmu/djgpp/keyboard.h
+
+add keyboard (fix keyboard stuff for allegro w/ v2 djgpp )
+
+------------------------------------------------------------------------
+r37 | fraggle | 2000-06-09 21:55:14 +0100 (Fri, 09 Jun 2000) | 2 lines
+Changed paths:
+   M /trunk/smmu/djgpp/i_system.c
+   M /trunk/smmu/djgpp/keyboard.c
+
+fix keyboard
+
+------------------------------------------------------------------------
+r36 | fraggle | 2000-06-09 21:55:09 +0100 (Fri, 09 Jun 2000) | 2 lines
+Changed paths:
+   M /trunk/smmu/makefile
+
+*** empty log message ***
+
+------------------------------------------------------------------------
+r35 | fraggle | 2000-06-09 21:54:53 +0100 (Fri, 09 Jun 2000) | 2 lines
+Changed paths:
+   M /trunk/smmu/djgpp/v_alleg.c
+   M /trunk/smmu/linux/v_svga.c
+   M /trunk/smmu/linux/v_xwin.c
+   M /trunk/smmu/v_mode.c
+   M /trunk/smmu/v_mode.h
+
+add I_StartFrame frame-syncronous stuff (joystick)
+
+------------------------------------------------------------------------
+r34 | fraggle | 2000-06-09 21:51:09 +0100 (Fri, 09 Jun 2000) | 2 lines
+Changed paths:
+   M /trunk/smmu/m_fixed.h
+   M /trunk/smmu/r_things.c
+
+fix i386 asm for v2 djgpp
+
+------------------------------------------------------------------------
+r33 | fraggle | 2000-06-04 18:19:22 +0100 (Sun, 04 Jun 2000) | 2 lines
+Changed paths:
+   M /trunk/smmu/cl_clien.c
+   M /trunk/smmu/cl_find.c
+   M /trunk/smmu/djgpp/i_main.c
+   M /trunk/smmu/net_gen.c
+   M /trunk/smmu/sv_serv.c
+   M /trunk/smmu/sv_serv.h
+
+easier reliable-packet send interface
+
+------------------------------------------------------------------------
+r32 | fraggle | 2000-05-24 14:36:05 +0100 (Wed, 24 May 2000) | 2 lines
+Changed paths:
+   M /trunk/smmu/sv_serv.c
+
+secure up server a bit
+
+------------------------------------------------------------------------
+r31 | fraggle | 2000-05-24 14:29:11 +0100 (Wed, 24 May 2000) | 2 lines
+Changed paths:
+   M /trunk/smmu/cl_clien.c
+   M /trunk/smmu/d_player.h
+   M /trunk/smmu/p_map.c
+   M /trunk/smmu/p_user.c
+
+fix jerkiness problem w/client prediction
+
+------------------------------------------------------------------------
+r30 | fraggle | 2000-05-22 11:14:02 +0100 (Mon, 22 May 2000) | 2 lines
+Changed paths:
+   M /trunk/smmu/p_user.c
+
+nothing
+
+------------------------------------------------------------------------
+r29 | fraggle | 2000-05-22 11:01:54 +0100 (Mon, 22 May 2000) | 2 lines
+Changed paths:
+   M /trunk/smmu/g_bind.c
+   M /trunk/smmu/g_game.c
+
+ctrl-d to disconnect from server
+
+------------------------------------------------------------------------
+r28 | fraggle | 2000-05-22 10:59:36 +0100 (Mon, 22 May 2000) | 2 lines
+Changed paths:
+   M /trunk/smmu/sv_serv.h
+
+ticcmds/packet increased
+
+------------------------------------------------------------------------
+r27 | fraggle | 2000-05-22 10:59:04 +0100 (Mon, 22 May 2000) | 2 lines
+Changed paths:
+   M /trunk/smmu/sv_serv.c
+
+/msg, /me commands for chat room
+
+------------------------------------------------------------------------
+r26 | fraggle | 2000-05-22 10:57:45 +0100 (Mon, 22 May 2000) | 2 lines
+Changed paths:
+   M /trunk/smmu/cl_clien.c
+
+increase maximum lag to 40
+
+------------------------------------------------------------------------
+r25 | fraggle | 2000-05-12 17:42:20 +0100 (Fri, 12 May 2000) | 2 lines
+Changed paths:
+   M /trunk/smmu/g_bind.c
+   M /trunk/smmu/hu_stuff.c
+
+ctrl-d to disconnect from server
+
+------------------------------------------------------------------------
+r24 | fraggle | 2000-05-12 17:41:59 +0100 (Fri, 12 May 2000) | 2 lines
+Changed paths:
+   M /trunk/smmu/cl_clien.c
+   M /trunk/smmu/sv_serv.c
+
+even better speeddup algorithm
+
+------------------------------------------------------------------------
+r23 | fraggle | 2000-05-10 14:11:37 +0100 (Wed, 10 May 2000) | 2 lines
+Changed paths:
+   M /trunk/smmu/cl_clien.c
+   M /trunk/smmu/cl_demo.c
+   M /trunk/smmu/g_bind.c
+   M /trunk/smmu/g_cmd.c
+   M /trunk/smmu/r_main.c
+   M /trunk/smmu/w_wad.h
+
+fix demos
+
+------------------------------------------------------------------------
+r22 | fraggle | 2000-05-07 15:14:09 +0100 (Sun, 07 May 2000) | 2 lines
+Changed paths:
+   M /trunk/smmu/d_main.c
+
+default to graphic startup
+
+------------------------------------------------------------------------
+r21 | fraggle | 2000-05-07 15:10:28 +0100 (Sun, 07 May 2000) | 2 lines
+Changed paths:
+   M /trunk/smmu/sv_serv.c
+
+better time adjustment algorithm
+
+------------------------------------------------------------------------
+r20 | fraggle | 2000-05-07 14:40:31 +0100 (Sun, 07 May 2000) | 2 lines
+Changed paths:
+   M /trunk/smmu/cl_clien.c
+
+default to full prediction
+
+------------------------------------------------------------------------
+r19 | fraggle | 2000-05-07 14:11:21 +0100 (Sun, 07 May 2000) | 2 lines
+Changed paths:
+   M /trunk/smmu/cl_clien.c
+   M /trunk/smmu/mn_misc.c
+   M /trunk/smmu/sv_serv.c
+
+improve multiplayer chatroom interface
+
+------------------------------------------------------------------------
+r18 | fraggle | 2000-05-07 14:01:12 +0100 (Sun, 07 May 2000) | 2 lines
+Changed paths:
+   M /trunk/smmu/hu_stuff.c
+   M /trunk/smmu/p_user.c
+
+lightup crosshair prediction
+
+------------------------------------------------------------------------
+r17 | fraggle | 2000-05-06 15:39:10 +0100 (Sat, 06 May 2000) | 2 lines
+Changed paths:
+   M /trunk/smmu/cl_clien.c
+   M /trunk/smmu/mn_net.c
+
+add prediction/ticdup to menu
+
+------------------------------------------------------------------------
+r16 | fraggle | 2000-05-06 15:06:11 +0100 (Sat, 06 May 2000) | 2 lines
+Changed paths:
+   M /trunk/smmu/c_net.c
+   M /trunk/smmu/cl_clien.c
+   M /trunk/smmu/sv_serv.c
+   M /trunk/smmu/sv_serv.h
+
+fix ticdup
+
+------------------------------------------------------------------------
+r15 | fraggle | 2000-05-06 15:05:39 +0100 (Sat, 06 May 2000) | 2 lines
+Changed paths:
+   M /trunk/smmu/net_udp.c
+
+udp stats console cmd
+
+------------------------------------------------------------------------
+r14 | fraggle | 2000-05-03 17:47:23 +0100 (Wed, 03 May 2000) | 2 lines
+Changed paths:
+   M /trunk/smmu/w_wad.h
+
+add W_Signature
+
+------------------------------------------------------------------------
+r13 | fraggle | 2000-05-03 17:46:45 +0100 (Wed, 03 May 2000) | 2 lines
+Changed paths:
+   M /trunk/smmu/cl_clien.c
+   M /trunk/smmu/sv_serv.c
+   M /trunk/smmu/sv_serv.h
+   M /trunk/smmu/w_wad.c
+
+check wads in netgames
+
+------------------------------------------------------------------------
+r12 | fraggle | 2000-05-03 17:30:42 +0100 (Wed, 03 May 2000) | 2 lines
+Changed paths:
+   M /trunk/smmu/cl_clien.c
+
+remove multiplayer quit flash
+
+------------------------------------------------------------------------
+r11 | fraggle | 2000-05-03 17:21:23 +0100 (Wed, 03 May 2000) | 2 lines
+Changed paths:
+   M /trunk/smmu/cl_clien.c
+   M /trunk/smmu/net_gen.c
+   M /trunk/smmu/p_mobj.c
+   M /trunk/smmu/sv_serv.c
+   M /trunk/smmu/sv_serv.h
+
+client speedup code
+
+------------------------------------------------------------------------
+r10 | fraggle | 2000-05-03 17:02:27 +0100 (Wed, 03 May 2000) | 2 lines
+Changed paths:
+   M /trunk/smmu/net_udp.c
+
+packet stats
+
+------------------------------------------------------------------------
+r9 | fraggle | 2000-05-02 16:43:41 +0100 (Tue, 02 May 2000) | 2 lines
+Changed paths:
+   M /trunk/smmu/cl_clien.c
+   M /trunk/smmu/d_player.h
+   M /trunk/smmu/p_enemy.c
+   M /trunk/smmu/p_inter.c
+   M /trunk/smmu/p_map.c
+   M /trunk/smmu/p_mobj.c
+   M /trunk/smmu/p_pspr.c
+   M /trunk/smmu/p_tick.c
+   M /trunk/smmu/p_user.c
+   M /trunk/smmu/p_user.h
+   M /trunk/smmu/r_main.c
+   M /trunk/smmu/r_things.c
+   M /trunk/smmu/sv_serv.c
+
+client movement prediction
+
+------------------------------------------------------------------------
+r8 | fraggle | 2000-05-02 16:43:10 +0100 (Tue, 02 May 2000) | 2 lines
+Changed paths:
+   M /trunk/smmu/net_udp.c
+
+lag simulation code
+
+------------------------------------------------------------------------
+r7 | fraggle | 2000-04-30 20:49:26 +0100 (Sun, 30 Apr 2000) | 2 lines
+Changed paths:
+   D /trunk/smmu/bexout.txt
+   D /trunk/smmu/sock.vxd
+
+remove files which are not supposed to be here
+
+------------------------------------------------------------------------
+r6 | fraggle | 2000-04-30 20:45:32 +0100 (Sun, 30 Apr 2000) | 2 lines
+Changed paths:
+   M /trunk/smmu/djgpp/ser_port.c
+
+remove d_net.c
+
+------------------------------------------------------------------------
+r5 | fraggle | 2000-04-30 20:45:21 +0100 (Sun, 30 Apr 2000) | 2 lines
+Changed paths:
+   D /trunk/smmu/smmu.wad
+
+removed smmu.wad from repository
+
+------------------------------------------------------------------------
+r4 | fraggle | 2000-04-30 20:38:33 +0100 (Sun, 30 Apr 2000) | 2 lines
+Changed paths:
+   M /trunk/smmu/linux/i_system.c
+   M /trunk/smmu/linux/v_xwin.c
+
+fix linux build
+
+------------------------------------------------------------------------
+r3 | fraggle | 2000-04-30 20:12:12 +0100 (Sun, 30 Apr 2000) | 2 lines
+Changed paths:
+   A /trunk/smmu
+   A /trunk/smmu/COPYING
+   A /trunk/smmu/am_color.c
+   A /trunk/smmu/am_map.c
+   A /trunk/smmu/am_map.h
+   A /trunk/smmu/bexout.txt
+   A /trunk/smmu/c_cmd.c
+   A /trunk/smmu/c_io.c
+   A /trunk/smmu/c_io.h
+   A /trunk/smmu/c_net.c
+   A /trunk/smmu/c_net.h
+   A /trunk/smmu/c_runcmd.c
+   A /trunk/smmu/c_runcmd.h
+   A /trunk/smmu/changes.txt
+   A /trunk/smmu/cl_clien.c
+   A /trunk/smmu/cl_clien.h
+   A /trunk/smmu/cl_demo.c
+   A /trunk/smmu/cl_find.c
+   A /trunk/smmu/compile.txt
+   A /trunk/smmu/copx.bat
+   A /trunk/smmu/d_deh.c
+   A /trunk/smmu/d_deh.h
+   A /trunk/smmu/d_englsh.h
+   A /trunk/smmu/d_event.h
+   A /trunk/smmu/d_french.h
+   A /trunk/smmu/d_items.c
+   A /trunk/smmu/d_items.h
+   A /trunk/smmu/d_main.c
+   A /trunk/smmu/d_main.h
+   A /trunk/smmu/d_player.h
+   A /trunk/smmu/d_textur.h
+   A /trunk/smmu/d_think.h
+   A /trunk/smmu/d_ticcmd.h
+   A /trunk/smmu/dedserv.c
+   A /trunk/smmu/dedserv.mak
+   A /trunk/smmu/djgpp
+   A /trunk/smmu/djgpp/allegro.h
+   A /trunk/smmu/djgpp/drawcol.s
+   A /trunk/smmu/djgpp/drawspan.s
+   A /trunk/smmu/djgpp/emu8k.h
+   A /trunk/smmu/djgpp/emu8kmid.c
+   A /trunk/smmu/djgpp/i_main.c
+   A /trunk/smmu/djgpp/i_sound.c
+   A /trunk/smmu/djgpp/i_system.c
+   A /trunk/smmu/djgpp/internal.h
+   A /trunk/smmu/djgpp/interndj.h
+   A /trunk/smmu/djgpp/keyboard.c
+   A /trunk/smmu/djgpp/mmus2mid.c
+   A /trunk/smmu/djgpp/mmus2mid.h
+   A /trunk/smmu/djgpp/net_ext.c
+   A /trunk/smmu/djgpp/net_ser.c
+   A /trunk/smmu/djgpp/oldasm
+   A /trunk/smmu/djgpp/oldasm/DRAWCOL.S
+   A /trunk/smmu/djgpp/oldasm/DRAWSPAN.S
+   A /trunk/smmu/djgpp/oldasm/PPROBLIT.S
+   A /trunk/smmu/djgpp/pproblit.s
+   A /trunk/smmu/djgpp/ser_port.c
+   A /trunk/smmu/djgpp/ser_port.h
+   A /trunk/smmu/djgpp/v_alleg.c
+   A /trunk/smmu/doomdata.h
+   A /trunk/smmu/doomdef.c
+   A /trunk/smmu/doomdef.h
+   A /trunk/smmu/doomstat.c
+   A /trunk/smmu/doomstat.h
+   A /trunk/smmu/doomtype.h
+   A /trunk/smmu/dstrings.c
+   A /trunk/smmu/dstrings.h
+   A /trunk/smmu/f_finale.c
+   A /trunk/smmu/f_finale.h
+   A /trunk/smmu/f_wipe.c
+   A /trunk/smmu/f_wipe.h
+   A /trunk/smmu/g_bind.c
+   A /trunk/smmu/g_bind.h
+   A /trunk/smmu/g_cmd.c
+   A /trunk/smmu/g_game.c
+   A /trunk/smmu/g_game.h
+   A /trunk/smmu/hu_frags.c
+   A /trunk/smmu/hu_frags.h
+   A /trunk/smmu/hu_over.c
+   A /trunk/smmu/hu_over.h
+   A /trunk/smmu/hu_stuff.c
+   A /trunk/smmu/hu_stuff.h
+   A /trunk/smmu/i_sound.h
+   A /trunk/smmu/i_system.h
+   A /trunk/smmu/info.c
+   A /trunk/smmu/info.h
+   A /trunk/smmu/linux
+   A /trunk/smmu/linux/drawcol.s
+   A /trunk/smmu/linux/drawspan.s
+   A /trunk/smmu/linux/i_main.c
+   A /trunk/smmu/linux/i_sound.c
+   A /trunk/smmu/linux/i_system.c
+   A /trunk/smmu/linux/old
+   A /trunk/smmu/linux/old/i_svga.c
+   A /trunk/smmu/linux/old/i_xwin.c
+   A /trunk/smmu/linux/v_svga.c
+   A /trunk/smmu/linux/v_xwin.c
+   A /trunk/smmu/m_argv.c
+   A /trunk/smmu/m_argv.h
+   A /trunk/smmu/m_bbox.c
+   A /trunk/smmu/m_bbox.h
+   A /trunk/smmu/m_cheat.c
+   A /trunk/smmu/m_cheat.h
+   A /trunk/smmu/m_fixed.h
+   A /trunk/smmu/m_misc.c
+   A /trunk/smmu/m_misc.h
+   A /trunk/smmu/m_random.c
+   A /trunk/smmu/m_random.h
+   A /trunk/smmu/m_swap.h
+   A /trunk/smmu/makefile
+   A /trunk/smmu/mn_engin.c
+   A /trunk/smmu/mn_engin.h
+   A /trunk/smmu/mn_files.c
+   A /trunk/smmu/mn_menus.c
+   A /trunk/smmu/mn_menus.h
+   A /trunk/smmu/mn_misc.c
+   A /trunk/smmu/mn_misc.h
+   A /trunk/smmu/mn_net.c
+   A /trunk/smmu/net_gen.c
+   A /trunk/smmu/net_gen.h
+   A /trunk/smmu/net_loop.c
+   A /trunk/smmu/net_modl.h
+   A /trunk/smmu/net_udp.c
+   A /trunk/smmu/oldate.bat
+   A /trunk/smmu/p_ceilng.c
+   A /trunk/smmu/p_chase.c
+   A /trunk/smmu/p_chase.h
+   A /trunk/smmu/p_cmd.c
+   A /trunk/smmu/p_doors.c
+   A /trunk/smmu/p_enemy.c
+   A /trunk/smmu/p_enemy.h
+   A /trunk/smmu/p_floor.c
+   A /trunk/smmu/p_genlin.c
+   A /trunk/smmu/p_hubs.c
+   A /trunk/smmu/p_hubs.h
+   A /trunk/smmu/p_info.c
+   A /trunk/smmu/p_info.h
+   A /trunk/smmu/p_inter.c
+   A /trunk/smmu/p_inter.h
+   A /trunk/smmu/p_lights.c
+   A /trunk/smmu/p_map.c
+   A /trunk/smmu/p_map.h
+   A /trunk/smmu/p_maputl.c
+   A /trunk/smmu/p_maputl.h
+   A /trunk/smmu/p_mobj.c
+   A /trunk/smmu/p_mobj.h
+   A /trunk/smmu/p_plats.c
+   A /trunk/smmu/p_pspr.c
+   A /trunk/smmu/p_pspr.h
+   A /trunk/smmu/p_saveg.c
+   A /trunk/smmu/p_saveg.h
+   A /trunk/smmu/p_setup.c
+   A /trunk/smmu/p_setup.h
+   A /trunk/smmu/p_sight.c
+   A /trunk/smmu/p_skin.c
+   A /trunk/smmu/p_skin.h
+   A /trunk/smmu/p_spec.c
+   A /trunk/smmu/p_spec.h
+   A /trunk/smmu/p_switch.c
+   A /trunk/smmu/p_telept.c
+   A /trunk/smmu/p_tick.c
+   A /trunk/smmu/p_tick.h
+   A /trunk/smmu/p_user.c
+   A /trunk/smmu/p_user.h
+   A /trunk/smmu/r_bsp.c
+   A /trunk/smmu/r_bsp.h
+   A /trunk/smmu/r_data.c
+   A /trunk/smmu/r_data.h
+   A /trunk/smmu/r_defs.h
+   A /trunk/smmu/r_draw.c
+   A /trunk/smmu/r_draw.h
+   A /trunk/smmu/r_main.c
+   A /trunk/smmu/r_main.h
+   A /trunk/smmu/r_plane.c
+   A /trunk/smmu/r_plane.h
+   A /trunk/smmu/r_ripple.c
+   A /trunk/smmu/r_ripple.h
+   A /trunk/smmu/r_segs.c
+   A /trunk/smmu/r_segs.h
+   A /trunk/smmu/r_sky.c
+   A /trunk/smmu/r_sky.h
+   A /trunk/smmu/r_state.h
+   A /trunk/smmu/r_things.c
+   A /trunk/smmu/r_things.h
+   A /trunk/smmu/s_sound.c
+   A /trunk/smmu/s_sound.h
+   A /trunk/smmu/smmu.wad
+   A /trunk/smmu/sock.vxd
+   A /trunk/smmu/sounds.c
+   A /trunk/smmu/sounds.h
+   A /trunk/smmu/st_lib.c
+   A /trunk/smmu/st_lib.h
+   A /trunk/smmu/st_stuff.c
+   A /trunk/smmu/st_stuff.h
+   A /trunk/smmu/stripexe.bat
+   A /trunk/smmu/sv_serv.c
+   A /trunk/smmu/sv_serv.h
+   A /trunk/smmu/t_func.c
+   A /trunk/smmu/t_func.h
+   A /trunk/smmu/t_oper.c
+   A /trunk/smmu/t_oper.h
+   A /trunk/smmu/t_parse.c
+   A /trunk/smmu/t_parse.h
+   A /trunk/smmu/t_prepro.c
+   A /trunk/smmu/t_prepro.h
+   A /trunk/smmu/t_script.c
+   A /trunk/smmu/t_script.h
+   A /trunk/smmu/t_spec.c
+   A /trunk/smmu/t_spec.h
+   A /trunk/smmu/t_vari.c
+   A /trunk/smmu/t_vari.h
+   A /trunk/smmu/tables.c
+   A /trunk/smmu/tables.h
+   A /trunk/smmu/utils
+   A /trunk/smmu/utils/defswani.dat
+   A /trunk/smmu/utils/makefile
+   A /trunk/smmu/utils/src
+   A /trunk/smmu/utils/src/add_fs
+   A /trunk/smmu/utils/src/add_fs/main.c
+   A /trunk/smmu/utils/src/add_fs/makefile
+   A /trunk/smmu/utils/src/add_fs/waddir.c
+   A /trunk/smmu/utils/src/add_fs/waddir.h
+   A /trunk/smmu/utils/src/swantbls
+   A /trunk/smmu/utils/src/swantbls/defswani.dat
+   A /trunk/smmu/utils/src/swantbls/makefile
+   A /trunk/smmu/utils/src/swantbls/swantbls.c
+   A /trunk/smmu/v_misc.c
+   A /trunk/smmu/v_misc.h
+   A /trunk/smmu/v_mode.c
+   A /trunk/smmu/v_mode.h
+   A /trunk/smmu/v_video.c
+   A /trunk/smmu/v_video.h
+   A /trunk/smmu/version.c
+   A /trunk/smmu/version.h
+   A /trunk/smmu/w_wad.c
+   A /trunk/smmu/w_wad.h
+   A /trunk/smmu/wi_stuff.c
+   A /trunk/smmu/wi_stuff.h
+   A /trunk/smmu/winsock2.bat
+   A /trunk/smmu/z_zone.c
+   A /trunk/smmu/z_zone.h
+
+initial import
+
+------------------------------------------------------------------------

@@ -1,0 +1,425 @@
+------------------------------------------------------------------------
+r83 | fraggle | 2000-08-22 21:09:17 +0100 (Tue, 22 Aug 2000) | 2 lines
+Changed paths:
+   M /trunk/mbf/p_spec.c
+
+bug with 3key doors!
+
+------------------------------------------------------------------------
+r73 | fraggle | 2000-08-12 22:29:34 +0100 (Sat, 12 Aug 2000) | 2 lines
+Changed paths:
+   M /trunk/mbf/am_map.c
+   M /trunk/mbf/am_map.h
+   M /trunk/mbf/d_deh.c
+   M /trunk/mbf/d_deh.h
+   M /trunk/mbf/d_englsh.h
+   M /trunk/mbf/d_event.h
+   M /trunk/mbf/d_french.h
+   M /trunk/mbf/d_items.c
+   M /trunk/mbf/d_items.h
+   M /trunk/mbf/d_main.c
+   M /trunk/mbf/d_main.h
+   M /trunk/mbf/d_net.c
+   M /trunk/mbf/d_net.h
+   M /trunk/mbf/d_player.h
+   M /trunk/mbf/d_textur.h
+   M /trunk/mbf/d_think.h
+   M /trunk/mbf/d_ticcmd.h
+   M /trunk/mbf/doomdata.h
+   M /trunk/mbf/doomdef.c
+   M /trunk/mbf/doomdef.h
+   M /trunk/mbf/doomstat.c
+   M /trunk/mbf/doomstat.h
+   M /trunk/mbf/doomtype.h
+   M /trunk/mbf/dstrings.c
+   M /trunk/mbf/dstrings.h
+   M /trunk/mbf/f_finale.c
+   M /trunk/mbf/f_finale.h
+   M /trunk/mbf/f_wipe.c
+   M /trunk/mbf/f_wipe.h
+   M /trunk/mbf/g_game.c
+   M /trunk/mbf/g_game.h
+   M /trunk/mbf/hu_lib.c
+   M /trunk/mbf/hu_lib.h
+   M /trunk/mbf/hu_stuff.c
+   M /trunk/mbf/hu_stuff.h
+   M /trunk/mbf/i_main.c
+   M /trunk/mbf/i_net.c
+   M /trunk/mbf/i_net.h
+   M /trunk/mbf/i_sound.c
+   M /trunk/mbf/i_sound.h
+   M /trunk/mbf/i_system.c
+   M /trunk/mbf/i_system.h
+   M /trunk/mbf/i_video.c
+   M /trunk/mbf/i_video.h
+   M /trunk/mbf/info.c
+   M /trunk/mbf/info.h
+   M /trunk/mbf/m_argv.c
+   M /trunk/mbf/m_argv.h
+   M /trunk/mbf/m_bbox.c
+   M /trunk/mbf/m_bbox.h
+   M /trunk/mbf/m_cheat.c
+   M /trunk/mbf/m_cheat.h
+   M /trunk/mbf/m_fixed.h
+   M /trunk/mbf/m_menu.c
+   M /trunk/mbf/m_menu.h
+   M /trunk/mbf/m_misc.c
+   M /trunk/mbf/m_misc.h
+   M /trunk/mbf/m_random.c
+   M /trunk/mbf/m_random.h
+   M /trunk/mbf/m_swap.h
+   M /trunk/mbf/p_ceilng.c
+   M /trunk/mbf/p_doors.c
+   M /trunk/mbf/p_enemy.c
+   M /trunk/mbf/p_enemy.h
+   M /trunk/mbf/p_floor.c
+   M /trunk/mbf/p_genlin.c
+   M /trunk/mbf/p_inter.c
+   M /trunk/mbf/p_inter.h
+   M /trunk/mbf/p_lights.c
+   M /trunk/mbf/p_map.c
+   M /trunk/mbf/p_map.h
+   M /trunk/mbf/p_maputl.c
+   M /trunk/mbf/p_maputl.h
+   M /trunk/mbf/p_mobj.c
+   M /trunk/mbf/p_mobj.h
+   M /trunk/mbf/p_plats.c
+   M /trunk/mbf/p_pspr.c
+   M /trunk/mbf/p_pspr.h
+   M /trunk/mbf/p_saveg.c
+   M /trunk/mbf/p_saveg.h
+   M /trunk/mbf/p_setup.c
+   M /trunk/mbf/p_setup.h
+   M /trunk/mbf/p_sight.c
+   M /trunk/mbf/p_spec.c
+   M /trunk/mbf/p_spec.h
+   M /trunk/mbf/p_switch.c
+   M /trunk/mbf/p_telept.c
+   M /trunk/mbf/p_tick.c
+   M /trunk/mbf/p_tick.h
+   M /trunk/mbf/p_user.c
+   M /trunk/mbf/p_user.h
+   M /trunk/mbf/r_bsp.c
+   M /trunk/mbf/r_bsp.h
+   M /trunk/mbf/r_data.c
+   M /trunk/mbf/r_data.h
+   M /trunk/mbf/r_defs.h
+   M /trunk/mbf/r_draw.c
+   M /trunk/mbf/r_draw.h
+   M /trunk/mbf/r_main.c
+   M /trunk/mbf/r_main.h
+   M /trunk/mbf/r_plane.c
+   M /trunk/mbf/r_plane.h
+   M /trunk/mbf/r_segs.c
+   M /trunk/mbf/r_segs.h
+   M /trunk/mbf/r_sky.c
+   M /trunk/mbf/r_sky.h
+   M /trunk/mbf/r_state.h
+   M /trunk/mbf/r_things.c
+   M /trunk/mbf/r_things.h
+   M /trunk/mbf/s_sound.c
+   M /trunk/mbf/s_sound.h
+   M /trunk/mbf/sounds.c
+   M /trunk/mbf/sounds.h
+   M /trunk/mbf/st_lib.c
+   M /trunk/mbf/st_lib.h
+   M /trunk/mbf/st_stuff.c
+   M /trunk/mbf/st_stuff.h
+   M /trunk/mbf/tables.c
+   M /trunk/mbf/tables.h
+   M /trunk/mbf/v_video.c
+   M /trunk/mbf/v_video.h
+   M /trunk/mbf/w_wad.c
+   M /trunk/mbf/w_wad.h
+   M /trunk/mbf/wi_stuff.c
+   M /trunk/mbf/wi_stuff.h
+   M /trunk/mbf/z_zone.c
+   M /trunk/mbf/z_zone.h
+
+change license header
+
+------------------------------------------------------------------------
+r72 | fraggle | 2000-08-12 00:11:50 +0100 (Sat, 12 Aug 2000) | 2 lines
+Changed paths:
+   A /trunk/mbf/keyboard.h
+
+allegro keyboard code fix
+
+------------------------------------------------------------------------
+r71 | fraggle | 2000-08-12 00:09:44 +0100 (Sat, 12 Aug 2000) | 2 lines
+Changed paths:
+   M /trunk/mbf/r_draw.c
+
+blur effect fix
+
+------------------------------------------------------------------------
+r70 | fraggle | 2000-08-01 21:23:05 +0100 (Tue, 01 Aug 2000) | 2 lines
+Changed paths:
+   M /trunk/mbf/i_sound.c
+
+stereo fix for allegro v3.12
+
+------------------------------------------------------------------------
+r69 | fraggle | 2000-08-01 21:22:41 +0100 (Tue, 01 Aug 2000) | 2 lines
+Changed paths:
+   M /trunk/mbf/z_zone.c
+
+bugfixes from lxdoom
+
+------------------------------------------------------------------------
+r68 | fraggle | 2000-07-30 00:28:24 +0100 (Sun, 30 Jul 2000) | 2 lines
+Changed paths:
+   M /trunk/mbf/d_main.c
+   M /trunk/mbf/f_finale.c
+   M /trunk/mbf/g_game.c
+   M /trunk/mbf/hu_stuff.c
+   M /trunk/mbf/m_cheat.c
+   M /trunk/mbf/m_menu.c
+   M /trunk/mbf/m_misc.c
+   M /trunk/mbf/p_enemy.c
+   M /trunk/mbf/p_inter.c
+   M /trunk/mbf/p_map.c
+   M /trunk/mbf/p_mobj.c
+   M /trunk/mbf/r_bsp.c
+   M /trunk/mbf/r_data.c
+   M /trunk/mbf/r_plane.c
+   M /trunk/mbf/r_segs.c
+   M /trunk/mbf/r_things.c
+   M /trunk/mbf/s_sound.c
+   M /trunk/mbf/st_lib.c
+
+fix ambiguous else warnings
+
+------------------------------------------------------------------------
+r67 | fraggle | 2000-07-30 00:28:00 +0100 (Sun, 30 Jul 2000) | 2 lines
+Changed paths:
+   D /trunk/mbf/attic
+
+remove exes
+
+------------------------------------------------------------------------
+r66 | fraggle | 2000-07-29 23:48:23 +0100 (Sat, 29 Jul 2000) | 2 lines
+Changed paths:
+   M /trunk/mbf/i_system.c
+   M /trunk/mbf/i_video.c
+   M /trunk/mbf/keyboard.c
+
+fix for allegro v3.12
+
+------------------------------------------------------------------------
+r60 | fraggle | 2000-07-29 14:48:25 +0100 (Sat, 29 Jul 2000) | 2 lines
+Changed paths:
+   M /trunk/mbf/m_fixed.h
+   M /trunk/mbf/r_things.c
+
+fix asm
+
+------------------------------------------------------------------------
+r59 | fraggle | 2000-07-29 14:48:12 +0100 (Sat, 29 Jul 2000) | 2 lines
+Changed paths:
+   M /trunk/mbf/d_deh.h
+
+fix multiline comment errors
+
+------------------------------------------------------------------------
+r57 | fraggle | 2000-07-29 14:20:41 +0100 (Sat, 29 Jul 2000) | 2 lines
+Changed paths:
+   A /trunk/mbf
+   A /trunk/mbf/allegro.h
+   A /trunk/mbf/am_map.c
+   A /trunk/mbf/am_map.h
+   A /trunk/mbf/attic
+   A /trunk/mbf/attic/asetup.exe
+   A /trunk/mbf/attic/cwsdpmi.exe
+   A /trunk/mbf/betabug.txt
+   A /trunk/mbf/betagrph.wad
+   A /trunk/mbf/betalevl.wad
+   A /trunk/mbf/bin2c.c
+   A /trunk/mbf/bmp2c.c
+   A /trunk/mbf/boom.txt
+   A /trunk/mbf/boomdeh.txt
+   A /trunk/mbf/boomref.txt
+   A /trunk/mbf/changes.txt
+   A /trunk/mbf/common.cfg
+   A /trunk/mbf/copying
+   A /trunk/mbf/copying.dj
+   A /trunk/mbf/d_deh.c
+   A /trunk/mbf/d_deh.h
+   A /trunk/mbf/d_englsh.h
+   A /trunk/mbf/d_event.h
+   A /trunk/mbf/d_french.h
+   A /trunk/mbf/d_items.c
+   A /trunk/mbf/d_items.h
+   A /trunk/mbf/d_main.c
+   A /trunk/mbf/d_main.h
+   A /trunk/mbf/d_net.c
+   A /trunk/mbf/d_net.h
+   A /trunk/mbf/d_player.h
+   A /trunk/mbf/d_textur.h
+   A /trunk/mbf/d_think.h
+   A /trunk/mbf/d_ticcmd.h
+   A /trunk/mbf/dck.bat
+   A /trunk/mbf/dckboom.txt
+   A /trunk/mbf/defswani.dat
+   A /trunk/mbf/doom17.dat
+   A /trunk/mbf/doom19.dat
+   A /trunk/mbf/doomdata.h
+   A /trunk/mbf/doomdef.c
+   A /trunk/mbf/doomdef.h
+   A /trunk/mbf/doomlic.txt
+   A /trunk/mbf/doomstat.c
+   A /trunk/mbf/doomstat.h
+   A /trunk/mbf/doomtype.h
+   A /trunk/mbf/drawcol.s
+   A /trunk/mbf/drawspan.s
+   A /trunk/mbf/dstrings.c
+   A /trunk/mbf/dstrings.h
+   A /trunk/mbf/emu8k.h
+   A /trunk/mbf/emu8kmid.c
+   A /trunk/mbf/examples
+   A /trunk/mbf/examples/battle.wad
+   A /trunk/mbf/examples/dogfly.deh
+   A /trunk/mbf/examples/donut.txt
+   A /trunk/mbf/examples/donut.wad
+   A /trunk/mbf/examples/fireplas.deh
+   A /trunk/mbf/examples/fly.deh
+   A /trunk/mbf/examples/friend.deh
+   A /trunk/mbf/examples/grenade.deh
+   A /trunk/mbf/examples/hockey.wad
+   A /trunk/mbf/examples/mbfedit!.txt
+   A /trunk/mbf/examples/mbfedit!.wad
+   A /trunk/mbf/examples/mine.deh
+   A /trunk/mbf/examples/mushroom.deh
+   A /trunk/mbf/examples/playbud.deh
+   A /trunk/mbf/examples/possbud.deh
+   A /trunk/mbf/examples/sky.wad
+   A /trunk/mbf/examples/touchy.deh
+   A /trunk/mbf/f_finale.c
+   A /trunk/mbf/f_finale.h
+   A /trunk/mbf/f_wipe.c
+   A /trunk/mbf/f_wipe.h
+   A /trunk/mbf/fakedate.asm
+   A /trunk/mbf/g_game.c
+   A /trunk/mbf/g_game.h
+   A /trunk/mbf/hu_lib.c
+   A /trunk/mbf/hu_lib.h
+   A /trunk/mbf/hu_stuff.c
+   A /trunk/mbf/hu_stuff.h
+   A /trunk/mbf/i_main.c
+   A /trunk/mbf/i_net.c
+   A /trunk/mbf/i_net.h
+   A /trunk/mbf/i_sound.c
+   A /trunk/mbf/i_sound.h
+   A /trunk/mbf/i_system.c
+   A /trunk/mbf/i_system.h
+   A /trunk/mbf/i_video.c
+   A /trunk/mbf/i_video.h
+   A /trunk/mbf/info.c
+   A /trunk/mbf/info.h
+   A /trunk/mbf/internal.h
+   A /trunk/mbf/interndj.h
+   A /trunk/mbf/keyboard.c
+   A /trunk/mbf/log_jff.txt
+   A /trunk/mbf/log_lee.txt
+   A /trunk/mbf/log_rsp.txt
+   A /trunk/mbf/log_ty.txt
+   A /trunk/mbf/m_argv.c
+   A /trunk/mbf/m_argv.h
+   A /trunk/mbf/m_bbox.c
+   A /trunk/mbf/m_bbox.h
+   A /trunk/mbf/m_cheat.c
+   A /trunk/mbf/m_cheat.h
+   A /trunk/mbf/m_fixed.h
+   A /trunk/mbf/m_menu.c
+   A /trunk/mbf/m_menu.h
+   A /trunk/mbf/m_misc.c
+   A /trunk/mbf/m_misc.h
+   A /trunk/mbf/m_random.c
+   A /trunk/mbf/m_random.h
+   A /trunk/mbf/m_swap.h
+   A /trunk/mbf/makefile
+   A /trunk/mbf/mbf.txt
+   A /trunk/mbf/mbfedit.txt
+   A /trunk/mbf/mbffaq.txt
+   A /trunk/mbf/mmus2mid.c
+   A /trunk/mbf/mmus2mid.h
+   A /trunk/mbf/mus_form.doc
+   A /trunk/mbf/options.txt
+   A /trunk/mbf/p_ceilng.c
+   A /trunk/mbf/p_doors.c
+   A /trunk/mbf/p_enemy.c
+   A /trunk/mbf/p_enemy.h
+   A /trunk/mbf/p_floor.c
+   A /trunk/mbf/p_genlin.c
+   A /trunk/mbf/p_inter.c
+   A /trunk/mbf/p_inter.h
+   A /trunk/mbf/p_lights.c
+   A /trunk/mbf/p_map.c
+   A /trunk/mbf/p_map.h
+   A /trunk/mbf/p_maputl.c
+   A /trunk/mbf/p_maputl.h
+   A /trunk/mbf/p_mobj.c
+   A /trunk/mbf/p_mobj.h
+   A /trunk/mbf/p_plats.c
+   A /trunk/mbf/p_pspr.c
+   A /trunk/mbf/p_pspr.h
+   A /trunk/mbf/p_saveg.c
+   A /trunk/mbf/p_saveg.h
+   A /trunk/mbf/p_setup.c
+   A /trunk/mbf/p_setup.h
+   A /trunk/mbf/p_sight.c
+   A /trunk/mbf/p_spec.c
+   A /trunk/mbf/p_spec.h
+   A /trunk/mbf/p_switch.c
+   A /trunk/mbf/p_telept.c
+   A /trunk/mbf/p_tick.c
+   A /trunk/mbf/p_tick.h
+   A /trunk/mbf/p_user.c
+   A /trunk/mbf/p_user.h
+   A /trunk/mbf/pproblit.s
+   A /trunk/mbf/r_bsp.c
+   A /trunk/mbf/r_bsp.h
+   A /trunk/mbf/r_data.c
+   A /trunk/mbf/r_data.h
+   A /trunk/mbf/r_defs.h
+   A /trunk/mbf/r_draw.c
+   A /trunk/mbf/r_draw.h
+   A /trunk/mbf/r_main.c
+   A /trunk/mbf/r_main.h
+   A /trunk/mbf/r_plane.c
+   A /trunk/mbf/r_plane.h
+   A /trunk/mbf/r_segs.c
+   A /trunk/mbf/r_segs.h
+   A /trunk/mbf/r_sky.c
+   A /trunk/mbf/r_sky.h
+   A /trunk/mbf/r_state.h
+   A /trunk/mbf/r_things.c
+   A /trunk/mbf/r_things.h
+   A /trunk/mbf/readme.1st
+   A /trunk/mbf/s_sound.c
+   A /trunk/mbf/s_sound.h
+   A /trunk/mbf/snddrvr.txt
+   A /trunk/mbf/sounds.c
+   A /trunk/mbf/sounds.h
+   A /trunk/mbf/st_lib.c
+   A /trunk/mbf/st_lib.h
+   A /trunk/mbf/st_stuff.c
+   A /trunk/mbf/st_stuff.h
+   A /trunk/mbf/swantbls.c
+   A /trunk/mbf/tables.c
+   A /trunk/mbf/tables.h
+   A /trunk/mbf/v_video.c
+   A /trunk/mbf/v_video.h
+   A /trunk/mbf/version.c
+   A /trunk/mbf/version.h
+   A /trunk/mbf/w_wad.c
+   A /trunk/mbf/w_wad.h
+   A /trunk/mbf/watermap.wad
+   A /trunk/mbf/wi_stuff.c
+   A /trunk/mbf/wi_stuff.h
+   A /trunk/mbf/z_zone.c
+   A /trunk/mbf/z_zone.h
+
+imported sources
+
+------------------------------------------------------------------------
