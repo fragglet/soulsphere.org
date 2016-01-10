@@ -4,3 +4,6 @@
 [submodule "projects/lhasa"]
 	path = projects/lhasa
 	url = git@github.com:fragglet/lhasa-releases.git
+[submodule "img"]
+	path = img
+	url = git@github.com:fragglet/soulsphere.org-img.git
