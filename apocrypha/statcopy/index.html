@@ -1,0 +1,38 @@
+<html>
+<head>
+<title>The wonderful world of -statcopy</title>
+</head>
+
+<body>
+<h1>The wonderful world of -statcopy</h1>
+
+In 2007 I wrote the first (to my knowledge) implementation of a Doom
+<a href="http://doomwiki.org/wiki/Statistics_driver">external statistics
+driver</a>, named <tt>statdump.exe</tt>.
+The purpose of this feature in Vanilla Doom is still unclear to me, but
+it has since spawned
+<a href="https://github.com/chocolate-doom/statcheck">a separate project</a>
+which has proved very useful for regression testing of
+<a href="http://www.chocolate-doom.org">Chocolate Doom</a>.
+<p>
+My original writeup, <a href="https://www.doomworld.com/vb/doom-general/41586-the-wonderful-world-of-statcopy/">
+originally posted to the Doomworld forums</a>, follows.
+
+<hr>
+
+Vanilla Doom has a mysterious command line parameter named "statcopy".  The Doom FAQ describes it as "Unknown".  What does it do?  Read on..<br>
+<br>
+Doom comes with ipxsetup.exe and sersetup.exe, external programs that Doom communicates with to run multiplayer games over IPX networks and serial/modem lines.  You run ipxsetup, and it runs Doom for you, adding a magic extra "-net" option that you never see.  The -net option is used to specify a memory address that doom.exe and ipxsetup.exe use to communicate.<br>
+<br>
+The "-statcopy" parameter is similar to "-net": it's used to specify a buffer to pass the end-of-level statistics into.  It's supposed to be passed by an external statistics-gathering program to capture the intermission screen statistics, just like how ipxsetup and sersetup pass "-net".  The only problem is that no such program has ever been written (at least, until now).<br>
+<br>
+Over the past few days I've written what is, as far as I know, the world's first Doom external statistics driver.  You can download it <a href="http://www.doomworld.com/idgames/?id=16596" rel="nofollow">here</a>. <br>
+<br>
+<img src="http://www.soulsphere.org/img/screenshots/game/statdump.png"><br>
+<br>
+My driver just saves the statistics to a file, which isn't very exciting.  However, you could do more interesting things with it.  For example:<ul><li> Use the statistics data to generate demo hash checksums, and automatically check that source ports play back demos exactly the same as Vanilla Doom.<br>
+<li> At a Doom tournament, pass the statistics data out in real time to some kind of big screen that shows players' scores.</ul>The real mystery is why Id added this feature into Doom, though.  However, it appeared in v1.666, which is the same time that the "-avg" "Austin Virtual Gaming" parameter appeared.  Maybe it's something to do with the <a href="http://www.doomworld.com/idgames/index.php?id=421" rel="nofollow">Austin Virtual Gaming</a> tournament?  (See my tournament / big screen idea above for an example of how it might have been used)</font></p>
+
+</body>
+</html>
+
