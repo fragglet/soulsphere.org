@@ -40,17 +40,17 @@ I use several terms which may need explaining:
 </p>
 
 <ul>
-<li> <i>Map</i> - this refers to the area being rendered: in a game
+<li> <i>Map</i> &mdash; this refers to the area being rendered: in a game
 this is the game Map or Level.
-<li> <i>Viewpoint</i> - the point of view at which we are rendering
-<li> <i>Field of view</i> - the area of the map visible from the
+<li> <i>Viewpoint</i> &mdash; the point of view at which we are rendering
+<li> <i>Field of view</i> &mdash; the area of the map visible from the
      position and angle of the viewpoint
 </ul>
 
 <p>
 I will explain the system using the examples of a 2-D Map of the kind
 <i>Doom</i> uses. However, BSP can easily be extended to 3 dimensions
-(or more?) - instead of 2-D lines, 3-D planes would be used, etc.
+(or more?) &mdash; instead of 2-D lines, 3-D planes would be used, etc.
 
 <h3> Precomputed calculations </h3>
 
@@ -58,10 +58,10 @@ I will explain the system using the examples of a 2-D Map of the kind
 Before the map can be rendered we must perform a number of
 calculations on it.  However, once these calculations are performed
 their results can be used many times.  This is one of the advantages
-of BSP - once the calculations are performed they do not need to be
-done again, unless the map is changed - BSP only allows 'static' maps,
+of BSP &mdash; once the calculations are performed they do not need to be
+done again, unless the map is changed. BSP only allows 'static' maps,
 or ones that do not move. If a map has any moving parts then they must
-be rendered seperately. 
+be rendered separately.
 </p>
 
 <p>
@@ -190,9 +190,9 @@ function render(node)
 
 <p>
 The main disadvantage of bsp trees is that the entire map must be
-static (non-moving) - if part of it moved, the entire tree would have
+static (non-moving) &mdash; if part of it moved, the entire tree would have
 to be rebuilt. One way to overcome this problem is to keep static and
-moving parts seperate, and render them seperately.
+moving parts separate, and render them separately.
 </p>
 
 <h3> Other uses of BSP Trees </h3>
@@ -201,7 +201,7 @@ moving parts seperate, and render them seperately.
 As well as in visibility ordering, BSP trees also have a number of
 other uses. One of these is the fact that dividing up the map in a
 hierarchical way such as this allows large portions of the map to be
-excluded from the rendering process - if all of a particular node is
+excluded from the rendering process &mdash; if all of a particular node is
 outside the field of view of the viewpoint, that node can be discarded
 from rendering. This is a fast and effective way of speeding up the
 rendering engine.
