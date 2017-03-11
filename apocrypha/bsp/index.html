@@ -4,13 +4,14 @@
 
 <title> Binary Space Partitioning (BSP) and its use in 3-D Rendering </title>
 
+<link rel="stylesheet" href="../milligram.min.css">
+<link rel="stylesheet" href="../tweaks.css">
+
 </head>
 
 <body>
 
 <h1> Binary Space Partitioning (BSP) and its use in 3-D Rendering </h1>
-
-<hr>
 
 <h3> Introduction </h3>
 
@@ -48,8 +49,6 @@ I will explain the system using the examples of a 2-D Map of the kind
 <i>Doom</i> uses. However, BSP can easily be extended to 3 dimensions
 (or more?) - instead of 2-D lines, 3-D planes would be used, etc.
 
-<hr>
-
 <h3> Precomputed calculations </h3>
 
 <p>
@@ -69,17 +68,13 @@ less than or equal to 180 degrees. The following shapes are convex
 polygons, for example:
 </p>
 
-<center>
-<img src="convex1.png">
-</center>
+<img class="illustration" src="convex1.png">
 
 <p>
 The following shapes are not convex, however:
 </p>
 
-<center>
-<img src="convex2.png">
-</center>
+<img class="illustration" src="convex2.png">
 
 <p>
 If the map is considered as a non-convex polygon, we can divide this
@@ -87,18 +82,14 @@ into two sub-polygons by drawing a dividing line across it. For
 example, consider the following map:
 </p>
 
-<center>
-<img src="division.png">
-</center>
+<img class="illustration" src="division.png">
 
 <p>
 In dividing this polygon in two, we have created two
 "sub-polygons". This division can be represented by a simple tree:
 </p>
 
-<center>
-<img src="tree1.png">
-</center>
+<img class="illustration" src="tree1.png">
 
 <p>
 It is now possible to recursively divide each of the two
@@ -107,17 +98,13 @@ tree. Recursion continues until the map is divided into convex
 polygons, which are the "leaves" of the tree.
 </p>
 
-<center>
-<img src="division2.png">
-</center>
+<img class="illustration" src="division2.png">
 
 <p>
 For reasons which will become apparent, it is desirable to keep the
 tree 'balanced' if possible: that is, to keep the heights of either
 sides of the tree roughly equal. 
 </p>
-
-<hr>
 
 <h3> Rendering </h3>
 
@@ -141,9 +128,7 @@ side. The side the viewpoint is on determines which of the subnodes is
 rendered first.
 </p>
 
-<center>
-<img src="render1.png" border=0>
-</center>
+<img class="illustration" src="render1.png" border=0>
 
 <p>
 Note that there are actually two ways in which rendering can be
@@ -207,8 +192,6 @@ to be rebuilt. One way to overcome this problem is to keep static and
 moving parts seperate, and render them seperately.
 </p>
 
-<hr>
-
 <h3> Other uses of BSP Trees </h3>
 
 <p>
@@ -225,8 +208,6 @@ rendering engine.
 The tree can also be used for a number of other effects, such as
 shadows. 
 </p>
-
-<hr>
 
 <h3>References</h3>
 

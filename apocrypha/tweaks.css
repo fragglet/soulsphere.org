@@ -1,0 +1,44 @@
+/* page should have proper margins. */
+body {
+  margin-top: 2em;
+  margin-bottom: 4em;
+
+  max-width: 38em;
+  margin-left: auto;
+  margin-right: auto;
+  /* we always want at least a little bit of horizontal margins: */
+  padding-left: 2em;
+  padding-right: 2em;
+}
+/* because we always have some horizontal margin, we can expand the
+   top heading slightly. */
+h1 {
+  margin-left: -0.3em;
+  margin-right: -0.3em;
+}
+/* fix up the ugly bullet-point lists to indent properly */
+ul {
+  list-style-position: outside;
+  list-style-type: disc;
+  margin-left: 3em;
+}
+/* horizontal rules a bit less faint */
+hr {
+  border-color: #ccc;
+}
+/* for "illustrations" (images and video iframes), display as block
+   and center on page */
+.illustration {
+  margin-top: 30px;
+  margin-bottom: 10px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+/* embedded text files need to be readable within the overall page, so
+   we use a small font */
+pre {
+  padding-left: 10px;
+  font-size: small;
+  width: auto;
+}
