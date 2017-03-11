@@ -22,9 +22,12 @@ ul {
   list-style-type: disc;
   margin-left: 3em;
 }
-/* horizontal rules a bit less faint */
+/* "fancy" horizontal rule that only takes up a third of the page */
 hr {
-  border-color: #ccc;
+  border-color: #aaa;
+  border-style: dashed;
+  width: 33%;
+  margin-left: 33%;
 }
 /* for "illustrations" (images and video iframes), display as block
    and center on page */
