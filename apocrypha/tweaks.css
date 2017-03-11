@@ -51,3 +51,9 @@ pre {
   font-size: small;
   width: auto;
 }
+
+/* justified text looks slightly nicer. */
+p,li {
+  text-align: justify;
+}
+
