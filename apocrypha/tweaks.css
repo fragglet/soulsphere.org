@@ -7,14 +7,14 @@ body {
   margin-left: auto;
   margin-right: auto;
   /* we always want at least a little bit of horizontal margins: */
-  padding-left: 2em;
-  padding-right: 2em;
+  padding-left: 1.3em;
+  padding-right: 1.3em;
 }
 /* because we always have some horizontal margin, we can expand the
    top heading slightly. */
 h1 {
-  margin-left: -0.3em;
-  margin-right: -0.3em;
+  margin-left: -5px;
+  margin-right: -5px;
 }
 /* fix up the ugly bullet-point lists to indent properly */
 ul {
