@@ -25,17 +25,36 @@ originally posted to the Doomworld forums</a>, follows.
 
 <hr>
 <p>
-Vanilla Doom has a mysterious command line parameter named "statcopy".  The Doom FAQ describes it as "Unknown".  What does it do?  Read on..
+Vanilla Doom has a mysterious command line parameter named "statcopy".
+The Doom FAQ describes it as "Unknown".  What does it do?  Read on..
 <p>
-Doom comes with ipxsetup.exe and sersetup.exe, external programs that Doom communicates with to run multiplayer games over IPX networks and serial/modem lines.  You run ipxsetup, and it runs Doom for you, adding a magic extra "-net" option that you never see.  The -net option is used to specify a memory address that doom.exe and ipxsetup.exe use to communicate.
+Doom comes with ipxsetup.exe and sersetup.exe, external programs that
+Doom communicates with to run multiplayer games over IPX networks and
+serial/modem lines.  You run ipxsetup, and it runs Doom for you, adding
+a magic extra "-net" option that you never see.  The -net option is used
+to specify a memory address that doom.exe and ipxsetup.exe use to
+communicate.
 <p>
-The "-statcopy" parameter is similar to "-net": it's used to specify a buffer to pass the end-of-level statistics into.  It's supposed to be passed by an external statistics-gathering program to capture the intermission screen statistics, just like how ipxsetup and sersetup pass "-net".  The only problem is that no such program has ever been written (at least, until now).
+The "-statcopy" parameter is similar to "-net": it's used to specify a
+buffer to pass the end-of-level statistics into.  It's supposed to be
+passed by an external statistics-gathering program to capture the
+intermission screen statistics, just like how ipxsetup and sersetup pass
+"-net".  The only problem is that no such program has ever been written
+(at least, until now).
 <p>
-Over the past few days I've written what is, as far as I know, the world's first Doom external statistics driver.  You can download it <a href="http://www.doomworld.com/idgames/?id=16596" rel="nofollow">here</a>. 
+Over the past few days I've written what is, as far as I know, the
+world's first Doom external statistics driver.  You can download it
+<a href="http://www.doomworld.com/idgames/?id=16596">here</a>.
 <p>
-<img class="illustration" src="https://soulsphere.org/img/screenshots/game/statdump.png">
+<img class="illustration"
+     src="https://soulsphere.org/img/screenshots/game/statdump.png">
 <p>
-My driver just saves the statistics to a file, which isn't very exciting.  However, you could do more interesting things with it.  For example:<ul><li> Use the statistics data to generate demo hash checksums, and automatically check that source ports play back demos exactly the same as Vanilla Doom.
+My driver just saves the statistics to a file, which isn't very
+exciting.  However, you could do more interesting things with it.  For
+example:
+<ul><li> Use the statistics data to generate demo hash
+checksums, and automatically check that source ports play back demos
+exactly the same as Vanilla Doom.
 <p>
 
 </body>
