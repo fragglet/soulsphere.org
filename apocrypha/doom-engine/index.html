@@ -25,7 +25,7 @@ the Doom Wiki</a>. The original text is below.
 The Doom rendering engine is an interesting study in software rendering. It is not a true "3D" engine (as it is not possible look up and down properly), but is however a fairly elegant system that allows pseudo-3D rendering. In its time, Doom was revolutionary and almost unique in its providing a fast texture-mapped 3D environment.
 
 <h2>Doom level structure</h2>
-
+<p>
 Viewed from the top down, all Doom levels are really 2D, demonstrating one of the key limitations of the Doom engine: it is not possible to have "rooms above rooms".
 <p>
 The base unit is the vertex, which represents a single 2D point. Vertices (or "vertexes" as they are referred to internally) are then joined to form lines, known as "linedefs". Each linedef can have either one or two sides, these are known as "sidedefs". Sidedefs are then grouped together to form polygons; these are called "sectors". Sectors represent particular areas of the level.
@@ -109,5 +109,6 @@ While ssectors are guaranteed to be in order, the sprites within them are not. D
 There is a final issue of middle textures on 2-sided lines, used in transparent bars for example. These are mixed in and drawn with the sprites at the end of the rendering process, rather than with the other walls.
 
 <h2> Sources </h2>
+<p>
 The Doom Source, as released by Id Software.
 
