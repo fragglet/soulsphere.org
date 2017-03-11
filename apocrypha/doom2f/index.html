@@ -31,7 +31,7 @@ that others could try the French version:
 
 <hr>
 <p>
-Back when the Doom source was released, one of the odd things tucked away in the source code was the <a href="http://chocolate-doom.svn.sourceforge.net/viewvc/chocolate-doom/tags/doom-src-release/src/d_french.h" >French translations</a> header.  A header file contains French translated versions of all the messages that appear in-game during play.  Not only that, there are references to <a href="http://chocolate-doom.svn.sourceforge.net/viewvc/chocolate-doom/tags/doom-src-release/src/d_main.c?view=markup#l_610" >doom2f.wad"</a> and a <a href="http://chocolate-doom.svn.sourceforge.net/viewvc/chocolate-doom/tags/doom-src-release/src/d_main.c?view=markup#l_664" >French language mode</a> within the source code.
+Back when the Doom source was released, one of the odd things tucked away in the source code was the <a href="https://github.com/chocolate-doom/chocolate-doom/blob/doom-src-release/src/d_french.h" >French translations</a> header.  A header file contains French translated versions of all the messages that appear in-game during play.  Not only that, there are references to <a href="https://github.com/chocolate-doom/chocolate-doom/blob/doom-src-release/src/d_main.c#L610">doom2f.wad"</a> and a <a href="https://github.com/chocolate-doom/chocolate-doom/blob/doom-src-release/src/d_main.c#L664">French language mode</a> within the source code.
 <p>
 I always assumed the French version really existed, but I never found anyone who actually owned the thing, or a copy of DOOM2F.WAD.  Searches for it on Google were fruitless, most results being comments from other people who had <a href="http://www.dcisozone.com/downloads/138/Doom-DC.html" >similarly failed to track it down</a>. Some people even dared to suggest it was a <a href="http://forum.zdoom.org/viewtopic.php?f=4&t=15540" >myth</a> and didn't really exist.  So, while it's clear that the translation work was clearly done, it seemed ambiguous as to whether it was ever actually properly released.  If it did, it would have to be pretty rare.
 <p>
@@ -161,7 +161,7 @@ A Youtube video showing it in action (along with the translated command line too
 <iframe class="illustration" src="https://www.youtube.com/embed/o0cGEgBDUxs"
 	frameborder="0" allowfullscreen></iframe>
 <p>
-The detail level graphics on the options menu are misaligned (probably because the code doesn't take into account the different width of the text image). Note that the French doom2.exe always shows the same quit message (you can see the code to handle this <a href="http://chocolate-doom.svn.sourceforge.net/viewvc/chocolate-doom/tags/doom-src-release/src/m_menu.c?view=markup#l_1101">in the source code</a>).
+The detail level graphics on the options menu are misaligned (probably because the code doesn't take into account the different width of the text image). Note that the French doom2.exe always shows the same quit message (you can see the code to handle this <a href="https://github.com/chocolate-doom/chocolate-doom/blob/doom-src-release/src/m_menu.c#L1105">in the source code</a>).
 <p>
 <h3>Vital statistics</h3>
 <p>
@@ -186,7 +186,7 @@ HELP (Help screen with key bindings)
 <p>
 DOOM2F.WAD does not contain M_EPI1, M_EPI2, M_EPI3, M_EPISOD, M_RDTHIS, which are Doom 1 graphics that apparently got left in DOOM2.WAD by mistake. It also does not include WIOSTF.
 <p>
-It does contain an extra graphic called WIOBJ, and there's <a href="http://chocolate-doom.svn.sourceforge.net/viewvc/chocolate-doom/tags/doom-src-release/src/wi_stuff.c?view=markup#l_1658">a reference in the source code</a> to handle this.  It looks like WIOBJ is used instead of WIOSTI in multiplayer co-op games (presumably the normal WIOSTI is too big for the co-op intermission screen).
+It does contain an extra graphic called WIOBJ, and there's <a href="https://github.com/chocolate-doom/chocolate-doom/blob/doom-src-release/src/wi_stuff.c#L1658">a reference in the source code</a> to handle this.  It looks like WIOBJ is used instead of WIOSTI in multiplayer co-op games (presumably the normal WIOSTI is too big for the co-op intermission screen).
 <p>
 <h3>Finally</h3>
 <p>
