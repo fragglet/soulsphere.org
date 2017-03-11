@@ -57,11 +57,11 @@ I will explain the system using the examples of a 2-D Map of the kind
 <p>
 Before the map can be rendered we must perform a number of
 calculations on it.  However, once these calculations are performed
-their results can be used many times.  This is one of the advantages
-of BSP &mdash; once the calculations are performed they do not need to be
-done again, unless the map is changed. BSP only allows 'static' maps,
-or ones that do not move. If a map has any moving parts then they must
-be rendered separately.
+their results can be used many times.  This is one of the advantages of
+BSP &mdash; once the calculations are performed they do not need to be
+done again, unless the map is changed. BSP only allows
+&rdquo;static&rdquo; maps, or ones that do not move. If a map has any
+moving parts then they must be rendered separately.
 </p>
 
 <p>
@@ -105,8 +105,8 @@ polygons, which are the &ldquo;leaves&rdquo; of the tree.
 
 <p>
 For reasons which will become apparent, it is desirable to keep the
-tree 'balanced' if possible: that is, to keep the heights of either
-sides of the tree roughly equal. 
+tree &ldquo;balanced&rdquo; if possible: that is, to keep the heights of
+either sides of the tree roughly equal.
 </p>
 
 <h3> Rendering </h3>
@@ -126,9 +126,9 @@ the rendering function recurses. That is, whether the left or right
 subtree of the given node is rendered first. For any particular node,
 there is a dividing line where it splits into two subnodes. If
 this line is extended to infinity, the viewpoint from which we are
-rendering can be considered to be on either the 'left' or 'right'
-side. The side the viewpoint is on determines which of the subnodes is
-rendered first.
+rendering can be considered to be on either the &ldquo;left&rdquo; or
+&ldquo;right&rdquo; side. The side the viewpoint is on determines which
+of the subnodes is rendered first.
 </p>
 
 <img class="illustration" src="render1.png" border=0>
