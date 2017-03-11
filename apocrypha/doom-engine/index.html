@@ -23,48 +23,50 @@ the Doom Wiki</a>. The original text is below.
 
 <p>
 The Doom rendering engine is an interesting study in software rendering.
-It is not a true "3D" engine (as it is not possible look up and down
-properly), but is however a fairly elegant system that allows pseudo-3D
-rendering. In its time, Doom was revolutionary and almost unique in its
-providing a fast texture-mapped 3D environment.
+It is not a true &ldquo;3D&rdquo; engine (as it is not possible look up
+and down properly), but is however a fairly elegant system that allows
+pseudo-3D rendering. In its time, Doom was revolutionary and almost
+unique in its providing a fast texture-mapped 3D environment.
 
 <h2>Doom level structure</h2>
 <p>
 Viewed from the top down, all Doom levels are really 2D, demonstrating
 one of the key limitations of the Doom engine: it is not possible to
-have "rooms above rooms".
+have &ldquo;rooms above rooms&rdquo;.
 <p>
 The base unit is the vertex, which represents a single 2D point.
-Vertices (or "vertexes" as they are referred to internally) are then
-joined to form lines, known as "linedefs". Each linedef can have either
-one or two sides, these are known as "sidedefs". Sidedefs are then
-grouped together to form polygons; these are called "sectors". Sectors
-represent particular areas of the level.
+Vertices (or &ldquo;vertexes&rdquo; as they are referred to internally)
+are then joined to form lines, known as &ldquo;linedefs&rdquo;. Each
+linedef can have either one or two sides, these are known as
+&ldquo;sidedefs&rdquo;. Sidedefs are then grouped together to form
+polygons; these are called &ldquo;sectors&rdquo;. Sectors represent
+particular areas of the level.
 <p>
 Each sector contains a number of properties: a floor height, ceiling
 height, light level, a floor texture and a ceiling texture. To have a
 different light level in a particular area, for example, a new sector
 must be created for that area with a different light level. One-sided
-linedefs therefore represent solid "walls", while two-sided linedefs
-represent "bridge" lines between sectors.
+linedefs therefore represent solid &ldquo;walls&rdquo;, while two-sided
+linedefs represent &ldquo;bridge&rdquo; lines between sectors.
 <p>
 Sidedefs are used to store wall textures; these are totally separate
 from the floor and ceiling textures. Each sidedef can have three
 textures; these are called the middle, upper and lower textures. In
-one-sided linedefs, only the "middle" texture is used for the texture on
-the wall. In two-sided linedefs, the situation is more complex. The
-lower and upper textures are used to fill the gaps where adjacent
-sectors have different floor and ceiling heights: lower textures are
-used for steps, for example. The sidedefs can have a middle texture as
-well, although most do not; this is used to make textures "hang" in mid
-air. For example, when a transparent bar texture is seen forming a cage,
-this is an example of a middle texture on a two-sided linedef.
+one-sided linedefs, only the &ldquo;middle&rdquo; texture is used for
+the texture on the wall. In two-sided linedefs, the situation is more
+complex. The lower and upper textures are used to fill the gaps where
+adjacent sectors have different floor and ceiling heights: lower
+textures are used for steps, for example. The sidedefs can have a middle
+texture as well, although most do not; this is used to make textures
+&ldquo;hang&rdquo; in mid air. For example, when a transparent bar
+texture is seen forming a cage, this is an example of a middle texture
+on a two-sided linedef.
 <p>
 Finally, there is a list of objects in the level; objects are known as
-"things" by Doom. These are used to place players, monsters, powerups,
-etc. Each thing is given a 2D coordinate, as with the vertices. Things
-are then automatically placed on the floor or the ceiling depending on
-their type.
+&ldquo;things&rdquo; by Doom. These are used to place players, monsters,
+powerups, etc. Each thing is given a 2D coordinate, as with the
+vertices. Things are then automatically placed on the floor or the
+ceiling depending on their type.
 <p>
 This is only an overview of the basic structure of Doom levels; most of
 the data structures here carry extra properties, for example, texture
@@ -81,16 +83,17 @@ because of this that it is not possible to move the walls in Doom; while
 doors and lifts move up and down, none of them ever move sideways.
 <p>
 The level is divided up into a binary tree: each location in the tree is
-a "node" which represents a particular area of the level (with the root
-node representing the entire level). At each branch of the tree there is
-a dividing line which divides the area of the node into two subnodes. At
-the same time, the dividing line divides linedefs into line segments
-called "segs".
+a &ldquo;node&rdquo; which represents a particular area of the level
+(with the root node representing the entire level). At each branch of
+the tree there is a dividing line which divides the area of the node
+into two subnodes. At the same time, the dividing line divides linedefs
+into line segments called &ldquo;segs&rdquo;.
 <p>
 At the leaves of the tree are convex polygons, where it is not useful to
 divide the level up any further. These convex polygons are called
-"ssectors" (subsectors), and are bound to a particular sector. Each
-ssector has an associated list of segs associated with it.
+&ldquo;ssectors&rdquo; (subsectors), and are bound to a particular
+sector. Each ssector has an associated list of segs associated with it.
+
 <p>
 The BSP system is really a very clever way of sorting the ssectors into
 the right order for rendering. The algorithm is fairly simple:
@@ -112,12 +115,12 @@ bounding box is totally outside the field of view, it is not drawn.
 <p>
 All walls in Doom are drawn vertically; it is because of this that it is
 not possible to properly look up and down. It is possible to perform a
-form of look up/down via "y-shearing", and many modern Doom source ports
-do this. Essentially this works by increasing the vertical resolution,
-and then providing a "window" on that space. By moving the window up and
-down, it is possible to give the illusion of looking up and down.
-However, this tends to distort the view the further up and down the
-player looks.
+form of look up/down via &ldquo;y-shearing&rdquo;, and many modern Doom
+source ports do this. Essentially this works by increasing the vertical
+resolution, and then providing a &ldquo;window&rdquo; on that space. By
+moving the window up and down, it is possible to give the illusion of
+looking up and down. However, this tends to distort the view the
+further up and down the player looks.
 <p>
 The Doom engine renders the walls as it traverses the BSP tree, drawing
 ssectors by order of distance from the camera so that the closest segs
@@ -127,9 +130,9 @@ overdraw. This is also used later to clip the edges of sprites.
 <p>
 Once the engine reaches a solid (1-sided) wall at a particular x
 ordinate, no more lines need to be drawn at that area. For clipping the
-engine stores a "map" of areas of the screen where solid walls have been
-reached. This allows far away parts of the level which are invisible to
-the player to be clipped completely.
+engine stores a &ldquo;map&rdquo; of areas of the screen where solid
+walls have been reached. This allows far away parts of the level which
+are invisible to the player to be clipped completely.
 <p>
 The Doom graphic format stores the wall textures as sets of vertical
 columns; this is useful to the renderer, which essentially renders the
@@ -138,15 +141,16 @@ walls by drawing lots of vertical columns of texture.
 <h2> Floor and Ceiling </h2>
 
 <p>
-The system for drawing floors and ceilings ("flats") is less elegant
-than that used for the walls. Flats are drawn with a flood-fill like
-algorithm. Because of this, it is sometimes possible if a bad BSP
-builder is used to get "holes" where the floor or ceiling bleeds down to
-the edges of the screen. This is also the reason that if the player
-travels outside of the level using the noclip cheat, the floors and
-ceilings appear to stretch out from the level over the empty space.
+The system for drawing floors and ceilings (&ldquo;flats&rdquo;) is less
+elegant than that used for the walls. Flats are drawn with a flood-fill
+like algorithm. Because of this, it is sometimes possible if a bad BSP
+builder is used to get &ldquo;holes&rdquo; where the floor or ceiling
+bleeds down to the edges of the screen. This is also the reason that if
+the player travels outside of the level using the noclip cheat, the
+floors and ceilings appear to stretch out from the level over the empty
+space.
 <p>
-The floor and ceiling are drawn as "visplanes". These represent
+The floor and ceiling are drawn as &ldquo;visplanes&rdquo;. These represent
 horizontal runs of texture, from a floor or ceiling at a particular
 height, light level and texture (if two adjacent sectors have the exact
 same floor, these can get merged into one visplane). Each x position in
@@ -162,29 +166,31 @@ needed for the surrounding floor.
 <p>
 This leads to one of Doom's classic limitations which frustrated many
 mappers for a long time. Doom contained a static limit on the number of
-visplanes; if exceeded, it would crash back to DOS with the message, "No
-more visplanes!". The easiest way to invoke the visplane limit is a
-large checkerboard floor pattern; this creates a large number of
-visplanes.
+visplanes; if exceeded, it would crash back to DOS with the message,
+&ldquo;No more visplanes!&rdquo;. The easiest way to invoke the visplane
+limit is a large checkerboard floor pattern; this creates a large number
+of visplanes.
 <p>
 As the segs are rendered, visplanes are also added, extending from the
 edges of the segs towards the vertical edges of the screen. These extend
 until they reach existing visplanes. Because of the way this works, the
 system is dependent on the fact that segs are rendered in order by the
 overall engine; it is necessary to draw close up visplanes first, so
-that they can "cut off" by the further away ones. If unstopped, the
-floor or ceiling will "bleed out" to the edges of the screen, as
-previously described. Eventually, the visplanes form a "map" of
-particular areas of the screen in which to draw particular textures.
+that they can &ldquo;cut off&rdquo; by the further away ones. If
+unstopped, the floor or ceiling will &ldquo;bleed out&rdquo; to the
+edges of the screen, as previously described. Eventually, the visplanes
+form a &ldquo;map&rdquo; of particular areas of the screen in which to
+draw particular textures.
 <p>
-While visplanes are constructed essentially from vertical "strips", the
-actual low level rendering is performed in the form of horizontal
-"spans" of texture. After all the visplanes have been constructed, they
-are converted into spans which are then rendered to the screen. This
-appears to be a tradeoff: it is easier to construct visplanes as
-vertical strips, but because of the nature of how the floor and ceiling
-textures appear it is easier to draw them as horizontal strips. Because
-of the nature of visplanes, the conversion is fairly trivial, however.
+While visplanes are constructed essentially from vertical
+&ldquo;strips&rdquo;, the actual low level rendering is performed in the
+form of horizontal &ldquo;spans&rdquo; of texture. After all the
+visplanes have been constructed, they are converted into spans which are
+then rendered to the screen. This appears to be a tradeoff: it is easier
+to construct visplanes as vertical strips, but because of the nature of
+how the floor and ceiling textures appear it is easier to draw them as
+horizontal strips. Because of the nature of visplanes, the conversion is
+fairly trivial, however.
 
 <h2> Things (Sprites) </h2>
 
@@ -199,9 +205,10 @@ walls are, which again is useful for the renderer. The same functions
 which are used to draw walls are used to draw sprites as well.
 <p>
 While ssectors are guaranteed to be in order, the sprites within them
-are not. Doom stores a list of sprites to be drawn ("vissprites") and
-sorts the list before rendering. Far away sprites are drawn before close
-ones. This causes some overdraw but usually this is negligible.
+are not. Doom stores a list of sprites to be drawn
+(&ldquo;vissprites&rdquo;) and sorts the list before rendering. Far away
+sprites are drawn before close ones. This causes some overdraw but
+usually this is negligible.
 <p>
 There is a final issue of middle textures on 2-sided lines, used in
 transparent bars for example. These are mixed in and drawn with the
