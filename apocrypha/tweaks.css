@@ -18,8 +18,10 @@ h1 {
 }
 /* fix up the ugly bullet-point lists to indent properly */
 ul {
-  list-style-position: outside;
   list-style-type: disc;
+}
+ol,ul {
+  list-style-position: outside;
   margin-left: 3em;
 }
 /* "fancy" horizontal rule that only takes up a third of the page */
