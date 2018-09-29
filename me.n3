@@ -12,8 +12,7 @@
 @prefix wot: <http://xmlns.com/wot/0.1/> .
 
 :me a foaf:Person;
-    owl:sameAs <http://fragglet.livejournal.com/data/foaf>,
-               <http://www.advogato.org/person/fraggle/foaf.rdf#me>;
+    owl:sameAs <https://fragglet.livejournal.com/data/foaf>;
     foaf:name "Simon Howard";
     foaf:givenname "Simon";
     foaf:family_name "Howard";
@@ -34,10 +33,6 @@
                  wot:pubkeyAddress <https://soulsphere.org/gpg-key.txt>;
                  wot:fingerprint "6D2C117E0310664497AA9546F6C2EE9C23354344" ];
     foaf:account
-       [ a foaf:OnlineAccount;
-         foaf:accountServiceHomepage <http://www.advogato.org/>;
-         foaf:accountName "fraggle";
-         foaf:accountProfilePage <http://www.advogato.org/person/fraggle/> ],
        [ a foaf:OnlineAccount;
          foaf:accountServiceHomepage <https://delicious.com/>;
          foaf:accountName "fragglet";
