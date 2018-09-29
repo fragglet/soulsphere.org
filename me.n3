@@ -46,9 +46,9 @@
          foaf:accountName "Fraggle";
          foaf:accountProfilePage <https://doomwiki.org/wiki/User:Fraggle> ],
        [ a foaf:OnlineAccount;
-         foaf:accountServiceHomepage <http://www.everything2.com/>;
+         foaf:accountServiceHomepage <https://everything2.com/>;
          foaf:accountName "phraggle";
-         foaf:accountProfilePage <http://www.everything2.com/index.pl?node_id=899084> ],
+         foaf:accountProfilePage <https://everything2.com/user/phraggle> ],
        [ a foaf:OnlineAccount;
          foaf:accountServiceHomepage <https://www.facebook.com>;
          foaf:accountName "fragglet";
@@ -64,9 +64,9 @@
        [ a foaf:OnlineAccount;
          foaf:accountServiceHomepage <https://www.livejournal.com>;
          foaf:accountName "fragglet";
-         foaf:accountProfilePage <http://fragglet.livejournal.com/> ],
+         foaf:accountProfilePage <https://fragglet.livejournal.com/> ],
        [ a foaf:OnlineAccount;
-         foaf:accountServiceHomepage <https://www.medium.com/>;
+         foaf:accountServiceHomepage <https://medium.com/>;
          foaf:accountName "fraggletastic";
          foaf:accountProfilePage <https://medium.com/@fraggletastic> ],
        [ a foaf:OnlineAccount;
