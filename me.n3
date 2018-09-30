@@ -38,9 +38,9 @@
          foaf:accountName "fragglet";
          foaf:accountProfilePage <https://delicious.com/fragglet> ],
        [ a foaf:OnlineAccount;
-         foaf:accountServiceHomepage <https://www.doomworld.com/vb/>;
+         foaf:accountServiceHomepage <https://www.doomworld.com/>;
          foaf:accountName "fraggle";
-         foaf:accountProfilePage <https://www.doomworld.com/vb/members/fraggle/> ],
+         foaf:accountProfilePage <https://www.doomworld.com/profile/103-fraggle/> ],
        [ a foaf:OnlineAccount;
          foaf:accountServiceHomepage <https://doomwiki.org/>;
          foaf:accountName "Fraggle";
