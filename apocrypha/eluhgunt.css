@@ -110,6 +110,7 @@ blockquote {
    and center on page */
 .illustration {
   display: block;
+  max-width: 100%;
   margin-left: auto;
   margin-right: auto;
 }
