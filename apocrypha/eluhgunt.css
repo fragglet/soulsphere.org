@@ -1,0 +1,150 @@
+/* eluhgunt.css. Designed to be a nice-looking CSS stylesheet for writing
+   essays with. See <http://soulsphere.org/apocrypha/eluhgunt.html> for some
+   demos.
+
+   Please make sure you include this so that you get the right fonts:
+
+   <link href="https://fonts.googleapis.com/css?family=Cinzel|EB+Garamond|Signika|Source+Code+Pro&display=swap" rel="stylesheet">
+*/
+
+/* page should have proper margins. */
+body {
+  margin-top: 2em;
+  margin-bottom: 4em;
+
+  max-width: 38em;
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
+
+  /* we always want at least a little bit of horizontal margins: */
+  padding-left: 1.3em;
+  padding-right: 1.3em;
+
+  font-family: "EB Garamond", serif;
+  font-size: large;
+  color: #555;
+  line-height: 1.6;
+  text-align: justify;
+}
+
+/* Bold text appears slightly darker as additional emphasis. */
+b {
+  color: #222;
+}
+
+/** Headings **/
+h1 {
+  margin-left: -5px;
+  margin-right: -5px;
+  font-family: 'Cinzel', serif;
+  font-weight: bold;
+  font-size: 40px;
+  text-align: center;
+  color: #333;
+  line-height: 1;
+}
+
+h2,h3,h4,h5 {
+  font-family: 'Signika', sans-serif;
+  color: #444;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 25px;
+}
+h4 {
+  font-size: 20px;
+}
+h5 {
+  font-size: 18px;
+}
+
+/* <p> adds some margin to separate it from the previous paragraph. */
+p {
+  margin-top: 15px;
+  margin-bottom: 0;
+}
+
+/* We give some nice-looking margins around certain elements. */
+ol,ul,pre,blockquote,.illustration {
+  margin-top: 18px;
+  margin-bottom: 18px;
+}
+
+/* Numbered and bullet point lists */
+ul {
+  list-style-type: disc;
+}
+ol,ul {
+  list-style-position: outside;
+  margin-left: 0;
+  padding-left: 36px;
+}
+li {
+  margin-bottom: 0.3em;
+}
+/* "fancy" horizontal rule that only takes up a third of the page */
+hr {
+  border-color: #aaa;
+  border-style: dashed;
+  width: 33%;
+  margin-left: 33%;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+/* For quotations, we indent with a line to the left. */
+blockquote {
+  border-left: 2px solid #444;
+  margin-left: 15px;
+  padding-left: 15px;
+}
+
+/* for "illustrations" (images and video iframes), display as block
+   and center on page */
+.illustration {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+/* youtube video */
+iframe.illustration {
+  width: 32em;
+  height: 24em;
+}
+
+pre,tt {
+  font-family: 'Source Code Pro', monospace;
+  font-size: 14px;
+}
+
+/* embedded text files need to be readable within the overall page, so
+   we use a small font */
+pre {
+  padding-left: 10px;
+  width: auto;
+  background-color: #ddd;
+  color: #222;
+  font-size: 10px;
+}
+
+/* Links look more subtle than usual */
+a {
+  color: #226;
+  text-decoration: underline;
+  text-decoration-color: rgba(0, 0, 200, 0.4);
+}
+a:hover {
+  text-decoration-color: rgba(50, 50, 200, 1.0);
+}
+a:visited {
+  color: #333;
+  text-decoration-color: rgba(30, 30, 30, 0.3);
+}
+
