@@ -25,7 +25,9 @@ body {
   font-size: large;
   color: #555;
   line-height: 1.6;
+
   text-align: justify;
+  overflow-wrap: break-word;
 }
 
 /* Bold text appears slightly darker as additional emphasis. */
@@ -50,6 +52,7 @@ h2,h3,h4,h5 {
   color: #444;
   margin-top: 20px;
   margin-bottom: 10px;
+  text-align: left;
 }
 
 h2 {
