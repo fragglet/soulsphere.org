@@ -152,3 +152,33 @@ a:visited {
   text-decoration-color: rgba(30, 30, 30, 0.3);
 }
 
+/* Tables */
+table {
+  margin-top: 18px;
+  margin-bottom: 18px;
+  margin-left: 32px;
+  margin-right: 16px;
+  border-collapse: collapse;
+  max-width: 100%;
+  border: 1px solid #e0e0e0;
+}
+tr {
+  background-color: white;
+}
+tr:nth-child(odd) {
+  background-color: #f0f0f0;
+  border-top: 1px solid #e0e0e0;
+  border-bottom: 1px solid #e0e0e0;
+}
+th {
+  font-family: 'Signika', sans-serif;
+  font-weight: bold;
+  text-align: left;
+}
+th,td {
+  padding-top: 3px;
+  padding-bottom: 3px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
