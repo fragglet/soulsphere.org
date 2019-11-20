@@ -130,7 +130,7 @@ def cpp_output(text)
     puts "<pre>"
     converted = plaintext_convert(text)
 
-    for line in converted
+    converted.each_line do |line|
         puts "// " + line
     end
     
@@ -141,7 +141,7 @@ def perl_output(text)
     puts "<pre>"
     converted = plaintext_convert(text)
 
-    for line in converted
+    converted.each_line do |line|
         puts "# " + line
     end
     

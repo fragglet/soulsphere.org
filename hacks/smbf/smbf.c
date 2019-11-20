@@ -16,7 +16,7 @@ void tape_init(void)
 {
     tape_size = 1000;
     tape_center = tape_size / 2;
-    tape = malloc(tape_size);
+    tape = calloc(tape_size, 1);
 }
 
 unsigned char tape_read(signed int index)
