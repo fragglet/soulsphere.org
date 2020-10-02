@@ -34,10 +34,6 @@
                  wot:fingerprint "6D2C117E0310664497AA9546F6C2EE9C23354344" ];
     foaf:account
        [ a foaf:OnlineAccount;
-         foaf:accountServiceHomepage <https://delicious.com/>;
-         foaf:accountName "fragglet";
-         foaf:accountProfilePage <https://delicious.com/fragglet> ],
-       [ a foaf:OnlineAccount;
          foaf:accountServiceHomepage <https://www.doomworld.com/>;
          foaf:accountName "fraggle";
          foaf:accountProfilePage <https://www.doomworld.com/profile/103-fraggle/> ],
@@ -58,10 +54,6 @@
          foaf:accountName "fragglet";
          foaf:accountProfilePage <https://github.com/fragglet> ],
        [ a foaf:OnlineAccount;
-         foaf:accountServiceHomepage <https://keybase.io/>;
-         foaf:accountName "fraggle";
-         foaf:accountProfilePage <https://keybase.io/fraggle> ],
-       [ a foaf:OnlineAccount;
          foaf:accountServiceHomepage <https://www.livejournal.com>;
          foaf:accountName "fragglet";
          foaf:accountProfilePage <https://fragglet.livejournal.com/> ],
@@ -69,9 +61,6 @@
          foaf:accountServiceHomepage <https://medium.com/>;
          foaf:accountName "fraggletastic";
          foaf:accountProfilePage <https://medium.com/@fraggletastic> ],
-       [ a foaf:OnlineAccount;
-         foaf:accountServiceHomepage <https://plus.google.com/>;
-         foaf:accountProfilePage <https://plus.google.com/111550145781278122079> ],
        [ a foaf:OnlineAccount;
          foaf:accountServiceHomepage <https://www.reddit.com/>;
          foaf:accountName "fragglet";
