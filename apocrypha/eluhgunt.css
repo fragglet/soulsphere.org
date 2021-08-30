@@ -181,4 +181,8 @@ th,td {
   padding-left: 10px;
   padding-right: 10px;
 }
+i,em {
+  font-family: "EB Garamond Italic";
+  font-style: italic;
+}
 
