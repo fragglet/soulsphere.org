@@ -9,6 +9,7 @@
 
 /* page should have proper margins. */
 body {
+  background-color: white;
   margin-top: 2em;
   margin-bottom: 4em;
 
@@ -184,5 +185,27 @@ th,td {
 i,em {
   font-family: "EB Garamond Italic";
   font-style: italic;
+}
+
+/* For dark mode we make some subtle tweaks. While we don't switch to a
+ * dark background, we at least tone down the white background. */
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #ccccc7;
+  }
+  pre {
+    background-color: #c3c3ba;
+  }
+  table {
+    border: 1px solid #a0a0a0;
+  }
+  tr {
+    background-color: #ccccc7;
+  }
+  tr:nth-child(odd) {
+    background-color: #c0c0b7;
+    border-top: 1px solid #a0a0a0;
+    border-bottom: 1px solid #a0a0a0;
+  }
 }
 
