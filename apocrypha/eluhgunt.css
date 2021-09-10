@@ -22,7 +22,7 @@ body {
   padding-left: 1.3em;
   padding-right: 1.3em;
 
-  font-family: "EB Garamond", serif;
+  font-family: 'EB Garamond', 'Calisto MT', 'Palatino', serif;
   font-size: large;
   color: #555;
   line-height: 1.6;
@@ -40,7 +40,7 @@ b {
 h1 {
   margin-left: -5px;
   margin-right: -5px;
-  font-family: 'Cinzel', serif;
+  font-family: 'Cinzel', 'Constantia', serif;
   font-weight: bold;
   font-size: 40px;
   text-align: center;
@@ -49,7 +49,8 @@ h1 {
 }
 
 h2,h3,h4,h5 {
-  font-family: 'Signika', sans-serif;
+  font-family: 'Signika', 'Corbel', sans-serif;
+  font-weight: bold;
   color: #444;
   margin-top: 20px;
   margin-bottom: 10px;
@@ -183,7 +184,7 @@ th,td {
   padding-right: 10px;
 }
 i,em {
-  font-family: "EB Garamond Italic";
+  font-family: 'EB Garamond Italic', 'Calisto MT Italic', serif;
   font-style: italic;
 }
 
