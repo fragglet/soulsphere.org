@@ -1,5 +1,5 @@
-I am PGP identity 0x23354344.
 Key fingerprint = 6D2C 117E 0310 6644 97AA 9546 F6C2 EE9C 2335 4344
+Be careful to verify the whole key and not just the last eight digits.
 
 -----BEGIN PGP PUBLIC KEY BLOCK-----
 Version: GnuPG v2.0.20 (GNU/Linux)
