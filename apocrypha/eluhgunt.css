@@ -33,7 +33,7 @@ body {
 
 /* Bold text appears slightly darker as additional emphasis. */
 b {
-  color: #222;
+  color: black;
 }
 
 /** Headings **/
@@ -136,23 +136,21 @@ pre,tt {
 pre {
   padding-left: 10px;
   width: auto;
-  background-color: #ddd;
+  background-color: #e5e5e5;
   color: #222;
   font-size: 10px;
 }
 
 /* Links look more subtle than usual */
 a {
-  color: #226;
+  color: #333;
   text-decoration: underline;
-  text-decoration-color: rgba(0, 0, 200, 0.4);
+  text-underline-offset: 15%;
+  text-decoration-color: rgba(0, 0, 0, 0.3);
 }
 a:hover {
-  text-decoration-color: rgba(50, 50, 200, 1.0);
-}
-a:visited {
-  color: #333;
-  text-decoration-color: rgba(30, 30, 30, 0.3);
+  color: black;
+  text-decoration-color: rgba(0, 0, 0, 1.0);
 }
 
 /* Tables */
@@ -193,19 +191,20 @@ i,em {
  * dark background, we at least tone down the white background. */
 @media (prefers-color-scheme: dark) {
   body {
-    background-color: #ccccc7;
+    background-color: #c5beb7;
+    color: #333;
   }
   pre {
-    background-color: #c3c3ba;
+    background-color: #bbb3aa;
   }
   table {
     border: 1px solid #a0a0a0;
   }
   tr {
-    background-color: #ccccc7;
+    background-color: #c0bab2;
   }
   tr:nth-child(odd) {
-    background-color: #c0c0b7;
+    background-color: #bbb3aa;
     border-top: 1px solid #a0a0a0;
     border-bottom: 1px solid #a0a0a0;
   }
