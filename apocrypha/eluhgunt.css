@@ -1,11 +1,9 @@
 /* eluhgunt.css. Designed to be a nice-looking CSS stylesheet for writing
    essays with. See <http://soulsphere.org/apocrypha/eluhgunt.html> for some
    demos.
+ */
 
-   Please make sure you include this so that you get the right fonts:
-
-   <link href="https://fonts.googleapis.com/css?family=Cinzel|EB+Garamond|Signika|Source+Code+Pro&display=swap" rel="stylesheet">
-*/
+@import url("https://fonts.googleapis.com/css?family=Cinzel|EB+Garamond|Signika|Source+Code+Pro&display=block");
 
 /* page should have proper margins. */
 body {
