@@ -7,3 +7,6 @@
 [submodule "img"]
 	path = img
 	url = git@github.com:fragglet/soulsphere.org-img.git
+[submodule "eluhgunt"]
+	path = eluhgunt
+	url = https://github.com/fragglet/eluhgunt.git
