@@ -1,3 +1,23 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>wadptr</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">wadptr</h1>
+</header>
 <h1>NAME</h1>
 <p>wadptr - compression tool for .wad files</p>
 <h1>SYNOPSIS</h1>
@@ -35,6 +55,9 @@
 <dt><strong>-nosquash</strong></dt>
 <dd><p>Disables graphic squashing (see the <strong>compression schemes</strong> section below).</p>
 </dd>
+<dt><strong>-nostack</strong></dt>
+<dd><p>Disables blockmap stacking (see the <strong>compression schemes</strong> section below).</p>
+</dd>
 </dl>
 <h1>COMPRESSION SCHEMES</h1>
 <p>The following are some brief technical details about how wadptr's .wad file compression works:</p>
@@ -48,10 +71,14 @@
 <dt><strong>Graphic squashing</strong></dt>
 <dd><p>Doom's graphics format splits images into vertical columns. A table stores the offset of each column within the lump. Sometimes an image can contain the same identical column multiple times. These identical columns can be merged together and the table offsets changed to point to the same data. This compression scheme works most effectively on images that are either very simple, based on repeating patterns, or those containing flat fields of a single color. This behavior can be disabled using the <strong>-nosquash</strong> option.</p>
 </dd>
+<dt><strong>Blockmap stacking</strong></dt>
+<dd><p>A precomputed table named the blockmap is used for collision detection; it divides up each level into 128x128 blocks and indexes which lines appear in each block. Often, different blocks contain the same identical set of lines. This compression scheme saves space by merging identical blocks together. This behavior can be disabled using the <strong>-nostack</strong> option.</p>
+</dd>
 </dl>
 <p>To see an example of wadptr used in a very effective way, see miniwad, a minimalist Doom-compatible IWAD file that is less than 250KiB in size: &lt;https://github.com/fragglet/miniwad&gt;</p>
 <h1>LIMITATIONS</h1>
 <p>The <strong>-c</strong> command will compress a WAD file and the <strong>-u</strong> command can then be used to restore the original uncompressed file. However, the decompressed file may not exactly match the original file byte-for-byte. For example, some editors already pack sidedefs, and sometimes WAD files include junk data that wadptr will discard. If for some reason it's important to retain the original file, you should therefore make sure to to either back up the original file before using wadptr, or use the <strong>-o</strong> command line option to write to a different file.</p>
+<p>For compatibility reasons, wadptr's blockmap stacking is deliberately very conservative. Far more aggressive techniques can be used to shrink blockmap lumps further, particularly for large levels that run up against the blockmap size limit. If you need this, check out ZokumBSP: &lt;https://github.com/zokum-no/zokumbsp&gt;</p>
 <p>Some level editors get confused by packed sidedefs. If your level editor has problems, use <strong>-u</strong> to uncompress the file before editing.</p>
 <h1>EXAMPLES</h1>
 <p>Here are some examples for how to invoke the program:</p>
@@ -75,3 +102,5 @@
 <p>Copyright(C) 1998-2023 Simon Howard, Andreas Dehmel</p>
 <p>This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.</p>
 <p>This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.</p>
+</body>
+</html>
