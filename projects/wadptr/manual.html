@@ -13,6 +13,55 @@
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
   </style>
+  
+  <!-- Tweaks to the pandoc output style to make the resulting HTML
+       look much nicer. -->
+
+  <style>
+  body {
+      background-color: white;
+      margin-top: 1.5em;
+      margin-bottom: 4em;
+
+      max-width: 38em;
+      margin-left: auto;
+      margin-right: auto;
+      box-sizing: border-box;
+
+      padding: 0;
+      padding-left: 1.3em;
+      padding-right: 1.3em;
+
+      font-size: large;
+      color: #555;
+      line-height: 1.6;
+
+      text-align: justify;
+      overflow-wrap: break-word;
+  }
+
+  header {
+      font-family: serif;
+      margin-top: 0;
+      margin-bottom: 0.2em;
+      text-align: center;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+      margin-top: 0.5em;
+      margin-bottom: 0.2em;
+  }
+
+  p {
+      margin-top: 0;
+      margin-bottom: 0.8em;
+  }
+
+  dl {
+      margin-block-start: 0.5em;
+  }
+  </style>
+
 </head>
 <body>
 <header id="title-block-header">
@@ -47,16 +96,19 @@
 <dd><p>Quiet mode. Normal output that is printed when compressing or decompressing files is suppressed, making wadptr work more like a normal Unix tool that only prints output when an error occurs.</p>
 </dd>
 <dt><strong>-nomerge</strong></dt>
-<dd><p>Disables WAD lump merging (see the <strong>compression schemes</strong> section below).</p>
+<dd><p>Disables WAD lump merging (see the <strong>compression schemes</strong> section below). Cannot be used with uncompress mode.</p>
 </dd>
 <dt><strong>-nopack</strong></dt>
-<dd><p>Disables sidedef packing (see the <strong>compression schemes</strong> section below).</p>
+<dd><p>Disables sidedef packing (see the <strong>compression schemes</strong> section below). In uncompress mode, this disables sidedef <em>unpacking</em>.</p>
 </dd>
 <dt><strong>-nosquash</strong></dt>
-<dd><p>Disables graphic squashing (see the <strong>compression schemes</strong> section below).</p>
+<dd><p>Disables graphic squashing (see the <strong>compression schemes</strong> section below). In uncompress mode, this disables graphic <em>unsquashing</em>.</p>
 </dd>
 <dt><strong>-nostack</strong></dt>
-<dd><p>Disables blockmap stacking (see the <strong>compression schemes</strong> section below).</p>
+<dd><p>Disables blockmap stacking (see the <strong>compression schemes</strong> section below). In uncompress mode, this disables blockmap <em>unstacking</em>.</p>
+</dd>
+<dt><strong>-v</strong></dt>
+<dd><p>Print version number.</p>
 </dd>
 </dl>
 <h1>COMPRESSION SCHEMES</h1>
@@ -79,6 +131,8 @@
 <h1>LIMITATIONS</h1>
 <p>The <strong>-c</strong> command will compress a WAD file and the <strong>-u</strong> command can then be used to restore the original uncompressed file. However, the decompressed file may not exactly match the original file byte-for-byte. For example, some editors already pack sidedefs, and sometimes WAD files include junk data that wadptr will discard. If for some reason it's important to retain the original file, you should therefore make sure to to either back up the original file before using wadptr, or use the <strong>-o</strong> command line option to write to a different file.</p>
 <p>For compatibility reasons, wadptr's blockmap stacking is deliberately very conservative. Far more aggressive techniques can be used to shrink blockmap lumps further, particularly for large levels that run up against the blockmap size limit. If you need this, check out ZokumBSP: &lt;https://github.com/zokum-no/zokumbsp&gt;</p>
+<p>When packing sidedefs, linedefs with special types always get their own unique sidedefs that are not shared with other linedefs. This is to avoid problems with animated walls (including scrolling walls and switches). wadptr's behavior is maybe excessively cautious in that it applies to any and all special lines, but since only very few linedefs in a typical level are special lines this is judged to be okay.</p>
+<p>Some levels are so large that it is impossible to unpack their sidedefs or unstack their blockmap without exceeding the limits of the Doom level format. If this happens when uncompressing a level, "failed" will be shown in the program output for that lump and the original (compressed) lump will be copied into the output file unchanged.</p>
 <p>Some level editors get confused by packed sidedefs. If your level editor has problems, use <strong>-u</strong> to uncompress the file before editing.</p>
 <h1>EXAMPLES</h1>
 <p>Here are some examples for how to invoke the program:</p>
