@@ -107,6 +107,12 @@
 <dt><strong>-nostack</strong></dt>
 <dd><p>Disables blockmap stacking (see the <strong>compression schemes</strong> section below). In uncompress mode, this disables blockmap <em>unstacking</em>.</p>
 </dd>
+<dt><strong>-extblocks</strong></dt>
+<dd><p>Enables extended BLOCKMAP size limit, for WADs targeting limit-removing source ports. This effectively doubles the limit, but the resulting lump will not work with vanilla Doom.</p>
+</dd>
+<dt><strong>-extsides</strong></dt>
+<dd><p>Enables extended sidedef count limit, for WADs targeting limit-removing source ports. This effectively doubles the limit, but the resulting lump will not work with vanilla Doom.</p>
+</dd>
 <dt><strong>-v</strong></dt>
 <dd><p>Print version number.</p>
 </dd>
@@ -127,12 +133,12 @@
 <dd><p>A precomputed table named the blockmap is used for collision detection; it divides up each level into 128x128 blocks and indexes which lines appear in each block. Often, different blocks contain the same identical set of lines. This compression scheme saves space by merging identical blocks together. This behavior can be disabled using the <strong>-nostack</strong> option.</p>
 </dd>
 </dl>
-<p>To see an example of wadptr used in a very effective way, see miniwad, a minimalist Doom-compatible IWAD file that is less than 250KiB in size: &lt;https://github.com/fragglet/miniwad&gt;</p>
+<p>To see an example of wadptr used in a very effective way, see miniwad, a minimalist Doom-compatible IWAD file that is less than 250KiB in size: <a href="https://github.com/fragglet/miniwad"></a></p>
 <h1>LIMITATIONS</h1>
 <p>The <strong>-c</strong> command will compress a WAD file and the <strong>-u</strong> command can then be used to restore the original uncompressed file. However, the decompressed file may not exactly match the original file byte-for-byte. For example, some editors already pack sidedefs, and sometimes WAD files include junk data that wadptr will discard. If for some reason it's important to retain the original file, you should therefore make sure to to either back up the original file before using wadptr, or use the <strong>-o</strong> command line option to write to a different file.</p>
-<p>For compatibility reasons, wadptr's blockmap stacking is deliberately very conservative. Far more aggressive techniques can be used to shrink blockmap lumps further, particularly for large levels that run up against the blockmap size limit. If you need this, check out ZokumBSP: &lt;https://github.com/zokum-no/zokumbsp&gt;</p>
+<p>For compatibility reasons, wadptr's blockmap stacking is deliberately very conservative. Far more aggressive techniques can be used to shrink blockmap lumps further, particularly for large levels that run up against the blockmap size limit. If you need this, check out ZokumBSP: <a href="https://github.com/zokum-no/zokumbsp"></a></p>
 <p>When packing sidedefs, linedefs with special types always get their own unique sidedefs that are not shared with other linedefs. This is to avoid problems with animated walls (including scrolling walls and switches). wadptr's behavior is maybe excessively cautious in that it applies to any and all special lines, but since only very few linedefs in a typical level are special lines this is judged to be okay.</p>
-<p>Some levels are so large that it is impossible to unpack their sidedefs or unstack their blockmap without exceeding the limits of the Doom level format. If this happens when uncompressing a level, "failed" will be shown in the program output for that lump and the original (compressed) lump will be copied into the output file unchanged.</p>
+<p>Some levels are so large that it is impossible to unpack their sidedefs or unstack their blockmap without exceeding the limits of the Doom level format. If this happens when uncompressing a level, "failed" will be shown in the program output for that lump and the original (compressed) lump will be copied into the output file unchanged. The <strong>-extblocks</strong> and <strong>-extsides</strong> command line arguments can be specified to use the extended limits instead of the vanilla limits, but the resulting levels will only work in a limit-removing source port.</p>
 <p>Some level editors get confused by packed sidedefs. If your level editor has problems, use <strong>-u</strong> to uncompress the file before editing.</p>
 <h1>EXAMPLES</h1>
 <p>Here are some examples for how to invoke the program:</p>
@@ -147,13 +153,18 @@
 <dd><p>Compress <strong>foo.wad</strong> but write the resulting file to <strong>newfoo.wad</strong>.</p>
 </dd>
 </dl>
+<h1>BUG REPORTS</h1>
+<p>Bugs can be reported to the GitHub issue tracker:<br />
+<a href="https://github.com/fragglet/wadptr"></a></p>
+<h1>WWW</h1>
+<p><a href="https://soulsphere.org/projects/wadptr/"></a></p>
 <h1>SEE ALSO</h1>
 <p><strong>deutex</strong>(6), <strong>bsp</strong>(6), <strong>yadex</strong>(6), <strong>eureka</strong>(1), <strong>chocolate-doom</strong>(6)</p>
 <h1>HISTORY</h1>
-<p>wadptr was originally written in 1998 by Simon Howard as a command-line program for MS-DOS. Simon continues to maintain the project. The first version worked as an adjunct to <strong>deutex</strong>(6), but with the 2.x series it changed to a standalone tool. Andreas Dehmel ported the program to several different Unix systems and also to RISC OS. The source code was recently (writing in 2023) overhauled and cleaned up.</p>
-<p><em>Doom</em> is a first-person shooter (FPS) game released by id Software in 1993 that has consistently topped lists of the best video games of all time. It retains an active modding community to this day that continues to develop new levels and reinvent the game in new and amazing ways.</p>
+<p>wadptr was originally written in 1998 by <a href="mailto:fraggle@gmail.com">Simon Howard</a> as a command-line program for MS-DOS. Simon continues to maintain the project. The first version worked as an adjunct to <strong>deutex</strong>(6), but with the 2.x series it changed to a standalone tool. Andreas Dehmel ported the program to several different Unix systems and also to RISC OS. The source code was recently (writing in 2023) overhauled and cleaned up.</p>
+<p><a href="https://doomwiki.org/wiki/Doom"><em>Doom</em></a> is a first-person shooter (FPS) game released by id Software in 1993 that has consistently topped lists of the best video games of all time. It retains an active modding community to this day that continues to develop new levels and reinvent the game in new and amazing ways.</p>
 <h1>COPYRIGHT</h1>
-<p>Copyright(C) 1998-2023 Simon Howard, Andreas Dehmel</p>
+<p>Copyright © 1998-2023 Simon Howard, Andreas Dehmel</p>
 <p>This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.</p>
 <p>This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.</p>
 </body>
