@@ -44,6 +44,10 @@ read_commit_ids() {
     echo ${#commits[@]} commits
 }
 
+print_progress() {
+    echo -n "[" $((commit_index + 1)) "/" ${#commits[@]} "] "
+}
+
 scan() {
     local arg="$1"
     local direction="$2"
@@ -58,6 +62,7 @@ scan() {
           [[ $new_index -lt ${#commits[@]} ]]; do
         commit=${commits[$new_index]}
         if git show "$commit" | grep -iq "$arg"; then
+            echo "                                                      "
             commit_index=$new_index
             return 0
         fi
@@ -65,8 +70,17 @@ scan() {
         new_index=$((new_index + direction))
     done
 
+    echo "                                                      "
     echo "Failed to find '$arg'"
     return 1
+}
+
+show_help() {
+    echo " y           - Cherry pick this commit and move to next"
+    echo " d           - Show full diff"
+    echo " n [needle]  - Skip; scan forward to find commit"
+    echo " b [needle]  - Scan backward to find commit"
+    echo " q           - Quit"
 }
 
 read_commit_ids "$1"
@@ -84,7 +98,8 @@ while [[ $commit_index -lt ${#commits[@]} ]]; do
     fi
     while true; do
         arg=
-        read -p "Cherrypick? [y/n/d/q] " -u 5 response arg
+        print_progress
+        read -p "Cherrypick? [y/n/b/d/q] " -u 5 response arg
         case $response in
             y)
                 try_cherrypick $commit
@@ -104,6 +119,9 @@ while [[ $commit_index -lt ${#commits[@]} ]]; do
                 ;;
             q)
                 exit
+                ;;
+            \?)
+                show_help
                 ;;
         esac
     done
