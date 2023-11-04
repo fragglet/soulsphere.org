@@ -134,10 +134,17 @@
 </dd>
 </dl>
 <p>To see an example of wadptr used in a very effective way, see miniwad, a minimalist Doom-compatible IWAD file that is less than 250KiB in size: <a href="https://github.com/fragglet/miniwad"></a></p>
+<h1>SIDEDEFS ON SPECIAL LINES</h1>
+<p>When packing sidedefs, linedefs with special types always get unique sidedefs that are not shared with any other linedefs. This is to avoid problems with animated walls, such as:</p>
+<ul>
+<li><p>Scrolling walls; if multiple scrolling wall linedefs share the same sidedef, these walls will all scroll faster than normal. Non-scrolling walls that share the same sidedef will also scroll unintentionally.</p></li>
+<li><p>Wall switches; if multiple switch lines share the same sidedef, pressing one will animate all others.</p></li>
+</ul>
+<p>wadptr's behavior is maybe excessively cautious in that it applies to any and all special lines, but since only very few linedefs in a typical level are special lines this is judged to be a reasonable tradeoff.</p>
+<p>However, if wadptr repacks the sidedefs on a level that was already packed by another, less cautious, tool, the resulting sidedefs lump may be slightly larger than the original. While counterintuitive given the purpose of the program is to make WADs smaller, this is almost certainly what you want to happen; other tools that do sidedef packing less cautiously may cause unintended visual glitches to occur.</p>
 <h1>LIMITATIONS</h1>
 <p>The <strong>-c</strong> command will compress a WAD file and the <strong>-u</strong> command can then be used to restore the original uncompressed file. However, the decompressed file may not exactly match the original file byte-for-byte. For example, some editors already pack sidedefs, and sometimes WAD files include junk data that wadptr will discard. If for some reason it's important to retain the original file, you should therefore make sure to to either back up the original file before using wadptr, or use the <strong>-o</strong> command line option to write to a different file.</p>
 <p>For compatibility reasons, wadptr's blockmap stacking is deliberately very conservative. Far more aggressive techniques can be used to shrink blockmap lumps further, particularly for large levels that run up against the blockmap size limit. If you need this, check out ZokumBSP: <a href="https://github.com/zokum-no/zokumbsp"></a></p>
-<p>When packing sidedefs, linedefs with special types always get their own unique sidedefs that are not shared with other linedefs. This is to avoid problems with animated walls (including scrolling walls and switches). wadptr's behavior is maybe excessively cautious in that it applies to any and all special lines, but since only very few linedefs in a typical level are special lines this is judged to be okay.</p>
 <p>Some levels are so large that it is impossible to unpack their sidedefs or unstack their blockmap without exceeding the limits of the Doom level format. If this happens when uncompressing a level, "failed" will be shown in the program output for that lump and the original (compressed) lump will be copied into the output file unchanged. The <strong>-extblocks</strong> and <strong>-extsides</strong> command line arguments can be specified to use the extended limits instead of the vanilla limits, but the resulting levels will only work in a limit-removing source port.</p>
 <p>Some level editors get confused by packed sidedefs. If your level editor has problems, use <strong>-u</strong> to uncompress the file before editing.</p>
 <h1>EXAMPLES</h1>
