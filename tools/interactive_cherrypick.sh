@@ -75,6 +75,20 @@ scan() {
     return 1
 }
 
+conflict_sources() {
+    local commit_id="$1"
+    git show $commit_id --name-only --pretty=format: | {
+        filenames=()
+        i=0
+        while read filename; do
+            filenames[$i]="$filename"
+        done
+
+        git log --pretty="format:%h %s" "$commit_id"^ ^HEAD \
+                -- "${filenames[@]}"
+    }
+}
+
 show_help() {
     echo " y           - Cherry pick this commit and move to next"
     echo " d           - Show full diff"
@@ -119,6 +133,9 @@ while [[ $commit_index -lt ${#commits[@]} ]]; do
                 ;;
             q)
                 exit
+                ;;
+            c)
+                conflict_sources $commit
                 ;;
             \?)
                 show_help
