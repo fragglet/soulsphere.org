@@ -99,7 +99,7 @@ while [[ $commit_index -lt ${#commits[@]} ]]; do
     while true; do
         arg=
         print_progress
-        read -p "Cherrypick? [y/n/b/d/q] " -u 5 response arg
+        read -p "Cherrypick? [y/n/b/d/q] " response arg
         case $response in
             y)
                 try_cherrypick $commit
