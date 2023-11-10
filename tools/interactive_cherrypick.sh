@@ -48,12 +48,20 @@ print_progress() {
     echo -n "[" $((commit_index + 1)) "/" ${#commits[@]} "] "
 }
 
+# Save current commit_index to navigate_history array.
+push_navigate_history() {
+    local arrlen=${#navigate_history[@]}
+    navigate_history[$arrlen]=$commit_index
+    navigate_future=()
+}
+
 scan() {
     local arg="$1"
     local direction="$2"
     local new_index=$((commit_index + direction))
 
     if [[ "$arg" = "" ]]; then
+        push_navigate_history
         commit_index=$new_index
         return 0
     fi
@@ -63,6 +71,7 @@ scan() {
         commit=${commits[$new_index]}
         if git show "$commit" | grep -iq "$arg"; then
             echo "                                                      "
+            push_navigate_history
             commit_index=$new_index
             return 0
         fi
@@ -73,6 +82,42 @@ scan() {
     echo "                                                      "
     echo "Failed to find '$arg'"
     return 1
+}
+
+debug_print_history_stacks() {
+    echo "${navigate_history[@]} < $commit_index > ${navigate_future[@]}"
+}
+
+navigate_back() {
+    local history_len=${#navigate_history[@]}
+    if [[ $history_len -lt 1 ]]; then
+        echo "Beginning of history; nothing to go back to."
+        return 1
+    fi
+    # Push to future stack, and...
+    local future_len=${#navigate_future[@]}
+    navigate_future[$future_len]=$commit_index
+    # Pop from history stack:
+    local history_top=$((history_len - 1))
+    commit_index=${navigate_history[$history_top]}
+    unset navigate_history[$history_top]
+    return 0
+}
+
+navigate_forward() {
+    local future_len=${#navigate_future[@]}
+    if [[ $future_len -lt 1 ]]; then
+        echo "Nothing to go forward to."
+        return 1
+    fi
+    # Push to history stack, and...
+    local history_len=${#navigate_history[@]}
+    navigate_history[$history_len]=$commit_index
+    # Pop from future stack:
+    local future_top=$((future_len - 1))
+    commit_index=${navigate_future[$future_top]}
+    unset navigate_future[$future_top]
+    return 0
 }
 
 conflict_sources() {
@@ -92,12 +137,21 @@ conflict_sources() {
 show_help() {
     echo " y           - Cherry pick this commit and move to next"
     echo " d           - Show full diff"
-    echo " n [needle]  - Skip; scan forward to find commit"
-    echo " b [needle]  - Scan backward to find commit"
+    echo " n [needle]  - Next; scan forward to find commit"
+    echo " p [needle]  - Previous; Scan backward to find commit"
+    echo " c           - List previous commits possibly causing conflict"
+    echo " b           - Go back to last commit"
+    echo " f           - Go forward"
     echo " q           - Quit"
 }
 
 read_commit_ids "$1"
+
+# Commits previously moved (by commit index):
+navigate_history=()
+
+# Commits get saved here when we navigate back:
+navigate_future=()
 
 commit_index=0
 while [[ $commit_index -lt ${#commits[@]} ]]; do
@@ -113,20 +167,32 @@ while [[ $commit_index -lt ${#commits[@]} ]]; do
     while true; do
         arg=
         print_progress
-        read -p "Cherrypick? [y/n/b/d/q] " response arg
+        read -p "Cherrypick? [y/n/p/d/c/q] " response arg
         case $response in
             y)
                 try_cherrypick $commit
                 commit_index=$((commit_index+1))
                 break
                 ;;
-            b)
-                scan "$arg" -1
-                break
+            p)
+                if scan "$arg" -1; then
+                    break
+                fi
                 ;;
             n)
-                scan "$arg" 1
-                break
+                if scan "$arg" 1; then
+                    break
+                fi
+                ;;
+            b)
+                if navigate_back; then
+                    break
+                fi
+                ;;
+            f)
+                if navigate_forward; then
+                    break
+                fi
                 ;;
             d)
                 git show $commit
