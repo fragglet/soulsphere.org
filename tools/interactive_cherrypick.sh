@@ -150,15 +150,21 @@ conflict_sources() {
         fi
         i=$((i + 1))
     done
+    num_search_results=$future_len
     echo "=== ${#navigate_future[@]} potential conflict commits found."
     navigate_forward
 }
 
 print_search_status() {
-    if [[ ${#navigate_future[@]} -eq 0 ]]; then
+    local num_future=${#navigate_future[@]}
+    if [[ $num_future -ge $num_search_results ]]; then
+        # We have walked backwards out of the search results range.
+        return
+    fi
+    if [[ $num_future -eq 0 ]]; then
         echo "*** No more search results."
         echo
-        return 0
+        return
     fi
     local next_result_idx=$((${#navigate_future[@]} - 1))
     local next_commit=${navigate_future[$next_result_idx]}
@@ -168,6 +174,7 @@ print_search_status() {
     echo "*** ${#navigate_future[@]} more search results after this one."
     echo "*** f - Next: $commit_descr"
     echo
+    return
 }
 
 show_help() {
@@ -192,6 +199,7 @@ navigate_future=()
 # If true, navigate_future contains search results that we are
 # stepping through.
 have_search_results=false
+num_search_results=0
 
 commit_index=0
 while [[ $commit_index -lt ${#commits[@]} ]]; do
