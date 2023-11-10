@@ -236,14 +236,14 @@ print_search_status() {
 }
 
 show_help() {
-    echo " y           - Cherry pick this commit and move to next"
-    echo " n [needle]  - Next; scan forward to find commit"
-    echo " p [needle]  - Previous; Scan backward to find commit"
-    echo " f           - Forward [to next search result]"
-    echo " b           - Back to last commit"
-    echo " c           - Search previous commits for conflict source"
-    echo " d           - Show full diff"
-    echo " q           - Quit"
+    echo " y - Cherry pick this commit and move to next"
+    echo " n - Next commit                n [x] - Search forwards for x"
+    echo " p - Previous commit            p [x] - Search backwards for x"
+    echo " f - Forward [to next search result]"
+    echo " b - Back to last commit"
+    echo " c - Search previous commits for conflict source"
+    echo " d - Show full diff"
+    echo " q - Quit"
 }
 
 read_commit_ids "$1"
@@ -322,6 +322,9 @@ while [[ $commit_index -lt ${#commits[@]} ]]; do
                 ;;
             \?)
                 show_help
+                ;;
+            *)
+                echo "Unknown command; type '?' for help."
                 ;;
         esac
     done
