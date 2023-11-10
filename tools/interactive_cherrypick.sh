@@ -48,12 +48,66 @@ print_progress() {
     echo -n "[" $((commit_index + 1)) "/" ${#commits[@]} "] "
 }
 
+clear_line() {
+    printf "                                                              \r"
+}
+
+append_to_navigate_future() {
+    local new_value="$1"
+    # We're inserting to bottom of the stack, so we must
+    # move everything up by one.
+    local i=$((${#navigate_future[@]} - 1))
+    while [[ $i -ge 0 ]]; do
+        new_i=$((i + 1))
+        navigate_future[$new_i]=${navigate_future[$i]}
+        i=$((i - 1))
+    done
+    navigate_future[0]=$new_value
+}
+
+scan_find_result() {
+    if $scan_search_ended; then
+        return 1
+    fi
+
+    local new_index=$((scan_last_index + scan_search_direction))
+
+    while [[ $new_index -ge 0 ]] &&
+          [[ $new_index -lt ${#commits[@]} ]]; do
+        commit=${commits[$new_index]}
+        if git show "$commit" | grep -iq "$scan_search_query"; then
+            clear_line
+            append_to_navigate_future $new_index
+            num_search_results=$((num_search_results + 1))
+            scan_last_index=$new_index
+            # We only find a single result per call.
+            return 0
+        fi
+        printf "Searching: commit $commit\r"
+        new_index=$((new_index + scan_search_direction))
+    done
+
+    # No more results to find.
+    clear_line
+    scan_search_ended=true
+    return 1
+}
+
+start_scan() {
+    scan_search_query="$1"
+    scan_search_direction="$2"
+    scan_search_ended=false
+    scan_last_index=$commit_index
+    navigate_future=()
+}
+
 # Save current commit_index to navigate_history array.
 push_navigate_history() {
     local arrlen=${#navigate_history[@]}
     navigate_history[$arrlen]=$commit_index
     navigate_future=()
     have_search_results=false
+    scan_search_ended=true
 }
 
 scan() {
@@ -67,22 +121,16 @@ scan() {
         return 0
     fi
 
-    while [[ $new_index -ge 0 ]] &&
-          [[ $new_index -lt ${#commits[@]} ]]; do
-        commit=${commits[$new_index]}
-        if git show "$commit" | grep -iq "$arg"; then
-            echo "                                                      "
-            push_navigate_history
-            commit_index=$new_index
-            return 0
-        fi
-        printf "Searching: commit $commit\r"
-        new_index=$((new_index + direction))
-    done
+    start_scan "$arg" "$direction"
+    if ! scan_find_result; then
+        echo "No result found for query."
+        return 1
+    fi
 
-    echo "                                                      "
-    echo "Failed to find '$arg'"
-    return 1
+    have_search_results=true
+    num_search_results=1
+    navigate_forward
+    return 0
 }
 
 debug_print_history_stacks() {
@@ -118,6 +166,11 @@ navigate_forward() {
     local future_top=$((future_len - 1))
     commit_index=${navigate_future[$future_top]}
     unset navigate_future[$future_top]
+    # Top up the future array so that we always have at least one
+    # more result waiting.
+    if ! $scan_search_ended && [[ $future_top = 0 ]]; then
+        scan_find_result
+    fi
     return 0
 }
 
@@ -141,6 +194,7 @@ conflict_sources() {
     # through results.
     navigate_future=()
     have_search_results=true
+    scan_search_ended=true
     local future_len=0
     local i
     while [[ $i -lt $commit_index ]]; do
@@ -171,7 +225,11 @@ print_search_status() {
     local next_commit_id=${commits[$next_commit]}
     local commit_descr=$(git log --pretty="%h %s" \
                          "${next_commit_id}^...${next_commit_id}")
-    echo "*** ${#navigate_future[@]} more search results after this one."
+    if $scan_search_ended; then
+        echo "*** ${#navigate_future[@]} more search results after this one."
+    else
+        echo "*** Stepping through search results for '$scan_search_query'"
+    fi
     echo "*** f - Next: $commit_descr"
     echo
     return
@@ -200,6 +258,12 @@ navigate_future=()
 # stepping through.
 have_search_results=false
 num_search_results=0
+
+# Scan search results (with n/p) are lazily evaluated.
+scan_search_ended=true
+scan_last_index=0
+scan_search_query=
+scan_search_direction=1
 
 commit_index=0
 while [[ $commit_index -lt ${#commits[@]} ]]; do
