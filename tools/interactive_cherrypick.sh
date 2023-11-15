@@ -235,6 +235,43 @@ print_search_status() {
     return
 }
 
+show_log() {
+    local index=$((commit_index - 10))
+    local end_index=$((commit_index + 10))
+    if [[ $index -lt 0 ]]; then
+        index=0
+    fi
+    local prev_commit=$((commit_index - 1))
+    local next_commit=$((commit_index + 1))
+    local back_commit=none forward_commit=none
+    local top=$((${#navigate_history[@]} - 1))
+    if [[ $top -ge 0 ]]; then
+        back_commit=${navigate_history[$top]}
+    fi
+    top=$((${#navigate_future[@]} - 1))
+    if [[ $top -ge 0 ]]; then
+        forward_commit=${navigate_future[$top]}
+    fi
+    while [[ $index -lt ${#commits[@]} ]] &&
+          [[ $index -lt $end_index ]]; do
+        if [[ $index -eq $commit_index ]]; then
+            echo -n "> "
+        elif [[ $index -eq $prev_commit ]]; then
+            echo -n "p "
+        elif [[ $index -eq $next_commit ]]; then
+            echo -n "n "
+        elif [[ $index -eq $back_commit ]]; then
+            echo -n "b "
+        elif [[ $index -eq $forward_commit ]]; then
+            echo -n "f "
+        else
+            echo -n "  "
+        fi
+        git -P show --oneline -s ${commits[$index]}
+        index=$((index + 1))
+    done
+}
+
 show_help() {
     echo " y - Cherry pick this commit and move to next"
     echo " n - Next commit                n [x] - Search forwards for x"
@@ -314,6 +351,9 @@ while [[ $commit_index -lt ${#commits[@]} ]]; do
                 ;;
             q)
                 exit
+                ;;
+            l)
+                show_log
                 ;;
             c)
                 if conflict_sources $commit; then
