@@ -1,0 +1,77 @@
+Registry keys installed by different Windows Doom installers that can be used
+to locate IWAD files.
+
+== Collectors Edition ==
+
+Install path can be found from
+HKEY_LOCAL_MACHINE\Software\Activision\DOOM Collector's Edition\v1.0\INSTALLPATH
+
+wads are then in
+${INSTALL_PATH}\Doom2
+${INSTALL_PATH}\Final Doom
+${INSTALL_PATH}\Ultimate Doom
+
+== Final Doom ==
+
+Look at 
+HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Uninstall\Final DOOM for Windows 95\UninstallString
+
+The value looks like
+
+C:\Program Files\Path\uninstl.exe /S C:\Program Files\Path
+
+Cut everything after and including "\uninstl.exe /S" to get the install path
+WADs are in this install path
+
+== Depths of Doom trilogy ==
+
+=== Doom II for Windows 95 ===
+
+Look at 
+HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Uninstall\Doom II for Windows 95\UninstallString
+
+The value looks like
+
+C:\Program Files\Path\uninstl.exe /S C:\Program Files\Path
+
+Cut everything after and including "\uninstl.exe /S" to get the install path
+doom2.wad is in the install path
+
+=== Ultimate Doom ===
+
+Look at 
+HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Uninstall\Ultimate Doom for Windows 95
+
+The value looks like
+
+C:\Program Files\Path\uninstl.exe /S C:\Program Files\Path
+
+Cut everything after and including "\uninstl.exe /S" to get the install path
+doom.wad is in the install path
+
+== Chex Quest ==
+
+Look at HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Uninstall\Chex® Quest
+
+The value looks like:
+
+C:\Chex\UNWISE.EXE C:\Chex\INSTALL.LOG
+
+Cut everything after and including "\UNWISE.EXE" to get the install path.
+chex.wad is in the install path.
+
+== Steam ==
+
+Get the steam install location from:
+
+HKEY_LOCAL_MACHINE\Software\Valve\Steam\InstallPath
+
+IWADs are installed at:
+
+${STEAM}\steamapps\common\doom 2\doom2.wad
+${STEAM}\steamapps\common\ultimate doom\doom.wad
+${STEAM}\steamapps\common\final doom\tnt.wad
+${STEAM}\steamapps\common\final doom\plutonia.wad
+${STEAM}\steamapps\common\hexen\base\hexen.wad
+${STEAM}\steamapps\common\heretic shadow of the serpent riders\heretic.wad
+

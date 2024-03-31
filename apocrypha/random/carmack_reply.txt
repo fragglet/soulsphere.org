@@ -1,0 +1,17 @@
+You can't re-create anything that is clearly our work.
+
+You can make a completely different game using the code with our blessing,
+but if it has imps, cyber demons, BFGs, etc, then you are treading on thin ice.
+
+I hate to be the one to tell people this, but the reality of the business
+is that we are obligated to defend our trademarks and copyrights, so we
+can't just let things like that happen, even if they aren't perceived as a
+"threat".
+
+You could make and release a new DOOM wad that replaced everything with
+similary looking original art, but it would still be bound by the
+restrictions we place on community derivative work, so it wouldn't be
+"free" in the sense that the GPL'd codebase is.
+
+John Carmack
+

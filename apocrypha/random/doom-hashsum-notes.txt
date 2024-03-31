@@ -1,0 +1,145 @@
+Filename                          Description            Version
+
+doom-alpha-0.2.tar.gz             Doom (Alpha)           0.2
+doom-alpha-0.3.tar.gz             Doom (Alpha)           0.3
+doom-alpha-0.4.tar.gz             Doom (Alpha)           0.4
+doom-alpha-0.5.tar.gz             Doom (Alpha)           0.5
+doom-press-release-beta.tar.gz    Doom (Beta)            N/A
+doom-shareware-1.0.tar.gz         Shareware Doom         1.0
+doom-shareware-1.1.tar.gz         Shareware Doom         1.1
+doom-shareware-1.2.tar.gz         Shareware Doom         1.2
+doom-shareware-1.25.tar.gz        Shareware Doom         1.25 (Sybex special)
+doom-1.4bl.tar.gz                 Doom                   pre-1.4 (BETA leak)
+doom-shareware-1.4.tar.gz         Shareware Doom         1.4 (BETA)
+doom-shareware-1.5.tar.gz         Shareware Doom         1.5 (BETA)
+doom-shareware-1.6.tar.gz         Shareware Doom         1.6 (BETA)
+doom-shareware-1.666-beta.tar.gz  Shareware Doom         1.6 beta
+doom-shareware-1.666.tar.gz       Shareware Doom         1.666
+doom-shareware-1.8.tar.gz         Shareware Doom         1.8
+doom-shareware-1.9.tar.gz         Shareware Doom         1.9
+doom-registered-1.1.tar.gz        Registered Doom        1.1
+doom-registered-1.2.tar.gz        Registered Doom        1.2
+doom-registered-1.666.tar.gz      Registered Doom        1.666
+doom-registered-1.8.tar.gz        Registered Doom        1.8
+doom-registered-1.9.tar.gz        Registered Doom        1.9
+ultimate-doom-1.9.tar.gz          Ultimate Doom          1.9
+doom2-1.666.tar.gz                Doom 2                 1.666 (1994/08/30)
+doom2-1.666-pirated.tar.gz        Doom 2 pirated version 1.666 (1994/08/25)
+doom2-1.666-german.tar.gz         Doom 2 (German)        1.666
+doom2-1.7.tar.gz                  Doom 2                 1.7
+doom2-1.7a.tar.gz                 Doom 2                 1.7a
+doom2-1.8.tar.gz                  Doom 2                 1.8
+doom2-1.8-french.tar.gz           Doom 2 (French)        1.8
+doom2-1.9.tar.gz                  Doom 2                 1.9
+final-doom-tnt-1.9.tar.gz         Final Doom: TNT        1.9
+final-doom-tnt-1.9-alt.tar.gz     Final Doom: TNT        1.9 (alt. version)
+final-doom-plutonia-1.9.tar.gz    Final Doom: Plutonia   1.9
+final-doom-plutonia-1.9-alt.tar.gz Final Doom: Plutonia  1.9 (alt. version)
+master-levels.tar.gz              Master Levels          n/a
+maximum-doom.tar.gz               Maximum Doom (DOOM-IT) n/a
+maximum-doom-wads.tar.gz          Maximum Doom (WADs)    n/a
+
+doom-source-1.10.tar.gz           Doom source code       1.10 (DSL version)
+doom-source-1.10-gpl.tar.gz       Doom source code       1.10 (GPL version)
+setup-source.tar.gz               SETUP.EXE source       N/A
+ipxsetup-source-doom1.tar.gz      IPXSETUP.EXE source    Doom 1 version
+ipxsetup-source-doom2.tar.gz      IPXSETUP.EXE source    Doom 2 version
+sersetup-source-doom1.tar.gz      SERSETUP.EXE source    Doom 1 version
+sersetup-source-doom2.tar.gz      SERSETUP.EXE source    Doom 2 version
+
+heretic-shareware-1.0.tar.gz      Shareware Heretic      1.0
+heretic-shareware-1.2.tar.gz      Shareware Heretic      1.2
+heretic-source.tar.gz             Heretic source code    N/A
+heretic-registered-1.0.tar.gz     Registered Heretic     1.0
+heretic-registered-1.2.tar.gz     Registered Heretic     1.2
+heretic-registered-1.3.tar.gz     Registered Heretic     1.3
+heretic-beta.tar.gz               Shareware Heretic      Wide Area Beta
+
+hexen-beta.tar.gz                 Hexen Demo version     beta
+hexen-demo.tar.gz                 Hexen Demo version     n/a
+hexen-retail-store-beta.tar.gz    Registered Hexen       beta
+hexen-1.0.tar.gz                  Registered Hexen       1.0
+hexen-1.0-cd.tar.gz               Registered Hexen       1.0 (CD version)
+hexen-1.1.tar.gz                  Registered Hexen       1.1
+hexen-deathkings-1.0.tar.gz       Hexen: DK/DC           1.0
+hexen-deathkings-1.1.tar.gz       Hexen: DK/DC           1.1
+hexen-source.tar.gz               Hexen source code      N/A
+
+strife-shareware-1.1.tar.gz       Shareware Strife       1.1 (incomplete?)
+strife-registered-1.0.tar.gz      Registered Strife      1.0
+strife-registered-1.2.tar.gz      Registered Strife      1.2
+strife-registered-1.3.tar.gz      Registered Strife      1.3
+strife-registered-1.31.tar.gz     Registered Strife      1.31
+
+chex-quest.tar.gz                 Chex Quest             N/A
+chex-quest2.tar.gz                Chex Quest 2           N/A
+chex-quest3.tar.gz                Chex Quest 3 (BETA)    N/A
+
+doom-rpg-1.0.20.tar.gz            Doom RPG               1.0.20
+doom-rpg-1.0.92.tar.gz            Doom RPG               1.0.92
+orcs-and-elves-1.0.16.tar.gz      Orcs and Elves         1.0.16
+
+dck-3.62.tar.gz                   DCK                    3.62
+
+lost-episodes-of-doom.tar.gz      Lost Episodes of Doom
+
+Installers:
+
+doom-press-release-beta-installer.tar.gz Doom (BETA)             n/a
+doom-shareware-1.0-installer.tar.gz      Shareware Doom          1.0
+doom-shareware-1.1-installer.tar.gz      Shareware Doom          1.1
+doom-shareware-1.2-installer.tar.gz      Shareware Doom          1.2
+doom-shareware-1.25-installer.tar.gz     Shareware Doom          1.25 (Sybex)
+doom-shareware-1.666-installer.tar.gz    Shareware Doom          1.666
+doom-shareware-1.8-installer.tar.gz      Shareware Doom          1.8
+doom-shareware-1.9-installer.tar.gz      Shareware Doom          1.9
+doom-registered-1.1-installer.tar.gz     Registered Doom         1.1
+doom-registered-1.2-installer.tar.gz     Registered Doom         1.2
+doom-registered-1.666-installer.tar.gz   Registered Doom         1.666
+doom-registered-1.9-installer.tar.gz     Registered Doom         1.9
+ultimate-doom-1.9-installer.tar.gz       Ultimate Doom           1.9
+doom2-1.666-installer.tar.gz             Doom 2                  1.666
+doom2-1.666-german-installer.tar.gz      Doom 2 (German)         1.666
+doom2-1.666-pirated-installer.tar.gz     Doom 2 pirated version  1.666
+doom2-1.7-installer.tar.gz               Doom 2                  1.7
+doom2-1.8-french-installer.tar.gz        Doom 2 (French)         1.8
+doom2-1.9-installer.tar.gz               Doom 2                  1.9
+doom2-1.9-mac-floppies.tar.gz            Doom 2 (Macintosh)      1.9
+master-levels-installer.tar.gz           Master levels           n/a
+maxium-doom-installer.tar.gz             Maximum Doom (DOOM-IT)  n/a
+final-doom-plutonia-1.9-installer.tar.gz Final Doom: TNT         1.9
+final-doom-plutonia-1.9-alt-installer.tar.gz Final Doom: TNT     1.9 (alt version)
+final-doom-tnt-1.9-installer.tar.gz      Final Doom: Plutonia    1.9
+final-doom-tnt-1.9-alt-installer.tar.gz  Final Doom: Plutonia    1.9 (alt version)
+heretic-beta-installer.tar.gz            Shareware Heretic       Wide Area Beta
+heretic-shareware-1.0-installer.tar.gz   Shareware Heretic       1.0
+heretic-shareware-1.2-installer.tar.gz   Shareware Heretic       1.2
+heretic-registered-1.0-installer.tar.gz  Registered Heretic      1.0
+heretic-registered-1.3-installer.tar.gz  Registered Heretic      1.3
+hexen-1.0-installer.tar.gz               Hexen (Floppy)          1.0
+hexen-1.0-cd-installer.tar.gz            Hexen (CD)              1.0
+hexen-1.1-installer.tar.gz               Hexen                   1.1
+hexen-beta-installer.tar.gz              Hexen Demo              beta
+hexen-demo-installer.tar.gz              Hexen Demo              n/a
+hexen-deathkings-1.0-installer.tar.gz    Hexen: DK/DC            1.0
+dck-3.62-installer.tar.gz                DCK                     3.62
+strife-shareware-1.0-installer.tar.gz    Shareware Strife        1.0
+
+strife-registered-1.1-cd.tar.gz          Registered Strife       1.1
+strife-registered-1.2-cd.tar.gz          Registered Strife       1.2
+
+hell-to-pay-installar.tar.gz             Hell to Pay
+perditions-gate-installer.tar.gz         Perdition's Gate
+lost-episodes-of-doom-installer.tar.gz   Lost Episodes of Doom
+
+Needed:
+          Doom RPG v1.6.89 / BREW versions
+          More installers (if they exist):
+                Doom II 1.7a, 1.8
+                Doom Registered 1.8
+                Doom Shareware 1.4, 1.5, 1.6
+                Heretic Registered 1.2
+                Hexen Deathkings 1.1
+          Registered Doom 1.4, 1.5 betas
+          D! Zone, H! Zone, etc.
+

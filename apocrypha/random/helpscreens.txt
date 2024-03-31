@@ -1,0 +1,42 @@
+Doom help screens
+=================
+
+Shareware/Registered Doom IWAD has these screens:
+
+HELP1: Key bindings
+HELP2: To order Doom...
+
+Ultimate Doom IWAD has these screens:
+
+HELP1: Key bindings
+
+Doom 2 IWAD has these screens:
+
+HELP: Key bindings
+
+Coordinates are positions of the skull
+
+doom.exe
+========
+
+Shareware Doom:  HELP2 (280, 185), HELP1 (330, 175)
+Registered Doom: HELP2 (280, 185), HELP1 (330, 175)
+Doom 2:          HELP  (330, 165)
+
+ultdoom.exe
+===========
+
+Shareware Doom:  HELP1 (330, 175)
+Registered Doom: HELP1 (330, 175)
+Ultimate Doom:   HELP1 (330, 175)
+Doom 2:          HELP1 (Crash)
+
+final doom exe
+==============
+
+Shareware Doom:  HELP (Crash)
+Registered Doom: HELP (Crash)
+Ultimate Doom:   HELP (Crash)
+Doom 2:          HELP (330, 175)
+Final Doom:      HELP (330, 175)
+

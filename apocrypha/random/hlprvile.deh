@@ -1,0 +1,25 @@
+Patch File for DeHackEd v3.0
+
+# Note: Use the pound sign ('#') to start comment lines.
+
+Doom version = 19
+Patch format = 6
+
+Thing 140 (Helper Dog)
+Initial frame = 241
+Hit points = 700
+First moving frame = 243
+Alert sound = 48
+Attack sound = 0
+Injury frame = 269
+Pain chance = 10
+Pain sound = 28
+Close attack frame = 0
+Far attack frame = 255
+Death frame = 271
+Exploding frame = 0
+Death sound = 71
+Speed = 15
+Mass = 500
+Action sound = 80
+Respawn frame = 0

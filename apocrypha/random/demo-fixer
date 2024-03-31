@@ -1,0 +1,68 @@
+#!/usr/bin/env ruby
+#
+# This script replaces all attempts in a Vanilla demo to switch directly
+# to the super shotgun with attempts to switch to the normal shotgun 
+# (which should work correctly assuming the player _has_ the super
+# shotgun).
+
+raise "Usage: demo-fixer <infile> <outfile>" if ARGV.length < 2
+
+infile = File.open(ARGV[0], "rb")
+outfile = File.open(ARGV[1], "wb")
+
+# demo header
+
+13.times do 
+    c = infile.getc
+    outfile.putc(c)
+end
+
+EOF = 0x80
+CHANGE = 4
+WEAPONMASK = 8 + 16 + 32 + 64
+WEAPONSHIFT = 3
+WEAP_SSG = 8
+WEAP_SHOTGUN = 2
+
+# read all ticcmds
+
+loop do
+    # read a ticcmd
+
+    forward = infile.getc
+
+    if forward == EOF
+        # end of file?
+        outfile.putc(EOF)
+        break
+    end
+    side = infile.getc
+    angle = infile.getc
+    buttons = infile.getc
+
+    if (buttons & CHANGE) != 0
+        weap = (buttons & WEAPONMASK) >> WEAPONSHIFT
+        if weap == WEAP_SSG
+            # ssg!
+
+            # mask out the weapon number
+
+            buttons = buttons & ~WEAPONMASK
+
+            # if they are switching to the ssg, they probably have it
+
+            buttons |= WEAP_SHOTGUN << WEAPONSHIFT
+        end
+    end
+
+    # write the new ticcmd to the file
+
+    outfile.putc(forward)
+    outfile.putc(side)
+    outfile.putc(angle)
+    outfile.putc(buttons)
+end
+
+infile.close
+outfile.close
+

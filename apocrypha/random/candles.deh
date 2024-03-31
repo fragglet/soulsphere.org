@@ -1,0 +1,2050 @@
+Patch File for DeHackEd v3.0
+
+# Note: Use the pound sign ('#') to start comment lines.
+
+Doom version = 19
+Patch format = 6
+
+Frame 160
+Sprite number = 112
+Sprite subnumber = 0
+
+Frame 161
+Sprite number = 112
+Sprite subnumber = 0
+
+Frame 162
+Sprite number = 112
+Sprite subnumber = 0
+
+Frame 163
+Sprite number = 112
+Sprite subnumber = 0
+
+Frame 164
+Sprite number = 112
+Sprite subnumber = 0
+
+Frame 167
+Sprite number = 112
+Sprite subnumber = 0
+
+Frame 168
+Sprite number = 112
+Sprite subnumber = 0
+
+Frame 169
+Sprite number = 112
+Sprite subnumber = 0
+
+Frame 170
+Sprite number = 112
+Sprite subnumber = 0
+
+Frame 171
+Sprite number = 112
+Sprite subnumber = 0
+
+Frame 172
+Sprite number = 112
+Sprite subnumber = 0
+
+Frame 173
+Sprite number = 112
+Sprite subnumber = 0
+
+Frame 174
+Sprite number = 118
+
+Frame 175
+Sprite number = 118
+
+Frame 176
+Sprite number = 118
+
+Frame 177
+Sprite number = 118
+
+Frame 178
+Sprite number = 118
+
+Frame 179
+Sprite number = 118
+
+Frame 180
+Sprite number = 118
+
+Frame 181
+Sprite number = 118
+
+Frame 182
+Sprite number = 118
+Sprite subnumber = 0
+
+Frame 183
+Sprite number = 118
+Sprite subnumber = 0
+
+Frame 184
+Sprite number = 118
+Sprite subnumber = 1
+
+Frame 185
+Sprite number = 118
+Sprite subnumber = 2
+
+Frame 186
+Sprite number = 118
+Sprite subnumber = 1
+
+Frame 187
+Sprite number = 118
+Sprite subnumber = 0
+
+Frame 188
+Sprite number = 118
+Sprite subnumber = 0
+
+Frame 189
+Sprite number = 118
+Sprite subnumber = 1
+
+Frame 190
+Sprite number = 118
+Sprite subnumber = 2
+
+Frame 191
+Sprite number = 112
+Sprite subnumber = 0
+
+Frame 192
+Sprite number = 112
+Sprite subnumber = 0
+
+Frame 193
+Sprite number = 112
+Sprite subnumber = 0
+
+Frame 194
+Sprite number = 118
+Sprite subnumber = 0
+
+Frame 195
+Sprite number = 118
+Sprite subnumber = 1
+
+Frame 196
+Sprite number = 112
+Sprite subnumber = 0
+
+Frame 197
+Sprite number = 112
+Sprite subnumber = 0
+
+Frame 198
+Sprite number = 112
+Sprite subnumber = 0
+
+Frame 199
+Sprite number = 112
+Sprite subnumber = 0
+
+Frame 200
+Sprite number = 112
+Sprite subnumber = 0
+
+Frame 201
+Sprite number = 112
+Sprite subnumber = 0
+
+Frame 202
+Sprite number = 112
+Sprite subnumber = 0
+
+Frame 203
+Sprite number = 118
+Sprite subnumber = 1
+
+Frame 204
+Sprite number = 118
+Sprite subnumber = 0
+
+Frame 205
+Sprite number = 118
+Sprite subnumber = 2
+
+Frame 206
+Sprite number = 118
+Sprite subnumber = 1
+
+Frame 207
+Sprite number = 118
+
+Frame 208
+Sprite number = 118
+
+Frame 209
+Sprite number = 118
+
+Frame 210
+Sprite number = 118
+
+Frame 211
+Sprite number = 118
+
+Frame 212
+Sprite number = 118
+
+Frame 213
+Sprite number = 118
+
+Frame 214
+Sprite number = 118
+
+Frame 215
+Sprite number = 118
+Sprite subnumber = 0
+
+Frame 216
+Sprite number = 118
+Sprite subnumber = 0
+
+Frame 217
+Sprite number = 118
+Sprite subnumber = 1
+
+Frame 218
+Sprite number = 118
+Sprite subnumber = 1
+
+Frame 219
+Sprite number = 118
+Sprite subnumber = 1
+
+Frame 220
+Sprite number = 118
+Sprite subnumber = 0
+
+Frame 221
+Sprite number = 118
+Sprite subnumber = 0
+
+Frame 222
+Sprite number = 118
+Sprite subnumber = 1
+
+Frame 223
+Sprite number = 118
+Sprite subnumber = 2
+
+Frame 224
+Sprite number = 112
+Sprite subnumber = 0
+
+Frame 225
+Sprite number = 112
+Sprite subnumber = 0
+
+Frame 226
+Sprite number = 112
+Sprite subnumber = 0
+
+Frame 227
+Sprite number = 118
+Sprite subnumber = 0
+
+Frame 228
+Sprite number = 118
+Sprite subnumber = 1
+
+Frame 229
+Sprite number = 112
+Sprite subnumber = 0
+
+Frame 230
+Sprite number = 112
+Sprite subnumber = 0
+
+Frame 231
+Sprite number = 112
+Sprite subnumber = 0
+
+Frame 232
+Sprite number = 112
+Sprite subnumber = 0
+
+Frame 233
+Sprite number = 112
+Sprite subnumber = 0
+
+Frame 234
+Sprite number = 112
+Sprite subnumber = 0
+
+Frame 235
+Sprite number = 112
+Sprite subnumber = 0
+
+Frame 236
+Sprite number = 118
+Sprite subnumber = 2
+
+Frame 237
+Sprite number = 118
+Sprite subnumber = 1
+
+Frame 238
+Sprite number = 118
+Sprite subnumber = 0
+
+Frame 239
+Sprite number = 118
+Sprite subnumber = 2
+
+Frame 240
+Sprite number = 118
+Sprite subnumber = 1
+
+Frame 241
+Sprite number = 118
+
+Frame 242
+Sprite number = 118
+
+Frame 243
+Sprite number = 118
+
+Frame 244
+Sprite number = 118
+
+Frame 245
+Sprite number = 118
+
+Frame 246
+Sprite number = 118
+
+Frame 247
+Sprite number = 118
+
+Frame 248
+Sprite number = 118
+
+Frame 249
+Sprite number = 118
+Sprite subnumber = 0
+
+Frame 250
+Sprite number = 118
+Sprite subnumber = 0
+
+Frame 251
+Sprite number = 118
+Sprite subnumber = 1
+
+Frame 252
+Sprite number = 118
+Sprite subnumber = 1
+
+Frame 253
+Sprite number = 118
+Sprite subnumber = 2
+
+Frame 254
+Sprite number = 118
+Sprite subnumber = 2
+
+Frame 255
+Sprite number = 118
+Sprite subnumber = 2
+
+Frame 256
+Sprite number = 118
+Sprite subnumber = 2
+
+Frame 257
+Sprite number = 118
+Sprite subnumber = 0
+
+Frame 258
+Sprite number = 118
+Sprite subnumber = 1
+
+Frame 259
+Sprite number = 118
+Sprite subnumber = 2
+
+Frame 260
+Sprite number = 118
+Sprite subnumber = 0
+
+Frame 261
+Sprite number = 118
+Sprite subnumber = 1
+
+Frame 262
+Sprite number = 118
+Sprite subnumber = 2
+
+Frame 263
+Sprite number = 118
+Sprite subnumber = 0
+
+Frame 264
+Sprite number = 118
+Sprite subnumber = 1
+
+Frame 265
+Sprite number = 118
+Sprite subnumber = 2
+
+Frame 269
+Sprite number = 118
+Sprite subnumber = 1
+
+Frame 270
+Sprite number = 118
+Sprite subnumber = 1
+
+Frame 271
+Sprite number = 118
+Sprite subnumber = 1
+
+Frame 272
+Sprite number = 118
+Sprite subnumber = 2
+
+Frame 273
+Sprite number = 112
+Sprite subnumber = 0
+
+Frame 274
+Sprite number = 112
+Sprite subnumber = 0
+
+Frame 275
+Sprite number = 112
+Sprite subnumber = 0
+
+Frame 276
+Sprite number = 112
+Sprite subnumber = 0
+
+Frame 277
+Sprite number = 112
+Sprite subnumber = 0
+
+Frame 278
+Sprite number = 112
+Sprite subnumber = 0
+
+Frame 279
+Sprite number = 112
+Sprite subnumber = 0
+
+Frame 280
+Sprite number = 112
+Sprite subnumber = 0
+
+Frame 321
+Sprite number = 118
+
+Frame 322
+Sprite number = 118
+
+Frame 323
+Sprite number = 118
+
+Frame 324
+Sprite number = 118
+
+Frame 325
+Sprite number = 118
+
+Frame 326
+Sprite number = 118
+
+Frame 327
+Sprite number = 118
+
+Frame 328
+Sprite number = 118
+
+Frame 329
+Sprite number = 118
+Sprite subnumber = 0
+
+Frame 330
+Sprite number = 118
+Sprite subnumber = 0
+
+Frame 331
+Sprite number = 118
+Sprite subnumber = 1
+
+Frame 332
+Sprite number = 118
+Sprite subnumber = 1
+
+Frame 333
+Sprite number = 118
+Sprite subnumber = 2
+
+Frame 334
+Sprite number = 118
+Sprite subnumber = 2
+
+Frame 335
+Sprite number = 118
+Sprite subnumber = 0
+
+Frame 336
+Sprite number = 118
+Sprite subnumber = 0
+
+Frame 337
+Sprite number = 118
+Sprite subnumber = 1
+
+Frame 338
+Sprite number = 118
+Sprite subnumber = 2
+
+Frame 339
+Sprite number = 118
+Sprite subnumber = 2
+
+Frame 340
+Sprite number = 118
+Sprite subnumber = 2
+
+Frame 341
+Sprite number = 118
+Sprite subnumber = 1
+
+Frame 342
+Sprite number = 118
+Sprite subnumber = 1
+
+Frame 343
+Sprite number = 118
+Sprite subnumber = 2
+
+Frame 344
+Sprite number = 118
+Sprite subnumber = 2
+
+Frame 345
+Sprite number = 118
+Sprite subnumber = 2
+
+Frame 346
+Sprite number = 118
+Sprite subnumber = 0
+
+Frame 347
+Sprite number = 118
+Sprite subnumber = 1
+
+Frame 348
+Sprite number = 112
+Sprite subnumber = 0
+
+Frame 349
+Sprite number = 112
+Sprite subnumber = 0
+
+Frame 350
+Sprite number = 112
+Sprite subnumber = 0
+
+Frame 351
+Sprite number = 118
+Sprite subnumber = 1
+
+Frame 352
+Sprite number = 118
+Sprite subnumber = 0
+
+Frame 353
+Sprite number = 118
+Sprite subnumber = 2
+
+Frame 354
+Sprite number = 118
+Sprite subnumber = 1
+
+Frame 355
+Sprite number = 118
+Sprite subnumber = 0
+
+Frame 356
+Sprite number = 118
+Sprite subnumber = 2
+
+Frame 362
+Sprite number = 118
+
+Frame 363
+Sprite number = 118
+
+Frame 364
+Sprite number = 118
+
+Frame 365
+Sprite number = 118
+
+Frame 366
+Sprite number = 118
+
+Frame 367
+Sprite number = 118
+
+Frame 368
+Sprite number = 118
+
+Frame 369
+Sprite number = 118
+
+Frame 370
+Sprite number = 118
+Sprite subnumber = 0
+
+Frame 371
+Sprite number = 118
+Sprite subnumber = 0
+
+Frame 372
+Sprite number = 118
+Sprite subnumber = 1
+
+Frame 373
+Sprite number = 118
+Sprite subnumber = 1
+
+Frame 374
+Sprite number = 118
+Sprite subnumber = 2
+
+Frame 375
+Sprite number = 118
+Sprite subnumber = 2
+
+Frame 376
+Sprite number = 118
+Sprite subnumber = 0
+
+Frame 377
+Sprite number = 118
+Sprite subnumber = 0
+
+Frame 378
+Sprite number = 118
+Sprite subnumber = 2
+
+Frame 379
+Sprite number = 118
+Sprite subnumber = 0
+
+Frame 380
+Sprite number = 118
+Sprite subnumber = 0
+
+Frame 381
+Sprite number = 118
+Sprite subnumber = 2
+
+Frame 382
+Sprite number = 118
+Sprite subnumber = 0
+
+Frame 383
+Sprite number = 118
+Sprite subnumber = 0
+
+Frame 384
+Sprite number = 118
+Sprite subnumber = 2
+
+Frame 385
+Sprite number = 118
+Sprite subnumber = 0
+
+Frame 386
+Sprite number = 118
+Sprite subnumber = 0
+
+Frame 387
+Sprite number = 118
+Sprite subnumber = 0
+
+Frame 388
+Sprite number = 118
+Sprite subnumber = 1
+
+Frame 389
+Sprite number = 118
+Sprite subnumber = 2
+
+Frame 390
+Sprite number = 112
+Sprite subnumber = 0
+
+Frame 391
+Sprite number = 112
+Sprite subnumber = 0
+
+Frame 392
+Sprite number = 112
+Sprite subnumber = 0
+
+Frame 393
+Sprite number = 112
+Sprite subnumber = 0
+
+Frame 394
+Sprite number = 112
+Sprite subnumber = 0
+
+Frame 395
+Sprite number = 112
+Sprite subnumber = 0
+
+Frame 396
+Sprite number = 112
+Sprite subnumber = 0
+
+Frame 397
+Sprite number = 112
+Sprite subnumber = 0
+
+Frame 398
+Sprite number = 118
+Sprite subnumber = 2
+
+Frame 399
+Sprite number = 118
+Sprite subnumber = 1
+
+Frame 400
+Sprite number = 118
+Sprite subnumber = 0
+
+Frame 401
+Sprite number = 118
+Sprite subnumber = 2
+
+Frame 402
+Sprite number = 118
+Sprite subnumber = 1
+
+Frame 403
+Sprite number = 118
+Sprite subnumber = 0
+
+Frame 404
+Sprite number = 118
+Sprite subnumber = 2
+
+Frame 405
+Sprite number = 118
+Sprite subnumber = 1
+
+Frame 406
+Sprite number = 118
+
+Frame 407
+Sprite number = 118
+
+Frame 408
+Sprite number = 118
+
+Frame 409
+Sprite number = 118
+
+Frame 410
+Sprite number = 118
+
+Frame 411
+Sprite number = 118
+
+Frame 412
+Sprite number = 118
+
+Frame 413
+Sprite number = 118
+
+Frame 414
+Sprite number = 118
+Sprite subnumber = 0
+
+Frame 415
+Sprite number = 118
+Sprite subnumber = 0
+
+Frame 416
+Sprite number = 118
+Sprite subnumber = 1
+
+Frame 417
+Sprite number = 118
+Sprite subnumber = 1
+
+Frame 418
+Sprite number = 118
+Sprite subnumber = 0
+
+Frame 419
+Sprite number = 118
+Sprite subnumber = 2
+
+Frame 420
+Sprite number = 118
+Sprite subnumber = 0
+
+Frame 421
+Sprite number = 118
+Sprite subnumber = 0
+
+Frame 422
+Sprite number = 118
+Sprite subnumber = 1
+
+Frame 423
+Sprite number = 118
+Sprite subnumber = 2
+
+Frame 424
+Sprite number = 112
+Sprite subnumber = 0
+
+Frame 425
+Sprite number = 112
+Sprite subnumber = 0
+
+Frame 426
+Sprite number = 112
+Sprite subnumber = 0
+
+Frame 427
+Sprite number = 112
+Sprite subnumber = 0
+
+Frame 428
+Sprite number = 112
+Sprite subnumber = 0
+
+Frame 429
+Sprite number = 118
+Sprite subnumber = 2
+
+Frame 430
+Sprite number = 118
+Sprite subnumber = 0
+
+Frame 431
+Sprite number = 112
+Sprite subnumber = 0
+
+Frame 432
+Sprite number = 112
+Sprite subnumber = 0
+
+Frame 433
+Sprite number = 112
+Sprite subnumber = 0
+
+Frame 434
+Sprite number = 112
+Sprite subnumber = 0
+
+Frame 435
+Sprite number = 118
+Sprite subnumber = 1
+
+Frame 436
+Sprite number = 118
+Sprite subnumber = 0
+
+Frame 437
+Sprite number = 118
+Sprite subnumber = 2
+
+Frame 438
+Sprite number = 118
+Sprite subnumber = 1
+
+Frame 439
+Sprite number = 118
+Sprite subnumber = 0
+
+Frame 440
+Sprite number = 118
+Sprite subnumber = 2
+
+Frame 441
+Sprite number = 118
+Sprite subnumber = 1
+
+Frame 442
+Sprite number = 118
+
+Frame 443
+Sprite number = 118
+
+Frame 444
+Sprite number = 118
+
+Frame 445
+Sprite number = 118
+
+Frame 446
+Sprite number = 118
+
+Frame 447
+Sprite number = 118
+
+Frame 448
+Sprite number = 118
+
+Frame 449
+Sprite number = 118
+
+Frame 450
+Sprite number = 118
+Sprite subnumber = 0
+
+Frame 451
+Sprite number = 118
+Sprite subnumber = 0
+
+Frame 452
+Sprite number = 118
+Sprite subnumber = 1
+
+Frame 453
+Sprite number = 118
+Sprite subnumber = 2
+
+Frame 454
+Sprite number = 118
+Sprite subnumber = 0
+
+Frame 455
+Sprite number = 118
+Sprite subnumber = 1
+
+Frame 456
+Sprite number = 118
+Sprite subnumber = 1
+
+Frame 457
+Sprite number = 118
+Sprite subnumber = 2
+
+Frame 458
+Sprite number = 118
+Sprite subnumber = 0
+
+Frame 459
+Sprite number = 118
+Sprite subnumber = 1
+
+Frame 460
+Sprite number = 112
+Sprite subnumber = 0
+
+Frame 461
+Sprite number = 112
+Sprite subnumber = 0
+
+Frame 462
+Sprite number = 118
+Sprite subnumber = 1
+
+Frame 463
+Sprite number = 118
+Sprite subnumber = 2
+
+Frame 464
+Sprite number = 118
+Sprite subnumber = 0
+
+Frame 465
+Sprite number = 112
+Sprite subnumber = 0
+
+Frame 466
+Sprite number = 112
+Sprite subnumber = 0
+
+Frame 467
+Sprite number = 112
+Sprite subnumber = 0
+
+Frame 468
+Sprite number = 112
+Sprite subnumber = 0
+
+Frame 469
+Sprite number = 112
+Sprite subnumber = 0
+
+Frame 470
+Sprite number = 118
+Sprite subnumber = 0
+
+Frame 471
+Sprite number = 118
+Sprite subnumber = 2
+
+Frame 472
+Sprite number = 118
+Sprite subnumber = 1
+
+Frame 473
+Sprite number = 118
+Sprite subnumber = 0
+
+Frame 474
+Sprite number = 118
+Sprite subnumber = 2
+
+Frame 475
+Sprite number = 118
+
+Frame 476
+Sprite number = 118
+
+Frame 477
+Sprite number = 118
+
+Frame 478
+Sprite number = 118
+
+Frame 479
+Sprite number = 118
+
+Frame 480
+Sprite number = 118
+
+Frame 481
+Sprite number = 118
+
+Frame 482
+Sprite number = 118
+
+Frame 483
+Sprite number = 118
+Sprite subnumber = 0
+
+Frame 484
+Sprite number = 118
+Sprite subnumber = 0
+
+Frame 485
+Sprite number = 118
+Sprite subnumber = 1
+
+Frame 486
+Sprite number = 118
+Sprite subnumber = 2
+
+Frame 487
+Sprite number = 118
+Sprite subnumber = 0
+
+Frame 488
+Sprite number = 118
+Sprite subnumber = 1
+
+Frame 489
+Sprite number = 118
+Sprite subnumber = 1
+
+Frame 490
+Sprite number = 118
+Sprite subnumber = 2
+
+Frame 491
+Sprite number = 118
+Sprite subnumber = 0
+
+Frame 492
+Sprite number = 118
+Sprite subnumber = 1
+
+Frame 493
+Sprite number = 112
+Sprite subnumber = 0
+
+Frame 494
+Sprite number = 112
+Sprite subnumber = 0
+
+Frame 495
+Sprite number = 112
+Sprite subnumber = 0
+
+Frame 496
+Sprite number = 118
+Sprite subnumber = 1
+
+Frame 497
+Sprite number = 118
+Sprite subnumber = 0
+
+Frame 498
+Sprite number = 118
+Sprite subnumber = 2
+
+Frame 499
+Sprite number = 118
+Sprite subnumber = 1
+
+Frame 500
+Sprite number = 118
+Sprite subnumber = 0
+
+Frame 501
+Sprite number = 118
+Sprite subnumber = 2
+
+Frame 502
+Sprite number = 118
+
+Frame 503
+Sprite number = 118
+
+Frame 504
+Sprite number = 118
+
+Frame 505
+Sprite number = 118
+
+Frame 506
+Sprite number = 118
+Sprite subnumber = 2
+
+Frame 507
+Sprite number = 118
+Sprite subnumber = 1
+
+Frame 508
+Sprite number = 118
+Sprite subnumber = 1
+
+Frame 509
+Sprite number = 118
+Sprite subnumber = 2
+
+Frame 510
+Sprite number = 118
+Sprite subnumber = 0
+
+Frame 511
+Sprite number = 118
+Sprite subnumber = 1
+
+Frame 512
+Sprite number = 118
+Sprite subnumber = 2
+
+Frame 513
+Sprite number = 118
+Sprite subnumber = 0
+
+Frame 514
+Sprite number = 112
+Sprite subnumber = 0
+
+Frame 515
+Sprite number = 112
+Sprite subnumber = 0
+
+Frame 516
+Sprite number = 118
+Sprite subnumber = 2
+
+Frame 517
+Sprite number = 118
+Sprite subnumber = 1
+
+Frame 518
+Sprite number = 118
+Sprite subnumber = 0
+
+Frame 519
+Sprite number = 118
+Sprite subnumber = 2
+
+Frame 520
+Sprite number = 118
+Sprite subnumber = 1
+
+Frame 521
+Sprite number = 118
+Sprite subnumber = 0
+
+Frame 527
+Sprite number = 118
+
+Frame 528
+Sprite number = 118
+
+Frame 529
+Sprite number = 118
+
+Frame 530
+Sprite number = 118
+
+Frame 531
+Sprite number = 118
+
+Frame 532
+Sprite number = 118
+
+Frame 533
+Sprite number = 118
+
+Frame 534
+Sprite number = 118
+
+Frame 535
+Sprite number = 118
+Sprite subnumber = 0
+
+Frame 536
+Sprite number = 118
+Sprite subnumber = 0
+
+Frame 537
+Sprite number = 118
+Sprite subnumber = 1
+
+Frame 538
+Sprite number = 118
+Sprite subnumber = 2
+
+Frame 539
+Sprite number = 118
+Sprite subnumber = 0
+
+Frame 540
+Sprite number = 118
+Sprite subnumber = 1
+
+Frame 541
+Sprite number = 118
+Sprite subnumber = 1
+
+Frame 542
+Sprite number = 118
+Sprite subnumber = 2
+
+Frame 543
+Sprite number = 118
+Sprite subnumber = 0
+
+Frame 544
+Sprite number = 118
+Sprite subnumber = 1
+
+Frame 545
+Sprite number = 112
+Sprite subnumber = 0
+
+Frame 546
+Sprite number = 112
+Sprite subnumber = 0
+
+Frame 547
+Sprite number = 112
+Sprite subnumber = 0
+
+Frame 548
+Sprite number = 112
+Sprite subnumber = 0
+
+Frame 549
+Sprite number = 118
+Sprite subnumber = 2
+
+Frame 550
+Sprite number = 118
+Sprite subnumber = 1
+
+Frame 551
+Sprite number = 118
+Sprite subnumber = 0
+
+Frame 552
+Sprite number = 118
+Sprite subnumber = 2
+
+Frame 553
+Sprite number = 118
+Sprite subnumber = 1
+
+Frame 554
+Sprite number = 118
+Sprite subnumber = 0
+
+Frame 555
+Sprite number = 118
+Sprite subnumber = 2
+
+Frame 556
+Sprite number = 118
+
+Frame 557
+Sprite number = 118
+
+Frame 558
+Sprite number = 118
+
+Frame 559
+Sprite number = 118
+
+Frame 560
+Sprite number = 118
+
+Frame 561
+Sprite number = 118
+
+Frame 562
+Sprite number = 118
+
+Frame 563
+Sprite number = 118
+
+Frame 564
+Sprite number = 118
+Sprite subnumber = 0
+
+Frame 565
+Sprite number = 118
+Sprite subnumber = 0
+
+Frame 566
+Sprite number = 118
+Sprite subnumber = 1
+
+Frame 567
+Sprite number = 118
+Sprite subnumber = 2
+
+Frame 568
+Sprite number = 118
+Sprite subnumber = 0
+
+Frame 569
+Sprite number = 118
+Sprite subnumber = 1
+
+Frame 570
+Sprite number = 118
+Sprite subnumber = 1
+
+Frame 571
+Sprite number = 118
+Sprite subnumber = 2
+
+Frame 572
+Sprite number = 118
+Sprite subnumber = 0
+
+Frame 573
+Sprite number = 118
+Sprite subnumber = 1
+
+Frame 574
+Sprite number = 112
+Sprite subnumber = 0
+
+Frame 575
+Sprite number = 112
+Sprite subnumber = 0
+
+Frame 576
+Sprite number = 112
+Sprite subnumber = 0
+
+Frame 577
+Sprite number = 112
+Sprite subnumber = 0
+
+Frame 578
+Sprite number = 118
+Sprite subnumber = 2
+
+Frame 579
+Sprite number = 118
+Sprite subnumber = 1
+
+Frame 580
+Sprite number = 118
+Sprite subnumber = 0
+
+Frame 581
+Sprite number = 118
+Sprite subnumber = 2
+
+Frame 582
+Sprite number = 118
+Sprite subnumber = 1
+
+Frame 583
+Sprite number = 118
+Sprite subnumber = 0
+
+Frame 584
+Sprite number = 118
+Sprite subnumber = 2
+
+Frame 598
+Sprite number = 112
+Sprite subnumber = 0
+
+Frame 599
+Sprite number = 112
+Sprite subnumber = 0
+
+Frame 600
+Sprite number = 112
+Sprite subnumber = 0
+
+Frame 601
+Sprite number = 118
+
+Frame 602
+Sprite number = 118
+
+Frame 603
+Sprite number = 118
+
+Frame 604
+Sprite number = 118
+
+Frame 605
+Sprite number = 118
+
+Frame 606
+Sprite number = 118
+
+Frame 607
+Sprite number = 118
+
+Frame 608
+Sprite number = 118
+
+Frame 609
+Sprite number = 118
+Sprite subnumber = 0
+
+Frame 610
+Sprite number = 118
+Sprite subnumber = 0
+
+Frame 611
+Sprite number = 118
+Sprite subnumber = 1
+
+Frame 612
+Sprite number = 118
+Sprite subnumber = 1
+
+Frame 613
+Sprite number = 118
+Sprite subnumber = 2
+
+Frame 614
+Sprite number = 118
+Sprite subnumber = 2
+
+Frame 615
+Sprite number = 118
+Sprite subnumber = 2
+
+Frame 616
+Sprite number = 118
+Sprite subnumber = 2
+
+Frame 617
+Sprite number = 118
+Sprite subnumber = 0
+
+Frame 618
+Sprite number = 118
+Sprite subnumber = 0
+
+Frame 619
+Sprite number = 118
+Sprite subnumber = 2
+
+Frame 620
+Sprite number = 118
+Sprite subnumber = 2
+
+Frame 621
+Sprite number = 118
+Sprite subnumber = 0
+
+Frame 622
+Sprite number = 112
+Sprite subnumber = 0
+
+Frame 623
+Sprite number = 112
+Sprite subnumber = 0
+
+Frame 624
+Sprite number = 112
+Sprite subnumber = 0
+
+Frame 625
+Sprite number = 112
+Sprite subnumber = 0
+
+Frame 626
+Sprite number = 112
+Sprite subnumber = 0
+
+Frame 627
+Sprite number = 112
+Sprite subnumber = 0
+
+Frame 628
+Sprite number = 112
+Sprite subnumber = 0
+
+Frame 629
+Sprite number = 112
+Sprite subnumber = 0
+
+Frame 630
+Sprite number = 112
+Sprite subnumber = 0
+
+Frame 631
+Sprite number = 112
+Sprite subnumber = 0
+
+Frame 632
+Sprite number = 118
+
+Frame 633
+Sprite number = 118
+
+Frame 634
+Sprite number = 118
+
+Frame 635
+Sprite number = 118
+
+Frame 636
+Sprite number = 118
+
+Frame 637
+Sprite number = 118
+
+Frame 638
+Sprite number = 118
+
+Frame 639
+Sprite number = 118
+
+Frame 640
+Sprite number = 118
+
+Frame 641
+Sprite number = 118
+Sprite subnumber = 0
+
+Frame 642
+Sprite number = 118
+Sprite subnumber = 0
+
+Frame 643
+Sprite number = 118
+Sprite subnumber = 1
+
+Frame 644
+Sprite number = 118
+Sprite subnumber = 1
+
+Frame 645
+Sprite number = 118
+Sprite subnumber = 2
+
+Frame 646
+Sprite number = 118
+Sprite subnumber = 2
+
+Frame 647
+Sprite number = 118
+Sprite subnumber = 2
+
+Frame 648
+Sprite number = 118
+Sprite subnumber = 2
+
+Frame 649
+Sprite number = 118
+Sprite subnumber = 0
+
+Frame 650
+Sprite number = 118
+Sprite subnumber = 0
+
+Frame 651
+Sprite number = 118
+Sprite subnumber = 2
+
+Frame 652
+Sprite number = 118
+Sprite subnumber = 2
+
+Frame 653
+Sprite number = 118
+Sprite subnumber = 0
+
+Frame 654
+Sprite number = 112
+Sprite subnumber = 0
+
+Frame 655
+Sprite number = 112
+Sprite subnumber = 0
+
+Frame 656
+Sprite number = 112
+Sprite subnumber = 0
+
+Frame 657
+Sprite number = 112
+Sprite subnumber = 0
+
+Frame 658
+Sprite number = 112
+Sprite subnumber = 0
+
+Frame 659
+Sprite number = 112
+Sprite subnumber = 0
+
+Frame 660
+Sprite number = 118
+Sprite subnumber = 0
+
+Frame 661
+Sprite number = 118
+Sprite subnumber = 2
+
+Frame 662
+Sprite number = 118
+Sprite subnumber = 1
+
+Frame 663
+Sprite number = 118
+Sprite subnumber = 0
+
+Frame 664
+Sprite number = 118
+Sprite subnumber = 2
+
+Frame 665
+Sprite number = 118
+Sprite subnumber = 1
+
+Frame 666
+Sprite number = 118
+Sprite subnumber = 0
+
+Frame 674
+Sprite number = 118
+
+Frame 675
+Sprite number = 118
+
+Frame 676
+Sprite number = 118
+
+Frame 677
+Sprite number = 118
+
+Frame 678
+Sprite number = 118
+
+Frame 679
+Sprite number = 118
+
+Frame 680
+Sprite number = 118
+
+Frame 681
+Sprite number = 118
+
+Frame 682
+Sprite number = 118
+Sprite subnumber = 0
+
+Frame 683
+Sprite number = 118
+Sprite subnumber = 0
+
+Frame 684
+Sprite number = 118
+Sprite subnumber = 1
+
+Frame 685
+Sprite number = 118
+Sprite subnumber = 2
+
+Frame 686
+Sprite number = 118
+Sprite subnumber = 1
+
+Frame 687
+Sprite number = 118
+Sprite subnumber = 2
+
+Frame 688
+Sprite number = 118
+Sprite subnumber = 1
+
+Frame 689
+Sprite number = 118
+Sprite subnumber = 2
+
+Frame 690
+Sprite number = 118
+Sprite subnumber = 0
+
+Frame 691
+Sprite number = 118
+Sprite subnumber = 1
+
+Frame 692
+Sprite number = 118
+Sprite subnumber = 2
+
+Frame 693
+Sprite number = 118
+Sprite subnumber = 0
+
+Frame 694
+Sprite number = 118
+Sprite subnumber = 1
+
+Frame 695
+Sprite number = 118
+Sprite subnumber = 2
+
+Frame 696
+Sprite number = 112
+Sprite subnumber = 0
+
+Frame 697
+Sprite number = 112
+Sprite subnumber = 0
+
+Frame 698
+Sprite number = 112
+Sprite subnumber = 0
+
+Frame 699
+Sprite number = 112
+Sprite subnumber = 0
+
+Frame 700
+Sprite number = 112
+Sprite subnumber = 0
+
+Frame 701
+Sprite number = 118
+
+Frame 702
+Sprite number = 118
+
+Frame 703
+Sprite number = 118
+
+Frame 704
+Sprite number = 118
+
+Frame 705
+Sprite number = 118
+
+Frame 706
+Sprite number = 118
+
+Frame 707
+Sprite number = 118
+
+Frame 708
+Sprite number = 118
+Sprite subnumber = 0
+
+Frame 709
+Sprite number = 118
+Sprite subnumber = 1
+
+Frame 710
+Sprite number = 118
+Sprite subnumber = 1
+
+Frame 711
+Sprite number = 118
+Sprite subnumber = 1
+
+Frame 712
+Sprite number = 118
+Sprite subnumber = 0
+
+Frame 713
+Sprite number = 118
+Sprite subnumber = 0
+
+Frame 714
+Sprite number = 118
+Sprite subnumber = 0
+
+Frame 715
+Sprite number = 118
+Sprite subnumber = 1
+
+Frame 716
+Sprite number = 118
+Sprite subnumber = 2
+
+Frame 717
+Sprite number = 118
+Sprite subnumber = 0
+
+Frame 718
+Sprite number = 118
+Sprite subnumber = 1
+
+Frame 719
+Sprite number = 118
+Sprite subnumber = 2
+
+Frame 720
+Sprite number = 118
+Sprite subnumber = 0
+
+Frame 721
+Sprite number = 118
+Sprite subnumber = 2
+
+Frame 722
+Sprite number = 118
+Sprite subnumber = 1
+
+Frame 723
+Sprite number = 118
+Sprite subnumber = 0
+
+Frame 724
+Sprite number = 118
+Sprite subnumber = 2
+
+Frame 725
+Sprite number = 118
+Sprite subnumber = 1
+
+Frame 726
+Sprite number = 118
+
+Frame 727
+Sprite number = 118
+
+Frame 728
+Sprite number = 118
+
+Frame 729
+Sprite number = 118
+
+Frame 730
+Sprite number = 118
+
+Frame 731
+Sprite number = 118
+
+Frame 732
+Sprite number = 118
+
+Frame 733
+Sprite number = 118
+
+Frame 734
+Sprite number = 118
+Sprite subnumber = 0
+
+Frame 735
+Sprite number = 118
+Sprite subnumber = 0
+
+Frame 736
+Sprite number = 118
+Sprite subnumber = 1
+
+Frame 737
+Sprite number = 118
+Sprite subnumber = 2
+
+Frame 738
+Sprite number = 118
+Sprite subnumber = 2
+
+Frame 739
+Sprite number = 118
+Sprite subnumber = 2
+
+Frame 740
+Sprite number = 118
+Sprite subnumber = 2
+
+Frame 741
+Sprite number = 118
+Sprite subnumber = 2
+
+Frame 742
+Sprite number = 118
+Sprite subnumber = 1
+
+Frame 743
+Sprite number = 118
+Sprite subnumber = 1
+
+Frame 744
+Sprite number = 118
+Sprite subnumber = 2
+
+Frame 745
+Sprite number = 118
+Sprite subnumber = 0
+
+Frame 746
+Sprite number = 112
+Sprite subnumber = 0
+
+Frame 747
+Sprite number = 112
+Sprite subnumber = 0
+
+Frame 748
+Sprite number = 112
+Sprite subnumber = 0
+
+Frame 749
+Sprite number = 118
+Sprite subnumber = 1
+
+Frame 750
+Sprite number = 118
+Sprite subnumber = 2
+
+Frame 751
+Sprite number = 112
+Sprite subnumber = 0
+
+Frame 752
+Sprite number = 112
+Sprite subnumber = 0
+
+Frame 753
+Sprite number = 112
+Sprite subnumber = 0
+
+Frame 754
+Sprite number = 112
+Sprite subnumber = 0
+
+Frame 755
+Sprite number = 112
+Sprite subnumber = 0
+
+Frame 756
+Sprite number = 112
+Sprite subnumber = 0
+
+Frame 757
+Sprite number = 112
+Sprite subnumber = 0
+
+Frame 758
+Sprite number = 118
+Sprite subnumber = 0
+
+Frame 759
+Sprite number = 118
+Sprite subnumber = 2
+
+Frame 760
+Sprite number = 118
+Sprite subnumber = 1
+
+Frame 761
+Sprite number = 118
+Sprite subnumber = 0
+
+Frame 762
+Sprite number = 118
+Sprite subnumber = 2
+
+Frame 763
+Sprite number = 118
+
+Frame 764
+Sprite number = 118
+
+Frame 765
+Sprite number = 118
+
+Frame 766
+Sprite number = 118
+
+Frame 767
+Sprite number = 118
+Sprite subnumber = 0
+
+Frame 768
+Sprite number = 118
+Sprite subnumber = 1
+
+Frame 769
+Sprite number = 118
+Sprite subnumber = 2
+
+Frame 770
+Sprite number = 118
+Sprite subnumber = 0
+
+Frame 771
+Sprite number = 118
+Sprite subnumber = 1
+
+Frame 772
+Sprite number = 118
+Sprite subnumber = 2
+
+Frame 773
+Sprite number = 118
+Sprite subnumber = 0
+
+Frame 774
+Sprite number = 118
+Sprite subnumber = 1
+
+Frame 775
+Sprite number = 118
+Sprite subnumber = 2
+
+Frame 776
+Sprite number = 118
+Sprite subnumber = 0
+
+Frame 777
+Sprite number = 118
+Sprite subnumber = 0
