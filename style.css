@@ -27,6 +27,10 @@ h1 img {
 	margin-left: 0.2em;
 }
 
+h1, h2 {
+	text-shadow: 2px 2px #00000020;
+}
+
 #header {
 	margin-top: 20px;
 	margin-bottom: 30px;
