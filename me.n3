@@ -77,9 +77,9 @@
          foaf:accountServiceHomepage <https://stackoverflow.com/>;
          foaf:accountProfilePage <https://stackoverflow.com/users/24806/simon-howard> ],
        [ a foaf:OnlineAccount;
-         foaf:accountServiceHomepage <https://octodon.social/>;
+         foaf:accountServiceHomepage <https://social.coop/>;
          foaf:accountName "fraggle";
-         foaf:accountProfilePage <https://octodon.social/@fraggle> ],
+         foaf:accountProfilePage <https://social.coop/@fraggle> ],
        [ a foaf:OnlineAccount;
          foaf:accountServiceHomepage <https://www.youtube.com/>;
          foaf:accountName "fragglet";
