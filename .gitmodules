@@ -1,6 +1,3 @@
-[submodule "projects/boomref"]
-	path = projects/boomref
-	url = git@github.com:fragglet/boomref.git
 [submodule "projects/lhasa"]
 	path = projects/lhasa
 	url = git@github.com:fragglet/lhasa-releases.git
