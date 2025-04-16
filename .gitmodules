@@ -7,3 +7,6 @@
 [submodule "eluhgunt"]
 	path = eluhgunt
 	url = https://github.com/fragglet/eluhgunt.git
+[submodule "boring"]
+	path = boring
+	url = git@github.com:fragglet/boring.git
