@@ -198,8 +198,13 @@
   }
 
   h1, h2, h3, h4, h5, h6 {
+      font-size: 25px;
       margin-top: 0.5em;
       margin-bottom: 0.2em;
+  }
+
+  .title {
+      font-size: 35px;
   }
 
   p {
@@ -210,6 +215,16 @@
   dl {
       margin-block-start: 0.5em;
   }
+
+  tbody > tr:nth-child(odd) {
+      background-color: #f7f7f7;
+  }
+
+  td,th {
+      text-align: left;
+      border: 1px solid #ccc;
+  }
+
   </style>
 
 </head>
@@ -220,12 +235,14 @@
 <h1>NAME</h1>
 <p>wadptr - compression tool for .wad files</p>
 <h1>SYNOPSIS</h1>
-<p><strong>wadptr</strong> [options] [ -c | -u | -l ]
+<p><strong>wadptr</strong> [options] [ -c | -d | -l ]
 <em>wadfile...</em></p>
 <h1>DESCRIPTION</h1>
 <p><strong>wadptr</strong> is a tool for compressing Doom .wad files. It
 takes advantage of the structure of the WAD format and some of the lumps
-stored inside it to merge repeated data.</p>
+stored inside it to merge repeated data. Compressed files are still
+playable like the originals; there is no need to decompress them
+first.</p>
 <h1>COMMAND SYNTAX</h1>
 <p>wadptr has three separate subcommands:</p>
 <dl>
@@ -238,9 +255,9 @@ are compressed or merged with other lumps.</p>
 <dd>
 <p>Compress the specified .wad file.</p>
 </dd>
-<dt><strong>-u</strong></dt>
+<dt><strong>-d</strong></dt>
 <dd>
-<p>Uncompress the specified .wad file.</p>
+<p>Decompress the specified .wad file.</p>
 </dd>
 </dl>
 <h1>OPTIONS</h1>
@@ -260,25 +277,25 @@ Unix tool that only prints output when an error occurs.</p>
 <dt><strong>-nomerge</strong></dt>
 <dd>
 <p>Disables WAD lump merging (see the <strong>compression
-schemes</strong> section below). Cannot be used with uncompress
+schemes</strong> section below). Cannot be used with decompress
 mode.</p>
 </dd>
 <dt><strong>-nopack</strong></dt>
 <dd>
 <p>Disables sidedef packing (see the <strong>compression
-schemes</strong> section below). In uncompress mode, this disables
+schemes</strong> section below). In decompress mode, this disables
 sidedef <em>unpacking</em>.</p>
 </dd>
 <dt><strong>-nosquash</strong></dt>
 <dd>
 <p>Disables graphic squashing (see the <strong>compression
-schemes</strong> section below). In uncompress mode, this disables
+schemes</strong> section below). In decompress mode, this disables
 graphic <em>unsquashing</em>.</p>
 </dd>
 <dt><strong>-nostack</strong></dt>
 <dd>
 <p>Disables blockmap stacking (see the <strong>compression
-schemes</strong> section below). In uncompress mode, this disables
+schemes</strong> section below). In decompress mode, this disables
 blockmap <em>unstacking</em>.</p>
 </dd>
 <dt><strong>-extblocks</strong></dt>
@@ -374,33 +391,46 @@ be slightly larger than the original. While counterintuitive given the
 purpose of the program is to make WADs smaller, this is almost certainly
 what you want to happen; other tools that do sidedef packing less
 cautiously may cause unintended visual glitches to occur.</p>
+<p>As a special case, if a linedef has a tag number in the range
+9700-9799 (decimal), its sidedefs will be made eligible for merging with
+those of other linedefs that have the same tag, even if the linedefs are
+special lines. This is to facilitate special effects; for example, by
+making scrolling walls scroll faster than normal as described above. The
+sidedefs must still be identical in all other respects (ie. same
+textures, sector references, etc.) or they will not be merged.</p>
 <h1>LIMITATIONS</h1>
-<p>The <strong>-c</strong> command will compress a WAD file and the
-<strong>-u</strong> command can then be used to restore the original
-uncompressed file. However, the decompressed file may not exactly match
+<ul>
+<li><p>The <strong>-c</strong> command will compress a WAD file and the
+<strong>-d</strong> command can then be used to restore the original
+decompressed file. However, the decompressed file may not exactly match
 the original file byte-for-byte. For example, some editors already pack
 sidedefs, and sometimes WAD files include junk data that wadptr will
 discard. If for some reason it's important to retain the original file,
 you should therefore make sure to to either back up the original file
 before using wadptr, or use the <strong>-o</strong> command line option
-to write to a different file.</p>
-<p>For compatibility reasons, wadptr's blockmap stacking is deliberately
-very conservative. Far more aggressive techniques can be used to shrink
-blockmap lumps further, particularly for large levels that run up
-against the blockmap size limit. If you need this, check out <a
-href="https://github.com/zokum-no/zokumbsp">ZokumBSP.</a></p>
-<p>Some levels are so large that it is impossible to unpack their
+to write to a different file.</p></li>
+<li><p>For compatibility reasons, wadptr's blockmap stacking is
+deliberately very conservative. Far more aggressive techniques can be
+used to shrink blockmap lumps further, particularly for large levels
+that run up against the blockmap size limit. If you need this, check out
+<a href="https://github.com/zokum-no/zokumbsp">ZokumBSP.</a></p></li>
+<li><p>WADs for PSX Doom and Doom 64 use a different level format to PC
+Doom and are not yet supported. To avoid unintentional corruption,
+levels in this format are detected and ignored (by looking for lumps
+named <strong>LEAFS</strong> or <strong>LIGHTS</strong>).</p></li>
+<li><p>Some levels are so large that it is impossible to unpack their
 sidedefs or unstack their blockmap without exceeding the limits of the
-Doom level format. If this happens when uncompressing a level, "failed"
+Doom level format. If this happens when decompressing a level, "failed"
 will be shown in the program output for that lump and the original
 (compressed) lump will be copied into the output file unchanged. The
 <strong>-extblocks</strong> and <strong>-extsides</strong> command line
 arguments can be specified to use the extended limits instead of the
 vanilla limits, but the resulting levels will only work in a
-limit-removing source port.</p>
-<p>Some level editors get confused by packed sidedefs. If your level
-editor has problems, use <strong>-u</strong> to uncompress the file
-before editing.</p>
+limit-removing source port.</p></li>
+<li><p>Some level editors get confused by packed sidedefs. If your level
+editor has problems, use <strong>-d</strong> to decompress the file
+before editing.</p></li>
+</ul>
 <h1>EXAMPLES</h1>
 <p>Here are some examples for how to invoke the program:</p>
 <dl>
@@ -408,9 +438,9 @@ before editing.</p>
 <dd>
 <p>Compress <strong>foo.wad</strong>, overwriting the original file.</p>
 </dd>
-<dt>wadptr -u foo.wad</dt>
+<dt>wadptr -d foo.wad</dt>
 <dd>
-<p>Uncompress <strong>foo.wad</strong>, overwriting the original
+<p>Decompress <strong>foo.wad</strong>, overwriting the original
 file.</p>
 </dd>
 <dt>wadptr -o newfoo.wad -c foo.wad</dt>
@@ -433,13 +463,23 @@ href="https://soulsphere.org/projects/wadptr/">https://soulsphere.org/projects/w
 <h1>HISTORY</h1>
 <p>wadptr was originally written in 1998 by <a
 href="mailto:fraggle@gmail.com">Simon Howard</a> as a command-line
-program for MS-DOS. Simon continues to maintain the project. The first
-version worked as an adjunct to <strong>deutex</strong>(6), but with the
-2.x series it changed to a standalone tool. Versions before v2.2 have
-been lost to time and the v1.x series may have never been publicly
-released at all. Andreas Dehmel ported the program to several different
-Unix systems and also to RISC OS. The source code was recently (writing
-in 2023) overhauled and cleaned up.</p>
+program for MS-DOS. The first version worked as an adjunct to
+<strong>deutex</strong>(6), but with the 2.x series it changed to a
+standalone tool. Sadly, versions before v2.2 have been lost to time and
+the v1.x series may have never been publicly released at all. In 1999,
+Andreas Dehmel ported the program to several different Unix systems and
+also to RISC OS. Simon continues to maintain the project, and the source
+code was recently (writing in 2023) overhauled and cleaned up.</p>
+<p>The name, "wadptr", is prounounced "wad pointer" and is a reference
+to the strategy of manipulating pointers within WAD files to combine
+repeated data. Originally, it only performed WAD lump merging, but other
+strategies were later incorporated to compress some of the lumps
+themselves in similar ways. Some of these predate wadptr itself: the
+sidedef packing strategy was pioneered by the <strong>dshrink</strong>
+tool (Rand Phares, 1994), and the invention of blockmap compression is
+credited to Jason Hoffoss, author of <strong>DMapEdit</strong>, the
+feature being subsequently added to <strong>WARM</strong> in 1995 in its
+v1.3 release, along with other node builders.</p>
 <p><a href="https://doomwiki.org/wiki/Doom"><em>Doom</em></a> is a
 first-person shooter (FPS) game released by id Software in 1993 that has
 consistently topped lists of the best video games of all time. It
