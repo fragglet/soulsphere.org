@@ -9,7 +9,7 @@ title=$(./levelname.py $seed)
 
 echo "Seed: $seed"
 rm -f slige.wad megawad.wad megawad.zip
-./tools/slige.amd64 -seed $seed -config SLIGE.CFG -doom2 -levels 32 -outfile slige.wad
+./tools/slige.$(uname -m) -seed $seed -config SLIGE.CFG -doom2 -levels 32 -outfile slige.wad
 ./tools/bsp.amd64 -blockmap comp slige.wad -o megawad.wad
 
 sed "s/__TITLE__/$title/; s/__DATE__/$date/" < megawad.txt.templ > megawad.txt
