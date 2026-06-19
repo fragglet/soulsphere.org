@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 import random
 import sys
@@ -46,5 +46,5 @@ r = random.Random(seed)
 w1 = firstword[int(r.random() * len(firstword))]
 w2 = secondword[int(r.random() * len(secondword))]
 
-print "The %s %s" % (w1.capitalize(), w2.capitalize())
+print("The %s %s" % (w1.capitalize(), w2.capitalize()))
 
